@@ -99,7 +99,7 @@ public class Asignatura {
 	}
 
 	public void setHorasDesdoble(int horasDesdoble) {
-		if (horasDesdoble<1||horasDesdoble>MAX_NUM_HORAS_DESDOBLES) {
+		if (horasDesdoble<0||horasDesdoble>MAX_NUM_HORAS_DESDOBLES) {
 			throw new IllegalArgumentException("ERROR: El número de horas de desdoble de una asignatura no puede ser menor a 0 ni mayor a 6.");
 		}else {this.horasDesdoble = horasDesdoble;}
 	}
