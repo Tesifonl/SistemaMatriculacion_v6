@@ -10,7 +10,7 @@ public class Alumno {
 	private static final String ER_CORREO="[a-zA-Z1-9áéíóú.]*[@]{1}[a-zA-Z]{1,15}[.]{1}[a-z]*";;
 	private static final String ER_DNI="[0-9]{8}[a-zA-Z]{1}";
 	public static final String FORMATO_FECHA="[0-1]+[0-9]/[0-1]+[0-9]/[1-2][0-9][0-9][0-9]z";
-	private static final String ER_NIA="[a-zA-Z]{4}[0-9]{3}";
+	private static final String ER_NIA="[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]{4}[0-9]{3}";
 	private static final int MIN_EDAD_ALUMNADO=16;
 	
 	private DateTimeFormatter formatoFechaString = DateTimeFormatter.ofPattern("dd/MM/yyyy");
