@@ -21,21 +21,21 @@ public class CiclosFormativos {
 	}
 	
 	public CicloFormativo[] get() {
-		CicloFormativo[] copia=copiaProfundaAlumnos();
+		CicloFormativo[] copia=copiaProfundaCiclosFormativos();
 		return copia;
 	}
 	
-	private CicloFormativo[] copiaProfundaAlumnos() {
-		CicloFormativo[]copiaAlumnos=new CicloFormativo[coleccionCiclosFormativos.length];
+	private CicloFormativo[] copiaProfundaCiclosFormativos() {
+		CicloFormativo[]copiaCiclosFormativos=new CicloFormativo[coleccionCiclosFormativos.length];
 		
 		for(int i=0;i<coleccionCiclosFormativos.length;i++) {
-			if(coleccionCiclosFormativos[i]!=null) {copiaAlumnos[i]= new CicloFormativo(coleccionCiclosFormativos[i]);
+			if(coleccionCiclosFormativos[i]!=null) {copiaCiclosFormativos[i]= new CicloFormativo(coleccionCiclosFormativos[i]);
 			}
 			else {
-				copiaAlumnos[i]=null;
+				copiaCiclosFormativos[i]=null;
 			}
 		}
-		return copiaAlumnos;
+		return copiaCiclosFormativos;
 	}
 
 	public int getTamano() {
@@ -130,14 +130,14 @@ public class CiclosFormativos {
 		boolean encontrado=false;
 		boolean otro=false;
 		int indice=0;
-		CicloFormativo copiaAlumno=null;
+		CicloFormativo copiaCicloFormativo=null;
 		
 		if(cicloFormativo!=null) {
 			for (int i =0;i<coleccionCiclosFormativos.length;i++) {
 				if (coleccionCiclosFormativos[i]!=null && coleccionCiclosFormativos[i].equals(cicloFormativo)) {
 					encontrado=true;
 					indice=i;
-					copiaAlumno=new CicloFormativo(coleccionCiclosFormativos[indice]);
+					copiaCicloFormativo=new CicloFormativo(coleccionCiclosFormativos[indice]);
 				}
 				else {
 					otro=true;
@@ -145,7 +145,7 @@ public class CiclosFormativos {
 			}	
 				
 			if(encontrado==true) {
-				return copiaAlumno;
+				return copiaCicloFormativo;
 				
 			}else {return null;}
 				
