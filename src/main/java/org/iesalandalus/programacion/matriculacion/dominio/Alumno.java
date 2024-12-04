@@ -9,11 +9,11 @@ public class Alumno {
 	private static final String ER_TELEFONO="[0-9]{9}";
 	private static final String ER_CORREO="[a-zA-Z1-9áéíóú.]*[@]{1}[a-zA-Z]{1,15}[.]{1}[a-z]*";;
 	private static final String ER_DNI="[0-9]{8}[a-zA-Z]{1}";
-	public static final String FORMATO_FECHA="[0-1]+[0-9]/[0-1]+[0-9]/[1-2][0-9][0-9][0-9]z";
+	public static final String FORMATO_FECHA="dd/MM/yyyy";
 	private static final String ER_NIA="[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]{4}[0-9]{3}";
 	private static final int MIN_EDAD_ALUMNADO=16;
 	
-	private DateTimeFormatter formatoFechaString = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	private DateTimeFormatter formatoFechaString = DateTimeFormatter.ofPattern(FORMATO_FECHA);
 	
 	private String nombre;
 	private String telefono;
@@ -54,11 +54,11 @@ public class Alumno {
 
 	public void setNia(String nia) {
 		if (nia == null) { 
-			throw new NullPointerException("ERROR: El tel?fono de un hu?sped no puede ser nulo.");}
+			throw new NullPointerException("ERROR: El NIA de un alumno no puede ser nulo.");}
 		else if (nia.trim().equals("")) { 
-			throw new IllegalArgumentException("ERROR: El tel?fono del hu?sped no tiene un formato v?lido.");}
+			throw new IllegalArgumentException("ERROR: El NIA del alumno no tiene un formato valido.");}
 		else if (!nia.matches(ER_NIA)) {
-			throw new IllegalArgumentException("ERROR: El tel?fono del hu?sped no tiene un formato v?lido.");}
+			throw new IllegalArgumentException("ERROR: El NIA del  alumno no tiene un formato valido");}
 		else {this.nia=nia;}
 	}
 	
