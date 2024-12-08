@@ -431,7 +431,11 @@ public class MainApp {
   			}
       }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws OperationNotSupportedException {
+
+    		Consola.mostrarMenu();
+    		Opcion opcion=Consola.elegirOpcion();
+    		ejecutarOpcion(opcion);
 
 
         System.out.println("Hasta luego!!!!");
