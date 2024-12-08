@@ -6,6 +6,7 @@ import org.iesalandalus.programacion.matriculacion.dominio.Asignatura;
 import org.iesalandalus.programacion.matriculacion.dominio.CicloFormativo;
 import org.iesalandalus.programacion.matriculacion.dominio.Curso;
 import org.iesalandalus.programacion.matriculacion.dominio.EspecialidadProfesorado;
+import org.iesalandalus.programacion.matriculacion.dominio.Matricula;
 import org.iesalandalus.programacion.matriculacion.negocio.Alumnos;
 import org.iesalandalus.programacion.matriculacion.negocio.Asignaturas;
 import org.iesalandalus.programacion.matriculacion.negocio.CiclosFormativos;
@@ -64,15 +65,17 @@ public class MainApp {
     		if (opcion.equals(Opcion.MOSTRAR_CICLOS_FORMATIVOS)) {
     			mostrarCiclosFormativos();
     		}
-    		
+    		if (opcion.equals(Opcion.INSERTAR_MATRICULA)) {
+    			insertarMatricula();
+    		}
     		if (opcion.equals(Opcion.BUSCAR_MATRICULA)) {
-    			borrarCicloFormativo();
+    			buscarMatricula();
     		}
     		if (opcion.equals(Opcion.ANULAR_MATRICULA)) {
-    			buscarCicloFormativo();
+    			anularMatricula();
     		}
     		if (opcion.equals(Opcion.MOSTRAR_MATRICULAS)) {
-    			mostrarCiclosFormativos();
+    			mostrarMatriculas();
     		}
     		
     	}
@@ -136,7 +139,7 @@ public class MainApp {
   				 alumnos.toString();
   			 }
   			 else {
-  				 System.out.println(" No existen alumnos en la coleccion");
+  				 System.out.println(" No existe alumnos en el sistema");
   			 }
   			
   			}
@@ -203,7 +206,7 @@ public class MainApp {
   				 asignaturas.toString();
   			 }
   			 else {
-  				 System.out.println(" No existen asignaturas en la coleccion");
+  				 System.out.println(" No existen asignaturas  en el sistema");
   			 }
   			
   			}
@@ -271,7 +274,7 @@ public class MainApp {
   				 ciclosFormativos.toString();
   			 }
   			 else {
-  				 System.out.println(" No existen asignaturas en la coleccion");
+  				 System.out.println(" No existen ciclos formativos en el sistema");
   			 }
   			
   			}
@@ -285,8 +288,23 @@ public class MainApp {
   			}
       }
     
+    /*dudas con la matricula que habria que insertar aqui*/
+    private static void  insertarMatricula() throws OperationNotSupportedException {
+  		try {
+  			
+  			matriculas.insertar(Consola.leerMatricula(Consola.leerAlumno(), Consola.getMatriculaPorIdentificacion().getColeccionAsignaturas()));
+  			
+  			}
+  			catch(IllegalArgumentException e) {
+  				System.out.println(e.getMessage());
+  		
+  			}
+  			catch(NullPointerException e) {
+  			System.out.println(e.getMessage());
+  			
+  			}
+      }
     
- 
     
     private static void  buscarMatricula() throws OperationNotSupportedException {
   		try {
@@ -323,9 +341,10 @@ public class MainApp {
   		try {
   			 if(matriculas.getTamano()>0) {
   				 matriculas.toString();
+  			
   			 }
   			 else {
-  				 System.out.println(" No existen asignaturas en la coleccion");
+  				 System.out.println(" No existen matriculas en el sistema");
   			 }
   			
   			}
@@ -336,6 +355,79 @@ public class MainApp {
   			catch(NullPointerException e) {
   			System.out.println(e.getMessage());
   			
+  			}
+      }
+    
+    private static void mostrarMatriculasPorAlumno() throws OperationNotSupportedException  {
+  		try {
+  			 if(Consola.getMatriculaPorIdentificacion()!=null) {
+  				Consola.getMatriculaPorIdentificacion().toString();
+  			 }
+  			 else {
+  				 System.out.println(" No existen matriculas para este alumno");
+  			 }
+  			
+  			}
+  			catch(IllegalArgumentException e) {
+  				System.out.println(e.getMessage());
+  		
+  			}
+  			catch(NullPointerException e) {
+  			System.out.println(e.getMessage());
+  			
+  			}
+      }
+    
+    private static void mostrarMatriculasPorCicloFormativo() throws OperationNotSupportedException  {
+  		try {
+  				 Matricula[] busquedaMatricula=matriculas.get();
+  				 Matricula[] encontradaMatricula=null;
+  				 Asignatura[] busquedaAsignatura=null;
+  				 boolean encontrada=false;
+  				 boolean otro=false;
+  				 int contador=0;
+  				 
+  		
+  				 ciclosFormativos.toString();
+  				 
+  				 for (int i=0; i<busquedaMatricula.length-1;i++)
+  				 {
+  					 busquedaAsignatura=busquedaMatricula[i].getColeccionAsignaturas();
+  				 	 for(int j=0;j<busquedaAsignatura.length-1;j++) {
+  				 		 if(busquedaAsignatura[j].getCicloFormativo().equals(Consola.getCicloFormativoPorCodigo()))
+  				 		 	{
+  				 			contador++;
+  				 		 	encontrada=true;
+  				 			encontradaMatricula[contador-1]=busquedaMatricula[i];
+  				 			encontradaMatricula.toString();
+  				 		 	}
+  				 		 	else {
+  				 			 otro=true;	 
+  				 		 	}
+  				 	}
+  				 }
+  				 
+  			}
+  			catch(IllegalArgumentException e) {
+  			System.out.println(e.getMessage());
+  			}
+  			catch(NullPointerException e) {
+  			System.out.println(e.getMessage());
+  			}
+      }
+    
+    private static void mostrarMatriculasPorCursoAcademico() throws OperationNotSupportedException  {
+  		try {
+  				 System.out.println("Introduce el curso");
+				 String CursoAcademico=Entrada.cadena();	 
+				 Matricula[] busquedaMatricula=matriculas.get(CursoAcademico);
+  				 busquedaMatricula.toString();
+  			}
+  			catch(IllegalArgumentException e) {
+  			System.out.println(e.getMessage());
+  			}
+  			catch(NullPointerException e) {
+  			System.out.println(e.getMessage());
   			}
       }
     

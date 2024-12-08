@@ -176,6 +176,7 @@ public class Consola {
         }
 	}
 	
+	
 	public static Grado leerGrado() {
 		
 		int eleccion=0;
@@ -234,6 +235,7 @@ public class Consola {
 			return null;
 			}
 	}
+	/*por el contexto entiendo que ciclos formativos no tiene que estar como variable de entrada*/
 	
 	public static void mostrarCiclosFormativos (CiclosFormativos ciclosFormativos) {
 		
@@ -398,6 +400,8 @@ public class Consola {
 		else {return otro;
 		}
 	}
+	
+	/*Dudas diagrama de clase, pone alumnos en vez de alumno*/
 	
 	public static Matricula leerMatricula(Alumno alumno, Asignatura [] asignaturas) throws OperationNotSupportedException {
 		
