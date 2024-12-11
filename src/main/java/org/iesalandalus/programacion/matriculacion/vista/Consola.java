@@ -184,8 +184,8 @@ public class Consola {
 		
 		System.out.println("Introduce una numero para elegir el grado que deseas matricular: ");
 		
-		for (int i = 0; i < Opcion.values().length; i++) {
-			System.out.print(Opcion.values()[i] + " ");
+		for (int i = 0; i < Grado.values().length; i++) {
+			System.out.print("Opcion "+(i+1)+"=  "+Grado.values()[i]+"    ");
 		}
 		System.out.println();
 		
