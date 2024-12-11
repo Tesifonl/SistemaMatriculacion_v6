@@ -147,7 +147,7 @@ public class Consola {
 		try {
 			System.out.println("Introduce un dni: ");
 			String dni=Entrada.cadena();
-			Alumno alumno=new Alumno( "Tesifon Linares", dni, "Tesi@gmail.com", "950112233", LocalDate.of(2002, 9, 15));
+			Alumno alumno=new Alumno( "Tesi", dni, "Tesi@gmail.com", "999999999", LocalDate.of(1979, 1, 8));
 			return alumno;
 			}
 			catch(IllegalArgumentException e){

@@ -2,6 +2,7 @@ package org.iesalandalus.programacion.matriculacion;
 
 import javax.naming.OperationNotSupportedException;
 
+import org.iesalandalus.programacion.matriculacion.dominio.Alumno;
 import org.iesalandalus.programacion.matriculacion.dominio.Asignatura;
 import org.iesalandalus.programacion.matriculacion.dominio.CicloFormativo;
 import org.iesalandalus.programacion.matriculacion.dominio.Curso;
@@ -26,7 +27,7 @@ public class MainApp {
     
     private static void ejecutarOpcion(Opcion opcion) throws OperationNotSupportedException {
     	
-    	do {
+   
     		if (opcion.equals(Opcion.INSERTAR_ALUMNO)) {
     			insertarAlumno();
     		}
@@ -78,15 +79,13 @@ public class MainApp {
     			mostrarMatriculas();
     		}
     		
-    	}
-    	while (opcion!=Opcion.SALIR);
     }
    
 
     private static void insertarAlumno() throws OperationNotSupportedException {
-		try {
-			alumnos.insertar(Consola.leerAlumno());
-			
+		try {	
+			alumnos.insertar(Consola.leerAlumno());	
+
 			}
 			catch(IllegalArgumentException e) {
 				System.out.println(e.getMessage());
@@ -100,7 +99,14 @@ public class MainApp {
     
     private static void buscarAlumno() throws OperationNotSupportedException {
   		try {
-  			alumnos.buscar(Consola.getAlumnoPorDni());
+  			Alumno alumno=Consola.getAlumnoPorDni();
+  			if( alumnos.buscar(alumno)!=null) {
+  				System.out.println("Alumno econtrado");
+  				System.out.println(alumno.toString());
+  			}
+  			else {
+  				System.out.println("No encontrado en la coleccion");
+  			}
   			
   			}
   			catch(IllegalArgumentException e) {
@@ -119,7 +125,15 @@ public class MainApp {
     
     private static void borrarAlumno() throws OperationNotSupportedException {
   		try {
-  			alumnos.borrar(Consola.getAlumnoPorDni());
+  			
+  			Alumno alumno=Consola.getAlumnoPorDni();
+  			if( alumnos.buscar(alumno)!=null) {
+  				System.out.println("Alumno econtrado y borrado");
+  				alumnos.borrar(alumno);
+  			}
+  			else {
+  				System.out.println("No encontrado en la coleccion");
+  			}
   			
   			}
   			catch(IllegalArgumentException e) {
@@ -136,10 +150,16 @@ public class MainApp {
     private static void mostrarAlumnos() throws OperationNotSupportedException {
   		try {
   			 if(alumnos.getTamano()>0) {
-  				 alumnos.toString();
+  				 Alumno[]nuevoArray=alumnos.get();
+  				 
+  				 for(int i=0;i<nuevoArray.length;i++)
+  				 {
+  					System.out.println("Estos son los datos de los alumnos de la coleccion");
+  					System.out.println(nuevoArray[i]);
+  				 }
   			 }
   			 else {
-  				 System.out.println(" No existe alumnos en el sistema");
+  				 System.out.println(" No existen alumnos en el sistema");
   			 }
   			
   			}
@@ -171,8 +191,14 @@ public class MainApp {
     
     private static void buscarAsignatura(){
   		try {
-  			asignaturas.buscar(Consola.getAsignaturaPorCodigo());
-  			
+  			Asignatura asignatura=Consola.getAsignaturaPorCodigo();
+  			if( asignaturas.buscar(asignatura)!=null) {
+  				System.out.println("Asignatura econtrada");
+  				System.out.println(asignatura.toString());
+  			}
+  			else {
+  				System.out.println("No encontrado en la coleccion");
+  			}
   			}
   			catch(IllegalArgumentException e) {
   				System.out.println(e.getMessage());
@@ -186,7 +212,14 @@ public class MainApp {
     
     private static void borrarAsignatura() throws OperationNotSupportedException {
   		try {
-  			asignaturas.borrar(Consola.getAsignaturaPorCodigo());
+  			Asignatura asignatura=Consola.getAsignaturaPorCodigo();
+  			if( asignaturas.buscar(asignatura)!=null) {
+  				System.out.println("Asignatura econtrada y borrada");
+  				asignaturas.borrar(asignatura);
+  			}
+  			else {
+  				System.out.println("Asignatura no encontrada en la coleccion");
+  			}
   			
   			}
   			catch(IllegalArgumentException e) {
@@ -202,11 +235,18 @@ public class MainApp {
     
     private static void mostrarAsignaturas()  {
   		try {
+
   			 if(asignaturas.getTamano()>0) {
-  				 asignaturas.toString();
+  				 Asignatura[]nuevoArray=asignaturas.get();
+  				 
+  				 for(int i=0;i<nuevoArray.length;i++)
+  				 {
+  					System.out.println("Estos son los datos de las asignaturas de la coleccion");
+  					System.out.println(nuevoArray[i]);
+  				 }
   			 }
   			 else {
-  				 System.out.println(" No existen asignaturas  en el sistema");
+  				 System.out.println(" No existen asignaturas en el sistema");
   			 }
   			
   			}
@@ -224,7 +264,7 @@ public class MainApp {
     private static void insertarCicloFormativo() throws OperationNotSupportedException {
   		try {
   			ciclosFormativos.insertar(Consola.leerCicloFormativo());
-  			 
+  			
   			}
   			catch(IllegalArgumentException e) {
   				System.out.println(e.getMessage());
@@ -239,8 +279,14 @@ public class MainApp {
 
     private static void  buscarCicloFormativo() throws OperationNotSupportedException {
   		try {
-  			ciclosFormativos.buscar(Consola.getCicloFormativoPorCodigo());
-  			 
+  			CicloFormativo cicloFormativo=Consola.getCicloFormativoPorCodigo();
+  			if( ciclosFormativos.buscar(cicloFormativo)!=null) {
+  				System.out.println("Ciclo formativo econtrado");
+  				System.out.println(cicloFormativo.toString());
+  			}
+  			else {
+  				System.out.println("No encontrado el ciclo en la coleccion");
+  			}
   			}
   			catch(IllegalArgumentException e) {
   				System.out.println(e.getMessage());
@@ -255,7 +301,14 @@ public class MainApp {
     
     private static void  borrarCicloFormativo() throws OperationNotSupportedException {
   		try {
-  			ciclosFormativos.borrar(Consola.getCicloFormativoPorCodigo());
+  			CicloFormativo cicloFormativo=Consola.getCicloFormativoPorCodigo();
+  			if( ciclosFormativos.buscar(cicloFormativo)!=null) {
+  				System.out.println("Ciclo formativo econtrado y borrado");
+  				ciclosFormativos.borrar(cicloFormativo);
+  			}
+  			else {
+  				System.out.println("Ciclo formativo no encontrado en la coleccion");
+  			}
   			 
   			}
   			catch(IllegalArgumentException e) {
@@ -270,8 +323,15 @@ public class MainApp {
     
     private static void mostrarCiclosFormativos()  {
   		try {
+  			 
   			 if(ciclosFormativos.getTamano()>0) {
-  				 ciclosFormativos.toString();
+  				 CicloFormativo[]nuevoArray=ciclosFormativos.get();
+  				 
+  				 for(int i=0;i<nuevoArray.length;i++)
+  				 {
+  					System.out.println("Estos son los datos de los ciclos formativos de la coleccion");
+  					System.out.println(nuevoArray[i]);
+  				 }
   			 }
   			 else {
   				 System.out.println(" No existen ciclos formativos en el sistema");
@@ -288,7 +348,7 @@ public class MainApp {
   			}
       }
     
-    /*dudas con la matricula que habria que insertar aqui*/
+   
     private static void  insertarMatricula() throws OperationNotSupportedException {
   		try {
   			
@@ -308,7 +368,14 @@ public class MainApp {
     
     private static void  buscarMatricula() throws OperationNotSupportedException {
   		try {
-  			matriculas.buscar(Consola.getMatriculaPorIdentificacion());
+  			Matricula matricula=Consola.getMatriculaPorIdentificacion();
+  			if( matriculas.buscar(matricula)!=null) {
+  				System.out.println("Ciclo formativo econtrado");
+  				System.out.println(matricula.toString());
+  			}
+  			else {
+  				System.out.println("No encontrado el ciclo en la coleccion");
+  			}
   			 
   			}
   			catch(IllegalArgumentException e) {
@@ -323,7 +390,16 @@ public class MainApp {
     
     private static void  anularMatricula() throws OperationNotSupportedException {
   		try {
-  			matriculas.borrar(Consola.getMatriculaPorIdentificacion());
+  			
+  			Matricula matricula=Consola.getMatriculaPorIdentificacion();
+  			if( matriculas.buscar(matricula)!=null) {
+  				System.out.println("Matricula econtrada y borrada");
+  				matriculas.borrar(matricula);
+  			}
+  			else {
+  				System.out.println("Matricula no encontrada en la coleccion");
+  			}
+  			 
   			 
   			}
   			catch(IllegalArgumentException e) {
@@ -337,11 +413,17 @@ public class MainApp {
       }
     
     
-    private static void mostrarMatriculas()  {
+    private static void mostrarMatriculas() throws OperationNotSupportedException  {
   		try {
+
   			 if(matriculas.getTamano()>0) {
-  				 matriculas.toString();
-  			
+  				 Matricula[]nuevoArray=matriculas.get();
+  				 
+  				 for(int i=0;i<nuevoArray.length;i++)
+  				 {
+  					System.out.println("Estos son los datos de las matriculas de la coleccion");
+  					System.out.println(nuevoArray[i]);
+  				 }
   			 }
   			 else {
   				 System.out.println(" No existen matriculas en el sistema");
@@ -360,13 +442,23 @@ public class MainApp {
     
     private static void mostrarMatriculasPorAlumno() throws OperationNotSupportedException  {
   		try {
-  			 if(Consola.getMatriculaPorIdentificacion()!=null) {
-  				Consola.getMatriculaPorIdentificacion().toString();
+  			Alumno alumno=Consola.getAlumnoPorDni();
+  				
+  			
+ 			 if(matriculas.getTamano()>0) {
+  				 Matricula[]nuevoArray=matriculas.get();
+  				 
+  				 for(int i=0;i<nuevoArray.length;i++)
+  				 {
+  					if (nuevoArray[i].getAlumno()==alumno)
+  					System.out.println("Estos son los datos de las matriculas para el alumno seleccionado de la coleccion");
+  					System.out.println(nuevoArray[i]);
+  				 }
   			 }
   			 else {
-  				 System.out.println(" No existen matriculas para este alumno");
+  				 System.out.println(" No existen matriculas pare este alumno en el sistema");
   			 }
-  			
+  			 
   			}
   			catch(IllegalArgumentException e) {
   				System.out.println(e.getMessage());
@@ -377,8 +469,8 @@ public class MainApp {
   			
   			}
       }
-    
-    private static void mostrarMatriculasPorCicloFormativo() throws OperationNotSupportedException  {
+
+    	private static void mostrarMatriculasPorCicloFormativo() throws OperationNotSupportedException  {
   		try {
   				 Matricula[] busquedaMatricula=matriculas.get();
   				 Matricula[] encontradaMatricula=null;
@@ -419,9 +511,22 @@ public class MainApp {
     private static void mostrarMatriculasPorCursoAcademico() throws OperationNotSupportedException  {
   		try {
   				 System.out.println("Introduce el curso");
-				 String CursoAcademico=Entrada.cadena();	 
-				 Matricula[] busquedaMatricula=matriculas.get(CursoAcademico);
-  				 busquedaMatricula.toString();
+				 String cursoAcademico=Entrada.cadena();	 
+				 Matricula[] nuevoArray=matriculas.get();
+  			
+  				 
+  	 			 if(matriculas.getTamano()>0) {
+  	  				 
+  	  				 for(int i=0;i<nuevoArray.length;i++)
+  	  				 {
+  	  					if (nuevoArray[i].getCursoAcademico()==cursoAcademico)
+  	  					System.out.println("Estos son los datos de las matriculas para el curso academico seleccionado de la coleccion");
+  	  					System.out.println(nuevoArray[i]);
+  	  				 }
+  	  			 }
+  	  			 else {
+  	  				 System.out.println(" No existen matriculas para este curso academico en el sistema");
+  	  			 }
   			}
   			catch(IllegalArgumentException e) {
   			System.out.println(e.getMessage());
@@ -432,10 +537,18 @@ public class MainApp {
       }
     
     public static void main(String[] args) throws OperationNotSupportedException {
-
+    	Opcion opcion=null;
+    	alumnos=new Alumnos(1);
+    	asignaturas=new Asignaturas(1);
+    	ciclosFormativos=new CiclosFormativos(1);
+    	matriculas=new Matriculas(1);
+    	
+    	do {
     		Consola.mostrarMenu();
-    		Opcion opcion=Consola.elegirOpcion();
+    		opcion=Consola.elegirOpcion();
     		ejecutarOpcion(opcion);
+    	}while(!opcion.equals(Opcion.SALIR));
+    	
 
 
         System.out.println("Hasta luego!!!!");
