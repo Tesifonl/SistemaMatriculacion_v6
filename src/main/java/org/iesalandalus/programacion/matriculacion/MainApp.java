@@ -151,11 +151,14 @@ public class MainApp {
   		try {
   			 if(alumnos.getTamano()>0) {
   				 Alumno[]nuevoArray=alumnos.get();
+  				 boolean encontrado=false;
   				 
   				 for(int i=0;i<nuevoArray.length;i++)
-  				 {
-  					System.out.println("Estos son los datos de los alumnos de la coleccion");
-  					System.out.println(nuevoArray[i]);
+  				 { if (nuevoArray[i]!=null) {
+  					 System.out.println("Estos son los datos de los alumnos de la coleccion");
+  					 System.out.println(nuevoArray[i]);
+  				 	}
+  				 	else {encontrado=true;}
   				 }
   			 }
   			 else {
@@ -238,13 +241,17 @@ public class MainApp {
 
   			 if(asignaturas.getTamano()>0) {
   				 Asignatura[]nuevoArray=asignaturas.get();
+  				 boolean encontrado=false;
   				 
   				 for(int i=0;i<nuevoArray.length;i++)
   				 {
-  					System.out.println("Estos son los datos de las asignaturas de la coleccion");
-  					System.out.println(nuevoArray[i]);
+  					 if (nuevoArray[i]!=null) {
+  	  					 System.out.println("Estos son los datos de las asignaturas de la coleccion");
+  	  					 System.out.println(nuevoArray[i]);
+  	  				 }
+  	  				 else {encontrado=true;}
   				 }
-  			 }
+  				 }
   			 else {
   				 System.out.println(" No existen asignaturas en el sistema");
   			 }
@@ -326,13 +333,18 @@ public class MainApp {
   			 
   			 if(ciclosFormativos.getTamano()>0) {
   				 CicloFormativo[]nuevoArray=ciclosFormativos.get();
+  				 boolean encontrado=false;
   				 
   				 for(int i=0;i<nuevoArray.length;i++)
-  				 {
-  					System.out.println("Estos son los datos de los ciclos formativos de la coleccion");
-  					System.out.println(nuevoArray[i]);
-  				 }
-  			 }
+  				 
+  	  				 { if (nuevoArray[i]!=null) {
+  	  					 System.out.println("Estos son los datos de los ciclos formativos de la coleccion");
+  	  					 System.out.println(nuevoArray[i]);
+  	  				 	}
+  	  				 	else {encontrado=true;}
+  					 
+  	  				 }
+  	  			}
   			 else {
   				 System.out.println(" No existen ciclos formativos en el sistema");
   			 }
@@ -351,8 +363,8 @@ public class MainApp {
    
     private static void  insertarMatricula() throws OperationNotSupportedException {
   		try {
-  			
-  			matriculas.insertar(Consola.leerMatricula(Consola.leerAlumno(), Consola.getMatriculaPorIdentificacion().getColeccionAsignaturas()));
+  			Asignatura [] coleccionAsignaturas=asignaturas.get();
+  			matriculas.insertar(Consola.leerMatricula(Consola.leerAlumno(), coleccionAsignaturas));
   			
   			}
   			catch(IllegalArgumentException e) {
@@ -368,7 +380,7 @@ public class MainApp {
     
     private static void  buscarMatricula() throws OperationNotSupportedException {
   		try {
-  			Matricula matricula=Consola.getMatriculaPorIdentificacion();
+  			Matricula matricula=Consola.getMatriculaPorIdentificador();
   			if( matriculas.buscar(matricula)!=null) {
   				System.out.println("Ciclo formativo econtrado");
   				System.out.println(matricula.toString());
@@ -391,7 +403,7 @@ public class MainApp {
     private static void  anularMatricula() throws OperationNotSupportedException {
   		try {
   			
-  			Matricula matricula=Consola.getMatriculaPorIdentificacion();
+  			Matricula matricula=Consola.getMatriculaPorIdentificador();
   			if( matriculas.buscar(matricula)!=null) {
   				System.out.println("Matricula econtrada y borrada");
   				matriculas.borrar(matricula);
@@ -538,10 +550,10 @@ public class MainApp {
     
     public static void main(String[] args) throws OperationNotSupportedException {
     	Opcion opcion=null;
-    	alumnos=new Alumnos(1);
-    	asignaturas=new Asignaturas(1);
-    	ciclosFormativos=new CiclosFormativos(1);
-    	matriculas=new Matriculas(1);
+    	alumnos=new Alumnos(100);
+    	asignaturas=new Asignaturas(50);
+    	ciclosFormativos=new CiclosFormativos(5);
+    	matriculas=new Matriculas(100);
     	
     	do {
     		Consola.mostrarMenu();

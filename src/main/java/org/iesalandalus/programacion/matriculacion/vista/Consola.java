@@ -118,7 +118,7 @@ public class Consola {
 		
 		
 		try {
-			System.out.println("Introduce un nombre: ");
+			System.out.println("Introduce el nombre del alumno: ");
 			String nombre=Entrada.cadena();
 			System.out.println("Introduce un dni: ");
 			String dni=Entrada.cadena();
@@ -212,7 +212,7 @@ public class Consola {
 	public static CicloFormativo leerCicloFormativo() {
 		
 		try {
-			System.out.println("Introduce un codigo: ");
+			System.out.println("Introduce un numero de 4 digitos como codigo del ciclo: ");
 			int codigo=Entrada.entero();
 			System.out.println("Introduce una familia profesional ");
 			String familiaProfesional=Entrada.cadena();
@@ -249,7 +249,7 @@ public class Consola {
 	public static CicloFormativo getCicloFormativoPorCodigo() {
 		
 		try {
-			System.out.println("Introduce un codigo: ");
+			System.out.println("Introduce el codigo del ciclo formativo que debe ser 4 caracteres numericos: ");
 			int codigo=Entrada.entero();
 			
 
@@ -271,10 +271,10 @@ public class Consola {
 		int eleccion=0;
 		Curso cursoElegido=null;
 		
-		System.out.println("Introduce una numero para elegir el curso que deseas matricular: ");
+		System.out.println("Introduce un numero para elegir entre las siguientes opciones ");
 		
-		for (int i = 0; i < Opcion.values().length; i++) {
-			System.out.print(Opcion.values()[i] + " ");
+		for (int i = 0; i < Curso.values().length; i++) {
+			System.out.print("Opcion "+(i+1)+"=  "+Curso.values()[i] + "    ");
 		}
 		System.out.println();
 		
@@ -299,10 +299,10 @@ public class Consola {
 		int eleccion=0;
 		EspecialidadProfesorado  especialidadElegida=null;
 		
-		System.out.println("Introduce una numero para elegir el grado que deseas matricular: ");
+		System.out.println("Introduce una numero para elegir la especiliadad del profesorado ");
 		
-		for (int i = 0; i < Opcion.values().length; i++) {
-			System.out.print(Opcion.values()[i] + " ");
+		for (int i = 0; i < EspecialidadProfesorado.values().length; i++) {
+			System.out.print("Opcion "+(i+1)+"=  "+EspecialidadProfesorado.values()[i] + "   ");
 		}
 		System.out.println();
 		
@@ -329,9 +329,9 @@ public class Consola {
 	public static Asignatura leerAsignatura () {
 		
 		try {
-			System.out.println("Introduce un codigo: ");
+			System.out.println("Introduce un codigo para la asignatura: ");
 			String codigo=Entrada.cadena();
-			System.out.println("Introduce un nombre ");
+			System.out.println("Introduce un nombre para la asignaturas ");
 			String nombre=Entrada.cadena();
 			System.out.println("Introduce un numero de horas anuales ");
 			int horasAnuales=Entrada.entero();
@@ -357,10 +357,11 @@ public class Consola {
 	
 	public static Asignatura getAsignaturaPorCodigo() {
 		try {
-			System.out.println("Introduce un codigo: ");
-			String codigo=Entrada.cadena();
+			System.out.println("Introduce un codigo de asignatura que debe ser cuatro caracteres numericos: ");
+			int codigo1=Entrada.entero();
+			String codigo2=String.valueOf(codigo1);
 			
-			Asignatura asignatura =new Asignatura(codigo,"Programacion",300,Curso.PRIMERO,100,EspecialidadProfesorado.INFORMATICA,getCicloFormativoPorCodigo());
+			Asignatura asignatura =new Asignatura(codigo2,"Programacion",100,Curso.PRIMERO,6,EspecialidadProfesorado.INFORMATICA,getCicloFormativoPorCodigo());
 			return asignatura;
 			}
 			catch(IllegalArgumentException e) {
@@ -406,10 +407,11 @@ public class Consola {
 	public static Matricula leerMatricula(Alumno alumno, Asignatura [] asignaturas) throws OperationNotSupportedException {
 		
 		try {
-			System.out.println("Introduce un id de matricula: ");
+			System.out.println("Introduce un id de matricula que debe ser un numero mayor que cero: ");
 			int idMatricula=Entrada.entero();
-			System.out.println("Introduce el curso: ");
+			System.out.println("Introduce el cursoE que debe tener el formato dd-dd, por ejemplo, 23-24 ");
 			String curso=Entrada.cadena();
+			System.out.println("Introduce una fecha nacimiento: ");
 			LocalDate fechaMatriculacion=leerFecha(Entrada.cadena());
 			Alumno alumnoIntroducido=alumno;
 			Asignatura [] asignaturasIntroducidas=asignaturas;
@@ -429,7 +431,7 @@ public class Consola {
 		
 	}
 	
-	public static Matricula getMatriculaPorIdentificacion() throws OperationNotSupportedException {
+	public static Matricula getMatriculaPorIdentificador() throws OperationNotSupportedException {
 		
 		try {
 			System.out.println("Introduce un id de matricula: ");
