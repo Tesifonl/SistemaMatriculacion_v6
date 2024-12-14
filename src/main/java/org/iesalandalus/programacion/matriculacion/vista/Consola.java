@@ -411,7 +411,7 @@ public class Consola {
 			int idMatricula=Entrada.entero();
 			System.out.println("Introduce el cursoE que debe tener el formato dd-dd, por ejemplo, 23-24 ");
 			String curso=Entrada.cadena();
-			System.out.println("Introduce una fecha nacimiento: ");
+			System.out.println("Introduce una fecha de matriculacion ");
 			LocalDate fechaMatriculacion=leerFecha(Entrada.cadena());
 			Alumno alumnoIntroducido=alumno;
 			Asignatura [] asignaturasIntroducidas=asignaturas;
@@ -436,11 +436,13 @@ public class Consola {
 		try {
 			System.out.println("Introduce un id de matricula: ");
 			int idMatricula=Entrada.entero();
-			Asignatura[] asignaturas=new Asignatura[2];
-			asignaturas[0]=getAsignaturaPorCodigo();
+			Alumno alumno=new Alumno( "Tesi", "78033260X", "Tesi@gmail.com", "999999999", LocalDate.of(1979, 1, 8));
+			CicloFormativo cicloFormativo =new CicloFormativo(1111,"Semipresencial",Grado.GDCFGB,"DAW",100);
+			Asignatura[] asignaturas=new Asignatura[10];
+			asignaturas[0]=new Asignatura("2222","Programacion",100,Curso.PRIMERO,6,EspecialidadProfesorado.INFORMATICA,cicloFormativo);
 			
 
-			Matricula matricula =new Matricula(idMatricula,"PRIMERO",LocalDate.now(),getAlumnoPorDni() ,asignaturas);
+			Matricula matricula =new Matricula(idMatricula,"23-24",LocalDate.now(),alumno,asignaturas);
 			return matricula;
 			}
 			catch(IllegalArgumentException e) {

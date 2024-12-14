@@ -363,8 +363,18 @@ public class MainApp {
    
     private static void  insertarMatricula() throws OperationNotSupportedException {
   		try {
-  			Asignatura [] coleccionAsignaturas=asignaturas.get();
-  			matriculas.insertar(Consola.leerMatricula(Consola.leerAlumno(), coleccionAsignaturas));
+  			/*No se si tengo que pedir los datos del alumno y asignaturas o rescatarlos de la coleccion obligando a que se den de alta*/
+  			
+  			/*Asignatura [] coleccionAsignaturas=asignaturas.get();*/
+  			
+  			Alumno alumno=Consola.leerAlumno();
+  			System.out.println("Indica el numero de asignaturas que vas a introducir, debe ser mayor que 0");
+  			Asignatura [] coleccionAsignaturas=new Asignatura[10];
+  			int numeroAsignaturas=Entrada.entero();
+  			for (int i=0;i<numeroAsignaturas;i++) {
+  				coleccionAsignaturas[i]=Consola.leerAsignatura();
+  			}
+  			matriculas.insertar(Consola.leerMatricula(alumno, coleccionAsignaturas));
   			
   			}
   			catch(IllegalArgumentException e) {
@@ -386,7 +396,7 @@ public class MainApp {
   				System.out.println(matricula.toString());
   			}
   			else {
-  				System.out.println("No encontrado el ciclo en la coleccion");
+  				System.out.println("No encontrada la matricula en el sistema");
   			}
   			 
   			}
@@ -430,11 +440,24 @@ public class MainApp {
 
   			 if(matriculas.getTamano()>0) {
   				 Matricula[]nuevoArray=matriculas.get();
+  				 boolean encontrado=false;
   				 
   				 for(int i=0;i<nuevoArray.length;i++)
   				 {
-  					System.out.println("Estos son los datos de las matriculas de la coleccion");
-  					System.out.println(nuevoArray[i]);
+  					if (nuevoArray[i]!=null) {
+  						System.out.println("Estos son los datos de las matriculas de la coleccion");
+  						System.out.println(nuevoArray[i]);
+  						Asignatura[] arrayAsignaturas=nuevoArray[i].getColeccionAsignaturas();
+  						for (int j=0;j<arrayAsignaturas.length;j++)
+  						{ if(arrayAsignaturas[j]!=null) {
+  								System.out.println("Estas son sus asignaturas");
+  								System.out.println(arrayAsignaturas[j]);
+  							}
+  							else {encontrado=true;}
+  						}
+  					}else {
+  						encontrado=true;
+  					}
   				 }
   			 }
   			 else {
