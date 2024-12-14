@@ -78,6 +78,15 @@ public class MainApp {
     		if (opcion.equals(Opcion.MOSTRAR_MATRICULAS)) {
     			mostrarMatriculas();
     		}
+    		if (opcion.equals(Opcion.MOSTRAR_MATRICULAS_ALUMNO)) {
+    			mostrarMatriculasPorAlumno();
+    		}
+    		if (opcion.equals(Opcion.MOSTRAR_MATRICULAS_CICLO_FORMATIVO)) {
+    			mostrarMatriculasPorCicloFormativo();
+    		}
+    		if (opcion.equals(Opcion.MOSTRAR_MATRICULAS_CURSO_ACADEMICO)) {
+    			mostrarMatriculasPorCursoAcademico();
+    		}
     		
     }
    
@@ -478,6 +487,7 @@ public class MainApp {
     private static void mostrarMatriculasPorAlumno() throws OperationNotSupportedException  {
   		try {
   			Alumno alumno=Consola.getAlumnoPorDni();
+  			boolean encontrado=false;
   				
   			
  			 if(matriculas.getTamano()>0) {
@@ -485,13 +495,18 @@ public class MainApp {
   				 
   				 for(int i=0;i<nuevoArray.length;i++)
   				 {
-  					if (nuevoArray[i].getAlumno()==alumno)
+  					if (nuevoArray[i]!=null && nuevoArray[i].getAlumno().equals(alumno)) {
   					System.out.println("Estos son los datos de las matriculas para el alumno seleccionado de la coleccion");
   					System.out.println(nuevoArray[i]);
+  					}
+  					else
+  					{
+  						encontrado=true;
+  					}
   				 }
   			 }
   			 else {
-  				 System.out.println(" No existen matriculas pare este alumno en el sistema");
+  				 System.out.println(" No existen matriculas en el sistema");
   			 }
   			 
   			}
@@ -507,33 +522,51 @@ public class MainApp {
 
     	private static void mostrarMatriculasPorCicloFormativo() throws OperationNotSupportedException  {
   		try {
-  				 Matricula[] busquedaMatricula=matriculas.get();
-  				 Matricula[] encontradaMatricula=null;
-  				 Asignatura[] busquedaAsignatura=null;
-  				 boolean encontrada=false;
-  				 boolean otro=false;
-  				 int contador=0;
+  				 Matricula[] nuevoArray1=matriculas.get();
+  				 Asignatura[] nuevoArray2=null;
+  				 int otro=0;
+  				 mostrarCiclosFormativos();
+  				 System.out.println("Nota: Aunque no se haya dado de alta el ciclo, puede existir una matricula con él asignado");
+  				 CicloFormativo cicloFormativo=Consola.getCicloFormativoPorCodigo();
   				 
-  		
-  				 ciclosFormativos.toString();
   				 
-  				 for (int i=0; i<busquedaMatricula.length-1;i++)
+  				 for (int i=0; i<nuevoArray1.length-1;i++)
   				 {
-  					 busquedaAsignatura=busquedaMatricula[i].getColeccionAsignaturas();
-  				 	 for(int j=0;j<busquedaAsignatura.length-1;j++) {
-  				 		 if(busquedaAsignatura[j].getCicloFormativo().equals(Consola.getCicloFormativoPorCodigo()))
+  					 if (nuevoArray1[i]!=null) {
+  					 nuevoArray2=nuevoArray1[i].getColeccionAsignaturas();
+  				 	 for(int j=0;j<nuevoArray2.length-1;j++) {
+  				 		 if(nuevoArray2[j]==null) 
+  				 			 
+  				 		 {
+  				 			 otro=1;
+  				 		 }
+  				 		 else if(nuevoArray2[j].getCicloFormativo().equals(cicloFormativo))
   				 		 	{
-  				 			contador++;
-  				 		 	encontrada=true;
-  				 			encontradaMatricula[contador-1]=busquedaMatricula[i];
-  				 			encontradaMatricula.toString();
+  				 			System.out.println("Para ese ciclo se ha encontrado las siguientes matriculas");
+  				 		 	System.out.println(nuevoArray1[i]);
   				 		 	}
-  				 		 	else {
-  				 			 otro=true;	 
-  				 		 	}
-  				 	}
+  				 		 else{
+  				 			otro=2;
+  				 		 }
+  				 	  }
+  					 }
+  					otro=3;
   				 }
   				 
+  			    switch (otro) {
+  	            case 1:
+  	                System.out.println("No hay asignaturas dadas de alta en las matriculas");
+  	                break;
+  	            case 2:
+  	                System.out.println("No existe esta asignatura en ninguna matricula");
+  	                break;
+  	            case 3:
+  	                System.out.println("No existen mas matriculas dadas de alta");
+  	                break;
+  	          default:
+                  System.out.println("No existen mas matriculas dadas de alta");
+  			    }
+  				 			
   			}
   			catch(IllegalArgumentException e) {
   			System.out.println(e.getMessage());
@@ -545,23 +578,45 @@ public class MainApp {
     
     private static void mostrarMatriculasPorCursoAcademico() throws OperationNotSupportedException  {
   		try {
-  				 System.out.println("Introduce el curso");
+  				 System.out.println("Introduce el curso en formato DD-DD, por ejemplo 23-24");
 				 String cursoAcademico=Entrada.cadena();	 
 				 Matricula[] nuevoArray=matriculas.get();
+				 int otro=0;
   			
   				 
   	 			 if(matriculas.getTamano()>0) {
   	  				 
   	  				 for(int i=0;i<nuevoArray.length;i++)
   	  				 {
-  	  					if (nuevoArray[i].getCursoAcademico()==cursoAcademico)
-  	  					System.out.println("Estos son los datos de las matriculas para el curso academico seleccionado de la coleccion");
-  	  					System.out.println(nuevoArray[i]);
+  	  					if(nuevoArray[i]==null) {
+  	  						otro=1;
+  	  					}
+  	  					else if (nuevoArray[i].getCursoAcademico().equals(cursoAcademico)) {
+  	  						System.out.println("Estos son los datos de las matriculas para el curso academico seleccionado de la coleccion");
+  	  						System.out.println(nuevoArray[i]);
+  	  					}
+  	  					else
+  	  					{
+  	  					 otro=2;
+  	  					}
   	  				 }
   	  			 }
   	  			 else {
-  	  				 System.out.println(" No existen matriculas para este curso academico en el sistema");
+  	  				 otro=3;
   	  			 }
+   			  switch (otro) {
+   			  	case 1:
+  	                System.out.println("No existen ninguna matricula");
+  	                break;
+  	            case 2:
+  	                System.out.println("No existen ninguna matricula para ese curso");
+  	                break;
+  	            case 3:
+  	                System.out.println("No existen mas matriculas para ese curso dadas de alta");
+  	                break;
+  	            default:
+  	            	System.out.println("No existen mas matriculas para ese curso dadas de alta");
+  			    }
   			}
   			catch(IllegalArgumentException e) {
   			System.out.println(e.getMessage());

@@ -436,7 +436,7 @@ public class Consola {
 		try {
 			System.out.println("Introduce un id de matricula: ");
 			int idMatricula=Entrada.entero();
-			Alumno alumno=new Alumno( "Tesi", "78033260X", "Tesi@gmail.com", "999999999", LocalDate.of(1979, 1, 8));
+			Alumno alumno=new Alumno( "Tesi", "11111111H", "Tesi@gmail.com", "999999999", LocalDate.of(1979, 1, 8));
 			CicloFormativo cicloFormativo =new CicloFormativo(1111,"Semipresencial",Grado.GDCFGB,"DAW",100);
 			Asignatura[] asignaturas=new Asignatura[10];
 			asignaturas[0]=new Asignatura("2222","Programacion",100,Curso.PRIMERO,6,EspecialidadProfesorado.INFORMATICA,cicloFormativo);
