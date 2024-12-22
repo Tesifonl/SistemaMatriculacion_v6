@@ -55,7 +55,7 @@ public class Asignaturas {
 		return capacidad;
 	}
 	
-	public void insertar(Asignatura asignatura) throws OperationNotSupportedException {
+	/*public void insertar(Asignatura asignatura) throws OperationNotSupportedException {
 		boolean noEncontrado=false;
 		boolean encontrado=false;
 	
@@ -85,9 +85,31 @@ public class Asignaturas {
 		else {
 			throw new NullPointerException("ERROR: No se puede insertar una asignatura nula.");
 		}
+	}*/
+	
+	public void insertar(Asignatura asignatura) throws OperationNotSupportedException {
+		
+		if(asignatura!=null) {
+			int indice=buscarIndice(asignatura);
+			
+			if(indice==999999) {
+				if(getTamano()<getCapacidad()) {
+					coleccionAsignaturas[getTamano()]=asignatura;
+				}
+				else {
+					throw new OperationNotSupportedException("ERROR: No se aceptan más asignaturas.");
+				}
+			}
+			else{
+				throw new OperationNotSupportedException("ERROR: Ya existe una asignatura con ese código.");
+			}
+		}
+		else {
+			throw new NullPointerException("ERROR: No se puede insertar una asignatura nula.");
+		}
 	}
 	
-	private int buscarIndice(Asignatura asignatura) throws OperationNotSupportedException {
+	/*private int buscarIndice(Asignatura asignatura) throws OperationNotSupportedException {
 		int indice=0;
 		
 		if (asignatura!=null) {
@@ -105,6 +127,35 @@ public class Asignaturas {
 			throw new NullPointerException("Se ha recibido una asignatura nula");
 		}
 		return indice;
+	}*/
+	
+	private int buscarIndice(Asignatura asignatura) throws OperationNotSupportedException {
+		int indice=999999;
+		boolean encontrado=false;
+		boolean noEncontrado=false;
+		
+		if (asignatura!=null) {
+			for(int i=0;i<coleccionAsignaturas.length;i++) {
+				if(coleccionAsignaturas[i]!=null && coleccionAsignaturas[i].equals(asignatura)) {
+					encontrado=true;
+					indice=i;
+				}
+				else {
+					noEncontrado=true;
+				}
+				
+			}
+			
+			if(encontrado==true) {
+				return indice;
+			}
+			else {
+				return 999999;
+			}
+		}
+		else {
+			throw new NullPointerException("Se ha recibido una asignatura nula");
+		}
 	}
 	
 	private boolean tamanoSuperado(int indice) {
@@ -155,7 +206,7 @@ public class Asignaturas {
 		}
 	}
 	
-	public void borrar(Asignatura asignatura) throws OperationNotSupportedException {
+	/*public void borrar(Asignatura asignatura) throws OperationNotSupportedException {
 		boolean encontrado=false;
 		boolean otro=false;
 		int indice=0;
@@ -175,6 +226,23 @@ public class Asignaturas {
 				desplazarUnaPosicionHaciaIzquiera(indice);
 			}
 			else {
+				throw new OperationNotSupportedException("ERROR: No existe ninguna asignatura como la indicada.");
+			}
+		}
+		else {
+			throw new NullPointerException("ERROR: No se puede borrar una asignatura nula.");
+		}
+	}*/
+	
+	public void borrar(Asignatura asignatura) throws OperationNotSupportedException {
+		if(asignatura!=null) {
+			int indice=buscarIndice(asignatura);
+			
+			if(indice!=999999) {
+				coleccionAsignaturas[indice]=null;
+				desplazarUnaPosicionHaciaIzquiera(indice);
+			}
+			else{
 				throw new OperationNotSupportedException("ERROR: No existe ninguna asignatura como la indicada.");
 			}
 		}

@@ -52,7 +52,7 @@ public class Alumno {
 	}
 
 
-	public void setNia(String nia) {
+	private void setNia(String nia) {
 		if (nia == null) { 
 			throw new NullPointerException("ERROR: El NIA de un alumno no puede ser nulo.");}
 		else if (nia.trim().equals("")) { 
@@ -149,7 +149,7 @@ public class Alumno {
 			throw new IllegalArgumentException("ERROR: La letra del dni del alumno no es correcta.");}
 	}
 
-	public boolean comprobarLetraDni(String dni) {
+	private boolean comprobarLetraDni(String dni) {
 		
 		int resto=0;
 		char letra = 0;
@@ -170,12 +170,11 @@ public class Alumno {
 	}
 
 
-	public void setFechaNacimiento(LocalDate fechaNacimiento) {
-		LocalDate fechaMenores=LocalDate.of (2015,11,30);
+	private void setFechaNacimiento(LocalDate fechaNacimiento) {
 		
 		if (fechaNacimiento==null) {
 			throw new NullPointerException("ERROR: La fecha de nacimiento de un alumno no puede ser nula.");}
-		else if(fechaNacimiento.isAfter(fechaMenores)){
+		else if(LocalDate.now().getYear()-fechaNacimiento.getYear()<MIN_EDAD_ALUMNADO){
 			throw new IllegalArgumentException("ERROR: La edad del alumno debe ser mayor o igual a 16 años.");
 		}
 		else {this.fechaNacimiento=fechaNacimiento;}
@@ -183,7 +182,7 @@ public class Alumno {
 	
 
 	
-	public String getIniciales() {
+	private String getIniciales() {
 		String ini="";
 		nombre=formateaNombre(nombre);
 		String [] iniciales=nombre.split(" ");
@@ -193,9 +192,10 @@ public class Alumno {
 		return ini;
 	}
 
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(correo, dni, fechaNacimiento, nia, nombre, telefono);
+		return Objects.hash(dni);
 	}
 
 	@Override
@@ -207,9 +207,7 @@ public class Alumno {
 		if (getClass() != obj.getClass())
 			return false;
 		Alumno other = (Alumno) obj;
-		return Objects.equals(correo, other.correo) && Objects.equals(dni, other.dni)
-				&& Objects.equals(fechaNacimiento, other.fechaNacimiento) && Objects.equals(nia, other.nia)
-				&& Objects.equals(nombre, other.nombre) && Objects.equals(telefono, other.telefono);
+		return Objects.equals(dni, other.dni);
 	}
 
 	@Override

@@ -45,7 +45,7 @@ public class Asignatura {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) {
+	private void setCodigo(String codigo) {
 		if (codigo==null) {
 			throw new NullPointerException("ERROR: El código de una asignatura no puede ser nulo.");
 		}
@@ -126,10 +126,11 @@ public class Asignatura {
 		else {this.cicloFormativo=cicloFormativo;}
 	}
 
+	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(cicloFormativo, codigo, curso, especialidadProfesorado, horasAnuales, horasDesdoble,
-				nombre);
+		return Objects.hash(codigo);
 	}
 
 	@Override
@@ -141,10 +142,7 @@ public class Asignatura {
 		if (getClass() != obj.getClass())
 			return false;
 		Asignatura other = (Asignatura) obj;
-		return Objects.equals(cicloFormativo, other.cicloFormativo) && Objects.equals(codigo, other.codigo)
-				&& curso == other.curso && especialidadProfesorado == other.especialidadProfesorado
-				&& horasAnuales == other.horasAnuales && horasDesdoble == other.horasDesdoble
-				&& Objects.equals(nombre, other.nombre);
+		return Objects.equals(codigo, other.codigo);
 	}
 
 	@Override

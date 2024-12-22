@@ -87,7 +87,7 @@ public class CiclosFormativos {
 		}
 	}
 	
-	private int buscarIndice(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+	/*private int buscarIndice(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
 		int indice=0;
 		
 		if (cicloFormativo!=null) {
@@ -105,6 +105,35 @@ public class CiclosFormativos {
 			throw new NullPointerException("Se ha recibido un ciclo formativo nulo");
 		}
 		return indice;
+	}*/
+	
+	private int buscarIndice(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+		int indice=999999;
+		boolean encontrado=false;
+		boolean noEncontrado=false;
+		
+		if (cicloFormativo!=null) {
+			for(int i=0;i<coleccionCiclosFormativos.length;i++) {
+				if(coleccionCiclosFormativos[i]!=null && coleccionCiclosFormativos[i].equals(cicloFormativo)) {
+					encontrado=true;
+					indice=i;
+				}
+				else {
+					noEncontrado=true;
+				}
+				
+			}
+			
+			if(encontrado==true) {
+				return indice;
+			}
+			else {
+				return 999999;
+			}
+		}
+		else {
+			throw new NullPointerException("Se ha recibido un alumno nulo");
+		}
 	}
 	
 	private boolean tamanoSuperado(int indice) {
@@ -155,7 +184,7 @@ public class CiclosFormativos {
 		}
 	}
 	
-	public void borrar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+	/*public void borrar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
 		boolean encontrado=false;
 		boolean otro=false;
 		int indice=0;
@@ -175,6 +204,23 @@ public class CiclosFormativos {
 				desplazarUnaPosicionHaciaIzquiera(indice);
 			}
 			else {
+				throw new OperationNotSupportedException("ERROR: No existe ningún ciclo formativo como el indicado.");
+			}
+		}
+		else {
+			throw new NullPointerException("ERROR: No se puede borrar un ciclo formativo nulo.");
+		}
+	}*/
+	
+	public void borrar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+		if(cicloFormativo!=null) {
+			int indice=buscarIndice(cicloFormativo);
+			
+			if(indice!=999999) {
+				coleccionCiclosFormativos[indice]=null;
+				desplazarUnaPosicionHaciaIzquiera(indice);
+			}
+			else{
 				throw new OperationNotSupportedException("ERROR: No existe ningún ciclo formativo como el indicado.");
 			}
 		}

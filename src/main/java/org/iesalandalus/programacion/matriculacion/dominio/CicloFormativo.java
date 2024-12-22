@@ -95,9 +95,10 @@ public class CicloFormativo {
 		else {this.horas = horas;}
 	}
 
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(codigo, familiaProfesional, grado, horas, nombre);
+		return Objects.hash(codigo);
 	}
 
 	@Override
@@ -109,8 +110,7 @@ public class CicloFormativo {
 		if (getClass() != obj.getClass())
 			return false;
 		CicloFormativo other = (CicloFormativo) obj;
-		return codigo == other.codigo && Objects.equals(familiaProfesional, other.familiaProfesional)
-				&& grado == other.grado && horas == other.horas && Objects.equals(nombre, other.nombre);
+		return codigo == other.codigo;
 	}
 
 	@Override

@@ -54,7 +54,7 @@ public class Alumnos {
 		return capacidad;
 	}
 	
-	public void insertar(Alumno alumno) throws OperationNotSupportedException {
+	/*public void insertar(Alumno alumno) throws OperationNotSupportedException {
 		boolean noEncontrado=false;
 		boolean encontrado=false;
 	
@@ -84,26 +84,58 @@ public class Alumnos {
 		else {
 			throw new NullPointerException("ERROR: No se puede insertar un alumno nulo.");
 		}
+	}*/
+	
+	public void insertar(Alumno alumno) throws OperationNotSupportedException {
+		
+		if(alumno!=null) {
+			int indice=buscarIndice(alumno);
+			
+			if(indice==999999) {
+				if(getTamano()<getCapacidad()) {
+					coleccionAlumnos[getTamano()]=alumno;
+				}
+				else {
+					throw new OperationNotSupportedException("ERROR: No se aceptan más alumnos.");
+				}
+			}
+			else{
+				throw new OperationNotSupportedException("ERROR: Ya existe un alumno con ese dni.");
+			}
+		}
+		else {
+			throw new NullPointerException("ERROR: No se puede insertar un alumno nulo.");
+		}
 	}
+
 	
 	private int buscarIndice(Alumno alumno) throws OperationNotSupportedException {
-		int indice=0;
+		int indice=999999;
+		boolean encontrado=false;
+		boolean noEncontrado=false;
 		
 		if (alumno!=null) {
 			for(int i=0;i<coleccionAlumnos.length;i++) {
 				if(coleccionAlumnos[i]!=null && coleccionAlumnos[i].equals(alumno)) {
+					encontrado=true;
 					indice=i;
 				}
 				else {
-					throw new OperationNotSupportedException("Ya existe este alumno");
+					noEncontrado=true;
 				}
 				
+			}
+			
+			if(encontrado==true) {
+				return indice;
+			}
+			else {
+				return 999999;
 			}
 		}
 		else {
 			throw new NullPointerException("Se ha recibido un alumno nulo");
 		}
-		return indice;
 	}
 	
 	private boolean tamanoSuperado(int indice) {
@@ -154,7 +186,7 @@ public class Alumnos {
 		}
 	}
 	
-	public void borrar(Alumno alumno) throws OperationNotSupportedException {
+	/*public void borrar(Alumno alumno) throws OperationNotSupportedException {
 		boolean encontrado=false;
 		boolean otro=false;
 		int indice=0;
@@ -174,6 +206,23 @@ public class Alumnos {
 				desplazarUnaPosicionHaciaIzquiera(indice);
 			}
 			else {
+				throw new OperationNotSupportedException("ERROR: No existe ningún alumno como el indicado.");
+			}
+		}
+		else {
+			throw new NullPointerException("ERROR: No se puede borrar un alumno nulo.");
+		}
+	}*/
+	
+	public void borrar(Alumno alumno) throws OperationNotSupportedException {
+		if(alumno!=null) {
+			int indice=buscarIndice(alumno);
+			
+			if(indice!=999999) {
+				coleccionAlumnos[indice]=null;
+				desplazarUnaPosicionHaciaIzquiera(indice);
+			}
+			else{
 				throw new OperationNotSupportedException("ERROR: No existe ningún alumno como el indicado.");
 			}
 		}

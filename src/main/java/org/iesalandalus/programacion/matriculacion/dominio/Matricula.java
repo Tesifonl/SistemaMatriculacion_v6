@@ -180,14 +180,10 @@ public class Matricula {
 		else {this.fechaAnulacion = fechaAnulacion;}
 	}
 
-	
+
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + Arrays.hashCode(coleccionAsignaturas);
-		result = prime * result + Objects.hash(alumno, cursoAcademico, fechaAnulacion, fechaMatriculacion, idMatricula);
-		return result;
+		return Objects.hash(idMatricula);
 	}
 
 	@Override
@@ -199,10 +195,7 @@ public class Matricula {
 		if (getClass() != obj.getClass())
 			return false;
 		Matricula other = (Matricula) obj;
-		return Objects.equals(alumno, other.alumno) && Arrays.equals(coleccionAsignaturas, other.coleccionAsignaturas)
-				&& Objects.equals(cursoAcademico, other.cursoAcademico)
-				&& Objects.equals(fechaAnulacion, other.fechaAnulacion)
-				&& Objects.equals(fechaMatriculacion, other.fechaMatriculacion) && idMatricula == other.idMatricula;
+		return idMatricula == other.idMatricula;
 	}
 
 	@Override

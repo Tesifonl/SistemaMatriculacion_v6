@@ -57,7 +57,7 @@ public class Matriculas {
 		return capacidad;
 	}
 	
-	public void insertar(Matricula matricula) throws OperationNotSupportedException {
+	/*public void insertar(Matricula matricula) throws OperationNotSupportedException {
 		boolean noEncontrado=false;
 		boolean encontrado=false;
 	
@@ -87,9 +87,30 @@ public class Matriculas {
 		else {
 			throw new NullPointerException("ERROR: No se puede insertar una matrícula nula.");
 		}
+	}*/
+	
+	public void insertar(Matricula matricula) throws OperationNotSupportedException {
+		if(matricula!=null) {
+			int indice=buscarIndice(matricula);
+			
+			if(indice==999999) {
+				if(getTamano()<getCapacidad()) {
+					coleccionMatriculas[getTamano()]=matricula;
+				}
+				else {
+					throw new OperationNotSupportedException("ERROR: No se aceptan más matrículas.");
+				}
+			}
+			else{
+				throw new OperationNotSupportedException("ERROR: Ya existe una matrícula con ese identificador.");
+			}
+		}
+		else {
+			throw new NullPointerException("ERROR: No se puede insertar una matrícula nula.");
+		}
 	}
 	
-	private int buscarIndice(Matricula matricula) throws OperationNotSupportedException {
+	/*private int buscarIndice(Matricula matricula) throws OperationNotSupportedException {
 		int indice=0;
 		
 		if (matricula!=null) {
@@ -107,7 +128,37 @@ public class Matriculas {
 			throw new NullPointerException("Se ha recibido una matricula nulo");
 		}
 		return indice;
+	}*/
+	
+	private int buscarIndice(Matricula matricula) throws OperationNotSupportedException {
+		int indice=999999;
+		boolean encontrado=false;
+		boolean noEncontrado=false;
+		
+		if (matricula!=null) {
+			for(int i=0;i<coleccionMatriculas.length;i++) {
+				if(coleccionMatriculas[i]!=null && coleccionMatriculas[i].equals(matricula)) {
+					encontrado=true;
+					indice=i;
+				}
+				else {
+					noEncontrado=true;
+				}
+				
+			}
+			
+			if(encontrado==true) {
+				return indice;
+			}
+			else {
+				return 999999;
+			}
+		}
+		else {
+			throw new NullPointerException("Se ha recibido una matricula nulo");
+		}
 	}
+	
 	
 	private boolean tamanoSuperado(int indice) {
 		boolean superado=false;
@@ -157,7 +208,7 @@ public class Matriculas {
 		}
 	}
 	
-	public void borrar(Matricula matricula) throws OperationNotSupportedException {
+	/*public void borrar(Matricula matricula) throws OperationNotSupportedException {
 		boolean encontrado=false;
 		boolean otro=false;
 		int indice=0;
@@ -183,7 +234,25 @@ public class Matriculas {
 		else {
 			throw new NullPointerException("ERROR: No se puede borrar una matrícula nula.");
 		}
+	}*/
+	
+	public void borrar(Matricula matricula) throws OperationNotSupportedException {
+		if(matricula!=null) {
+			int indice=buscarIndice(matricula);
+			
+			if(indice!=999999) {
+				coleccionMatriculas[indice]=null;
+				desplazarUnaPosicionHaciaIzquiera(indice);
+			}
+			else{
+				throw new OperationNotSupportedException("ERROR: No existe ninguna matrícula como la indicada.");
+			}
+		}
+		else {
+			throw new NullPointerException("ERROR: No se puede borrar una matrícula nula.");
+		}
 	}
+	
 	
 	private void desplazarUnaPosicionHaciaIzquiera(int indice) {
 		
