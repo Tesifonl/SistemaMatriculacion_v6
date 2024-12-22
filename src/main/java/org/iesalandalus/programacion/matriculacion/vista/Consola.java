@@ -339,7 +339,7 @@ public class Consola {
 			System.out.println("Introduce un numero de horas de desdoble: ");
 			int horasDesdoble=Entrada.entero();
 			EspecialidadProfesorado especialidadProfesorado=leerEspecialidadProfesorado();
-			CicloFormativo cicloformativo=leerCicloFormativo();
+			CicloFormativo cicloformativo=getCicloFormativoPorCodigo();
 			
 
 			Asignatura asignatura =new Asignatura(codigo,nombre,horasAnuales,curso,horasDesdoble,especialidadProfesorado,cicloformativo);
