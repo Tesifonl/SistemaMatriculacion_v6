@@ -1,6 +1,6 @@
 # Tarea: Sistema de Matriculación
 ## Profesor: Andrés Rubio del Río
-## Alumno: Tesifón Linares Bonilla
+## Alumno: Tesifón Linares Bonilla_v1
 
 Tu tarea va a consistir en modelar la gestión del **sistema de matriculación del instituto IES Al-Ándalus**. 
 Después de todas las especificaciones y requerimientos anotados, en este **primer spring** de la aplicación 
