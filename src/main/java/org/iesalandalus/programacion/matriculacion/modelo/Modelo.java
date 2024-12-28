@@ -10,9 +10,7 @@ import org.iesalandalus.programacion.matriculacion.modelo.negocio.Alumnos;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.Asignaturas;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.CiclosFormativos;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.Matriculas;
-import org.iesalandalus.programacion.matriculacion.vista.Consola;
-import org.iesalandalus.programacion.matriculacion.vista.Opcion;
-import org.iesalandalus.programacion.utilidades.Entrada;
+
 
 public class Modelo {
 
@@ -36,7 +34,7 @@ public class Modelo {
 		System.out.print("Se ha terminado");
 	}
 	
-    private  void insertarAlumno(Alumno alumno) throws OperationNotSupportedException {
+	public  void insertarAlumno(Alumno alumno) throws OperationNotSupportedException {
 		try {	
 			alumnos.insertar(alumno);	
 
@@ -52,7 +50,7 @@ public class Modelo {
     }
     
     
-    private Alumno buscarAlumno(Alumno alumno) throws OperationNotSupportedException {
+	public Alumno buscarAlumno(Alumno alumno) throws OperationNotSupportedException {
   		try {
   			//Alumno alumno=Consola.getAlumnoPorDni();
   			if( alumnos.buscar(alumno)!=null) {
@@ -81,7 +79,7 @@ public class Modelo {
     
     
     
-    private void borrarAlumno(Alumno alumno) throws OperationNotSupportedException {
+	public void borrarAlumno(Alumno alumno) throws OperationNotSupportedException {
   		try {
   			
   			//Alumno alumno=Consola.getAlumnoPorDni();
@@ -105,7 +103,7 @@ public class Modelo {
       }
     
     
-    private Alumno[] getAlumnos() throws OperationNotSupportedException {
+	public Alumno[] getAlumnos() throws OperationNotSupportedException {
   		try {
   			 if(alumnos.getTamano()>0) {
   				 Alumno[]nuevoArray=alumnos.get();
@@ -137,7 +135,7 @@ public class Modelo {
       }
     
 	
-    private void insertarAsignatura(Asignatura asignatura) throws OperationNotSupportedException {
+	public void insertarAsignatura(Asignatura asignatura) throws OperationNotSupportedException {
   		try {
   			asignaturas.insertar(asignatura);
   			
@@ -152,7 +150,7 @@ public class Modelo {
   			}
       }
     
-    private Asignatura buscarAsignatura(Asignatura asignatura){
+    public Asignatura buscarAsignatura(Asignatura asignatura){
   		try {
   			//Asignatura asignatura=Consola.getAsignaturaPorCodigo();
   			if( asignaturas.buscar(asignatura)!=null) {
@@ -178,7 +176,7 @@ public class Modelo {
   			}
       }
     
-    private void borrarAsignatura(Asignatura asignatura) throws OperationNotSupportedException {
+    public void borrarAsignatura(Asignatura asignatura) throws OperationNotSupportedException {
   		try {
   			//Asignatura asignatura=Consola.getAsignaturaPorCodigo();
   			if(asignaturas.buscar(asignatura)!=null) {
@@ -201,7 +199,7 @@ public class Modelo {
       }
 
     
-    private Asignatura[] getAsignaturas()  {
+    public Asignatura[] getAsignaturas()  {
   		try {
   			 if(asignaturas.getTamano()>0) {
   				 Asignatura[]nuevoArray=asignaturas.get();
@@ -235,7 +233,7 @@ public class Modelo {
       }
     
 	
-    private void insertarCicloFormativo(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+    public void insertarCicloFormativo(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
   		try {
   			ciclosFormativos.insertar(cicloFormativo);
   			
@@ -251,7 +249,7 @@ public class Modelo {
       }
     
 
-    private CicloFormativo  buscarCicloFormativo(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+    public CicloFormativo  buscarCicloFormativo(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
   		try {
   			//CicloFormativo cicloFormativo=Consola.getCicloFormativoPorCodigo();
   			if( ciclosFormativos.buscar(cicloFormativo)!=null) {
@@ -277,7 +275,7 @@ public class Modelo {
       }
     
     
-    private void  borrarCicloFormativo(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+    public void  borrarCicloFormativo(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
   		try {
   			//CicloFormativo cicloFormativo=Consola.getCicloFormativoPorCodigo();
   			if( ciclosFormativos.buscar(cicloFormativo)!=null) {
@@ -299,7 +297,7 @@ public class Modelo {
   			}
       }
     
-    private CicloFormativo[] getCiclosFormativos()  {
+    public CicloFormativo[] getCiclosFormativos()  {
   		try {
   			 
   			 if(ciclosFormativos.getTamano()>0) {
@@ -335,7 +333,7 @@ public class Modelo {
   			}
       }
     
-    private void  insertarMatricula(Matricula matricula) throws OperationNotSupportedException {
+    public void  insertarMatricula(Matricula matricula) throws OperationNotSupportedException {
   		try {			
   			/*Alumno alumno=Consola.getAlumnoPorDni();
   			System.out.println("Indica el numero de asignaturas que vas a introducir, debe ser mayor que 0");
@@ -357,7 +355,7 @@ public class Modelo {
       }
     
     
-    private Matricula buscarMatricula(Matricula matricula) throws OperationNotSupportedException {
+    public Matricula buscarMatricula(Matricula matricula) throws OperationNotSupportedException {
   		try {
   			//Matricula matricula=Consola.getMatriculaPorIdentificador();
   			if( matriculas.buscar(matricula)!=null) {
@@ -383,7 +381,7 @@ public class Modelo {
   			}
       }
     
-    private void borrarMatricula(Matricula matricula) throws OperationNotSupportedException {
+    public void borrarMatricula(Matricula matricula) throws OperationNotSupportedException {
   		try {
   			//Matricula matricula=Consola.getMatriculaPorIdentificador();
   			if( matriculas.buscar(matricula)!=null) {
@@ -407,7 +405,7 @@ public class Modelo {
       }
     
     
-    private Matricula[] getMatriculas() throws OperationNotSupportedException  {
+    public Matricula[] getMatriculas() throws OperationNotSupportedException  {
   		try {
   			 if(matriculas.getTamano()>0) {
   				 Matricula[]nuevoArray=matriculas.get();
@@ -450,7 +448,7 @@ public class Modelo {
   			}
       }
     
-    private Matricula[] getMatriculas (Alumno alumno) throws OperationNotSupportedException  {
+    public Matricula[] getMatriculas (Alumno alumno) throws OperationNotSupportedException  {
   		try {
   			//Alumno alumno=Consola.getAlumnoPorDni();
   			boolean noEncontrado=false;
@@ -501,7 +499,7 @@ public class Modelo {
   			}
       }
 
-    	private Matricula[] getMatriculas(CicloFormativo cicloFormativo) throws OperationNotSupportedException  {
+    public Matricula[] getMatriculas(CicloFormativo cicloFormativo) throws OperationNotSupportedException  {
   		try {
   				 Matricula[] nuevoArray1=matriculas.get();
   				 Asignatura[] nuevoArray2=null;
@@ -566,7 +564,7 @@ public class Modelo {
   			}
       }
     
-    private Matricula[] getMatriculas(String cursoAcademico) throws OperationNotSupportedException  {
+    public Matricula[] getMatriculas(String cursoAcademico) throws OperationNotSupportedException  {
   		try {
   				 /*System.out.println("Introduce el curso en formato DD-DD, por ejemplo 23-24");
 				 String cursoAcademico=Entrada.cadena();*/	 
