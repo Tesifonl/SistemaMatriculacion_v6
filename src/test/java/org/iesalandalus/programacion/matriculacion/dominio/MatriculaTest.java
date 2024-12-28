@@ -1,5 +1,12 @@
 package org.iesalandalus.programacion.matriculacion.dominio;
 
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Curso;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.EspecialidadProfesorado;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Grado;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

@@ -1,12 +1,12 @@
-package org.iesalandalus.programacion.matriculacion.dominio;
+package org.iesalandalus.programacion.matriculacion.modelo.dominio;
 
-public enum Grado {
+public enum EspecialidadProfesorado {
 	
-	GDCFGB("GDCFCB"),GDCFGM("GDCFGM"),GDCFGS("GDCFGS");
+	INFORMATICA("Informatica"),SISTEMAS("Sistemas"),FOL("Fol");
 	
 	private String cadenaAMostrar;
 	
-	private Grado (String cadenaAMostrar) {	
+	private EspecialidadProfesorado (String cadenaAMostrar) {	
 		this.cadenaAMostrar=cadenaAMostrar;	
 	}
 	

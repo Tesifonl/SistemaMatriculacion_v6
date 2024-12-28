@@ -1,12 +1,12 @@
-package org.iesalandalus.programacion.matriculacion.dominio;
+package org.iesalandalus.programacion.matriculacion.modelo.dominio;
 
-public enum EspecialidadProfesorado {
-	
-	INFORMATICA("Informatica"),SISTEMAS("Sistemas"),FOL("Fol");
+public enum Curso {
+
+	PRIMERO("Primero"),SEGUNDO("Segundo");
 	
 	private String cadenaAMostrar;
 	
-	private EspecialidadProfesorado (String cadenaAMostrar) {	
+	private Curso (String cadenaAMostrar) {	
 		this.cadenaAMostrar=cadenaAMostrar;	
 	}
 	
@@ -18,4 +18,5 @@ public enum EspecialidadProfesorado {
 	public String toString() {	
 		return cadenaAMostrar;
 	}
+
 }

@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Grado;
+
 public class GradoTest {
     
     private static final String NOMBRE_NO_VALIDO = "El grado del ciclo formativo no es válido.";

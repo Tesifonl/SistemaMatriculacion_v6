@@ -1,12 +1,12 @@
-package org.iesalandalus.programacion.matriculacion.dominio;
+package org.iesalandalus.programacion.matriculacion.modelo.dominio;
 
-public enum Curso {
-
-	PRIMERO("Primero"),SEGUNDO("Segundo");
+public enum Grado {
+	
+	GDCFGB("GDCFCB"),GDCFGM("GDCFGM"),GDCFGS("GDCFGS");
 	
 	private String cadenaAMostrar;
 	
-	private Curso (String cadenaAMostrar) {	
+	private Grado (String cadenaAMostrar) {	
 		this.cadenaAMostrar=cadenaAMostrar;	
 	}
 	
@@ -18,5 +18,4 @@ public enum Curso {
 	public String toString() {	
 		return cadenaAMostrar;
 	}
-
 }

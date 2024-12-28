@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.EspecialidadProfesorado;
+
 public class EspecialidadProfesoradoTest {
     
     private static final String NOMBRE_NO_VALIDO = "La especialidad del profesorado no es válida.";
