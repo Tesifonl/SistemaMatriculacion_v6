@@ -38,7 +38,7 @@ public class Vista {
 	}
 	
 	public void terminar() {
-		System.out.println("Ciao");
+		System.out.println("Hasta luego.");
 	}
 	
 	private void ejecutarOpcion(Opcion opcion) throws OperationNotSupportedException {

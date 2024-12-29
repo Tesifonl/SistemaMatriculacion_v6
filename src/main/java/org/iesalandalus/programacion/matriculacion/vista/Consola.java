@@ -457,7 +457,7 @@ public class Consola {
 			System.out.println("Indica el numero de asignaturas que vas a introducir, debe ser mayor que 0");
 			int numeroAsignaturas=Entrada.entero();
 			Asignatura [] coleccionAsignaturas=new Asignatura[numeroAsignaturas];
-			for (int i=0;i<numeroAsignaturas-1;i++) {
+			for (int i=0;i<numeroAsignaturas;i++) {
 				coleccionAsignaturas[i]=Consola.getAsignaturaPorCodigo();
 			}
 			return coleccionAsignaturas;

@@ -8,7 +8,7 @@ import org.iesalandalus.programacion.matriculacion.vista.Vista;
 
 
 public class MainApp {
-	
+	//incorporo la variable CAPACIDAD para que los test no den error
 	public static final int CAPACIDAD=100;
     
     public static void main(String[] args) throws OperationNotSupportedException {
