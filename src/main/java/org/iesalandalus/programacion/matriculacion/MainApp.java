@@ -9,7 +9,7 @@ import org.iesalandalus.programacion.matriculacion.vista.Vista;
 
 public class MainApp {
 	
- 
+	public static final int CAPACIDAD=100;
     
     public static void main(String[] args) throws OperationNotSupportedException {
     	

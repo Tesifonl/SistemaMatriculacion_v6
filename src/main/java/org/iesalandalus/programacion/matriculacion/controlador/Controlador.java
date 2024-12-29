@@ -20,7 +20,7 @@ public class Controlador {
 		if (modelo!=null && vista!=null) {
 			this.modelo=modelo;
 			this.vista=vista;
-			vista.setControlador(new Controlador(modelo, vista));
+			vista.setControlador(this);
 			
 			
 		}else {
@@ -41,108 +41,285 @@ public class Controlador {
 	
 	public  void insertarAlumno(Alumno alumno) throws OperationNotSupportedException {
 		
-		modelo.insertarAlumno(alumno);
+		try {
+			modelo.insertarAlumno(alumno);
+		}
+		catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());	
+		}
+		catch(NullPointerException e) {
+		System.out.println(e.getMessage());}
     }
     
     
 	public Alumno buscarAlumno(Alumno alumno) throws OperationNotSupportedException {
-	  		
-		return modelo.buscarAlumno(alumno);
-      }
+	  	
+		try {
+			return modelo.buscarAlumno(alumno);
+		}				
+		
+		catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+		catch(NullPointerException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+     }
     
     
     
 	public void borrarAlumno(Alumno alumno) throws OperationNotSupportedException {
-
-		modelo.borrarAlumno(alumno);;
-      }
+		
+		try {
+			modelo.borrarAlumno(alumno);
+		}				
+		
+		catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			
+		}
+		catch(NullPointerException e) {
+			System.out.println(e.getMessage());}
+    }
     
     
 	public Alumno[] getAlumnos() throws OperationNotSupportedException {
   		
-		return modelo.getAlumnos();
-      }
+		try {
+			return modelo.getAlumnos();
+		}				
+		catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return null;
+			
+		}
+		catch(NullPointerException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+    }
     
 	
 	public void insertarAsignatura(Asignatura asignatura) throws OperationNotSupportedException {
 	  		
-		modelo.insertarAsignatura(asignatura);
-      }
+		try{
+			modelo.insertarAsignatura(asignatura);
+		}				
+		catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			
+		}
+		catch(NullPointerException e) {
+			System.out.println(e.getMessage());}
+    }
     
     public Asignatura buscarAsignatura(Asignatura asignatura){
-	  		
+	  	
+    	try {	
     	return modelo.buscarAsignatura(asignatura);
-      }
+	  	}				
+	  	
+	  	catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return null;
+			
+		}
+		catch(NullPointerException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+    }
     
     public void borrarAsignatura(Asignatura asignatura) throws OperationNotSupportedException {
-	  		
-    	modelo.borrarAsignatura(asignatura);
-      }
+	  	
+    	try {
+    		modelo.borrarAsignatura(asignatura);
+    	}				
+    	catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			
+		}
+		catch(NullPointerException e) {
+			System.out.println(e.getMessage());}
+    }
 
     
     public Asignatura[] getAsignaturas()  {
+    	try {
     	return modelo.getAsignaturas();
-      }
+    	}
+		
+    	catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+		catch(NullPointerException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+    }
     
 	
     public void insertarCicloFormativo(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
-	  		
-    	modelo.insertarCicloFormativo(cicloFormativo);
-      }
+	  	
+    	try {
+    		modelo.insertarCicloFormativo(cicloFormativo);
+    	}				
+    	catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			
+		}
+		catch(NullPointerException e) {
+			System.out.println(e.getMessage());}
+    }
     
 
     public CicloFormativo  buscarCicloFormativo(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
 	  		
-    	return modelo.buscarCicloFormativo(cicloFormativo);
-      }
+    	try{
+    		return modelo.buscarCicloFormativo(cicloFormativo);
+    	}				
+    	catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+		catch(NullPointerException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+    }
     
     
     public void  borrarCicloFormativo(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
-	  		
-    	modelo.borrarCicloFormativo(cicloFormativo);
-      }
+	  	
+    	try {
+    		modelo.borrarCicloFormativo(cicloFormativo);
+    	}				
+    	catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			
+		}
+		catch(NullPointerException e) {
+			System.out.println(e.getMessage());}
+    }
     
     public CicloFormativo[] getCiclosFormativos()  {
     	
-    	return modelo.getCiclosFormativos();
-      }
+    	try{
+    		return modelo.getCiclosFormativos();
+    	}				
+    	catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+		catch(NullPointerException e) {
+			System.out.println(e.getMessage());
+			return null;
+    	}
+    }
     
     public void  insertarMatricula(Matricula matricula) throws OperationNotSupportedException {
-	  		
-    	modelo.insertarMatricula(matricula);
-      }
+	  	
+    	try {
+    		modelo.insertarMatricula(matricula);
+    	}				
+    	catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			
+		}
+		catch(NullPointerException e) {
+			System.out.println(e.getMessage());}
+    }
     
     
     public Matricula buscarMatricula(Matricula matricula) throws OperationNotSupportedException {
-	  		
-    	return modelo.buscarMatricula(matricula);
+	  	
+    	try {	
+	  		return modelo.buscarMatricula(matricula);
+    	}				
+    	catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+		catch(NullPointerException e) {
+			System.out.println(e.getMessage());
+			return null;}
       }
     
     
     public void borrarMatricula(Matricula matricula) throws OperationNotSupportedException {
-	  		
-    	modelo.borrarMatricula(matricula);
+	  	
+    	try {
+    		modelo.borrarMatricula(matricula);
+    	}				
+    	catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			
+		}
+		catch(NullPointerException e) {
+			System.out.println(e.getMessage());}
       }
     
     
     public Matricula[] getMatriculas() throws OperationNotSupportedException  {
-    	
-    	return modelo.getMatriculas();
+    	try {
+    		return modelo.getMatriculas();
+    	}				
+    	catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+		catch(NullPointerException e) {
+		System.out.println(e.getMessage());
+		return null;
+		}
       }
     
     public Matricula[] getMatriculas (Alumno alumno) throws OperationNotSupportedException  {
-	  		
-    	return modelo.getMatriculas(alumno);
+	  	
+    	try {
+    		return modelo.getMatriculas(alumno);
+    	}				
+    	catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+		catch(NullPointerException e) {
+			System.out.println(e.getMessage());
+			return null;
+			}
       }
 
     public Matricula[] getMatriculas(CicloFormativo cicloFormativo) throws OperationNotSupportedException  {
-	  		
-    	return modelo.getMatriculas(cicloFormativo);
+	  	
+    	try {
+    		return modelo.getMatriculas(cicloFormativo);
+    	}				
+    	catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+		catch(NullPointerException e) {
+			System.out.println(e.getMessage());
+			return null;
+			}
       }
     
     public Matricula[] getMatriculas(String cursoAcademico) throws OperationNotSupportedException  {
 	  		
-    	return modelo.getMatriculas(cursoAcademico);
+    	try {
+    		return modelo.getMatriculas(cursoAcademico);
+    	}				
+    	catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+		catch(NullPointerException e) {
+			System.out.println(e.getMessage());
+			return null;
+			}
       }
 
 
