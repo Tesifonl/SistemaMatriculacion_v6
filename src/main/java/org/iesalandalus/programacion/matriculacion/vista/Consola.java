@@ -237,12 +237,20 @@ public class Consola {
 	}
 	/*por el contexto entiendo que ciclos formativos no tiene que estar como variable de entrada*/
 	
-	public static void mostrarCiclosFormativos (CiclosFormativos ciclosFormativos) {
+	public static void mostrarCiclosFormativos (CicloFormativo[] ciclosFormativos) {
+		boolean encontrado=false;
 		
 		if (ciclosFormativos!=null) {
-			ciclosFormativos.toString();
+		
+			for(int i=0;i<ciclosFormativos.length-1;i++) {
+				if(ciclosFormativos[i]!=null) {
+					ciclosFormativos[i].toString();
+				}else {
+					encontrado=true;
+				}
+			}
 		}else {
-			throw new NullPointerException("No se ha recibido el cicloformativo");
+			throw new NullPointerException("No se ha recibido la coleccion de ciclos formativos");
 		}
 	}
 	
@@ -374,13 +382,24 @@ public class Consola {
 			}
 	}
 	
-	private static void mostrarAsignaturas (Asignaturas asignaturas) {
+	private static void mostrarAsignaturas (Asignatura [] asignaturas) {
+		boolean encontrado=false;
+		
 		if (asignaturas!=null) {
-			asignaturas.toString();
+		
+			for(int i=0;i<asignaturas.length-1;i++) {
+				if(asignaturas[i]!=null) {
+					asignaturas[i].toString();
+				}else {
+					encontrado=true;
+				}
+			}
 		}else {
-			throw new NullPointerException("No se ha recibido el cicloformativo");
+			throw new NullPointerException("No se ha recibido la coleccion de asignaturas");
 		}
 	}
+	
+
 	
 	private static boolean asignaturaYaMatriculada(Asignatura[] asignaturasMatricula,Asignatura asignatura) {
 		boolean encontrada=false;
@@ -404,7 +423,7 @@ public class Consola {
 	
 	/*Dudas diagrama de clase, pone alumnos en vez de alumno*/
 	
-	public static Matricula leerMatricula(Alumno alumno, Asignatura [] asignaturas) throws OperationNotSupportedException {
+	public static Matricula leerMatricula(Alumno alumno, Asignatura[] asignaturas) throws OperationNotSupportedException {
 		
 		try {
 			System.out.println("Introduce un id de matricula que debe ser un numero mayor que cero: ");
@@ -430,6 +449,19 @@ public class Consola {
 			}
 		
 	}
+		
+	//Crea el método elegirAsignaturasMatricula para obtener el array de asignaturas que se asignarán en una matrícula.
+	//Diria que hay que construir el array dentro, pero en el diagrama aparece como parametro.
+	//yo voy a consutruirlo.
+	public static Asignatura[] elegirAsignaturasMatricula() {
+			System.out.println("Indica el numero de asignaturas que vas a introducir, debe ser mayor que 0");
+			int numeroAsignaturas=Entrada.entero();
+			Asignatura [] coleccionAsignaturas=new Asignatura[numeroAsignaturas];
+			for (int i=0;i<numeroAsignaturas-1;i++) {
+				coleccionAsignaturas[i]=Consola.getAsignaturaPorCodigo();
+			}
+			return coleccionAsignaturas;
+		}
 	
 	public static Matricula getMatriculaPorIdentificador() throws OperationNotSupportedException {
 		

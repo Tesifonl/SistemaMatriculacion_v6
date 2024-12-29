@@ -377,13 +377,14 @@ public class MainApp {
   			/*Asignatura [] coleccionAsignaturas=asignaturas.get();*/
   			
   			Alumno alumno=Consola.getAlumnoPorDni();
-  			System.out.println("Indica el numero de asignaturas que vas a introducir, debe ser mayor que 0");
+  			Asignatura[] asignaturas=Consola.elegirAsignaturasMatricula();
+  			/*System.out.println("Indica el numero de asignaturas que vas a introducir, debe ser mayor que 0");
   			Asignatura [] coleccionAsignaturas=new Asignatura[10];
   			int numeroAsignaturas=Entrada.entero();
   			for (int i=0;i<numeroAsignaturas;i++) {
   				coleccionAsignaturas[i]=Consola.getAsignaturaPorCodigo();
-  			}
-  			matriculas.insertar(Consola.leerMatricula(alumno, coleccionAsignaturas));
+  			}*/
+  			matriculas.insertar(Consola.leerMatricula(alumno, asignaturas));
   			
   			}
   			catch(IllegalArgumentException e) {
