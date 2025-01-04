@@ -18,7 +18,7 @@ public class Modelo {
 	private Matriculas matriculas;
 	private Asignaturas asignaturas;
 	private CiclosFormativos ciclosFormativos;
-	private final int CAPACIDAD=100;
+	private final int CAPACIDAD=5;
 	
 	
 	public Modelo() {}
@@ -413,7 +413,7 @@ public class Modelo {
     		try {
 	  			//Matricula matricula=Consola.getMatriculaPorIdentificador();
 	  			if( matriculas.buscar(matricula)!=null) {
-	  				System.out.println("Ciclo formativo econtrado");
+	  				System.out.println("Matricula econtrada");
 	  				System.out.println(matricula.toString());
 	  				Matricula nuevaInstanciaMatricula=new Matricula (matricula);
 	  				return nuevaInstanciaMatricula;
@@ -542,6 +542,7 @@ public class Modelo {
 	  				 
 	  				 if(encontrado==true){
 	  					 return nuevoArray2;
+	  					 
 	  				 }
 	  				 else {
 	  					 return null;
@@ -573,7 +574,7 @@ public class Modelo {
     		try {
 	  				 Matricula[] nuevoArray1=matriculas.get();
 	  				 Asignatura[] nuevoArray2=null;
-	  				 Matricula[] nuevoArray3=null;
+	  				 Matricula[] nuevoArray3=new Matricula[CAPACIDAD];
 	  				 int contador=0;
 	  				 int otro=0;
 	  				 
@@ -644,7 +645,7 @@ public class Modelo {
 	  				 /*System.out.println("Introduce el curso en formato DD-DD, por ejemplo 23-24");
 					 String cursoAcademico=Entrada.cadena();*/	 
 					 Matricula[] nuevoArray=matriculas.get();
-					 Matricula[] nuevoArray2=null;
+					 Matricula[] nuevoArray2=new Matricula[CAPACIDAD];
 					 int contador=0;
 					 int otro=0;
 	  			
