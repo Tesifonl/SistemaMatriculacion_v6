@@ -37,49 +37,40 @@ public class Modelo {
 	public  void insertarAlumno(Alumno alumno) throws OperationNotSupportedException {
 		
 		if(alumno!=null) {
-			try {	
+
 				alumnos.insertar(alumno);	
 	
-				}
-				catch(IllegalArgumentException e) {
-					System.out.println(e.getMessage());
-			
-				}
-				catch(NullPointerException e) {
-				System.out.println(e.getMessage());
-				
-				}
 		}else {
 			throw new NullPointerException("ERROR: No se ha recibido el alumno");
 		}
     }
     
     
-	public Alumno buscarAlumno(Alumno alumno) throws OperationNotSupportedException {
+	public Alumno buscarAlumno(Alumno alumno)  {
 	  		
 		if (alumno!=null) {
-			try {
 	  			//Alumno alumno=Consola.getAlumnoPorDni();
 	  			if( alumnos.buscar(alumno)!=null) {
-	  				System.out.println("Alumno econtrado");
-	  				System.out.println(alumno.toString());
-	  				Alumno nuevaInstanciaAlumno=new Alumno(alumno);
-	  				return nuevaInstanciaAlumno;
+	  
+	  				Alumno[]nuevoArray=alumnos.get();
+	  				boolean encontrado=false;
+	  				int j=0;
+	  			
+	  					for(int i=0;i<nuevoArray.length;i++)
+	  						{ if (nuevoArray[i]==alumno) {;
+	  							j=i;
+	  							}
+	  							encontrado=true;
+	  						}
+					System.out.println("Alumno econtrado");
+					System.out.println(nuevoArray[j].toString());
+	  				return nuevoArray[j];
 	  			}
 	  			else {
 	  				System.out.println("No encontrado en la coleccion");
 	  				return null;
-	  			}
-	  			
-	  			}
-	  			catch(IllegalArgumentException e) {
-	  				System.out.println(e.getMessage());
-	  				return null;
-	  			}
-	  			catch(NullPointerException e) {
-	  				System.out.println(e.getMessage());
-	  				return null;
-	  			}
+	  			}	  			
+
 		}else {
 			throw new NullPointerException("ERROR: No se ha recibido el alumno");
 		}
@@ -92,7 +83,6 @@ public class Modelo {
 	public void borrarAlumno(Alumno alumno) throws OperationNotSupportedException {
 
 		if (alumno!=null) {
-			try {
 	  			
 	  			//Alumno alumno=Consola.getAlumnoPorDni();
 	  			if( alumnos.buscar(alumno)!=null) {
@@ -103,24 +93,15 @@ public class Modelo {
 	  				System.out.println("No encontrado en la coleccion");
 	  			}
 	  			
-	  			}
-	  			catch(IllegalArgumentException e) {
-	  				System.out.println(e.getMessage());
-	  		
-	  			}
-	  			catch(NullPointerException e) {
-	  			System.out.println(e.getMessage());
-	  			
-	  			}
 		}else {
 			throw new NullPointerException("ERROR: No se ha recibido el alumno");
 		}
       }
     
     
-	public Alumno[] getAlumnos() throws OperationNotSupportedException {
+	public Alumno[] getAlumnos()  {
   		
-		try {
+	
   			 if(alumnos.getTamano()>0) {
   				 Alumno[]nuevoArray=alumnos.get();
   				 boolean encontrado=false;
@@ -138,65 +119,47 @@ public class Modelo {
   				 System.out.println(" No existen alumnos en el sistema");
   				 return null;
   			 }
-  			
-  			}
-  			catch(IllegalArgumentException e) {
-  				System.out.println(e.getMessage());
-  				return null;
-  			}
-  			catch(NullPointerException e) {
-  				System.out.println(e.getMessage());
-  				return null;
-  			}
+
       }
     
 	
 	public void insertarAsignatura(Asignatura asignatura) throws OperationNotSupportedException {
 	  		
 		if(asignatura!=null) {
-			try {
+
 	  			asignaturas.insertar(asignatura);
-	  			
-	  			}
-	  			catch(IllegalArgumentException e) {
-	  				System.out.println(e.getMessage());
-	  		
-	  			}
-	  			catch(NullPointerException e) {
-	  			System.out.println(e.getMessage());
-	  			
-	  			}
+
 		}else {
 			throw new NullPointerException("ERROR: No se ha recibido la asignatura");
 		}
       }
     
-    public Asignatura buscarAsignatura(Asignatura asignatura){
+	
+    public Asignatura buscarAsignatura(Asignatura asignatura) {
 	  		
     	if(asignatura!=null) {
-    		try {
+
 	  			//Asignatura asignatura=Consola.getAsignaturaPorCodigo();
 	  			if( asignaturas.buscar(asignatura)!=null) {
-	  				System.out.println("Asignatura econtrada");
-	  				System.out.println(asignatura.toString());
-	  				Asignatura nuevaInstanciaAsigantura=new Asignatura(asignatura);
-	  				return nuevaInstanciaAsigantura;
+	  				Asignatura[]nuevoArray=asignaturas.get();
+	  				boolean encontrado=false;
+	  				int j=0;
+	  			
+	  					for(int i=0;i<nuevoArray.length;i++)
+	  						{ if (nuevoArray[i]==asignatura) {;
+	  							j=i;
+	  							}
+	  							encontrado=true;
+	  						}
+					System.out.println("Asignatura econtrada");
+					System.out.println(nuevoArray[j].toString());
+	  				return nuevoArray[j];
 	  			}
 	  			else {
 	  				System.out.println("No encontrado en la coleccion");
 	  				return null;
 	  			}
-	  			}
-	  			catch(IllegalArgumentException e) {
-	  				System.out.println(e.getMessage());
-	  				return null;
-	  		
-	  			}
-	  			catch(NullPointerException e) {
-	  				System.out.println(e.getMessage());
-	  				return null;
-	  			
-	  			}
+
     	}else {
     		throw new NullPointerException("ERROR: No se ha recibido la asignatura");
     	}
@@ -205,7 +168,7 @@ public class Modelo {
     public void borrarAsignatura(Asignatura asignatura) throws OperationNotSupportedException {
 	  		
     	if(asignatura!=null) {
-    		try {
+
 	  			//Asignatura asignatura=Consola.getAsignaturaPorCodigo();
 	  			if(asignaturas.buscar(asignatura)!=null) {
 	  				System.out.println("Asignatura econtrada y borrada");
@@ -215,15 +178,6 @@ public class Modelo {
 	  				System.out.println("Asignatura no encontrada en la coleccion");
 	  			}
 	  			
-	  			}
-	  			catch(IllegalArgumentException e) {
-	  				System.out.println(e.getMessage());
-	  		
-	  			}
-	  			catch(NullPointerException e) {
-	  			System.out.println(e.getMessage());
-	  			
-	  			}
     	}else {
     		throw new NullPointerException("ERROR: No se ha recibido la asignatura");
     	}
@@ -232,7 +186,7 @@ public class Modelo {
     
     public Asignatura[] getAsignaturas()  {
   		
-    	try {
+ 
   			 if(asignaturas.getTamano()>0) {
   				 Asignatura[]nuevoArray=asignaturas.get();
   				 boolean encontrado=false;
@@ -250,67 +204,49 @@ public class Modelo {
   			 else {
   				 System.out.println(" No existen asignaturas en el sistema");
   				 return null;
-  			 }
-  			
-  			}
-  			catch(IllegalArgumentException e) {
-  				System.out.println(e.getMessage());
-  				return null;
-  		
-  			}
-  			catch(NullPointerException e) {
-  				System.out.println(e.getMessage());
-  				return null;
-  			}
+  			 }	
+
       }
     
 	
     public void insertarCicloFormativo(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
 	  		
     	if(cicloFormativo!=null) {
-    		try {
+
 	  			ciclosFormativos.insertar(cicloFormativo);
 	  			
-	  			}
-	  			catch(IllegalArgumentException e) {
-	  				System.out.println(e.getMessage());
-	  		
-	  			}
-	  			catch(NullPointerException e) {
-	  			System.out.println(e.getMessage());
-	  			
-	  			}
+
     	}else {
     		throw new NullPointerException("ERROR: No se ha recibido el ciclo formativo");
     	}
       }
     
 
-    public CicloFormativo  buscarCicloFormativo(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+    public CicloFormativo  buscarCicloFormativo(CicloFormativo cicloFormativo) {
 	  		
     	if(cicloFormativo!=null) {
-    		try {
+
 	  			//CicloFormativo cicloFormativo=Consola.getCicloFormativoPorCodigo();
 	  			if( ciclosFormativos.buscar(cicloFormativo)!=null) {
-	  				System.out.println("Ciclo formativo econtrado");
-	  				System.out.println(cicloFormativo.toString());
-	  				CicloFormativo nuevaInstanciaCicloFormativo=new CicloFormativo(cicloFormativo);
-	  				return nuevaInstanciaCicloFormativo;
+	  				CicloFormativo[]nuevoArray=ciclosFormativos.get();
+	  				boolean encontrado=false;
+	  				int j=0;
+	  			
+	  					for(int i=0;i<nuevoArray.length;i++)
+	  						{ if (nuevoArray[i]==cicloFormativo) {;
+	  							j=i;
+	  							}
+	  							encontrado=true;
+	  						}
+					System.out.println("Ciclo Formativo econtrado");
+					System.out.println(nuevoArray[j].toString());
+	  				return nuevoArray[j];
 	  			}
 	  			else {
 	  				System.out.println("No encontrado el ciclo en la coleccion");
 	  				return null;
 	  			}
-	  			}
-	  			catch(IllegalArgumentException e) {
-	  				System.out.println(e.getMessage());
-	  				return null;
-	  		
-	  			}
-	  			catch(NullPointerException e) {
-	  				System.out.println(e.getMessage());
-	  				return null;
-	  			}
+	
     	}else {
     		throw new NullPointerException("ERROR: No se ha recibido el ciclo formativo");
     	}
@@ -320,7 +256,7 @@ public class Modelo {
     public void  borrarCicloFormativo(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
 	  		
     	if(cicloFormativo!=null) {
-    		try {
+
 	  			//CicloFormativo cicloFormativo=Consola.getCicloFormativoPorCodigo();
 	  			if( ciclosFormativos.buscar(cicloFormativo)!=null) {
 	  				System.out.println("Ciclo formativo econtrado y borrado");
@@ -329,24 +265,15 @@ public class Modelo {
 	  			else {
 	  				System.out.println("Ciclo formativo no encontrado en la coleccion");
 	  			}
-	  			 
-	  			}
-	  			catch(IllegalArgumentException e) {
-	  				System.out.println(e.getMessage());
-	  		
-	  			}
-	  			catch(NullPointerException e) {
-	  			System.out.println(e.getMessage());
-	  			
-	  			}
+
     	}else {
     		throw new NullPointerException("ERROR: No se ha recibido el ciclo formativo");
     	}
       }
     
+    
     public CicloFormativo[] getCiclosFormativos()  {
-  		try {
-  			 
+
   			 if(ciclosFormativos.getTamano()>0) {
   				 CicloFormativo[]nuevoArray=ciclosFormativos.get();
   				 boolean encontrado=false;
@@ -367,23 +294,12 @@ public class Modelo {
   				 return null;
   			 }
   			
-  			}
-  			catch(IllegalArgumentException e) {
-  				System.out.println(e.getMessage());
-  				return null;
-  		
-  			}
-  			catch(NullPointerException e) {
-  				System.out.println(e.getMessage());
-  				return null;
-  			
-  			}
       }
     
     public void  insertarMatricula(Matricula matricula) throws OperationNotSupportedException {
 	  		
     	if(matricula!=null) {
-    		try {			
+			
 	  			/*Alumno alumno=Consola.getAlumnoPorDni();
 	  			System.out.println("Indica el numero de asignaturas que vas a introducir, debe ser mayor que 0");
 	  			Asignatura [] coleccionAsignaturas=new Asignatura[10];
@@ -392,15 +308,7 @@ public class Modelo {
 	  				coleccionAsignaturas[i]=Consola.getAsignaturaPorCodigo();*/
 	  			matriculas.insertar(matricula);
 	  			
-	  			}
-	  			catch(IllegalArgumentException e) {
-	  				System.out.println(e.getMessage());
-	  		
-	  			}
-	  			catch(NullPointerException e) {
-	  			System.out.println(e.getMessage());
-	  			
-	  			}
+
     	}else {
     		throw new NullPointerException("ERROR: No se ha recibido la matricula");
     	}
@@ -410,29 +318,28 @@ public class Modelo {
     public Matricula buscarMatricula(Matricula matricula) throws OperationNotSupportedException {
 	  		
     	if(matricula!=null) {
-    		try {
+   
 	  			//Matricula matricula=Consola.getMatriculaPorIdentificador();
 	  			if( matriculas.buscar(matricula)!=null) {
-	  				System.out.println("Matricula econtrada");
-	  				System.out.println(matricula.toString());
-	  				Matricula nuevaInstanciaMatricula=new Matricula (matricula);
-	  				return nuevaInstanciaMatricula;
+	  				Matricula[]nuevoArray=matriculas.get();
+	  				boolean encontrado=false;
+	  				int j=0;
+	  			
+	  					for(int i=0;i<nuevoArray.length;i++)
+	  						{ if (nuevoArray[i]==matricula) {;
+	  							j=i;
+	  							}
+	  							encontrado=true;
+	  						}
+					System.out.println("Matricula econtrada");
+					System.out.println(nuevoArray[j].toString());
+	  				return nuevoArray[j];
 	  			}
 	  			else {
 	  				System.out.println("No encontrada la matricula en el sistema");
 	  				return null;
 	  			}
-	  			 
-	  			}
-	  			catch(IllegalArgumentException e) {
-	  				System.out.println(e.getMessage());
-	  				return null;
-	  		
-	  			}
-	  			catch(NullPointerException e) {
-	  				System.out.println(e.getMessage());
-	  				return null;
-	  			}
+
     	}else {
     		throw new NullPointerException("ERROR: No se ha recibido la matricula");
     	}
@@ -442,7 +349,7 @@ public class Modelo {
     public void borrarMatricula(Matricula matricula) throws OperationNotSupportedException {
 	  		
     	if(matricula!=null) {
-    		try {
+
 	  			//Matricula matricula=Consola.getMatriculaPorIdentificador();
 	  			if( matriculas.buscar(matricula)!=null) {
 	  				System.out.println("Matricula econtrada y borrada");
@@ -451,17 +358,7 @@ public class Modelo {
 	  			else {
 	  				System.out.println("Matricula no encontrada en la coleccion");
 	  			}
-	  			 
-	  			 
-	  			}
-	  			catch(IllegalArgumentException e) {
-	  				System.out.println(e.getMessage());
-	  		
-	  			}
-	  			catch(NullPointerException e) {
-	  				System.out.println(e.getMessage());
-	  			
-	  			}
+
     	}else {
     		throw new NullPointerException("ERROR: No se ha recibido la matricula");
     	}
@@ -469,7 +366,7 @@ public class Modelo {
     
     
     public Matricula[] getMatriculas() throws OperationNotSupportedException  {
-  		try {
+  	
   			 if(matriculas.getTamano()>0) {
   				 Matricula[]nuevoArray=matriculas.get();
   				 boolean encontrado=false;
@@ -498,23 +395,13 @@ public class Modelo {
   				 return null;
   			 }
   			
-  			}
-  			catch(IllegalArgumentException e) {
-  				System.out.println(e.getMessage());
-  				return null;
-  		
-  			}
-  			catch(NullPointerException e) {
-  				System.out.println(e.getMessage());
-  				return null;
-  			
-  			}
+
       }
     
     public Matricula[] getMatriculas (Alumno alumno) throws OperationNotSupportedException  {
 	  		
     	if(alumno!=null) {
-    		try {
+    	
 	  			//Alumno alumno=Consola.getAlumnoPorDni();
 	  			boolean noEncontrado=false;
 	  			boolean encontrado=false;
@@ -552,26 +439,16 @@ public class Modelo {
 	  				 System.out.println(" No existen matriculas en el sistema");
 	  				 return null;
 	  			 }
-	  			 
-	  			}
-	  			catch(IllegalArgumentException e) {
-	  				System.out.println(e.getMessage());
-	  				return null;
-	  		
-	  			}
-	  			catch(NullPointerException e) {
-	  				System.out.println(e.getMessage());
-	  				return null;
-	  			}
+
     	}else {
     		throw new NullPointerException("ERROR: No se ha recibido el alumno para consultar la matricula");
     	}
       }
+    
 
     public Matricula[] getMatriculas(CicloFormativo cicloFormativo) throws OperationNotSupportedException  {
 	  		
     	if(cicloFormativo!=null) {
-    		try {
 	  				 Matricula[] nuevoArray1=matriculas.get();
 	  				 Asignatura[] nuevoArray2=null;
 	  				 Matricula[] nuevoArray3=new Matricula[CAPACIDAD];
@@ -624,15 +501,7 @@ public class Modelo {
 	  			   
 	  			   return nuevoArray3;
 	  				 			
-	  			}
-	  			catch(IllegalArgumentException e) {
-	  				System.out.println(e.getMessage());
-	  				return null;
-	  			}
-	  			catch(NullPointerException e) {
-	  				System.out.println(e.getMessage());
-	  				return null;
-	  			}
+
     	}else {
     		throw new NullPointerException("ERROR: No se ha recibido el ciclo formativo para consultar la matricula");
     	}
@@ -641,7 +510,7 @@ public class Modelo {
     public Matricula[] getMatriculas(String cursoAcademico) throws OperationNotSupportedException  {
 	  		
     	if(cursoAcademico!=null) {
-    		try {
+    		
 	  				 /*System.out.println("Introduce el curso en formato DD-DD, por ejemplo 23-24");
 					 String cursoAcademico=Entrada.cadena();*/	 
 					 Matricula[] nuevoArray=matriculas.get();
@@ -686,15 +555,7 @@ public class Modelo {
 	  	            	System.out.println("No existen mas matriculas para ese curso dadas de alta");
 	  			    }
 	   			  return nuevoArray2;
-	  			}
-	  			catch(IllegalArgumentException e) {
-	  				System.out.println(e.getMessage());
-	  				return null;
-	  			}
-	  			catch(NullPointerException e) {
-	  				System.out.println(e.getMessage());
-	  				return null;
-	  			}
+
     	}else {
     		throw new NullPointerException("ERROR: No se ha recibido el curso academico para consultar la matricula");
     	}

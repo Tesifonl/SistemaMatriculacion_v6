@@ -11,7 +11,7 @@ public class MainApp {
 	//incorporo la variable CAPACIDAD para que los test no den error
 	public static final int CAPACIDAD=5;
     
-    public static void main(String[] args) throws OperationNotSupportedException {
+    public static void main(String[] args)  {
     	
     	Modelo modelo=new Modelo();
     	Vista vista=new Vista();

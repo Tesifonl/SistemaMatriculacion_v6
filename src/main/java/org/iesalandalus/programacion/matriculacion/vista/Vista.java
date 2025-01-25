@@ -24,7 +24,7 @@ public class Vista {
 		}
 	}
 	
-	public void comenzar() throws OperationNotSupportedException {
+	public void comenzar() {
 		
 		Opcion opcion=null;
 				
@@ -41,73 +41,73 @@ public class Vista {
 		System.out.println("Hasta luego.");
 	}
 	
-	private void ejecutarOpcion(Opcion opcion) throws OperationNotSupportedException {
+	private void ejecutarOpcion(Opcion opcion) {
     	
-		   
-		if (opcion.equals(Opcion.INSERTAR_ALUMNO)) {
-			insertarAlumno();
-		}
-		if (opcion.equals(Opcion.BORRAR_ALUMNO)) {
-			borrarAlumno();
-		}
-		if (opcion.equals(Opcion.BUSCAR_ALUMNO)) {
-			buscarAlumno();
-		}
-		if (opcion.equals(Opcion.MOSTRAR_ALUMNOS)) {
-			mostrarAlumnos();
-		}
 		
-   		if (opcion.equals(Opcion.INSERTAR_ASIGNATURA)) {
-			insertarAsignatura();
-		}
-		if (opcion.equals(Opcion.BORRAR_ASIGNATURA)) {
-			borrarAsignatura();
-		}
-		if (opcion.equals(Opcion.BUSCAR_ASIGNATURA)) {
-			buscarAsignatura();
-		}
-		if (opcion.equals(Opcion.MOSTRAR_ASIGNATURAS)) {
-			mostrarAsignaturas();
-		}
+			if (opcion.equals(Opcion.INSERTAR_ALUMNO)) {
+				insertarAlumno();
+			}
+			if (opcion.equals(Opcion.BORRAR_ALUMNO)) {
+				borrarAlumno();
+			}
+			if (opcion.equals(Opcion.BUSCAR_ALUMNO)) {
+				buscarAlumno();
+			}
+			if (opcion.equals(Opcion.MOSTRAR_ALUMNOS)) {
+				mostrarAlumnos();
+			}
 		
-   		if (opcion.equals(Opcion.INSERTAR_CICLO_FORMATIVO)) {
-			insertarCicloFormativo();
-		}
-		if (opcion.equals(Opcion.BORRAR_CICLO_FORMATIVO)) {
-			borrarCicloFormativo();
-		}
-		if (opcion.equals(Opcion.BUSCAR_CICLO_FORMATIVO)) {
-			buscarCicloFormativo();
-		}
-		if (opcion.equals(Opcion.MOSTRAR_CICLOS_FORMATIVOS)) {
-			mostrarCiclosFormativos();
-		}
-		if (opcion.equals(Opcion.INSERTAR_MATRICULA)) {
-			insertarMatricula();
-		}
-		if (opcion.equals(Opcion.BUSCAR_MATRICULA)) {
-			buscarMatricula();
-		}
-		if (opcion.equals(Opcion.ANULAR_MATRICULA)) {
-			anularMatricula();
-		}
-		if (opcion.equals(Opcion.MOSTRAR_MATRICULAS)) {
-			mostrarMatriculas();
-		}
-		if (opcion.equals(Opcion.MOSTRAR_MATRICULAS_ALUMNO)) {
-			mostrarMatriculasPorAlumno();
-		}
-		if (opcion.equals(Opcion.MOSTRAR_MATRICULAS_CICLO_FORMATIVO)) {
-			mostrarMatriculasPorCicloFormativo();
-		}
-		if (opcion.equals(Opcion.MOSTRAR_MATRICULAS_CURSO_ACADEMICO)) {
-			mostrarMatriculasPorCursoAcademico();
-		}
+			if (opcion.equals(Opcion.INSERTAR_ASIGNATURA)) {
+				insertarAsignatura();
+			}
+			if (opcion.equals(Opcion.BORRAR_ASIGNATURA)) {
+				borrarAsignatura();
+			}
+			if (opcion.equals(Opcion.BUSCAR_ASIGNATURA)) {
+				buscarAsignatura();
+			}
+			if (opcion.equals(Opcion.MOSTRAR_ASIGNATURAS)) {
+				mostrarAsignaturas();
+			}
+		
+			if (opcion.equals(Opcion.INSERTAR_CICLO_FORMATIVO)) {
+				insertarCicloFormativo();
+			}
+			if (opcion.equals(Opcion.BORRAR_CICLO_FORMATIVO)) {
+				borrarCicloFormativo();
+			}
+			if (opcion.equals(Opcion.BUSCAR_CICLO_FORMATIVO)) {
+				buscarCicloFormativo();
+			}
+			if (opcion.equals(Opcion.MOSTRAR_CICLOS_FORMATIVOS)) {
+				mostrarCiclosFormativos();
+			}
+			if (opcion.equals(Opcion.INSERTAR_MATRICULA)) {
+				insertarMatricula();
+			}
+			if (opcion.equals(Opcion.BUSCAR_MATRICULA)) {
+				buscarMatricula();
+			}
+			if (opcion.equals(Opcion.ANULAR_MATRICULA)) {
+				anularMatricula();
+			}
+			if (opcion.equals(Opcion.MOSTRAR_MATRICULAS)) {
+				mostrarMatriculas();
+			}
+			if (opcion.equals(Opcion.MOSTRAR_MATRICULAS_ALUMNO)) {
+				mostrarMatriculasPorAlumno();
+			}
+			if (opcion.equals(Opcion.MOSTRAR_MATRICULAS_CICLO_FORMATIVO)) {
+				mostrarMatriculasPorCicloFormativo();
+			}
+			if (opcion.equals(Opcion.MOSTRAR_MATRICULAS_CURSO_ACADEMICO)) {
+				mostrarMatriculasPorCursoAcademico();
+			}
 		
 	}
 
 
-	private void insertarAlumno() throws OperationNotSupportedException {
+	private void insertarAlumno()  {
 		try {
 			controlador.insertarAlumno(Consola.leerAlumno());
 		}	
@@ -117,10 +117,14 @@ public class Vista {
 			
 		}
 		catch(NullPointerException e) {
+		System.out.println(e.getMessage());;
+		}
+		catch(OperationNotSupportedException e) {
 		System.out.println(e.getMessage());;}
 	}
+	
 
-	private  void buscarAlumno() throws OperationNotSupportedException {
+	private  void buscarAlumno()  {
 		try {
 			controlador.buscarAlumno(Consola.getAlumnoPorDni());
 		}				
@@ -129,10 +133,13 @@ public class Vista {
 			
 		}
 		catch(NullPointerException e) {
-			System.out.println(e.getMessage());}
+			System.out.println(e.getMessage());
+		}
+		catch(OperationNotSupportedException e) {
+		System.out.println(e.getMessage());;}
 	}
 
-	private void borrarAlumno() throws OperationNotSupportedException {
+	private void borrarAlumno()  {
 		try {
 			controlador.borrarAlumno(Consola.getAlumnoPorDni());
 		}				
@@ -142,11 +149,14 @@ public class Vista {
 			
 		}
 		catch(NullPointerException e) {
-			System.out.println(e.getMessage());;}
+			System.out.println(e.getMessage());;
+		}
+		catch(OperationNotSupportedException e) {
+		System.out.println(e.getMessage());;}
 	}
 
 
-	private void mostrarAlumnos() throws OperationNotSupportedException {
+	private void mostrarAlumnos()  {
 		try {
 			controlador.getAlumnos();
 		}				
@@ -155,11 +165,14 @@ public class Vista {
 			
 		}
 		catch(NullPointerException e) {
-			System.out.println(e.getMessage());}
+			System.out.println(e.getMessage());
+		}
+		catch(OperationNotSupportedException e) {
+		System.out.println(e.getMessage());;}
 	}
 
 
-	private void insertarAsignatura() throws OperationNotSupportedException {
+	private void insertarAsignatura() {
 		
 		try {
 			controlador.insertarAsignatura(Consola.leerAsignatura());
@@ -169,7 +182,10 @@ public class Vista {
 			
 		}
 		catch(NullPointerException e) {
-		System.out.println(e.getMessage());}
+		System.out.println(e.getMessage());
+		}
+		catch(OperationNotSupportedException e) {
+		System.out.println(e.getMessage());;}
 	}
 
 	private void buscarAsignatura(){
@@ -183,9 +199,10 @@ public class Vista {
 		catch(NullPointerException e) {
 		System.out.println(e.getMessage());
 		}
+		
 	}
 
-	private void borrarAsignatura() throws OperationNotSupportedException {
+	private void borrarAsignatura() {
 		
 		try {
 			controlador.borrarAsignatura(Consola.getAsignaturaPorCodigo());
@@ -195,7 +212,10 @@ public class Vista {
 			
 		}
 		catch(NullPointerException e) {
-			System.out.println(e.getMessage());}
+			System.out.println(e.getMessage());
+		}
+		catch(OperationNotSupportedException e) {
+		System.out.println(e.getMessage());;}
 	}
 
 
@@ -214,7 +234,7 @@ public class Vista {
 	}
 
 
-	private void insertarCicloFormativo() throws OperationNotSupportedException {
+	private void insertarCicloFormativo() {
 		
 		try{
 			controlador.insertarCicloFormativo(Consola.leerCicloFormativo());
@@ -224,11 +244,14 @@ public class Vista {
 			
 		}
 		catch(NullPointerException e) {
-			System.out.println(e.getMessage());}
+			System.out.println(e.getMessage());
+		}
+		catch(OperationNotSupportedException e) {
+		System.out.println(e.getMessage());;}
 	}
 
 
-	private void  buscarCicloFormativo() throws OperationNotSupportedException {
+	private void  buscarCicloFormativo()  {
 		
 		try{
 			controlador.buscarCicloFormativo(Consola.getCicloFormativoPorCodigo());
@@ -238,11 +261,14 @@ public class Vista {
 			
 		}
 		catch(NullPointerException e) {
-			System.out.println(e.getMessage());}
+			System.out.println(e.getMessage());
+		}
+		catch(OperationNotSupportedException e) {
+		System.out.println(e.getMessage());;}
 	}
 
 
-	private void  borrarCicloFormativo() throws OperationNotSupportedException {
+	private void  borrarCicloFormativo()  {
 		
 		try{
 			controlador.borrarCicloFormativo(Consola.getCicloFormativoPorCodigo());
@@ -252,8 +278,12 @@ public class Vista {
 			
 		}
 		catch(NullPointerException e) {
-			System.out.println(e.getMessage());}
+			System.out.println(e.getMessage());
+		}
+		catch(OperationNotSupportedException e) {
+		System.out.println(e.getMessage());;}
 	}
+	
 
 	private void mostrarCiclosFormativos()  {
 		try{
@@ -269,7 +299,7 @@ public class Vista {
 	}
 
 
-	private void  insertarMatricula() throws OperationNotSupportedException {
+	private void  insertarMatricula() {
 		try{
 			controlador.insertarMatricula(Consola.leerMatricula(Consola.getAlumnoPorDni(), Consola.elegirAsignaturasMatricula()));
 		}				
@@ -278,11 +308,14 @@ public class Vista {
 			
 		}
 		catch(NullPointerException e) {
-			System.out.println(e.getMessage());}
+			System.out.println(e.getMessage());
+		}
+		catch(OperationNotSupportedException e) {
+		System.out.println(e.getMessage());;}
 	}
 
 
-	private void  buscarMatricula() throws OperationNotSupportedException {
+	private void  buscarMatricula()  {
 		
 		try{
 			controlador.buscarMatricula(Consola.getMatriculaPorIdentificador());
@@ -292,10 +325,14 @@ public class Vista {
 	
 		}
 		catch(NullPointerException e) {
-		System.out.println(e.getMessage());}
+		System.out.println(e.getMessage());
+		}
+		catch(OperationNotSupportedException e) {
+		System.out.println(e.getMessage());;}
 	}
+	
 
-	private void  anularMatricula() throws OperationNotSupportedException {
+	private void  anularMatricula()  {
 		
 		try{
 			controlador.borrarMatricula(Consola.getMatriculaPorIdentificador());
@@ -305,11 +342,14 @@ public class Vista {
 			
 		}
 		catch(NullPointerException e) {
-		System.out.println(e.getMessage());}
+		System.out.println(e.getMessage());
+		}
+		catch(OperationNotSupportedException e) {
+		System.out.println(e.getMessage());;}
 	}
 
 
-	private void mostrarMatriculas() throws OperationNotSupportedException  {
+	private void mostrarMatriculas()   {
 		try{
 			controlador.getMatriculas();
 		}				
@@ -318,10 +358,13 @@ public class Vista {
 			
 		}
 		catch(NullPointerException e) {
+		System.out.println(e.getMessage());;
+		}
+		catch(OperationNotSupportedException e) {
 		System.out.println(e.getMessage());;}
 	}
 
-	private void mostrarMatriculasPorAlumno() throws OperationNotSupportedException  {
+	private void mostrarMatriculasPorAlumno()  {
 		try{
 			controlador.getMatriculas(Consola.getAlumnoPorDni());
 		}				
@@ -330,10 +373,13 @@ public class Vista {
 			
 		}
 		catch(NullPointerException e) {
-		System.out.println(e.getMessage());}
+		System.out.println(e.getMessage());
+		}
+		catch(OperationNotSupportedException e) {
+		System.out.println(e.getMessage());;}
 	}
 
-	private void mostrarMatriculasPorCicloFormativo() throws OperationNotSupportedException  {
+	private void mostrarMatriculasPorCicloFormativo() {
 		
 		try{
 			controlador.getMatriculas(Consola.getCicloFormativoPorCodigo());
@@ -343,10 +389,14 @@ public class Vista {
 			
 		}
 		catch(NullPointerException e) {
-		System.out.println(e.getMessage());}
+		System.out.println(e.getMessage());
+		}
+		catch(OperationNotSupportedException e) {
+		System.out.println(e.getMessage());;}
 	}
 
-	private void mostrarMatriculasPorCursoAcademico() throws OperationNotSupportedException  {
+	
+	private void mostrarMatriculasPorCursoAcademico()   {
 		
 		try{
 			System.out.println("Introduce el curso en formato DD-DD, por ejemplo 23-24");
@@ -358,7 +408,10 @@ public class Vista {
 		
 		}
 		catch(NullPointerException e) {
-			System.out.println(e.getMessage());}
+			System.out.println(e.getMessage());
+		}
+		catch(OperationNotSupportedException e) {
+		System.out.println(e.getMessage());;}
 		}
 
 	}
