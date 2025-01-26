@@ -339,7 +339,7 @@ public class Matriculas {
 				if (coleccionMatriculas[i]!=null) {
 					Asignatura [] nuevaColeccionAsignatura=coleccionMatriculas[i].getColeccionAsignaturas();
 					
-					for (int j=0;j<nuevaColeccionAsignatura.length-1;j++)
+					for (int j=0;j<nuevaColeccionAsignatura.length;j++)
 						if (nuevaColeccionAsignatura[j]!=null && nuevaColeccionAsignatura[j].getCicloFormativo().equals(cicloFormativo))
 							{encontrado=true;
 							contador++;

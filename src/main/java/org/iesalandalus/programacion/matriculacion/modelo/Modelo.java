@@ -49,27 +49,14 @@ public class Modelo {
 	public Alumno buscarAlumno(Alumno alumno)  {
 	  		
 		if (alumno!=null) {
-	  			//Alumno alumno=Consola.getAlumnoPorDni();
-	  			if( alumnos.buscar(alumno)!=null) {
-	  
-	  				Alumno[]nuevoArray=alumnos.get();
-	  				boolean encontrado=false;
-	  				int j=0;
-	  			
-	  					for(int i=0;i<nuevoArray.length;i++)
-	  						{ if (nuevoArray[i]==alumno) {;
-	  							j=i;
-	  							}
-	  							encontrado=true;
-	  						}
-					System.out.println("Alumno econtrado");
-					System.out.println(nuevoArray[j].toString());
-	  				return nuevoArray[j];
-	  			}
-	  			else {
-	  				System.out.println("No encontrado en la coleccion");
-	  				return null;
-	  			}	  			
+	  		
+			if (alumnos.buscar(alumno)!=null) {
+				System.out.println(alumnos.buscar(alumno));
+				return alumnos.buscar(alumno);
+			}
+			else {
+				throw new NullPointerException("ERROR: No se ha encontrado alumno para ese nif");
+			}
 
 		}else {
 			throw new NullPointerException("ERROR: No se ha recibido el alumno");
@@ -84,14 +71,15 @@ public class Modelo {
 
 		if (alumno!=null) {
 	  			
-	  			//Alumno alumno=Consola.getAlumnoPorDni();
-	  			if( alumnos.buscar(alumno)!=null) {
+	  			
+	  			/*if( alumnos.buscar(alumno)!=null) {
 	  				System.out.println("Alumno econtrado y borrado");
 	  				alumnos.borrar(alumno);
 	  			}
 	  			else {
 	  				System.out.println("No encontrado en la coleccion");
-	  			}
+	  			}*/
+				alumnos.borrar(alumno);
 	  			
 		}else {
 			throw new NullPointerException("ERROR: No se ha recibido el alumno");
@@ -139,26 +127,13 @@ public class Modelo {
 	  		
     	if(asignatura!=null) {
 
-	  			//Asignatura asignatura=Consola.getAsignaturaPorCodigo();
-	  			if( asignaturas.buscar(asignatura)!=null) {
-	  				Asignatura[]nuevoArray=asignaturas.get();
-	  				boolean encontrado=false;
-	  				int j=0;
-	  			
-	  					for(int i=0;i<nuevoArray.length;i++)
-	  						{ if (nuevoArray[i]==asignatura) {;
-	  							j=i;
-	  							}
-	  							encontrado=true;
-	  						}
-					System.out.println("Asignatura econtrada");
-					System.out.println(nuevoArray[j].toString());
-	  				return nuevoArray[j];
-	  			}
-	  			else {
-	  				System.out.println("No encontrado en la coleccion");
-	  				return null;
-	  			}
+    		if (asignaturas.buscar(asignatura)!=null) {
+    			System.out.println(asignaturas.buscar(asignatura));
+    			return asignaturas.buscar(asignatura);
+    		}
+    		else {
+    			throw new NullPointerException("ERROR: No se ha encontrado asignaturas por ese codigo");
+    		}
 
     	}else {
     		throw new NullPointerException("ERROR: No se ha recibido la asignatura");
@@ -169,14 +144,16 @@ public class Modelo {
 	  		
     	if(asignatura!=null) {
 
-	  			//Asignatura asignatura=Consola.getAsignaturaPorCodigo();
-	  			if(asignaturas.buscar(asignatura)!=null) {
+	 
+	  			/*if(asignaturas.buscar(asignatura)!=null) {
 	  				System.out.println("Asignatura econtrada y borrada");
 	  				asignaturas.borrar(asignatura);
 	  			}
 	  			else {
 	  				System.out.println("Asignatura no encontrada en la coleccion");
-	  			}
+	  			}*/
+    			asignaturas.borrar(asignatura);
+    		
 	  			
     	}else {
     		throw new NullPointerException("ERROR: No se ha recibido la asignatura");
@@ -226,26 +203,14 @@ public class Modelo {
 	  		
     	if(cicloFormativo!=null) {
 
-	  			//CicloFormativo cicloFormativo=Consola.getCicloFormativoPorCodigo();
-	  			if( ciclosFormativos.buscar(cicloFormativo)!=null) {
-	  				CicloFormativo[]nuevoArray=ciclosFormativos.get();
-	  				boolean encontrado=false;
-	  				int j=0;
-	  			
-	  					for(int i=0;i<nuevoArray.length;i++)
-	  						{ if (nuevoArray[i]==cicloFormativo) {;
-	  							j=i;
-	  							}
-	  							encontrado=true;
-	  						}
-					System.out.println("Ciclo Formativo econtrado");
-					System.out.println(nuevoArray[j].toString());
-	  				return nuevoArray[j];
-	  			}
-	  			else {
-	  				System.out.println("No encontrado el ciclo en la coleccion");
-	  				return null;
-	  			}
+    		if(ciclosFormativos.buscar(cicloFormativo)!=null) {
+    	
+    			System.out.println(ciclosFormativos.buscar(cicloFormativo));
+    			return ciclosFormativos.buscar(cicloFormativo);
+    		}
+    		else {
+    			throw new NullPointerException("ERROR: No se encuentra ciclos formativos para ese codigo");
+    		}
 	
     	}else {
     		throw new NullPointerException("ERROR: No se ha recibido el ciclo formativo");
@@ -257,14 +222,14 @@ public class Modelo {
 	  		
     	if(cicloFormativo!=null) {
 
-	  			//CicloFormativo cicloFormativo=Consola.getCicloFormativoPorCodigo();
-	  			if( ciclosFormativos.buscar(cicloFormativo)!=null) {
+	  			/*if( ciclosFormativos.buscar(cicloFormativo)!=null) {
 	  				System.out.println("Ciclo formativo econtrado y borrado");
 	  				ciclosFormativos.borrar(cicloFormativo);
 	  			}
 	  			else {
 	  				System.out.println("Ciclo formativo no encontrado en la coleccion");
-	  			}
+	  			}*/
+    			ciclosFormativos.borrar(cicloFormativo);
 
     	}else {
     		throw new NullPointerException("ERROR: No se ha recibido el ciclo formativo");
@@ -318,27 +283,16 @@ public class Modelo {
     public Matricula buscarMatricula(Matricula matricula) throws OperationNotSupportedException {
 	  		
     	if(matricula!=null) {
-   
-	  			//Matricula matricula=Consola.getMatriculaPorIdentificador();
-	  			if( matriculas.buscar(matricula)!=null) {
-	  				Matricula[]nuevoArray=matriculas.get();
-	  				boolean encontrado=false;
-	  				int j=0;
-	  			
-	  					for(int i=0;i<nuevoArray.length;i++)
-	  						{ if (nuevoArray[i]==matricula) {;
-	  							j=i;
-	  							}
-	  							encontrado=true;
-	  						}
-					System.out.println("Matricula econtrada");
-					System.out.println(nuevoArray[j].toString());
-	  				return nuevoArray[j];
-	  			}
-	  			else {
-	  				System.out.println("No encontrada la matricula en el sistema");
-	  				return null;
-	  			}
+    		
+    		if(matriculas.buscar(matricula)!=null) {
+
+    			System.out.println(matriculas.buscar(matricula));
+    			return matriculas.buscar(matricula);
+    		}
+    		else {
+    			
+    			throw new NullPointerException("ERROR: No hay matriculas para este codigo");
+    		}
 
     	}else {
     		throw new NullPointerException("ERROR: No se ha recibido la matricula");
@@ -350,14 +304,7 @@ public class Modelo {
 	  		
     	if(matricula!=null) {
 
-	  			//Matricula matricula=Consola.getMatriculaPorIdentificador();
-	  			if( matriculas.buscar(matricula)!=null) {
-	  				System.out.println("Matricula econtrada y borrada");
-	  				matriculas.borrar(matricula);
-	  			}
-	  			else {
-	  				System.out.println("Matricula no encontrada en la coleccion");
-	  			}
+    			matriculas.borrar(matricula);
 
     	}else {
     		throw new NullPointerException("ERROR: No se ha recibido la matricula");
@@ -368,7 +315,8 @@ public class Modelo {
     public Matricula[] getMatriculas() throws OperationNotSupportedException  {
   	
   			 if(matriculas.getTamano()>0) {
-  				 Matricula[]nuevoArray=matriculas.get();
+  				
+  				Matricula[]nuevoArray=matriculas.get();
   				 boolean encontrado=false;
   				 
   				 for(int i=0;i<nuevoArray.length;i++)
@@ -388,7 +336,7 @@ public class Modelo {
   						encontrado=true;
   					}
   				 }
-  				 return nuevoArray;
+  				 return matriculas.get();
   			 }
   			 else {
   				 System.out.println(" No existen matriculas en el sistema");
@@ -402,44 +350,33 @@ public class Modelo {
 	  		
     	if(alumno!=null) {
     	
-	  			//Alumno alumno=Consola.getAlumnoPorDni();
-	  			boolean noEncontrado=false;
-	  			boolean encontrado=false;
-	  				
-	  			
-	 			 if(matriculas.getTamano()>0) {
-	  				 Matricula[]nuevoArray=matriculas.get();
-	  				 Matricula[]nuevoArray2=matriculas.get();
-	  				 int contador=0;
-	  				 
-	  				 for(int i=0;i<nuevoArray.length;i++)
-	  				 {
-	  					if (nuevoArray[i]!=null && nuevoArray[i].getAlumno().equals(alumno)) {
-	  					System.out.println("Estos son los datos de las matriculas para el alumno seleccionado de la coleccion");
-	  					System.out.println(nuevoArray[i]);
-	  					contador++;
-	  					nuevoArray2[contador-1]=nuevoArray[i];
-	  					encontrado=true;
-	  					}
-	  					else
-	  					{
-	  					noEncontrado=true;
-	  					}
-	  				 }
-	  				 
-	  				 if(encontrado==true){
-	  					 return nuevoArray2;
-	  					 
-	  				 }
-	  				 else {
-	  					 return null;
-	  				 }
-	  			 }
-	  			 else {
-	  				 System.out.println(" No existen matriculas en el sistema");
-	  				 return null;
-	  			 }
-
+ 			
+ 			if (matriculas.get(alumno)!=null) {
+ 				Matricula[]nuevoArray=matriculas.get(alumno);
+ 	 			boolean encontrado=false;
+ 				 
+ 				 for(int i=0;i<nuevoArray.length;i++)
+ 				 {
+ 					if (nuevoArray[i]!=null) {
+ 						System.out.println("Estos son los datos de las matriculas de la coleccion");
+ 						System.out.println(nuevoArray[i]);
+ 						Asignatura[] arrayAsignaturas=nuevoArray[i].getColeccionAsignaturas();
+ 						for (int j=0;j<arrayAsignaturas.length;j++)
+ 						{ if(arrayAsignaturas[j]!=null) {
+ 								System.out.println("Estas son sus asignaturas");
+ 								System.out.println(arrayAsignaturas[j]);
+ 							}
+ 							else {encontrado=true;}
+ 						}
+ 					}else {
+ 						encontrado=true;
+ 					}
+ 				 }
+ 				 return matriculas.get(alumno);
+ 			}
+ 			else {
+ 				throw new NullPointerException("ERROR: No hay matriculas para este alumno");
+ 			}			
     	}else {
     		throw new NullPointerException("ERROR: No se ha recibido el alumno para consultar la matricula");
     	}
@@ -449,58 +386,34 @@ public class Modelo {
     public Matricula[] getMatriculas(CicloFormativo cicloFormativo) throws OperationNotSupportedException  {
 	  		
     	if(cicloFormativo!=null) {
-	  				 Matricula[] nuevoArray1=matriculas.get();
-	  				 Asignatura[] nuevoArray2=null;
-	  				 Matricula[] nuevoArray3=new Matricula[CAPACIDAD];
-	  				 int contador=0;
-	  				 int otro=0;
-	  				 
-	  				 /*mostrarCiclosFormativos();
-	  				 System.out.println("Nota: Aunque no se haya dado de alta el ciclo, puede existir una matricula con él asignado");
-	  				 CicloFormativo cicloFormativo=Consola.getCicloFormativoPorCodigo();*/
-	  				 
-	  				 
-	  				 for (int i=0; i<nuevoArray1.length-1;i++)
-	  				 {
-	  					 if (nuevoArray1[i]!=null) {
-	  					 nuevoArray2=nuevoArray1[i].getColeccionAsignaturas();
-	  				 	 for(int j=0;j<nuevoArray2.length-1;j++) {
-	  				 		 if(nuevoArray2[j]==null) 
-	  				 			 
-	  				 		 {
-	  				 			 otro=1;
-	  				 		 }
-	  				 		 else if(nuevoArray2[j].getCicloFormativo().equals(cicloFormativo))
-	  				 		 	{
-	  				 			System.out.println("Para ese ciclo se ha encontrado las siguientes matriculas");
-	  				 		 	System.out.println(nuevoArray1[i]);
-	  				 		 	contador++;
-	  				 		 	nuevoArray3[contador-1]=nuevoArray1[i];
-	  				 		 	}
-	  				 		 else{
-	  				 			otro=2;
-	  				 		 }
-	  				 	  }
-	  					 }
-	  					otro=3;
-	  				 }
-	  				 
-	  			    switch (otro) {
-	  	            case 1:
-	  	                System.out.println("No hay asignaturas dadas de alta en las matriculas");
-	  	                break;
-	  	            case 2:
-	  	                System.out.println("No existe esta asignatura en ninguna matricula");
-	  	                break;
-	  	            case 3:
-	  	                System.out.println("No existen mas matriculas dadas de alta");
-	  	                break;
-	  	          default:
-	                  System.out.println("No existen mas matriculas dadas de alta");
-	  			    }
-	  			   
-	  			   return nuevoArray3;
-	  				 			
+
+ 			if (matriculas.get(cicloFormativo)!=null) {
+ 				
+ 				Matricula[]nuevoArray=matriculas.get(cicloFormativo);
+ 	 			boolean encontrado=false;
+ 			
+ 				 for(int i=0;i<nuevoArray.length;i++)
+ 				 {
+ 					if (nuevoArray[i]!=null) {
+ 						System.out.println("Estos son los datos de las matriculas de la coleccion");
+ 						System.out.println(nuevoArray[i]);
+ 						Asignatura[] arrayAsignaturas=nuevoArray[i].getColeccionAsignaturas();
+ 						for (int j=0;j<arrayAsignaturas.length;j++)
+ 						{ if(arrayAsignaturas[j]!=null && arrayAsignaturas[j].getCicloFormativo().equals(cicloFormativo)) {
+ 								System.out.println("Estas son sus asignaturas");
+ 								System.out.println(arrayAsignaturas[j]);
+ 							}
+ 							else {encontrado=true;}
+ 						}
+ 					}else {
+ 						encontrado=true;
+ 					}
+ 				 }
+ 				 return matriculas.get(cicloFormativo); 
+ 			}
+ 			else {
+ 				throw new NullPointerException("ERROR: No hay matriculas para este ciclo formativo");
+ 			}
 
     	}else {
     		throw new NullPointerException("ERROR: No se ha recibido el ciclo formativo para consultar la matricula");
@@ -511,50 +424,34 @@ public class Modelo {
 	  		
     	if(cursoAcademico!=null) {
     		
-	  				 /*System.out.println("Introduce el curso en formato DD-DD, por ejemplo 23-24");
-					 String cursoAcademico=Entrada.cadena();*/	 
-					 Matricula[] nuevoArray=matriculas.get();
-					 Matricula[] nuevoArray2=new Matricula[CAPACIDAD];
-					 int contador=0;
-					 int otro=0;
-	  			
-	  				 
-	  	 			 if(matriculas.getTamano()>0) {
-	  	  				 
-	  	  				 for(int i=0;i<nuevoArray.length;i++)
-	  	  				 {
-	  	  					if(nuevoArray[i]==null) {
-	  	  						otro=1;
-	  	  					}
-	  	  					else if (nuevoArray[i].getCursoAcademico().equals(cursoAcademico)) {
-	  	  						System.out.println("Estos son los datos de las matriculas para el curso academico seleccionado de la coleccion");
-	  	  						System.out.println(nuevoArray[i]);
-	  	  						contador++;
-	  	  						nuevoArray2[contador-1]=nuevoArray[i];
-	  	  					}
-	  	  					else
-	  	  					{
-	  	  					 otro=2;
-	  	  					}
-	  	  				 }
-	  	  			 }
-	  	  			 else {
-	  	  				 otro=3;
-	  	  			 }
-	   			  switch (otro) {
-	   			  	case 1:
-	  	                System.out.println("No existen ninguna matricula");
-	  	                break;
-	  	            case 2:
-	  	                System.out.println("No existen ninguna matricula para ese curso");
-	  	                break;
-	  	            case 3:
-	  	                System.out.println("No existen mas matriculas para ese curso dadas de alta");
-	  	                break;
-	  	            default:
-	  	            	System.out.println("No existen mas matriculas para ese curso dadas de alta");
-	  			    }
-	   			  return nuevoArray2;
+ 			
+ 			if (matriculas.get(cursoAcademico)!=null) {
+ 				
+ 				Matricula[]nuevoArray=matriculas.get(cursoAcademico);
+ 	 			boolean encontrado=false;
+ 				 
+ 				 for(int i=0;i<nuevoArray.length;i++)
+ 				 {
+ 					if (nuevoArray[i]!=null) {
+ 						System.out.println("Estos son los datos de las matriculas de la coleccion");
+ 						System.out.println(nuevoArray[i]);
+ 						Asignatura[] arrayAsignaturas=nuevoArray[i].getColeccionAsignaturas();
+ 						for (int j=0;j<arrayAsignaturas.length;j++)
+ 						{ if(arrayAsignaturas[j]!=null) {
+ 								System.out.println("Estas son sus asignaturas");
+ 								System.out.println(arrayAsignaturas[j]);
+ 							}
+ 							else {encontrado=true;}
+ 						}
+ 					}else {
+ 						encontrado=true;
+ 					}
+ 				 }
+ 				 return matriculas.get(cursoAcademico);
+			}
+			else {
+				throw new NullPointerException("ERROR: No hay matriculas para este curso academico");
+			}
 
     	}else {
     		throw new NullPointerException("ERROR: No se ha recibido el curso academico para consultar la matricula");
