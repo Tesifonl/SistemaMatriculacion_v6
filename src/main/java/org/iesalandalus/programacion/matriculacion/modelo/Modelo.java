@@ -166,7 +166,7 @@ public class Modelo {
  
   			 if(asignaturas.getTamano()>0) {
   				 Asignatura[]nuevoArray=asignaturas.get();
-  				 boolean encontrado=false;
+  				 /*boolean encontrado=false;
   				 
   				 for(int i=0;i<nuevoArray.length;i++)
   				 {
@@ -175,11 +175,11 @@ public class Modelo {
   	  					 System.out.println(nuevoArray[i]);
   	  				 }
   	  				 else {encontrado=true;}
-  				 }
+  				 }*/
   				 return nuevoArray;
   				 }
   			 else {
-  				 System.out.println(" No existen asignaturas en el sistema");
+  				 
   				 return null;
   			 }	
 

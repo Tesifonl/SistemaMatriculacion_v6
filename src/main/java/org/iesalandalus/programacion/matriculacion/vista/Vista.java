@@ -110,6 +110,7 @@ public class Vista {
 	private void insertarAlumno()  {
 		try {
 			controlador.insertarAlumno(Consola.leerAlumno());
+			System.out.println("Alumno insertado correctamente");
 		}	
 		
 		catch(IllegalArgumentException e) {
@@ -142,6 +143,7 @@ public class Vista {
 	private void borrarAlumno()  {
 		try {
 			controlador.borrarAlumno(Consola.getAlumnoPorDni());
+			System.out.println("Alumno borrado correctamente");
 		}				
 		
 		catch(IllegalArgumentException e) {
@@ -175,7 +177,16 @@ public class Vista {
 	private void insertarAsignatura() {
 		
 		try {
-			controlador.insertarAsignatura(Consola.leerAsignatura());
+			Asignatura asignaturaNueva=Consola.leerAsignatura();
+			Asignatura[] nuevoArray=controlador.getAsignaturas();
+			
+			if (nuevoArray==null || Consola.asignaturaYaMatriculada(nuevoArray, asignaturaNueva)!=true) {
+			controlador.insertarAsignatura(asignaturaNueva);
+			System.out.println("Asignatura insertada correctamente");
+			}else
+			{
+				System.out.println("Asignatura insertada anteriormente");
+			}
 		}				
 		catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -206,6 +217,7 @@ public class Vista {
 		
 		try {
 			controlador.borrarAsignatura(Consola.getAsignaturaPorCodigo());
+			System.out.println("Asignatura borrada correctamente");
 		}				
 		catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -221,7 +233,8 @@ public class Vista {
 
 	private void mostrarAsignaturas()  {
 		try{
-			controlador.getAsignaturas();
+			
+			Consola.mostrarAsignaturas(controlador.getAsignaturas());
 		}				
 		catch(IllegalArgumentException e) {
 				System.out.println(e.getMessage());
@@ -238,6 +251,7 @@ public class Vista {
 		
 		try{
 			controlador.insertarCicloFormativo(Consola.leerCicloFormativo());
+			System.out.println("Ciclo formativo insertado correctamente");
 		}				
 		catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -272,6 +286,7 @@ public class Vista {
 		
 		try{
 			controlador.borrarCicloFormativo(Consola.getCicloFormativoPorCodigo());
+			System.out.println("Ciclo formativo borrado correctamente");
 		}				
 		catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -302,6 +317,7 @@ public class Vista {
 	private void  insertarMatricula() {
 		try{
 			controlador.insertarMatricula(Consola.leerMatricula(Consola.getAlumnoPorDni(), Consola.elegirAsignaturasMatricula()));
+			System.out.println("Matricula insertada correctamente");
 		}				
 		catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -336,6 +352,7 @@ public class Vista {
 		
 		try{
 			controlador.borrarMatricula(Consola.getMatriculaPorIdentificador());
+			System.out.println("Matricula anulada correctamente");
 		}				
 		catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());

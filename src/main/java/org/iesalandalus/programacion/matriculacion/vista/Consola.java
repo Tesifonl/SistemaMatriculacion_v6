@@ -337,7 +337,7 @@ public class Consola {
 	public static Asignatura leerAsignatura () {
 		
 		try {
-			System.out.println("Introduce un codigo para la asignatura: ");
+			System.out.println("Introduce un codigo entero de 4 digitos para la asignatura: ");
 			String codigo=Entrada.cadena();
 			System.out.println("Introduce un nombre para la asignaturas ");
 			String nombre=Entrada.cadena();
@@ -381,15 +381,15 @@ public class Consola {
 			return null;
 			}
 	}
-	
-	private static void mostrarAsignaturas (Asignatura [] asignaturas) {
+	//TESIFON: ESTO ME FALLA
+	public static void mostrarAsignaturas (Asignatura [] asignaturas) {
 		boolean encontrado=false;
 		
 		if (asignaturas!=null) {
 		
 			for(int i=0;i<asignaturas.length-1;i++) {
 				if(asignaturas[i]!=null) {
-					asignaturas[i].toString();
+					System.out.println(asignaturas[i].toString());
 				}else {
 					encontrado=true;
 				}
@@ -401,23 +401,23 @@ public class Consola {
 	
 
 	
-	private static boolean asignaturaYaMatriculada(Asignatura[] asignaturasMatricula,Asignatura asignatura) {
-		boolean encontrada=false;
+	public static boolean asignaturaYaMatriculada(Asignatura[] asignaturasMatricula,Asignatura asignatura) {
+		boolean insertada=false;
 		boolean otro=false;
 		
 		for(int i=0;i<asignaturasMatricula.length-1;i++) {
 			if(asignaturasMatricula [i]!=null && asignaturasMatricula[i].equals(asignatura)) {
-				encontrada=true;
+				insertada=true;
 			}
 			else {
 				otro=false;
 			}
 		}
 		
-		if (encontrada==true) {
-			return encontrada;
+		if (insertada==true) {
+			return true;
 		}
-		else {return otro;
+		else {return false;
 		}
 	}
 	

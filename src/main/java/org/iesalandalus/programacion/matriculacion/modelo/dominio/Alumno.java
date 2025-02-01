@@ -219,8 +219,7 @@ public class Alumno {
 	
 	
 	public String imprimir() {
-		return "nombre=" + nombre + ", telefono=" + telefono + ", correo=" + correo + ", dni=" + dni
-				+ ", fechaNacimiento=" + fechaNacimiento + ", nia=" + nia + "]";
+		return toString();
 	}
 	
 	
