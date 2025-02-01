@@ -34,11 +34,10 @@ public class Vista {
 			ejecutarOpcion(opcion);
 		}while(opcion!=Opcion.SALIR);
 		
-		terminar();
 	}
 	
 	public void terminar() {
-		System.out.println("Hasta luego.");
+		controlador.terminar();
 	}
 	
 	private void ejecutarOpcion(Opcion opcion) {
@@ -102,6 +101,9 @@ public class Vista {
 			}
 			if (opcion.equals(Opcion.MOSTRAR_MATRICULAS_CURSO_ACADEMICO)) {
 				mostrarMatriculasPorCursoAcademico();
+			}
+			if (opcion.equals(Opcion.SALIR)) {
+				terminar();
 			}
 		
 	}

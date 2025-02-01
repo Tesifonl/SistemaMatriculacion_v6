@@ -31,7 +31,7 @@ public class Modelo {
 	}
 	
 	public void terminar (){
-		System.out.print("Se ha terminado");
+		System.out.print("Hasta luego");
 	}
 	
 	public  void insertarAlumno(Alumno alumno) throws OperationNotSupportedException {
