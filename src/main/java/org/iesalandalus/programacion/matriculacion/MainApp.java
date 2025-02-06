@@ -9,7 +9,7 @@ import org.iesalandalus.programacion.matriculacion.vista.Vista;
 
 public class MainApp {
 	//incorporo la variable CAPACIDAD para que los test no den error
-	public static final int CAPACIDAD=5;
+	//public static final int CAPACIDAD=5;
     
     public static void main(String[] args)  {
     	

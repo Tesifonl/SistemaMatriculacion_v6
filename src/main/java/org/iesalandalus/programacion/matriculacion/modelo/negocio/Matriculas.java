@@ -1,5 +1,8 @@
 package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
@@ -9,53 +12,51 @@ import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
 
 public class Matriculas {
 
-	private Matricula [] coleccionMatriculas;
-	private int tamano;
-	private int capacidad;
+	private List<Matricula>  coleccionMatriculas;
+	//private int tamano;
+	//private int capacidad;
 	
-	public Matriculas (int capacidad) {
-		if (capacidad>0) {
-			coleccionMatriculas=new Matricula [capacidad];
-		}
-		else {
-			throw new IllegalArgumentException("ERROR: La capacidad debe ser mayor que cero.");
-		}
+	public Matriculas () {
+
+		coleccionMatriculas=new ArrayList<Matricula> ();
+
 	}
 	
-	public Matricula[] get() throws OperationNotSupportedException {
-		Matricula[] copia=copiaProfundaMatriculas();
+	public List<Matricula> get() throws OperationNotSupportedException {
+		List<Matricula> copia=copiaProfundaMatriculas();
 		return copia;
 	}
 	
-	private Matricula[] copiaProfundaMatriculas() throws OperationNotSupportedException {
-		Matricula[]copiaMatriculas=new Matricula[coleccionMatriculas.length];
+	private List<Matricula> copiaProfundaMatriculas() throws OperationNotSupportedException {
 		
-		for(int i=0;i<coleccionMatriculas.length;i++) {
-			if(coleccionMatriculas[i]!=null) {copiaMatriculas[i]= new Matricula(coleccionMatriculas[i]);
+		List<Matricula>copiaMatricula=new ArrayList<Matricula>();
+		
+		for(int i=0;i<coleccionMatriculas.size();i++) {
+			if(coleccionMatriculas.get(i)!=null) {copiaMatricula.add(coleccionMatriculas.get(i));
 			}
 			else {
-				copiaMatriculas[i]=null;
+				copiaMatricula.add(coleccionMatriculas.get(i));
 			}
 		}
-		return copiaMatriculas;
+		return copiaMatricula;
 	}
 
 	public int getTamano() {
 		int tamano=0;
 		
-		for (int i=0;i<coleccionMatriculas.length;i++) {
-			if(coleccionMatriculas[i]!=null) {tamano++;}
+		for (int i=0;i<coleccionMatriculas.size();i++) {
+			if(coleccionMatriculas.get(i)!=null) {tamano++;}
 		}
 		
 		return tamano;
 	}
 
 	
-	public int getCapacidad() {
+	/*public int getCapacidad() {
 		capacidad=coleccionMatriculas.length;
 		
 		return capacidad;
-	}
+	}*/
 	
 	/*public void insertar(Matricula matricula) throws OperationNotSupportedException {
 		boolean noEncontrado=false;
@@ -90,19 +91,13 @@ public class Matriculas {
 	}*/
 	
 	public void insertar(Matricula matricula) throws OperationNotSupportedException {
+		
 		if(matricula!=null) {
-			int indice=buscarIndice(matricula);
-			
-			if(indice==999999) {
-				if(getTamano()<getCapacidad()) {
-					coleccionMatriculas[getTamano()]=matricula;
-				}
-				else {
-					throw new OperationNotSupportedException("ERROR: No se aceptan más matrículas.");
-				}
-			}
-			else{
-				throw new OperationNotSupportedException("ERROR: Ya existe una matrícula con ese identificador.");
+			if(coleccionMatriculas.contains(matricula)) {
+				throw new OperationNotSupportedException("ERROR: Ya existe una matricula con ese codigo.");
+			}else {
+				coleccionMatriculas.add(matricula);
+				System.out.println("Matricula introducido en la lista");
 			}
 		}
 		else {
@@ -130,7 +125,7 @@ public class Matriculas {
 		return indice;
 	}*/
 	
-	private int buscarIndice(Matricula matricula) throws OperationNotSupportedException {
+	/*private int buscarIndice(Matricula matricula) throws OperationNotSupportedException {
 		int indice=999999;
 		boolean encontrado=false;
 		boolean noEncontrado=false;
@@ -177,31 +172,27 @@ public class Matriculas {
 		}
 		return superado;
 	}
-	
+	*/
 	
 	public Matricula buscar(Matricula matricula) throws OperationNotSupportedException {
-		boolean encontrado=false;
-		boolean otro=false;
-		int indice=0;
-		Matricula copiaAlumno=null;
+		int j=0;
+		boolean encontrado,noEncontrado=false;
 		
 		if(matricula!=null) {
-			for (int i =0;i<coleccionMatriculas.length;i++) {
-				if (coleccionMatriculas[i]!=null && coleccionMatriculas[i].equals(matricula)) {
-					encontrado=true;
-					indice=i;
-					copiaAlumno=new Matricula(coleccionMatriculas[indice]);
+			for (int i=0;i<coleccionMatriculas.size();i++) {
+				if(coleccionMatriculas.get(i).equals(matricula)){
+				j=i;
+				encontrado=true;
 				}
-				else {
-					otro=true;
-				}
-			}	
-				
-			if(encontrado==true) {
-				return copiaAlumno;
-				
-			}else {return null;}
-				
+				noEncontrado=true;
+			}
+			
+			if (encontrado=true) {
+				return coleccionMatriculas.get(j);
+			}else {
+				System.out.println("No se ha encontrado este alumno en la coleccion");
+				return null;
+			}
 		}
 		else {
 			throw new NullPointerException("matricula recibido nulo");
@@ -238,14 +229,11 @@ public class Matriculas {
 	
 	public void borrar(Matricula matricula) throws OperationNotSupportedException {
 		if(matricula!=null) {
-			int indice=buscarIndice(matricula);
-			
-			if(indice!=999999) {
-				coleccionMatriculas[indice]=null;
-				desplazarUnaPosicionHaciaIzquiera(indice);
+			if (coleccionMatriculas.contains(matricula)) {
+				coleccionMatriculas.remove(matricula);
 			}
 			else{
-				throw new OperationNotSupportedException("ERROR: No existe ninguna matrícula como la indicada.");
+				throw new OperationNotSupportedException("ERROR: No existe ningún alumno como el indicado.");
 			}
 		}
 		else {
@@ -254,27 +242,25 @@ public class Matriculas {
 	}
 	
 	
-	private void desplazarUnaPosicionHaciaIzquiera(int indice) {
+	/*private void desplazarUnaPosicionHaciaIzquiera(int indice) {
 		
 		for (int i =indice;i<coleccionMatriculas.length-1;i++) {
 			coleccionMatriculas[i]=coleccionMatriculas[i+1];
 			}
 			coleccionMatriculas[coleccionMatriculas.length-1]=null;
 
-	}
+	}*/
 	
-	public Matricula[] get (Alumno alumno) throws OperationNotSupportedException{
+	public List<Matricula> get (Alumno alumno) throws OperationNotSupportedException{
 		boolean encontrado=false;
 		boolean otro=false;
-		Matricula [] nuevaColeccion=new Matricula [coleccionMatriculas.length];
-		int contador=0;
+		List<Matricula> nuevaColeccion=new ArrayList<Matricula>();
 		
 		if (alumno!=null) {	
-			for (int i =0;i<coleccionMatriculas.length;i++) {
-				if (coleccionMatriculas[i]!=null && coleccionMatriculas[i].getAlumno().equals(alumno)) {
+			for (int i =0;i<coleccionMatriculas.size();i++) {
+				if (coleccionMatriculas.get(i)!=null && coleccionMatriculas.get(i).getAlumno().equals(alumno)) {
 					encontrado=true;
-					contador++;
-					nuevaColeccion[contador-1]=coleccionMatriculas[i];	
+					nuevaColeccion.add(coleccionMatriculas.get(i));	
 						
 				}
 				else {
@@ -294,19 +280,18 @@ public class Matriculas {
 		}
 	}
 	
-	public Matricula[] get (String cursoAcademico){
+	public List<Matricula> get (String cursoAcademico){
 		boolean encontrado=false;
 		boolean otro=false;
-		Matricula [] nuevaColeccion=new Matricula [coleccionMatriculas.length];
-		int contador=0;
+		List<Matricula> nuevaColeccion=new ArrayList<Matricula>();
+		
 		
 		if (cursoAcademico!=null) {
 			
-			for (int i =0;i<coleccionMatriculas.length;i++) {
-				if (coleccionMatriculas[i]!=null && coleccionMatriculas[i].getCursoAcademico().equals(cursoAcademico)) {
+			for (int i =0;i<coleccionMatriculas.size();i++) {
+				if (coleccionMatriculas.get(i)!=null && coleccionMatriculas.get(i).getCursoAcademico().equals(cursoAcademico)) {
 					encontrado=true;
-					contador++;
-					nuevaColeccion[contador-1]=coleccionMatriculas[i];	
+					nuevaColeccion.add(coleccionMatriculas.get(i));	
 						
 				}
 				else {
@@ -326,25 +311,22 @@ public class Matriculas {
 		}
 	}
 	
-	public Matricula[] get (CicloFormativo cicloFormativo) throws OperationNotSupportedException{
+	public List<Matricula> get (CicloFormativo cicloFormativo) throws OperationNotSupportedException{
 		boolean encontrado=false;
 		boolean otro=false;
-		Matricula [] nuevaColeccion=new Matricula [coleccionMatriculas.length];
+		List<Matricula> nuevaColeccion=new ArrayList<Matricula>();
+	
 	
 		
-		int contador=0;
-		
 		if (cicloFormativo!=null) {
-			for (int i =0;i<coleccionMatriculas.length;i++) {
-				if (coleccionMatriculas[i]!=null) {
-					Asignatura [] nuevaColeccionAsignatura=coleccionMatriculas[i].getColeccionAsignaturas();
+			for (int i =0;i<coleccionMatriculas.size();i++) {
+				if (coleccionMatriculas.get(i)!=null) {
+					List<Asignatura> nuevaColeccionAsignatura=coleccionMatriculas.get(i).getColeccionAsignaturas();
 					
-					for (int j=0;j<nuevaColeccionAsignatura.length;j++)
-						if (nuevaColeccionAsignatura[j]!=null && nuevaColeccionAsignatura[j].getCicloFormativo().equals(cicloFormativo))
+					for (int j=0;j<nuevaColeccionAsignatura.size();j++)
+						if (nuevaColeccionAsignatura.get(j)!=null && nuevaColeccionAsignatura.get(j).getCicloFormativo().equals(cicloFormativo))
 							{encontrado=true;
-							contador++;
-							nuevaColeccion[contador-1]=coleccionMatriculas[i];	
-						
+							nuevaColeccion.add(coleccionMatriculas.get(i));					
 							}
 						else {
 							otro=false;

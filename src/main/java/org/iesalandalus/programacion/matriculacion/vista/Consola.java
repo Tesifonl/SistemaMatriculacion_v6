@@ -5,6 +5,8 @@ package org.iesalandalus.programacion.matriculacion.vista;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
@@ -237,14 +239,14 @@ public class Consola {
 	}
 	/*por el contexto entiendo que ciclos formativos no tiene que estar como variable de entrada*/
 	
-	public static void mostrarCiclosFormativos (CicloFormativo[] ciclosFormativos) {
+	public static void mostrarCiclosFormativos (List<CicloFormativo> ciclosFormativos) {
 		boolean encontrado=false;
 		
 		if (ciclosFormativos!=null) {
 		
-			for(int i=0;i<ciclosFormativos.length-1;i++) {
-				if(ciclosFormativos[i]!=null) {
-					ciclosFormativos[i].toString();
+			for(int i=0;i<ciclosFormativos.size();i++) {
+				if(ciclosFormativos.get(i)!=null) {
+					ciclosFormativos.get(i).toString();
 				}else {
 					encontrado=true;
 				}
@@ -381,15 +383,15 @@ public class Consola {
 			return null;
 			}
 	}
-	//TESIFON: ESTO ME FALLA
-	public static void mostrarAsignaturas (Asignatura [] asignaturas) {
+	
+	public static void mostrarAsignaturas (List<Asignatura> asignaturas) {
 		boolean encontrado=false;
 		
 		if (asignaturas!=null) {
 		
-			for(int i=0;i<asignaturas.length-1;i++) {
-				if(asignaturas[i]!=null) {
-					System.out.println(asignaturas[i].toString());
+			for(int i=0;i<asignaturas.size();i++) {
+				if(asignaturas.get(i)!=null) {
+					System.out.println(asignaturas.get(i).toString());
 				}else {
 					encontrado=true;
 				}
@@ -401,12 +403,12 @@ public class Consola {
 	
 
 	
-	public static boolean asignaturaYaMatriculada(Asignatura[] asignaturasMatricula,Asignatura asignatura) {
+	public static boolean asignaturaYaMatriculada(List<Asignatura> asignaturasMatricula,Asignatura asignatura) {
 		boolean insertada=false;
 		boolean otro=false;
 		
-		for(int i=0;i<asignaturasMatricula.length-1;i++) {
-			if(asignaturasMatricula [i]!=null && asignaturasMatricula[i].equals(asignatura)) {
+		for(int i=0;i<asignaturasMatricula.size();i++) {
+			if(asignaturasMatricula.get(i)!=null && asignaturasMatricula.get(i).equals(asignatura)) {
 				insertada=true;
 			}
 			else {
@@ -423,7 +425,7 @@ public class Consola {
 	
 	/*Dudas diagrama de clase, pone alumnos en vez de alumno*/
 	
-	public static Matricula leerMatricula(Alumno alumno, Asignatura[] asignaturas) throws OperationNotSupportedException {
+	public static Matricula leerMatricula(Alumno alumno, List<Asignatura> asignaturas) throws OperationNotSupportedException {
 		
 		try {
 			System.out.println("Introduce un id de matricula que debe ser un numero mayor que cero: ");
@@ -433,7 +435,7 @@ public class Consola {
 			System.out.println("Introduce una fecha de matriculacion ");
 			LocalDate fechaMatriculacion=leerFecha(Entrada.cadena());
 			Alumno alumnoIntroducido=alumno;
-			Asignatura [] asignaturasIntroducidas=asignaturas;
+			List<Asignatura> asignaturasIntroducidas=asignaturas;
 			
 
 			Matricula matricula =new Matricula(idMatricula,curso,fechaMatriculacion,alumnoIntroducido,asignaturasIntroducidas);
@@ -453,12 +455,12 @@ public class Consola {
 	//Crea el método elegirAsignaturasMatricula para obtener el array de asignaturas que se asignarán en una matrícula.
 	//Diria que hay que construir el array dentro, pero en el diagrama aparece como parametro.
 	//yo voy a consutruirlo.
-	public static Asignatura[] elegirAsignaturasMatricula() {
+	public static List<Asignatura> elegirAsignaturasMatricula() {
 			System.out.println("Indica el numero de asignaturas que vas a introducir, debe ser mayor que 0");
 			int numeroAsignaturas=Entrada.entero();
-			Asignatura [] coleccionAsignaturas=new Asignatura[numeroAsignaturas];
+			List<Asignatura> coleccionAsignaturas=new ArrayList<Asignatura>();
 			for (int i=0;i<numeroAsignaturas;i++) {
-				coleccionAsignaturas[i]=Consola.getAsignaturaPorCodigo();
+				coleccionAsignaturas.add(Consola.getAsignaturaPorCodigo());
 			}
 			return coleccionAsignaturas;
 		}
@@ -470,8 +472,8 @@ public class Consola {
 			int idMatricula=Entrada.entero();
 			Alumno alumno=new Alumno( "Tesi", "11111111H", "Tesi@gmail.com", "999999999", LocalDate.of(1979, 1, 8));
 			CicloFormativo cicloFormativo =new CicloFormativo(1111,"Semipresencial",Grado.GDCFGB,"DAW",100);
-			Asignatura[] asignaturas=new Asignatura[10];
-			asignaturas[0]=new Asignatura("2222","Programacion",100,Curso.PRIMERO,6,EspecialidadProfesorado.INFORMATICA,cicloFormativo);
+			List<Asignatura> asignaturas=new ArrayList<Asignatura>();
+			asignaturas.add(new Asignatura("2222","Programacion",100,Curso.PRIMERO,6,EspecialidadProfesorado.INFORMATICA,cicloFormativo));
 			
 
 			Matricula matricula =new Matricula(idMatricula,"23-24",LocalDate.now(),alumno,asignaturas);

@@ -1,5 +1,7 @@
 package org.iesalandalus.programacion.matriculacion.vista;
 
+import java.util.List;
+
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.matriculacion.controlador.Controlador;
@@ -180,7 +182,7 @@ public class Vista {
 		
 		try {
 			Asignatura asignaturaNueva=Consola.leerAsignatura();
-			Asignatura[] nuevoArray=controlador.getAsignaturas();
+			List<Asignatura> nuevoArray=controlador.getAsignaturas();
 			
 			if (nuevoArray==null || Consola.asignaturaYaMatriculada(nuevoArray, asignaturaNueva)!=true) {
 			controlador.insertarAsignatura(asignaturaNueva);

@@ -3,6 +3,7 @@ package org.iesalandalus.programacion.matriculacion.modelo.dominio;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import javax.naming.OperationNotSupportedException;
@@ -10,7 +11,7 @@ import javax.naming.OperationNotSupportedException;
 public class Matricula {
 	
 	private Alumno alumno;
-	private Asignatura[] coleccionAsignaturas;
+	private List<Asignatura> coleccionAsignaturas;
 	
 	public static final int MAXIMO_MESES_ANTERIOR_ANULACION=6;
 	public static final int MAXIMO_DIAS_ANTERIOR_MATRICULA=15;
@@ -27,7 +28,7 @@ public class Matricula {
 	
 	/*\( - Escapa el carácter ( para que sea tratado como un paréntesis literal.*/
 	
-	public Matricula (int idMatricula,String cursoAcademico,LocalDate fechaMatriculacion,Alumno alumno,Asignatura[] coleccionAsignaturas) throws OperationNotSupportedException {
+	public Matricula (int idMatricula,String cursoAcademico,LocalDate fechaMatriculacion,Alumno alumno,List<Asignatura> coleccionAsignaturas) throws OperationNotSupportedException {
 		setIdMatricula(idMatricula);
 		setCursoAcademico(cursoAcademico);
 		setFechaMatriculacion(fechaMatriculacion);
@@ -58,11 +59,11 @@ public class Matricula {
 		}else {this.alumno = alumno;}
 	}
 
-	public Asignatura[] getColeccionAsignaturas() {
+	public List<Asignatura> getColeccionAsignaturas() {
 		return coleccionAsignaturas;
 	}
 
-	public void setColeccionAsignaturas(Asignatura[] coleccionAsignaturas) throws OperationNotSupportedException {
+	public void setColeccionAsignaturas(List<Asignatura> coleccionAsignaturas) throws OperationNotSupportedException {
 	
 		if(coleccionAsignaturas==null) {
 			throw new NullPointerException("ERROR: La lista de asignaturas de una matrícula no puede ser nula.");
@@ -71,9 +72,9 @@ public class Matricula {
 			int horas=0;
 			int sumaHoras=0;
 			
-			 for (int i=0;i<coleccionAsignaturas.length;i++) {
-				if(coleccionAsignaturas[i]!=null) {
-					horas=coleccionAsignaturas[i].getHorasAnuales();
+			 for (int i=0;i<coleccionAsignaturas.size();i++) {
+				if(coleccionAsignaturas.get(i)!=null) {
+					horas=coleccionAsignaturas.get(i).getHorasAnuales();
 					sumaHoras=sumaHoras+horas;
 					}
 				}
@@ -87,14 +88,14 @@ public class Matricula {
 		}
 	}
 	
-	private boolean superaMaximoNumeroHorasMatricula() {
+	private boolean superaMaximoNumeroHorasMatricula(List<Asignatura> coleccionAsignaturas) {
 		int horas=0;
 		int sumaHoras=0;
-		Asignatura [] nuevaColeccion=getColeccionAsignaturas();
 		
-		 for (int i=0;i<nuevaColeccion.length;i++) {
-			if(nuevaColeccion[i]!=null) {
-				horas=nuevaColeccion[i].getHorasAnuales();
+		
+		 for (int i=0;i<coleccionAsignaturas.size();i++) {
+			if(coleccionAsignaturas.get(i)!=null) {
+				horas=coleccionAsignaturas.get(i).getHorasAnuales();
 				sumaHoras=horas++;
 			}
 		 }
@@ -108,7 +109,7 @@ public class Matricula {
 	}
 	
 	private String asignaturasMatricula() {
-		if(getColeccionAsignaturas().length<=MAXIMO_NUMERO_ASIGNATURAS_POR_MATRICULA) {
+		if(superaMaximoNumeroHorasMatricula(coleccionAsignaturas)==true) {
 			return coleccionAsignaturas.toString();
 		}
 		else {throw new IllegalArgumentException("Error: El numero de asignaturas supera el maximo");}

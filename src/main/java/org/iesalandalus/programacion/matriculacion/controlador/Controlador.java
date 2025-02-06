@@ -1,5 +1,7 @@
 package org.iesalandalus.programacion.matriculacion.controlador;
 
+import java.util.List;
+
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.matriculacion.modelo.Modelo;
@@ -60,7 +62,7 @@ public class Controlador {
     }
     
     
-	public Alumno[] getAlumnos() throws OperationNotSupportedException {
+	public List<Alumno> getAlumnos() throws OperationNotSupportedException {
   		
 			return modelo.getAlumnos();
     }
@@ -84,7 +86,7 @@ public class Controlador {
     }
 
     
-    public Asignatura[] getAsignaturas()  {
+    public List<Asignatura> getAsignaturas()  {
 
     		return modelo.getAsignaturas();
 
@@ -109,7 +111,7 @@ public class Controlador {
 
     }
     
-    public CicloFormativo[] getCiclosFormativos()  {
+    public List<CicloFormativo> getCiclosFormativos()  {
 
     		return modelo.getCiclosFormativos();
 
@@ -135,24 +137,24 @@ public class Controlador {
       }
     
     
-    public Matricula[] getMatriculas() throws OperationNotSupportedException  {
+    public List<Matricula> getMatriculas() throws OperationNotSupportedException  {
     	
     		return modelo.getMatriculas();
       }
     
-    public Matricula[] getMatriculas (Alumno alumno) throws OperationNotSupportedException  {
+    public List<Matricula> getMatriculas (Alumno alumno) throws OperationNotSupportedException  {
 
     		return modelo.getMatriculas(alumno);
 
       }
 
-    public Matricula[] getMatriculas(CicloFormativo cicloFormativo) throws OperationNotSupportedException  {
+    public List<Matricula> getMatriculas(CicloFormativo cicloFormativo) throws OperationNotSupportedException  {
 
     		return modelo.getMatriculas(cicloFormativo);
 
       }
     
-    public Matricula[] getMatriculas(String cursoAcademico) throws OperationNotSupportedException  {
+    public List<Matricula> getMatriculas(String cursoAcademico) throws OperationNotSupportedException  {
 	  		
     		return modelo.getMatriculas(cursoAcademico);
 
