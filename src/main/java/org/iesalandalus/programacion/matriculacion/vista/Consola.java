@@ -384,7 +384,7 @@ public class Consola {
 			}
 	}
 	
-	public static void mostrarAsignaturas (List<Asignatura> asignaturas) {
+	public static void mostrarAsignaturas (ArrayList<Asignatura> asignaturas) {
 		boolean encontrado=false;
 		
 		if (asignaturas!=null) {
@@ -403,7 +403,7 @@ public class Consola {
 	
 
 	
-	public static boolean asignaturaYaMatriculada(List<Asignatura> asignaturasMatricula,Asignatura asignatura) {
+	public static boolean asignaturaYaMatriculada(ArrayList<Asignatura> asignaturasMatricula,Asignatura asignatura) {
 		boolean insertada=false;
 		boolean otro=false;
 		
@@ -423,9 +423,9 @@ public class Consola {
 		}
 	}
 	
-	/*Dudas diagrama de clase, pone alumnos en vez de alumno*/
 	
-	public static Matricula leerMatricula(Alumno alumno, List<Asignatura> asignaturas) throws OperationNotSupportedException {
+	
+	public static Matricula leerMatricula(Alumno alumno, ArrayList<Asignatura> asignaturas) throws OperationNotSupportedException {
 		
 		try {
 			System.out.println("Introduce un id de matricula que debe ser un numero mayor que cero: ");
@@ -435,7 +435,7 @@ public class Consola {
 			System.out.println("Introduce una fecha de matriculacion ");
 			LocalDate fechaMatriculacion=leerFecha(Entrada.cadena());
 			Alumno alumnoIntroducido=alumno;
-			List<Asignatura> asignaturasIntroducidas=asignaturas;
+			ArrayList<Asignatura> asignaturasIntroducidas=asignaturas;
 			
 
 			Matricula matricula =new Matricula(idMatricula,curso,fechaMatriculacion,alumnoIntroducido,asignaturasIntroducidas);
@@ -452,13 +452,11 @@ public class Consola {
 		
 	}
 		
-	//Crea el método elegirAsignaturasMatricula para obtener el array de asignaturas que se asignarán en una matrícula.
-	//Diria que hay que construir el array dentro, pero en el diagrama aparece como parametro.
-	//yo voy a consutruirlo.
-	public static List<Asignatura> elegirAsignaturasMatricula() {
+	
+	public static ArrayList<Asignatura> elegirAsignaturasMatricula() {
 			System.out.println("Indica el numero de asignaturas que vas a introducir, debe ser mayor que 0");
 			int numeroAsignaturas=Entrada.entero();
-			List<Asignatura> coleccionAsignaturas=new ArrayList<Asignatura>();
+			ArrayList<Asignatura> coleccionAsignaturas=new ArrayList<Asignatura>();
 			for (int i=0;i<numeroAsignaturas;i++) {
 				coleccionAsignaturas.add(Consola.getAsignaturaPorCodigo());
 			}
@@ -472,7 +470,7 @@ public class Consola {
 			int idMatricula=Entrada.entero();
 			Alumno alumno=new Alumno( "Tesi", "11111111H", "Tesi@gmail.com", "999999999", LocalDate.of(1979, 1, 8));
 			CicloFormativo cicloFormativo =new CicloFormativo(1111,"Semipresencial",Grado.GDCFGB,"DAW",100);
-			List<Asignatura> asignaturas=new ArrayList<Asignatura>();
+			ArrayList<Asignatura> asignaturas=new ArrayList<Asignatura>();
 			asignaturas.add(new Asignatura("2222","Programacion",100,Curso.PRIMERO,6,EspecialidadProfesorado.INFORMATICA,cicloFormativo));
 			
 

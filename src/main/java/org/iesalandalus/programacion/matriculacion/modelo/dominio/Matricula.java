@@ -2,6 +2,7 @@ package org.iesalandalus.programacion.matriculacion.modelo.dominio;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -11,7 +12,7 @@ import javax.naming.OperationNotSupportedException;
 public class Matricula {
 	
 	private Alumno alumno;
-	private List<Asignatura> coleccionAsignaturas;
+	private ArrayList<Asignatura> coleccionAsignaturas;
 	
 	public static final int MAXIMO_MESES_ANTERIOR_ANULACION=6;
 	public static final int MAXIMO_DIAS_ANTERIOR_MATRICULA=15;
@@ -28,7 +29,7 @@ public class Matricula {
 	
 	/*\( - Escapa el carácter ( para que sea tratado como un paréntesis literal.*/
 	
-	public Matricula (int idMatricula,String cursoAcademico,LocalDate fechaMatriculacion,Alumno alumno,List<Asignatura> coleccionAsignaturas) throws OperationNotSupportedException {
+	public Matricula (int idMatricula,String cursoAcademico,LocalDate fechaMatriculacion,Alumno alumno,ArrayList<Asignatura> coleccionAsignaturas) throws OperationNotSupportedException {
 		setIdMatricula(idMatricula);
 		setCursoAcademico(cursoAcademico);
 		setFechaMatriculacion(fechaMatriculacion);
@@ -59,11 +60,11 @@ public class Matricula {
 		}else {this.alumno = alumno;}
 	}
 
-	public List<Asignatura> getColeccionAsignaturas() {
+	public ArrayList<Asignatura> getColeccionAsignaturas() {
 		return coleccionAsignaturas;
 	}
 
-	public void setColeccionAsignaturas(List<Asignatura> coleccionAsignaturas) throws OperationNotSupportedException {
+	public void setColeccionAsignaturas(ArrayList<Asignatura> coleccionAsignaturas) throws OperationNotSupportedException {
 	
 		if(coleccionAsignaturas==null) {
 			throw new NullPointerException("ERROR: La lista de asignaturas de una matrícula no puede ser nula.");
@@ -88,7 +89,7 @@ public class Matricula {
 		}
 	}
 	
-	private boolean superaMaximoNumeroHorasMatricula(List<Asignatura> coleccionAsignaturas) {
+	private boolean superaMaximoNumeroHorasMatricula(ArrayList<Asignatura> coleccionAsignaturas) {
 		int horas=0;
 		int sumaHoras=0;
 		
