@@ -10,7 +10,7 @@ import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
 
-public class Matriculas {
+public class Matriculas  {
 
 	private ArrayList<Matricula>  coleccionMatriculas;
 
@@ -18,6 +18,7 @@ public class Matriculas {
 	public Matriculas () {
 
 		coleccionMatriculas=new ArrayList<Matricula> ();
+		
 
 	}
 	

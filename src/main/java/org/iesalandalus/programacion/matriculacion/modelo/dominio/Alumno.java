@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-public class Alumno {
+public class Alumno implements Comparable<Alumno>  {
 	
 	private static final String ER_TELEFONO="[0-9]{9}";
 	private static final String ER_CORREO="[a-zA-Z1-9áéíóú.]*[@]{1}[a-zA-Z]{1,15}[.]{1}[a-z]*";;
@@ -220,6 +220,13 @@ public class Alumno {
 	
 	public String imprimir() {
 		return toString();
+	}
+
+	@Override
+	public int compareTo(Alumno o) {
+		// TODO Auto-generated method stub
+		return this.nombre.compareTo(o.nombre); 
+	
 	}
 	
 	

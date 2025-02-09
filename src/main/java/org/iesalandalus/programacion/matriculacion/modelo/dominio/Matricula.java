@@ -9,7 +9,7 @@ import java.util.Objects;
 
 import javax.naming.OperationNotSupportedException;
 
-public class Matricula {
+public class Matricula implements Comparable<Matricula>  {
 	
 	private Alumno alumno;
 	private ArrayList<Asignatura> coleccionAsignaturas;
@@ -216,6 +216,18 @@ public class Matricula {
 	public String imprimir() {
 		return "idMatricula="+idMatricula+", curso académico="+cursoAcademico+", fecha matriculación="+fechaMatriculacion.format(formatoFechaString)+
 				", alumno={"+alumno.imprimir()+"}";
+	}
+
+	@Override
+	public int compareTo(Matricula o) {
+		// TODO Auto-generated method stub
+		int resultado = o.fechaMatriculacion.compareTo(this.fechaMatriculacion);
+		
+		if (resultado==0) {
+			resultado = this.alumno.getNombre().compareTo(o.getAlumno().getNombre());
+		}
+        
+		return resultado; 
 	}
 
 }

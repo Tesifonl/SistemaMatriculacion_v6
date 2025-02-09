@@ -1,6 +1,7 @@
 package org.iesalandalus.programacion.matriculacion.modelo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
@@ -82,6 +83,7 @@ public class Modelo {
 	
   			 if(alumnos.getTamano()>0) {
   				 ArrayList<Alumno> nuevoArrayList=alumnos.get();
+  				 Collections.sort(nuevoArrayList);
   				 boolean encontrado=false;
   				 
   				 for(int i=0;i<nuevoArrayList.size();i++)
@@ -135,13 +137,6 @@ public class Modelo {
     	if(asignatura!=null) {
 
 	 
-	  			/*if(asignaturas.buscar(asignatura)!=null) {
-	  				System.out.println("Asignatura econtrada y borrada");
-	  				asignaturas.borrar(asignatura);
-	  			}
-	  			else {
-	  				System.out.println("Asignatura no encontrada en la coleccion");
-	  			}*/
     			asignaturas.borrar(asignatura);
     		
 	  			
@@ -156,16 +151,8 @@ public class Modelo {
  
   			 if(asignaturas.getTamano()>0) {
   				 ArrayList<Asignatura>nuevoArrayList=asignaturas.get();
-  				 /*boolean encontrado=false;
-  				 
-  				 for(int i=0;i<nuevoArray.length;i++)
-  				 {
-  					 if (nuevoArray[i]!=null) {
-  	  					 System.out.println("Estos son los datos de las asignaturas de la coleccion");
-  	  					 System.out.println(nuevoArray[i]);
-  	  				 }
-  	  				 else {encontrado=true;}
-  				 }*/
+  				 Collections.sort(nuevoArrayList);
+
   				 return nuevoArrayList;
   				 }
   			 else {
@@ -212,13 +199,6 @@ public class Modelo {
 	  		
     	if(cicloFormativo!=null) {
 
-	  			/*if( ciclosFormativos.buscar(cicloFormativo)!=null) {
-	  				System.out.println("Ciclo formativo econtrado y borrado");
-	  				ciclosFormativos.borrar(cicloFormativo);
-	  			}
-	  			else {
-	  				System.out.println("Ciclo formativo no encontrado en la coleccion");
-	  			}*/
     			ciclosFormativos.borrar(cicloFormativo);
 
     	}else {
@@ -230,20 +210,17 @@ public class Modelo {
     public ArrayList<CicloFormativo> getCiclosFormativos()  {
 
   			 if(ciclosFormativos.getTamano()>0) {
-  				ArrayList<CicloFormativo>nuevoArrayList=ciclosFormativos.get();
+  				 ArrayList<CicloFormativo>nuevoArrayList=ciclosFormativos.get();
+  				 Collections.sort(nuevoArrayList);
   				 boolean encontrado=false;
   				 
-  				 for(int i=0;i<nuevoArrayList.size();i++)
+  				 for(CicloFormativo cicloformativo: nuevoArrayList) {
+  	  					 System.out.println("Estos son los datos de los ciclos formativos de la coleccion"+cicloformativo);
+  				 }
   				 
-  	  				 { if (nuevoArrayList.get(i)!=null) {
-  	  					 System.out.println("Estos son los datos de los ciclos formativos de la coleccion");
-  	  					 System.out.println(nuevoArrayList.get(i));
-  	  				 	}
-  	  				 	else {encontrado=true;}
-  					 
-  	  				 }
   				 return nuevoArrayList;
-  	  			}
+  			 } 
+  	  			
   			 else {
   				 System.out.println(" No existen ciclos formativos en el sistema");
   				 return null;
@@ -255,12 +232,6 @@ public class Modelo {
 	  		
     	if(matricula!=null) {
 			
-	  			/*Alumno alumno=Consola.getAlumnoPorDni();
-	  			System.out.println("Indica el numero de asignaturas que vas a introducir, debe ser mayor que 0");
-	  			Asignatura [] coleccionAsignaturas=new Asignatura[10];
-	  			int numeroAsignaturas=Entrada.entero();
-	  			for (int i=0;i<numeroAsignaturas;i++) {
-	  				coleccionAsignaturas[i]=Consola.getAsignaturaPorCodigo();*/
 	  			matriculas.insertar(matricula);
 	  			
 
@@ -306,7 +277,8 @@ public class Modelo {
   	
   			 if(matriculas.getTamano()>0) {
   				
-  				List<Matricula> nuevoArrayList=matriculas.get();
+  				 List<Matricula> nuevoArrayList=matriculas.get();
+  				 Collections.sort(nuevoArrayList);
   				 boolean encontrado=false;
   				 
   				 for(int i=0;i<nuevoArrayList.size();i++)
@@ -343,6 +315,7 @@ public class Modelo {
  			
  			if (matriculas.get(alumno)!=null) {
  				List<Matricula> nuevoArrayList=matriculas.get(alumno);
+ 				Collections.sort(nuevoArrayList);
  	 			boolean encontrado=false;
  				 
  				 for(int i=0;i<nuevoArrayList.size();i++)
@@ -380,6 +353,7 @@ public class Modelo {
  			if (matriculas.get(cicloFormativo)!=null) {
  				
  				List<Matricula> nuevoArrayList=matriculas.get(cicloFormativo);
+ 				Collections.sort(nuevoArrayList);
  	 			boolean encontrado=false;
  			
  				 for(int i=0;i<nuevoArrayList.size();i++)
@@ -418,6 +392,7 @@ public class Modelo {
  			if (matriculas.get(cursoAcademico)!=null) {
  				
  				List<Matricula> nuevoArrayList=matriculas.get(cursoAcademico);
+ 	 			Collections.sort(nuevoArrayList);
  	 			boolean encontrado=false;
  				 
  				 for(int i=0;i<nuevoArrayList.size();i++)

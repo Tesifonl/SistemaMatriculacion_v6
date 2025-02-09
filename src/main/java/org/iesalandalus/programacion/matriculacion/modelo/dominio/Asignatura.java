@@ -2,7 +2,7 @@ package org.iesalandalus.programacion.matriculacion.modelo.dominio;
 
 import java.util.Objects;
 
-public class Asignatura {
+public class Asignatura implements Comparable<Asignatura>  {
 	public static final int MAX_NUM_HORAS_ANUALES=300;
 	public static final int MAX_NUM_HORAS_DESDOBLES=6;
 	private String ER_CODIGO="[0-9]{4}";
@@ -156,6 +156,12 @@ public class Asignatura {
 	public String imprimir() {
 		return "Código asignatura="+codigo+", nombre asignatura="+nombre+", ciclo formativo=Código ciclo formativo="+cicloFormativo.getCodigo()+", nombre ciclo formativo="+cicloFormativo.getNombre();
 
+	}
+
+	@Override
+	public int compareTo(Asignatura o) {
+		// TODO Auto-generated method stub
+		return this.nombre.compareTo(o.nombre); 
 	}
 	
 }

@@ -2,7 +2,7 @@ package org.iesalandalus.programacion.matriculacion.modelo.dominio;
 
 import java.util.Objects;
 
-public class CicloFormativo {
+public class CicloFormativo implements Comparable<CicloFormativo> {
 	
 	public static final int MAXIMO_NUMERO_HORAS=2000;
 	private int codigo;
@@ -122,6 +122,12 @@ public class CicloFormativo {
 	public String imprimir() {
 		return "Código ciclo formativo="+codigo+", nombre ciclo formativo="+nombre;
 	
+	}
+
+	@Override
+	public int compareTo(CicloFormativo o) {
+		// TODO Auto-generated method stub
+		return this.nombre.compareTo(o.nombre); 
 	}
 	
 	
