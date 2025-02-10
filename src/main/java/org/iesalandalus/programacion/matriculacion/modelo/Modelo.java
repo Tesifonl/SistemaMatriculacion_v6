@@ -2,8 +2,6 @@ package org.iesalandalus.programacion.matriculacion.modelo;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
@@ -14,6 +12,7 @@ import org.iesalandalus.programacion.matriculacion.modelo.negocio.Alumnos;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.Asignaturas;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.CiclosFormativos;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.Matriculas;
+import org.iesalandalus.programacion.matriculacion.vista.Consola;
 
 
 public class Modelo {
@@ -84,14 +83,11 @@ public class Modelo {
   			 if(alumnos.getTamano()>0) {
   				 ArrayList<Alumno> nuevoArrayList=alumnos.get();
   				 Collections.sort(nuevoArrayList);
-  				 boolean encontrado=false;
+  		
   				 
-  				 for(int i=0;i<nuevoArrayList.size();i++)
-  				 { if (nuevoArrayList.get(i)!=null) {
-  					 System.out.println("Estos son los datos de los alumnos de la coleccion");
-  					 System.out.println(nuevoArrayList.get(i));
-  				 	}
-  				 	else {encontrado=true;}
+  				 for(Alumno alumno: nuevoArrayList)
+  				 {
+  					 System.out.println("Alumno: "+alumno);
   				 }
   				 return nuevoArrayList;
   			 }
@@ -106,8 +102,8 @@ public class Modelo {
 	public void insertarAsignatura(Asignatura asignatura) throws OperationNotSupportedException {
 	  		
 		if(asignatura!=null) {
-
-	  			asignaturas.insertar(asignatura);
+	
+				asignaturas.insertar(asignatura);
 
 		}else {
 			throw new NullPointerException("ERROR: No se ha recibido la asignatura");
@@ -152,6 +148,7 @@ public class Modelo {
   			 if(asignaturas.getTamano()>0) {
   				 ArrayList<Asignatura>nuevoArrayList=asignaturas.get();
   				 Collections.sort(nuevoArrayList);
+
 
   				 return nuevoArrayList;
   				 }
@@ -212,12 +209,11 @@ public class Modelo {
   			 if(ciclosFormativos.getTamano()>0) {
   				 ArrayList<CicloFormativo>nuevoArrayList=ciclosFormativos.get();
   				 Collections.sort(nuevoArrayList);
-  				 boolean encontrado=false;
-  				 
-  				 for(CicloFormativo cicloformativo: nuevoArrayList) {
-  	  					 System.out.println("Estos son los datos de los ciclos formativos de la coleccion"+cicloformativo);
+  				
+  				 for(CicloFormativo cicloFormativo: nuevoArrayList)
+  				 {
+  					 System.out.println("Alumno: "+cicloFormativo);
   				 }
-  				 
   				 return nuevoArrayList;
   			 } 
   	  			
@@ -277,26 +273,13 @@ public class Modelo {
   	
   			 if(matriculas.getTamano()>0) {
   				
-  				 List<Matricula> nuevoArrayList=matriculas.get();
+  				 ArrayList<Matricula> nuevoArrayList=matriculas.get();
   				 Collections.sort(nuevoArrayList);
-  				 boolean encontrado=false;
+
   				 
-  				 for(int i=0;i<nuevoArrayList.size();i++)
-  				 {
-  					if (nuevoArrayList.get(i)!=null) {
-  						System.out.println("Estos son los datos de las matriculas de la coleccion");
-  						System.out.println(nuevoArrayList.get(i));
-  						List<Asignatura> arrayListAsignaturas=nuevoArrayList.get(i).getColeccionAsignaturas();
-  						for (int j=0;j<arrayListAsignaturas.size();j++)
-  						{ if(arrayListAsignaturas.get(j)!=null) {
-  								System.out.println("Estas son sus asignaturas");
-  								System.out.println(arrayListAsignaturas.get(j));
-  							}
-  							else {encontrado=true;}
-  						}
-  					}else {
-  						encontrado=true;
-  					}
+  				 for (Matricula matricula: nuevoArrayList) {
+  					 System.out.println("Matricula: "+ matricula);
+  					 System.out.println("Asignatura: "+matricula.getColeccionAsignaturas().toString());
   				 }
   				 return matriculas.get();
   			 }
@@ -314,27 +297,14 @@ public class Modelo {
     	
  			
  			if (matriculas.get(alumno)!=null) {
- 				List<Matricula> nuevoArrayList=matriculas.get(alumno);
+ 				ArrayList<Matricula> nuevoArrayList=matriculas.get(alumno);
  				Collections.sort(nuevoArrayList);
- 	 			boolean encontrado=false;
- 				 
- 				 for(int i=0;i<nuevoArrayList.size();i++)
- 				 {
- 					if (nuevoArrayList.get(i)!=null) {
- 						System.out.println("Estos son los datos de las matriculas de la coleccion");
- 						System.out.println(nuevoArrayList.get(i));
- 						List<Asignatura> arrayListAsignaturas=nuevoArrayList.get(i).getColeccionAsignaturas();
- 						for (int j=0;j<arrayListAsignaturas.size();j++)
- 						{ if(arrayListAsignaturas.get(j)!=null) {
- 								System.out.println("Estas son sus asignaturas");
- 								System.out.println(arrayListAsignaturas.get(j));
- 							}
- 							else {encontrado=true;}
- 						}
- 					}else {
- 						encontrado=true;
- 					}
- 				 }
+
+ 				
+ 				for (Matricula matricula: nuevoArrayList) {
+ 					System.out.println("Matricula: "+ matricula);
+ 					System.out.println("Asignatura: "+matricula.getColeccionAsignaturas().toString());
+ 				}
  				 return matriculas.get(alumno);
  			}
  			else {
@@ -352,27 +322,14 @@ public class Modelo {
 
  			if (matriculas.get(cicloFormativo)!=null) {
  				
- 				List<Matricula> nuevoArrayList=matriculas.get(cicloFormativo);
+ 				ArrayList<Matricula> nuevoArrayList=matriculas.get(cicloFormativo);
  				Collections.sort(nuevoArrayList);
- 	 			boolean encontrado=false;
- 			
- 				 for(int i=0;i<nuevoArrayList.size();i++)
- 				 {
- 					if (nuevoArrayList.get(i)!=null) {
- 						System.out.println("Estos son los datos de las matriculas de la coleccion");
- 						System.out.println(nuevoArrayList.get(i));
- 						List<Asignatura> arrayListAsignaturas=nuevoArrayList.get(i).getColeccionAsignaturas();
- 						for (int j=0;j<arrayListAsignaturas.size();j++)
- 						{ if(arrayListAsignaturas.get(j)!=null && arrayListAsignaturas.get(j).getCicloFormativo().equals(cicloFormativo)) {
- 								System.out.println("Estas son sus asignaturas");
- 								System.out.println(arrayListAsignaturas.get(j));
- 							}
- 							else {encontrado=true;}
- 						}
- 					}else {
- 						encontrado=true;
- 					}
- 				 }
+
+ 				for (Matricula matricula: nuevoArrayList) {
+ 					System.out.println("Matricula: "+ matricula);
+ 					System.out.println("Asignatura: "+matricula.getColeccionAsignaturas().toString());
+ 				}
+ 				
  				 return matriculas.get(cicloFormativo); 
  			}
  			else {
@@ -391,27 +348,14 @@ public class Modelo {
  			
  			if (matriculas.get(cursoAcademico)!=null) {
  				
- 				List<Matricula> nuevoArrayList=matriculas.get(cursoAcademico);
+ 				ArrayList<Matricula> nuevoArrayList=matriculas.get(cursoAcademico);
  	 			Collections.sort(nuevoArrayList);
- 	 			boolean encontrado=false;
- 				 
- 				 for(int i=0;i<nuevoArrayList.size();i++)
- 				 {
- 					if (nuevoArrayList.get(i)!=null) {
- 						System.out.println("Estos son los datos de las matriculas de la coleccion");
- 						System.out.println(nuevoArrayList.get(i));
- 						List<Asignatura> arrayListAsignaturas=nuevoArrayList.get(i).getColeccionAsignaturas();
- 						for (int j=0;j<arrayListAsignaturas.size();j++)
- 						{ if(arrayListAsignaturas.get(j)!=null) {
- 								System.out.println("Estas son sus asignaturas");
- 								System.out.println(arrayListAsignaturas.get(j));
- 							}
- 							else {encontrado=true;}
- 						}
- 					}else {
- 						encontrado=true;
- 					}
- 				 }
+ 
+ 				for (Matricula matricula: nuevoArrayList) {
+ 					System.out.println("Matricula: "+ matricula);
+ 					System.out.println("Asignatura: "+matricula.getColeccionAsignaturas().toString());
+ 				}
+ 	 			
  				 return matriculas.get(cursoAcademico);
 			}
 			else {

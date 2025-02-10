@@ -221,7 +221,7 @@ public class Matricula implements Comparable<Matricula>  {
 	@Override
 	public int compareTo(Matricula o) {
 		// TODO Auto-generated method stub
-		int resultado = o.fechaMatriculacion.compareTo(this.fechaMatriculacion);
+		int resultado = this.fechaMatriculacion.compareTo(o.fechaMatriculacion);
 		
 		if (resultado==0) {
 			resultado = this.alumno.getNombre().compareTo(o.getAlumno().getNombre());

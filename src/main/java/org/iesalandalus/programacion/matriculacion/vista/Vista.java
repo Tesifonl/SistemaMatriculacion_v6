@@ -1,15 +1,9 @@
 package org.iesalandalus.programacion.matriculacion.vista;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.matriculacion.controlador.Controlador;
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
 public class Vista {
@@ -182,11 +176,10 @@ public class Vista {
 	private void insertarAsignatura() {
 		
 		try {
-			Asignatura asignaturaNueva=Consola.leerAsignatura();
-			ArrayList<Asignatura> nuevoArray=controlador.getAsignaturas();
 			
-			if (nuevoArray==null || Consola.asignaturaYaMatriculada(nuevoArray, asignaturaNueva)!=true) {
-			controlador.insertarAsignatura(asignaturaNueva);
+			Asignatura asignatura=Consola.leerAsignatura();
+			if (controlador.getAsignaturas()==null || Consola.asignaturaYaMatriculada(controlador.getAsignaturas(), asignatura)!=true) {
+			controlador.insertarAsignatura(asignatura);
 			System.out.println("Asignatura insertada correctamente");
 			}else
 			{

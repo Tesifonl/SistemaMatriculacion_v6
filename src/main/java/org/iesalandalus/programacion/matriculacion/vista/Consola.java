@@ -17,8 +17,6 @@ import org.iesalandalus.programacion.matriculacion.modelo.dominio.Curso;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.EspecialidadProfesorado;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Grado;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.Asignaturas;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.CiclosFormativos;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
 public class Consola {
@@ -237,7 +235,7 @@ public class Consola {
 			return null;
 			}
 	}
-	/*por el contexto entiendo que ciclos formativos no tiene que estar como variable de entrada*/
+	
 	
 	public static void mostrarCiclosFormativos (List<CicloFormativo> ciclosFormativos) {
 		boolean encontrado=false;
