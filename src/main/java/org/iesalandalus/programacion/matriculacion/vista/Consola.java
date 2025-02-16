@@ -349,6 +349,7 @@ public class Consola {
 			EspecialidadProfesorado especialidadProfesorado=leerEspecialidadProfesorado();
 			CicloFormativo cicloformativo=getCicloFormativoPorCodigo();
 			
+			
 
 			Asignatura asignatura =new Asignatura(codigo,nombre,horasAnuales,curso,horasDesdoble,especialidadProfesorado,cicloformativo);
 			return asignatura;
@@ -368,8 +369,9 @@ public class Consola {
 			System.out.println("Introduce un codigo de asignatura que debe ser cuatro caracteres numericos: ");
 			int codigo1=Entrada.entero();
 			String codigo2=String.valueOf(codigo1);
+			CicloFormativo cicloFormativo =new CicloFormativo(9999,"Semipresencial",Grado.GDCFGB,"DAW",100);
 			
-			Asignatura asignatura =new Asignatura(codigo2,"Programacion",100,Curso.PRIMERO,6,EspecialidadProfesorado.INFORMATICA,getCicloFormativoPorCodigo());
+			Asignatura asignatura =new Asignatura(codigo2,"Programacion",100,Curso.PRIMERO,6,EspecialidadProfesorado.INFORMATICA,cicloFormativo);
 			return asignatura;
 			}
 			catch(IllegalArgumentException e) {

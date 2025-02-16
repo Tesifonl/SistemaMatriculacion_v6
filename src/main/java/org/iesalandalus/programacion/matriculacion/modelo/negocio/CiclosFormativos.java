@@ -3,6 +3,7 @@ package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 import java.util.ArrayList;
 import javax.naming.OperationNotSupportedException;
 
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
 
 public class CiclosFormativos {
@@ -25,21 +26,18 @@ public class CiclosFormativos {
 		
 		ArrayList<CicloFormativo>copiaCicloFormativo=new ArrayList<CicloFormativo>();
 		
-		for(int i=0;i<coleccionCiclosFormativos.size();i++) {
-			if(coleccionCiclosFormativos.get(i)!=null) {copiaCicloFormativo.add(coleccionCiclosFormativos.get(i));
+		for(CicloFormativo cicloFormativo: coleccionCiclosFormativos) {
+			copiaCicloFormativo.add(cicloFormativo);
 			}
-			else {
-				copiaCicloFormativo.add(coleccionCiclosFormativos.get(i));
-			}
-		}
+	
 		return copiaCicloFormativo;
 	}
 
 	public int getTamano() {
 		int tamano=0;
 		
-		for (CicloFormativo cicloFormativo: coleccionCiclosFormativos) {
-			if(cicloFormativo!=null) {tamano++;}
+		for (int i=0;i<coleccionCiclosFormativos.size();i++) {
+			if(coleccionCiclosFormativos.get(i)!=null) {tamano++;}
 		}
 		
 		return tamano;
@@ -68,27 +66,28 @@ public class CiclosFormativos {
 	
 	
 	public CicloFormativo buscar(CicloFormativo cicloFormativo) {
-		int j=0;
 		boolean encontrado=false;
 		boolean noEncontrado=false;
+		CicloFormativo cicloFormativoArrayCreado=null;
 		
 		if(cicloFormativo!=null) {
-			
-			if(coleccionCiclosFormativos.size()>0) {
-				for (int i=0;i<coleccionCiclosFormativos.size();i++) {
-					if(coleccionCiclosFormativos.get(i).equals(cicloFormativo)){
-					j=i;
-					encontrado=true;
-					}
-					noEncontrado=true;
-				}
 				
-				if (encontrado==true) {
-					return coleccionCiclosFormativos.get(j);
-				}else {
-					System.out.println("No se ha encontrado este ciclo formativo en la coleccion");
-					return null;
+				if(coleccionCiclosFormativos.size()>0) {
+					
+					for (CicloFormativo cicloFormativoArray:coleccionCiclosFormativos) {
+						
+					if(cicloFormativoArray.equals(cicloFormativo)) {
+						encontrado=true;
+						cicloFormativoArrayCreado=cicloFormativoArray;
+					}else {
+						noEncontrado=true;
+					}	
 				}
+					if (encontrado!=true && noEncontrado==true) {
+						return null;
+					}else {
+						return cicloFormativoArrayCreado;
+					}
 			}else {
 				throw new NullPointerException("No hay ciclos formativos incluidos en la coleccion");
 			}	

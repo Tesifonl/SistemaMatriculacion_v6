@@ -26,13 +26,9 @@ public class Alumnos {
 		
 		ArrayList<Alumno>copiaAlumnos=new ArrayList<Alumno>();
 		
-		for(int i=0;i<coleccionAlumnos.size();i++) {
-			if(coleccionAlumnos.get(i)!=null) {copiaAlumnos.add(coleccionAlumnos.get(i));
+		for(Alumno alumno:coleccionAlumnos) {
+				copiaAlumnos.add(alumno);
 			}
-			else {
-				copiaAlumnos.add(coleccionAlumnos.get(i));
-			}
-		}
 		return copiaAlumnos;
 	}
 
@@ -40,8 +36,8 @@ public class Alumnos {
 	public int getTamano() {
 		int tamano=0;
 		
-		for (Alumno alumno:coleccionAlumnos) {
-			if(alumno!=null) {tamano++;}
+		for (int i=0; i<coleccionAlumnos.size();i++) {
+			if(coleccionAlumnos.get(i)!=null) {tamano++;}
 		}
 		
 		return tamano;
@@ -65,30 +61,32 @@ public class Alumnos {
 	
 	
 	public Alumno buscar(Alumno alumno) {
-		int j=0;
+
 		boolean encontrado=false;
 		boolean noEncontrado=false;
+		Alumno AlumnoArrayCreado=null;
 		
 		if(alumno!=null) {
 			
 			if (coleccionAlumnos.size()>0) {
-			
-				for (int i=0;i<coleccionAlumnos.size();i++) {
-					if(coleccionAlumnos.get(i).equals(alumno)){
-					j=i;
-					encontrado=true;
-					}
-					noEncontrado=true;
-				}
 				
-				if (encontrado==true) {
-					return coleccionAlumnos.get(j);
+				for (Alumno alumnoArray:coleccionAlumnos) {
+				
+				if(alumnoArray.equals(alumno)) {
+					encontrado=true;
+					AlumnoArrayCreado=alumnoArray;
 				}else {
-					System.out.println("No se ha encontrado este alumno en la coleccion");
+					noEncontrado=true;
+				}	
+			}
+				if (encontrado!=true && noEncontrado==true) {
 					return null;
+				}else {
+					return AlumnoArrayCreado;
 				}
-			}else {
-			throw new NullPointerException("No hay alumnos incluidos en la coleccion");
+			}
+			else {
+			throw new NullPointerException("No hay alumnos incluidos en la coleccion");		
 			}
 		}
 		else {

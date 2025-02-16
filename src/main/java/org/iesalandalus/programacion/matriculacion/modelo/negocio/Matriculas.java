@@ -1,5 +1,6 @@
 package org.iesalandalus.programacion.matriculacion.modelo.negocio;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.naming.OperationNotSupportedException;
 
@@ -29,16 +30,13 @@ public class Matriculas  {
 		
 		ArrayList<Matricula>copiaMatricula=new ArrayList<Matricula>();
 		
-		for(int i=0;i<coleccionMatriculas.size();i++) {
-			if(coleccionMatriculas.get(i)!=null) {copiaMatricula.add(coleccionMatriculas.get(i));
+		for(Matricula matricula: coleccionMatriculas) {
+			copiaMatricula.add(matricula);
 			}
-			else {
-				copiaMatricula.add(coleccionMatriculas.get(i));
-			}
-		}
 		return copiaMatricula;
 	}
 
+	
 	public int getTamano() {
 		int tamano=0;
 		
@@ -67,41 +65,49 @@ public class Matriculas  {
 
 	
 	public Matricula buscar(Matricula matricula) throws OperationNotSupportedException {
-		int j=0;
 		boolean encontrado=false;
 		boolean noEncontrado=false;
+		Matricula matriculaArrayCreado=null;
 		
 		if(matricula!=null) {
-			
-			if(coleccionMatriculas.size()>0) {
-				for (int i=0;i<coleccionMatriculas.size();i++) {
-					if(coleccionMatriculas.get(i).equals(matricula)){
-					j=i;
-					encontrado=true;
-					}
-					noEncontrado=true;
-				}
-				
-				if (encontrado==true) {
-					return coleccionMatriculas.get(j);
-				}else {
-					System.out.println("No se ha encontrado este alumno en la coleccion");
-					return null;
-				}
+		
+					if(coleccionMatriculas.size()>0) {
+						
+						for (Matricula matriculaArray:coleccionMatriculas) {
+							
+						if(matriculaArray.equals(matricula)) {
+							encontrado=true;
+							matriculaArrayCreado=matriculaArray;
+						}else {
+							noEncontrado=true;
+						}	
+						}
+						if (encontrado!=true && noEncontrado==true) {
+							return null;
+						}else {
+							return matriculaArrayCreado;
+						}
 			}else {
 				throw new NullPointerException("No hay matriculas incluidas en la coleccion");
 			}
 		}
 		else {
 			throw new NullPointerException("matricula recibido nulo");
+			}
 		}
-	}
+	
 	
 	
 	public void borrar(Matricula matricula) throws OperationNotSupportedException {
 		if(matricula!=null) {
 			if (coleccionMatriculas.contains(matricula)) {
-				coleccionMatriculas.remove(matricula);
+				//coleccionMatriculas.remove(matricula);
+				
+				for(Matricula matriculaArray:coleccionMatriculas) {
+					if (matriculaArray.equals(matricula)) {
+						matricula.setFechaAnulacion(LocalDate.now());;
+					}
+				}
 			}
 			else{
 				throw new OperationNotSupportedException("ERROR: No existe ningún alumno como el indicado.");
@@ -119,11 +125,12 @@ public class Matriculas  {
 		boolean otro=false;
 		ArrayList<Matricula> nuevaColeccion=new ArrayList<Matricula>();
 		
+		
 		if (alumno!=null) {	
-			for (int i =0;i<coleccionMatriculas.size();i++) {
-				if (coleccionMatriculas.get(i)!=null && coleccionMatriculas.get(i).getAlumno().equals(alumno)) {
+			for (Matricula matricula:coleccionMatriculas) {
+				if (matricula.getAlumno().equals(alumno)) {
 					encontrado=true;
-					nuevaColeccion.add(coleccionMatriculas.get(i));	
+					nuevaColeccion.add(matricula);	
 						
 				}
 				else {
@@ -151,10 +158,10 @@ public class Matriculas  {
 		
 		if (cursoAcademico!=null) {
 			
-			for (int i =0;i<coleccionMatriculas.size();i++) {
-				if (coleccionMatriculas.get(i)!=null && coleccionMatriculas.get(i).getCursoAcademico().equals(cursoAcademico)) {
+			for (Matricula matricula:coleccionMatriculas) {
+				if (matricula.getCursoAcademico().equals(cursoAcademico)) {
 					encontrado=true;
-					nuevaColeccion.add(coleccionMatriculas.get(i));	
+					nuevaColeccion.add(matricula);	
 						
 				}
 				else {
@@ -182,19 +189,19 @@ public class Matriculas  {
 	
 		
 		if (cicloFormativo!=null) {
-			for (int i =0;i<coleccionMatriculas.size();i++) {
-				if (coleccionMatriculas.get(i)!=null) {
-					ArrayList<Asignatura> nuevaColeccionAsignatura=coleccionMatriculas.get(i).getColeccionAsignaturas();
+			for (Matricula matricula:coleccionMatriculas) {
+			
+					ArrayList<Asignatura> nuevaColeccionAsignatura=matricula.getColeccionAsignaturas();
 					
-					for (int j=0;j<nuevaColeccionAsignatura.size();j++)
-						if (nuevaColeccionAsignatura.get(j)!=null && nuevaColeccionAsignatura.get(j).getCicloFormativo().equals(cicloFormativo))
+					for (Asignatura asignatura: nuevaColeccionAsignatura)
+						if (asignatura.getCicloFormativo().equals(cicloFormativo))
 							{encontrado=true;
-							nuevaColeccion.add(coleccionMatriculas.get(i));					
+							nuevaColeccion.add(matricula);					
 							}
 						else {
 							otro=false;
 						}
-					}
+					
 							
 				}
 				if (encontrado==true) {
