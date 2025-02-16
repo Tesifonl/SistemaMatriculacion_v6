@@ -1,82 +1,73 @@
 # Tarea: Sistema de Matriculación
 ## Profesor: Andrés Rubio del Río
-## Alumno: Tesifón Linares Bonilla_v2
+## Alumno: Tesifón Linares Bonilla_v3
 
-En este tercer spring de la tarea deberás modelar la gestión de las matrículas de alumnos del IES Al-Ándalus, eliminando la restricción de tamaño en los datos de la aplicación. Por lo que decidimos utilizar estructuras dinámicas de datos, en concreto Listas.
+Ahora que ya tienes afianzados los conceptos básicos de la Programación Orientada a Objetos, es un buen momento para llevar a cabo algunas modificaciones que afectan al modelo diseñado ya que hay conceptos avanzados de la Programación Orientada a Objetos que aún no han sido vistos en las unidades anteriores y que deberían ser aplicados. Por tal motivo, en este cuarto spring se van a llevar a cabo una serie de modificaciones con las que se pretende mejorar el diseño de clases implementado hasta ahora.
 
-Para las diferentes clases del modelo que contienen las colecciones de objetos del dominio (las que están incluidas en el paquete negocio) deberemos sustituir los Array por ArrayList y, cómo no, ajustar los diferentes métodos para que sigan haciendo lo mismo que antes, pero utilizando las nuevas estructuras de datos. Como observarás, muchos de los métodos privados que teníamos antes desaparecen ya que ahora no serán necesarios.
+Para ello te muestro un diagrama de clases para el mismo y poco a poco te iré explicando los diferentes pasos a realizar:
 
-Por otro lado, dado el buen hacer en la segunda entrega, se ha decidido que se añada la ordenación de los datos a la hora de listarlos en la vista para tener un mejor control y organización. En este caso deberás modificar los correspondientes métodos de mostrar y listar para que los resultados aparezcan ordenados de la siguiente manera:
-
-El listado de Alumnos (método mostrarAlumnos) deberá mostrarse ordenado alfabéticamente de la A a la Z por el nombre.
-El listado de Asignaturas (método mostrarAsignaturas) deberá mostrarse ordenado alfabéticamente de la A a la Z por el nombre.
-El listado de Ciclos Formativos (método mostrarCiclosFormativos) deberá mostrarse ordenado alfabéticamente de la A a la Z por el nombre.
-En el listado de Matrículas (métodos mostrarMatriculasXXX), éstas se mostrarán ordenadas por la fecha de matriculación en orden descendente (de las más recientes, a las más antiguas). En caso de que existan varias matrículas en la misma fecha, se realizará una segunda ordenación por el nombre del alumno matriculado en orden alfabético de la A a la Z.
-Para todo esto, a continuación te muestro como queda el diagrama de clases con las modificaciones y poco a poco te iré explicando los diferentes pasos a realizar:
-
-![](src/main/resources/SistemaMatriculacion_v2.png)
+![](src/main/resources/SistemaMatriculacion_v3.png)
 
 
 
 ###Primeros Pasos
 
-Realiza un fork del repositorio de tu tarea anterior en otro nuevo llamado SistemaMatriculacion_v2. Dicho repositorio lo clonarás localmente y realizarás las diferentes modificaciones que se piden en esta tarea.
-Modifica tu fichero README.
+Clona la versión anterior del proyecto a un nuevo repositorio SistemaMatriculacion_v3. Realiza las diferentes modificaciones que se piden en esta tarea.
 Realiza tu primer commit.
 
-###Matricula C.E. 6B
+###Opción
 
-Modifica los métodos necesarios para utilizar ArrayLists en vez de Arrays.
-Realiza un commit con la nueva clase creada.
-
-###Alumnos C.E. 6B
-
-Modifica la clase Alumnos para que utilice un ArrayList en vez de un Array.
-Elimina aquellos atributos y métodos que ya no sean necesarios, al utilizar esta nueva estructura.
+Modifica el enum Opcion teniendo en cuenta lo siguiente:
+Añade un atributo estático de tipo Vista.
+Implementa el método setVista tal y como aparece en el diagrama de clases y que deberá ser llamado desde el constructor de la clase Vista.
+Añade el método abstracto ejecutar, que deberá ser implementado en cada instancia del enum Opcion, llamando al método que le corresponda de la clase Vista. Con esto se pretende que cada opción no solo contenga el mensaje que debe mostrarse por pantalla, sino también, el método de la clase Vista que debe ser ejecutado cuando el usuario de la aplicación elija dicha opción.
 Realiza el commit correspondiente.
 
-###Matriculas C.E. 6B
+###Modalidad 
 
-Modifica la clase Matriculas para que utilice un ArrayList en vez de un Array.
-Elimina aquellos atributos y métodos que ya no sean necesarios, al utilizar esta nueva estructura.
+Crea el Enum Modalidad tal y como aparece en el diagrama de clases para que se pueda elegir entre modalidad Presencial y modalidad Semipresencial.
+Añade los métodos y atributos necesarios para que la implementación del Enum se ajuste a lo mostrado en el diagrama de clases.
+Realiza el commit correspondiente.
+
+###TiposGrado 
+
+Crea el Enum TiposGrado tal y como aparece en el diagrama de clases para que se pueda elegir entre Grado.
+Añade los métodos y atributos necesarios para que la implementación del Enum se ajuste a lo mostrado en el diagrama de clases.
 Realiza un commit con la modificación de este enumerado.
 
-###Asignaturas C.E. 6B
+###Grado
 
-Modifica la clase Asignaturas para que utilice un ArrayList en vez de un Array.
-Elimina aquellos atributos y métodos que ya no sean necesarios, al utilizar esta nueva estructura. 
-Realiza el commit correspondiente.
+Crea la clase Grado para que se ajuste a lo mostrado en el diagrama de clases.
+Añade los atributos necesarios con el modificador correspondiente según se muestra en el diagrama de clases.
+Implementa los métodos getNombre y setNombre, teniendo en cuenta que este último deberá lanzar las excepciones correspondientes en caso de que el parámetro no sea el adecuado.
+Implementa el método setIniciales que establecerá el atributo iniciales el cual se genera cogiendo el primer carácter de cada palabra del nombre del Grado. Además, deberá estar todo en mayúsculas. Ten en cuenta que cada vez que se modifique el nombre del grado, deberá actualizarse el atributo iniciales al valor que le corresponda.
+Implementa el método toString que devolverá una cadena de acuerdo al siguiente formato: (iniciales) - nombre.
+Crea el método setNumAnios.
+Realiza un commit con la clase creada.
 
-###CiclosFormativos C.E. 6B
+###GradoD
 
-Modifica la clase CiclosFormativos para que utilice un ArrayList en vez de un Array.
-Elimina aquellos atributos y métodos que ya no sean necesarios, al utilizar esta nueva estructura. 
-Realiza el commit correspondiente.
+Crea la clase GradoD para que se ajuste a lo mostrado en el diagrama de clases.
+Añade los atributos necesarios con el modificador correspondiente según se muestra en el diagrama de clases.
+Implementa los métodos getters y setters necesarios teniendo en cuenta que estos últimos deberán validar el parámetro y lanzar la excepción que corresponda. Debes tener en cuenta que el número de años de los grados de este tipo será 2 o 3.
+Realiza un commit con la clase creada.
 
-###Modelo C.E. 6B
+###GradoE
 
-Elimina la constante CAPACIDAD, puesto que ya no tienes limitaciones de memoria.
-Modifica los métodos necesarios para utilizar ArrayLists en vez de Arrays.
+Crea la clase GradoE para que se ajuste a lo mostrado en el diagrama de clases.
+Añade los atributos necesarios con el modificador correspondiente según se muestra en el diagrama de clases.
+Implementa los métodos getters y setters necesarios teniendo en cuenta que estos últimos deberán validar el parámetro y lanzar la excepción que corresponda. Debes tener en cuenta que el número de años de los grados de este tipo será siempre 1.
+Realiza un commit con la clase creada.
+
+###Consola
+
+Crea el método leerTipoGrado que permitirá al usuario elegir un tipo de Grado (Grado D o Grado E).
+Crea el método leerModalidad que permitirá al usuario elegir el tipo de modalidad de un grado (Presencial o Semipresencial).
+Modifica el método leerGrado para que en función del tipo de grado del Ciclo Formativo elegido por el usuario, cree el objeto correspondiente (Grado D o Grado E) con los atributos necesarios.
+Modifica el método leerCicloFormativo para haga uso del método nuevo método leerGrado.
+Modifica los métodos getCicloFormativoPorCodigo y getAsignaturaPorCodigo para que los errores de compilación sean corregidos.
 Realiza un commit con la nueva clase creada.
-
-###Controlador C.E. 6B y 6D
-
-Modifica los métodos necesarios para utilizar ArrayLists en vez de Arrays.
-Realiza un commit con la nueva clase creada.
-
-###Vista C.E. 6B y 6D
-
-Modifica los métodos necesarios para utilizar ArrayLists en vez de Arrays.
-Modifica el método mostrarAlumnos para que aplique la ordenación descrita anteriormente.
-Modifica el método mostraAsignaturas para que aplique la ordenación descrita anteriormente.
-Modifica el método mostrarCiclosFormativos para que aplique la ordenación descrita anteriormente.
-Modifica los métodos mostrarMatriculasXXX para que aplique la ordenación descrita anteriormente.
-Realiza un commit con la nueva clase creada.
-
-###Consola C.E. 6B
-
-Modifica los métodos necesarios para utilizar ArrayLists en vez de Arrays.
-Realiza un commit con la nueva clase creada.
+Finalmente, realiza el push hacia tu repositorio remoto en GitHub.
 
 ###Se valorará:
 
