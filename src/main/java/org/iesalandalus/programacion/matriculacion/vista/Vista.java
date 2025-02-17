@@ -15,8 +15,11 @@ import org.iesalandalus.programacion.utilidades.Entrada;
 public class Vista {
 	
 	private Controlador controlador;
+	private Opcion opcion;
 	
-	public Vista() {}
+	public Vista() {
+
+	}
 	
 	public void setControlador(Controlador controlador) {
 		
@@ -34,18 +37,8 @@ public class Vista {
 		do{
 			Consola.mostrarMenu();
 			opcion=Consola.elegirOpcion();
-			ejecutarOpcion(opcion);
-		}while(opcion!=Opcion.SALIR);
-		
-	}
-	
-	public void terminar() {
-		controlador.terminar();
-	}
-	
-	private void ejecutarOpcion(Opcion opcion) {
-    	
-		
+			
+
 			if (opcion.equals(Opcion.INSERTAR_ALUMNO)) {
 				insertarAlumno();
 			}
@@ -108,11 +101,18 @@ public class Vista {
 			if (opcion.equals(Opcion.SALIR)) {
 				terminar();
 			}
+			
+		}while(opcion!=Opcion.SALIR);
 		
 	}
+	
+	public void terminar() {
+		controlador.terminar();
+	}
+	
+	
 
-
-	private void insertarAlumno()  {
+	public void insertarAlumno()  {
 		try {
 			controlador.insertarAlumno(Consola.leerAlumno());
 			System.out.println("Alumno insertado correctamente");
@@ -130,7 +130,7 @@ public class Vista {
 	}
 	
 
-	private  void buscarAlumno()  {
+	public  void buscarAlumno()  {
 		try {
 			//controlador.buscarAlumno(Consola.getAlumnoPorDni());
 			System.out.println(controlador.buscarAlumno(Consola.getAlumnoPorDni()));
@@ -146,7 +146,7 @@ public class Vista {
 		System.out.println(e.getMessage());;}
 	}
 
-	private void borrarAlumno()  {
+	public void borrarAlumno()  {
 		try {
 			controlador.borrarAlumno(Consola.getAlumnoPorDni());
 			System.out.println("Alumno borrado correctamente");
@@ -164,7 +164,7 @@ public class Vista {
 	}
 
 
-	private void mostrarAlumnos()  {
+	public void mostrarAlumnos()  {
 		try {
 			//controlador.getAlumnos();
 			ArrayList<Alumno> nuevoArrayList=controlador.getAlumnos();
@@ -188,7 +188,7 @@ public class Vista {
 	}
 
 
-	private void insertarAsignatura() {
+	public void insertarAsignatura() {
 		
 		try {
 			
@@ -212,7 +212,7 @@ public class Vista {
 		System.out.println(e.getMessage());;}
 	}
 
-	private void buscarAsignatura(){
+	public void buscarAsignatura(){
 		try{
 			//controlador.buscarAsignatura(Consola.getAsignaturaPorCodigo());
 			System.out.println(controlador.buscarAsignatura(Consola.getAsignaturaPorCodigo()));
@@ -227,7 +227,7 @@ public class Vista {
 		
 	}
 
-	private void borrarAsignatura() {
+	public void borrarAsignatura() {
 		
 		try {
 			controlador.borrarAsignatura(Consola.getAsignaturaPorCodigo());
@@ -245,7 +245,7 @@ public class Vista {
 	}
 
 
-	private void mostrarAsignaturas()  {
+	public void mostrarAsignaturas()  {
 		try{
 			
 			Consola.mostrarAsignaturas(controlador.getAsignaturas());
@@ -261,7 +261,7 @@ public class Vista {
 	}
 
 
-	private void insertarCicloFormativo() {
+	public void insertarCicloFormativo() {
 		
 		try{
 			controlador.insertarCicloFormativo(Consola.leerCicloFormativo());
@@ -279,7 +279,7 @@ public class Vista {
 	}
 
 
-	private void  buscarCicloFormativo()  {
+	public void  buscarCicloFormativo()  {
 		
 		try{
 			//controlador.buscarCicloFormativo(Consola.getCicloFormativoPorCodigo());
@@ -297,7 +297,7 @@ public class Vista {
 	}
 
 
-	private void  borrarCicloFormativo()  {
+	public void  borrarCicloFormativo()  {
 		
 		try{
 			controlador.borrarCicloFormativo(Consola.getCicloFormativoPorCodigo());
@@ -315,7 +315,7 @@ public class Vista {
 	}
 	
 
-	private void mostrarCiclosFormativos()  {
+	public void mostrarCiclosFormativos()  {
 		try{
 			//controlador.getCiclosFormativos();
 			ArrayList<CicloFormativo>nuevoArrayList=controlador.getCiclosFormativos();
@@ -336,7 +336,7 @@ public class Vista {
 	}
 
 
-	private void  insertarMatricula() {
+	public void  insertarMatricula() {
 		try{
 			controlador.insertarMatricula(Consola.leerMatricula(Consola.getAlumnoPorDni(), Consola.elegirAsignaturasMatricula()));
 			System.out.println("Matricula insertada correctamente");
@@ -353,7 +353,7 @@ public class Vista {
 	}
 
 
-	private void  buscarMatricula()  {
+	public void  buscarMatricula()  {
 		
 		try{
 			//controlador.buscarMatricula(Consola.getMatriculaPorIdentificador());
@@ -371,7 +371,7 @@ public class Vista {
 	}
 	
 
-	private void  anularMatricula()  {
+	public void  anularMatricula()  {
 		
 		try{
 			controlador.borrarMatricula(Consola.getMatriculaPorIdentificador());
@@ -389,7 +389,7 @@ public class Vista {
 	}
 
 
-	private void mostrarMatriculas()   {
+	public void mostrarMatriculas()   {
 		try{
 			//controlador.getMatriculas();
 			ArrayList<Matricula> nuevoArrayList=controlador.getMatriculas();;
@@ -412,7 +412,7 @@ public class Vista {
 		System.out.println(e.getMessage());;}
 	}
 
-	private void mostrarMatriculasPorAlumno()  {
+	public void mostrarMatriculasPorAlumno()  {
 		try{
 			//controlador.getMatriculas(Consola.getAlumnoPorDni());
 			ArrayList<Matricula> nuevoArrayList=controlador.getMatriculas(Consola.getAlumnoPorDni());
@@ -435,7 +435,7 @@ public class Vista {
 		System.out.println(e.getMessage());;}
 	}
 
-	private void mostrarMatriculasPorCicloFormativo() {
+	public void mostrarMatriculasPorCicloFormativo() {
 		
 		try{
 			//controlador.getMatriculas(Consola.getCicloFormativoPorCodigo());
@@ -459,7 +459,7 @@ public class Vista {
 	}
 
 	
-	private void mostrarMatriculasPorCursoAcademico()   {
+	public void mostrarMatriculasPorCursoAcademico()   {
 		
 		try{
 			System.out.println("Introduce el curso en formato DD-DD, por ejemplo 23-24");

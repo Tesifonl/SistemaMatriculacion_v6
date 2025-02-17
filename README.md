@@ -18,9 +18,11 @@ Realiza tu primer commit.
 ###Opción
 
 Modifica el enum Opcion teniendo en cuenta lo siguiente:
-Añade un atributo estático de tipo Vista.
-Implementa el método setVista tal y como aparece en el diagrama de clases y que deberá ser llamado desde el constructor de la clase Vista.
+
+Añade un atributo estático de tipo Vista. Implementa el método setVista tal y como aparece en el diagrama de clases y que deberá ser llamado desde el constructor de la clase Vista.
+
 Añade el método abstracto ejecutar, que deberá ser implementado en cada instancia del enum Opcion, llamando al método que le corresponda de la clase Vista. Con esto se pretende que cada opción no solo contenga el mensaje que debe mostrarse por pantalla, sino también, el método de la clase Vista que debe ser ejecutado cuando el usuario de la aplicación elija dicha opción.
+
 Realiza el commit correspondiente.
 
 ###Modalidad 
