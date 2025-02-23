@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.matriculacion.modelo.negocio;
+package org.iesalandalus.programacion.matriculacion.modelo.dominio;
 
 
 
@@ -17,6 +17,10 @@ public enum Modalidad {
 
 	public String toString() {	
 		return this.ordinal() + ".-" + cadenaAMostrar;
+	}
+	
+	public String imprimir() {	
+		return toString();
 	}
 
 }
