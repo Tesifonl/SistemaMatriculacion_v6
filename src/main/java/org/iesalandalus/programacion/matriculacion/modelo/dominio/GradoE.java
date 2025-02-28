@@ -6,7 +6,6 @@ public class GradoE extends Grado{
 	
 	public GradoE (String nombre, int numAnios, int numEdiciones) {
 		super(nombre);
-		
 		this.numEdiciones=numEdiciones;
 	}
 

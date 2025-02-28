@@ -16,7 +16,11 @@ import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Curso;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.EspecialidadProfesorado;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Grado;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.GradoD;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.GradoE;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Modalidad;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.TiposGrado;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
 public class Consola {
@@ -178,14 +182,34 @@ public class Consola {
 	
 	
 	public static Grado leerGrado() {
-		
-		int eleccion=0;
+
 		Grado gradoElegido=null;
+		System.out.println("Introduce un nombre");
+		String nombre=Entrada.cadena();
+		System.out.println("Introduce un numero de años");
+		int numAnios=Entrada.entero();
 		
-		System.out.println("Introduce una numero para elegir el grado que deseas matricular: ");
+		if (leerTipoGrado().equals(TiposGrado.GRADOD)) {
+			gradoElegido=new GradoD(nombre,numAnios,leerModalidad());
+		}else {
+			System.out.println("Introduce un numero de años");
+			int numEdiciones=Entrada.entero();
+			gradoElegido=new GradoE(nombre,numAnios,numEdiciones);
+		}
+
 		
-		for (int i = 0; i < Grado.values().length; i++) {
-			System.out.print("Opcion "+(i+1)+"=  "+Grado.values()[i]+"    ");
+		return gradoElegido;
+		
+	}
+	
+	public static TiposGrado leerTipoGrado() {
+		int eleccion=0;
+		TiposGrado tiposGradoElegido=null;
+		
+		System.out.println("Introduce una numero para elegir el tipo de grado que deseas cursar: ");
+		
+		for (int i = 0; i < TiposGrado.values().length; i++) {
+			System.out.print("Opcion "+(i+1)+"=  "+TiposGrado.values()[i]+"    ");
 		}
 		System.out.println();
 		
@@ -194,19 +218,49 @@ public class Consola {
 		switch (eleccion)
 		{
 			case 1:
-				gradoElegido=Grado.GDCFGB;
+				tiposGradoElegido=TiposGrado.GRADOD;
 				break;
 			case 2:
-				gradoElegido=Grado.GDCFGM;
+				tiposGradoElegido=TiposGrado.GRADOE;
 				break;
 			case 3:
-				gradoElegido=Grado.GDCFGS;
+				tiposGradoElegido=null;
 				break;
 
 		}
 		
-		return gradoElegido;
+		return tiposGradoElegido;
 		
+	}
+	
+	public static Modalidad leerModalidad() {
+		int eleccion=0;
+		Modalidad modalidadElegido=null;
+		
+		System.out.println("Introduce una numero para elegir la modalidad que deseas cursar: ");
+		
+		for (int i = 0; i < Modalidad.values().length; i++) {
+			System.out.print("Opcion "+(i+1)+"=  "+Modalidad.values()[i]+"    ");
+		}
+		System.out.println();
+		
+		eleccion = Entrada.entero();
+	
+		switch (eleccion)
+		{
+			case 1:
+				modalidadElegido=Modalidad.PRESENCIAL;
+				break;
+			case 2:
+				modalidadElegido=Modalidad.SEMIPRESENCIAL;
+				break;
+			case 3:
+				modalidadElegido=null;
+				break;
+
+		}
+		
+		return modalidadElegido;
 	}
 	
 	public static CicloFormativo leerCicloFormativo() {
@@ -259,9 +313,9 @@ public class Consola {
 		try {
 			System.out.println("Introduce el codigo del ciclo formativo que debe ser 4 caracteres numericos: ");
 			int codigo=Entrada.entero();
-			
+			Grado grado=new GradoE("DW",1,1);
 
-			CicloFormativo cicloFormativo =new CicloFormativo(codigo,"Semipresencial",Grado.GDCFGB,"DAW",100);
+			CicloFormativo cicloFormativo =new CicloFormativo(codigo,"Semipresencial",grado,"DAW",100);
 			return cicloFormativo;
 			}
 			catch(IllegalArgumentException e) {
@@ -369,7 +423,8 @@ public class Consola {
 			System.out.println("Introduce un codigo de asignatura que debe ser cuatro caracteres numericos: ");
 			int codigo1=Entrada.entero();
 			String codigo2=String.valueOf(codigo1);
-			CicloFormativo cicloFormativo =new CicloFormativo(9999,"Semipresencial",Grado.GDCFGB,"DAW",100);
+			Grado grado=new GradoE("DW",1,1);
+			CicloFormativo cicloFormativo =new CicloFormativo(9999,"Semipresencial",grado,"DAW",100);
 			
 			Asignatura asignatura =new Asignatura(codigo2,"Programacion",100,Curso.PRIMERO,6,EspecialidadProfesorado.INFORMATICA,cicloFormativo);
 			return asignatura;
@@ -468,8 +523,9 @@ public class Consola {
 		try {
 			System.out.println("Introduce un id de matricula: ");
 			int idMatricula=Entrada.entero();
+			Grado grado=new GradoE("DW",1,1);
 			Alumno alumno=new Alumno( "Tesi", "11111111H", "Tesi@gmail.com", "999999999", LocalDate.of(1979, 1, 8));
-			CicloFormativo cicloFormativo =new CicloFormativo(1111,"Semipresencial",Grado.GDCFGB,"DAW",100);
+			CicloFormativo cicloFormativo =new CicloFormativo(1111,"Semipresencial",grado,"DAW",100);
 			ArrayList<Asignatura> asignaturas=new ArrayList<Asignatura>();
 			asignaturas.add(new Asignatura("2222","Programacion",100,Curso.PRIMERO,6,EspecialidadProfesorado.INFORMATICA,cicloFormativo));
 			
