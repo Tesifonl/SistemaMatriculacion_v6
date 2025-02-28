@@ -28,7 +28,7 @@ public class GradoD extends Grado{
 	public void setNumAnios(int numAnios) {
 		// TODO Auto-generated method stub
 		if(numAnios<2 || numAnios>3) {
-			throw new IllegalArgumentException("ERROR: El numero de años no puede ser menor que cero");
+			throw new IllegalArgumentException("ERROR: El numero de años no puede ser 2 O 3");
 		}else {
 			this.numAnios=numAnios;
 		}

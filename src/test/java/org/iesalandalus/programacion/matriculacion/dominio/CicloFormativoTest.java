@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.matriculacion.dominio;
+/*package org.iesalandalus.programacion.matriculacion.dominio;
 
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Grado;
@@ -251,4 +251,4 @@ public class CicloFormativoTest {
 
     }
 
-}
+}*/

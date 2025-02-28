@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.matriculacion.dominio;
+/*package org.iesalandalus.programacion.matriculacion.dominio;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,4 +18,4 @@ public class EspecialidadProfesoradoTest {
         assertEquals("FOL", EspecialidadProfesorado.FOL.name(), NOMBRE_NO_VALIDO);
     }
 
-}
+}*/

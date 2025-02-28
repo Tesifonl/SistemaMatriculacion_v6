@@ -184,15 +184,15 @@ public class Consola {
 	public static Grado leerGrado() {
 
 		Grado gradoElegido=null;
-		System.out.println("Introduce un nombre");
+		System.out.println("Introduce un nombre para el grado");
 		String nombre=Entrada.cadena();
-		System.out.println("Introduce un numero de años");
+		System.out.println("Introduce un numero de años para el grado");
 		int numAnios=Entrada.entero();
 		
 		if (leerTipoGrado().equals(TiposGrado.GRADOD)) {
 			gradoElegido=new GradoD(nombre,numAnios,leerModalidad());
 		}else {
-			System.out.println("Introduce un numero de años");
+			System.out.println("Introduce un numero de ediciones para el grado");
 			int numEdiciones=Entrada.entero();
 			gradoElegido=new GradoE(nombre,numAnios,numEdiciones);
 		}

@@ -14,7 +14,8 @@ public enum TiposGrado {
 
 
 	public String toString() {	
-		return this.ordinal() + ".-" + cadenaAMostrar;
+		return cadenaAMostrar;
+	
 	}
 	
 	public String imprimir() {	
