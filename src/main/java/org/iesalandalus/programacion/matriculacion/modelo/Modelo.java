@@ -92,8 +92,8 @@ public class Modelo {
   				 return nuevoArrayList;
   			 }
   			 else {
-  				 System.out.println(" No existen alumnos en el sistema");
-  				 return null;
+  				throw new NullPointerException(" No existen alumnos en el sistema");
+  				
   			 }
 
       }
@@ -154,7 +154,7 @@ public class Modelo {
   				 }
   			 else {
   				 
-  				 return null;
+  				throw new NullPointerException("No existen asignaturas dadas incluidas en el sistema");
   			 }	
 
       }
@@ -218,8 +218,8 @@ public class Modelo {
   			 } 
   	  			
   			 else {
-  				 System.out.println(" No existen ciclos formativos en el sistema");
-  				 return null;
+  				throw new NullPointerException(" No existen ciclos formativos en el sistema");
+  				
   			 }
   			
       }
@@ -284,8 +284,8 @@ public class Modelo {
   				 return matriculas.get();
   			 }
   			 else {
-  				 System.out.println(" No existen matriculas en el sistema");
-  				 return null;
+  				throw new NullPointerException(" No existen matriculas en el sistema");
+  				 
   			 }
   			
 
