@@ -16,7 +16,7 @@ public enum Modalidad {
 
 
 	public String toString() {	
-		return this.ordinal() + ".-" + cadenaAMostrar;
+		return cadenaAMostrar;
 	}
 	
 	public String imprimir() {	

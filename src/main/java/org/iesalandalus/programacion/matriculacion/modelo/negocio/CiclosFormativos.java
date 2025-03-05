@@ -55,7 +55,6 @@ public class CiclosFormativos {
 					throw new OperationNotSupportedException("ERROR: Ya existe un ciclo formativo con ese codigo.");
 				}else {
 					coleccionCiclosFormativos.add(cicloFormativo);
-					System.out.println("Ciclo formativo introducido en la lista");
 				}
 		}
 		else {

@@ -6,7 +6,8 @@ public class GradoE extends Grado{
 	
 	public GradoE (String nombre, int numAnios, int numEdiciones) {
 		super(nombre);
-		this.numEdiciones=numEdiciones;
+		setNumAnios(numAnios);
+		setNumEdiciones(numEdiciones);
 	}
 
 	public int getNumEdiciones() {
@@ -33,6 +34,10 @@ public class GradoE extends Grado{
 	}
 	
 
-	
+	@Override
+	public String toString() {
+
+		return super.toString()+"[ años= "+numAnios+" ediciones= " + numEdiciones + "]";
+	}
 	
 }

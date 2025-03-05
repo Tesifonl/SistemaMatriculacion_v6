@@ -28,16 +28,17 @@ public class GradoD extends Grado{
 	public void setNumAnios(int numAnios) {
 		// TODO Auto-generated method stub
 		if(numAnios<2 || numAnios>3) {
-			throw new IllegalArgumentException("ERROR: El numero de años no puede ser 2 O 3");
+			throw new IllegalArgumentException("ERROR: El numero de años no puede ser distinto a 2 o 3");
 		}else {
 			this.numAnios=numAnios;
 		}
 	}
 	
+
 	@Override
 	public String toString() {
-		return "GradoD [modalidad=" + modalidad + "]";
+
+		return super.toString()+"[ años= "+numAnios+" modalidad= " + modalidad + "]";
 	}
-	
 	
 }

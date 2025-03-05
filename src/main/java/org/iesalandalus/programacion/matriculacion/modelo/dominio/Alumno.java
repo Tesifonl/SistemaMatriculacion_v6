@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Alumno implements Comparable<Alumno>  {
 	
 	private static final String ER_TELEFONO="[0-9]{9}";
-	private static final String ER_CORREO="[a-zA-Z1-9áéíóú.]*[@]{1}[a-zA-Z]{1,15}[.]{1}[a-z]*";;
+	private static final String ER_CORREO="[a-zA-Z1-9áéíóú.]*[@]{1}[a-zA-Z]{1,15}[.]{1}[a-zA-Z]*";;
 	private static final String ER_DNI="[0-9]{8}[a-zA-Z]{1}";
 	public static final String FORMATO_FECHA="dd/MM/yyyy";
 	private static final String ER_NIA="[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]{4}[0-9]{3}";

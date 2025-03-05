@@ -249,10 +249,10 @@ public class Consola {
 		switch (eleccion)
 		{
 			case 1:
-				modalidadElegido=Modalidad.PRESENCIAL;
+				modalidadElegido=Modalidad.SEMIPRESENCIAL;
 				break;
 			case 2:
-				modalidadElegido=Modalidad.SEMIPRESENCIAL;
+				modalidadElegido=Modalidad.PRESENCIAL;
 				break;
 			case 3:
 				modalidadElegido=null;

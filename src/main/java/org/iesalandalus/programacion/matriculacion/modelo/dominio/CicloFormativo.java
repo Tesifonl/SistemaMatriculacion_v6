@@ -2,6 +2,7 @@ package org.iesalandalus.programacion.matriculacion.modelo.dominio;
 
 import java.util.Objects;
 
+
 public class CicloFormativo implements Comparable<CicloFormativo> {
 	
 	public static final int MAXIMO_NUMERO_HORAS=2000;
@@ -65,9 +66,18 @@ public class CicloFormativo implements Comparable<CicloFormativo> {
 
 	public void setGrado(Grado grado) {
 		if (grado==null) {
-			throw new NullPointerException("ERROR: El grado de un ciclo formativo no puede ser nulo.");
+			throw new NullPointerException("ERROR: La habitaci�n de una reserva no puede ser nula.");}
+		else {
+			if (grado instanceof GradoE) {
+				
+				GradoE nuevoGrado=(GradoE) grado;
+				this.grado = new GradoE (nuevoGrado.nombre,nuevoGrado.numAnios,nuevoGrado.getNumEdiciones());
+			}
+			else {
+				GradoD nuevoGrado=(GradoD) grado;
+				this.grado = new GradoD (nuevoGrado.nombre,nuevoGrado.numAnios,nuevoGrado.getModalidad());
+			}
 		}
-		else {this.grado = grado;}
 	}
 
 	public String getNombre() {

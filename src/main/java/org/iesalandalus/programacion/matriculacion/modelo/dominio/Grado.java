@@ -26,7 +26,7 @@ public abstract class Grado {
 	
 	private void setIniciales() {
 		
-		String [] coleccionString=getNombre().split("");
+		String [] coleccionString=getNombre().split(" ");
 		String letras="";
 		String iniciales="";
 		
@@ -35,9 +35,9 @@ public abstract class Grado {
 		for(String letra: coleccionString) {
 			j++;
 			letras=letra.substring(0, 1).toUpperCase();
-			iniciales=letras+letras;
+			iniciales=iniciales+letras;
 		}
-		
+		this.iniciales=iniciales;
 	}
 	
 
