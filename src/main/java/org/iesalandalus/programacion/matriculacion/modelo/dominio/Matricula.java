@@ -35,6 +35,7 @@ public class Matricula implements Comparable<Matricula>  {
 		setFechaMatriculacion(fechaMatriculacion);
 		setAlumno(alumno);
 		setColeccionAsignaturas(coleccionAsignaturas);
+		this.fechaAnulacion=null;
 	}
 	
 	public Matricula (Matricula matricula) throws OperationNotSupportedException {
@@ -44,6 +45,7 @@ public class Matricula implements Comparable<Matricula>  {
 			setIdMatricula(matricula.getIdMatricula());
 			setCursoAcademico(matricula.getCursoAcademico());
 			setFechaMatriculacion(matricula.getFechaMatriculacion());
+			setFechaAnulacion(matricula.getFechaAnulacion());
 			setAlumno(matricula.getAlumno());
 			setColeccionAsignaturas(matricula.getColeccionAsignaturas());
 		}
@@ -202,7 +204,8 @@ public class Matricula implements Comparable<Matricula>  {
 
 	@Override
 	public String toString() {
-		if (fechaAnulacion!=null) {
+		LocalDate nuevaFecha=getFechaAnulacion();
+		if (nuevaFecha!=null) {
 			return "idMatricula="+idMatricula+", curso académico="+cursoAcademico+", fecha matriculación="+
 					fechaMatriculacion.format(formatoFechaString)+", fecha anulación="+fechaAnulacion.format(formatoFechaString)+
 					", alumno="+alumno.imprimir()+", Asignaturas={ }";
@@ -214,8 +217,9 @@ public class Matricula implements Comparable<Matricula>  {
 	}
 	
 	public String imprimir() {
-		return "idMatricula="+idMatricula+", curso académico="+cursoAcademico+", fecha matriculación="+fechaMatriculacion.format(formatoFechaString)+
-				", alumno={"+alumno.imprimir()+"}";
+		//return "idMatricula="+idMatricula+", curso académico="+cursoAcademico+", fecha matriculación="+fechaMatriculacion.format(formatoFechaString)+
+				//", alumno={"+alumno.imprimir()+"}";
+		return toString();
 	}
 
 	@Override
