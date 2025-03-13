@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.matriculacion.modelo.negocio;
+package org.iesalandalus.programacion.matriculacion.modelo.negocio.memoria;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,8 +8,9 @@ import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.IMatriculas;
 
-public class Matriculas  {
+public class Matriculas implements IMatriculas {
 
 	private ArrayList<Matricula>  coleccionMatriculas;
 
@@ -218,4 +219,7 @@ public class Matriculas  {
 		}
 	
 	}
+	
+	public void comenzar() {};
+	public void terminar() {};
 }

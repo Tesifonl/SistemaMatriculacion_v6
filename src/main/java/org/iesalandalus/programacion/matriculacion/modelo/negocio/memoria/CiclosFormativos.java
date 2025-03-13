@@ -1,12 +1,13 @@
-package org.iesalandalus.programacion.matriculacion.modelo.negocio;
+package org.iesalandalus.programacion.matriculacion.modelo.negocio.memoria;
 
 import java.util.ArrayList;
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.ICiclosFormativos;
 
-public class CiclosFormativos {
+public class CiclosFormativos implements ICiclosFormativos{
 	
 	private ArrayList <CicloFormativo> coleccionCiclosFormativos;
 
@@ -111,5 +112,7 @@ public class CiclosFormativos {
 		}
 	}
 	
+	public void comenzar() {};
+	public void terminar() {};
 
 }

@@ -1,12 +1,13 @@
-package org.iesalandalus.programacion.matriculacion.modelo.negocio;
+package org.iesalandalus.programacion.matriculacion.modelo.negocio.memoria;
 
 import java.util.ArrayList;
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.IAsignaturas;
 
-public class Asignaturas {
+public class Asignaturas implements IAsignaturas {
 
 	private ArrayList<Asignatura> coleccionAsignaturas;
 
@@ -109,6 +110,7 @@ public class Asignaturas {
 		}
 	}
 	
-
+	public void comenzar() {};
+	public void terminar() {};
 	
 }

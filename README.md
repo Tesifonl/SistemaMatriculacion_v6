@@ -59,7 +59,8 @@ implementation 'mysql:mysql-connector-java:8.0.28'
 4.	CONTRASENA cuyo valor será la password del usuario con el que te conectas a la base de datos.
 5.	Crea el método establecerConexion que se encargará de realizar la conexión de la aplicación a la base de datos alojada en la nube.
 6.	Crea el método cerrarConexion que se encargará de cerrar la conexión de la aplicación con la base de datos alojada en la nube.
-2.	Añade la clase Alumnos tal y como aparece en el diagrama de clases teniendo en cuenta que:
+
+### Añade la clase Alumnos tal y como aparece en el diagrama de clases teniendo en cuenta que:
 
 1.	Implementa el patrón singlenton a través del atributo instancia y del método getInstancia que si el atributo instancia es nulo devolverá una instancia de la clase Alumnos, y si no es nulo devolverá el valor del atributo instancia.
 2.	El constructor de la clase se encargará de llamar al método comenzar.
@@ -70,7 +71,9 @@ implementation 'mysql:mysql-connector-java:8.0.28'
 7.	El método insertar deberá insertar un nuevo alumno en la base de datos. 
 8.	El método buscar deberá devolver el resultado de encontrar en la base de datos al alumno pasado como parámetro.
 9.	El método borrar deberá eliminar de la base de datos al alumno pasado como parámetro.
-3.	Añade la clase CiclosFormativos tal y como aparece en el diagrama de clases teniendo en cuenta que:
+
+### 	Añade la clase CiclosFormativos tal y como aparece en el diagrama de clases teniendo en cuenta que:
+
 1.	Implementa el patrón singlenton a través del atributo instancia y del método getInstancia que si el atributo instancia es nulo devolverá una instancia de la clase CiclosFormativos, y si no es nulo devolverá el valor del atributo instancia.
 2.	El constructor de la clase se encargará de llamar al método comenzar.
 3.	El método comenzar deberá crear una conexión con la base de datos.
@@ -80,8 +83,10 @@ implementation 'mysql:mysql-connector-java:8.0.28'
 7.	El método getTamano deberá devolver el número de ciclos formativos existentes en la base de datos.
 8.	El método insertar deberá insertar un nuevo ciclo formativo en la base de datos. 
 9.	El método buscar deberá devolver el resultado de encontrar en la base de datos el ciclo formativo pasado como parámetro.
-10.	El método borrar deberá eliminar de la base de datos al ciclo formativo pasado como parámetro. 
-4.	Añade la clase Asignaturas tal y como aparece en el diagrama de clases teniendo en cuenta que:
+10.	El método borrar deberá eliminar de la base de datos al ciclo formativo pasado como parámetro.
+ 
+### Añade la clase Asignaturas tal y como aparece en el diagrama de clases teniendo en cuenta que:
+
 1.	Implementa el patrón singlenton a través del atributo instancia y del método getInstancia que si el atributo instancia es nulo devolverá una instancia de la clase Asignaturas, y si no es nulo devolverá el valor del atributo instancia. 
 2.	El constructor de la clase se encargará de llamar al método comenzar.
 3.	El método comenzar deberá crear una conexión con la base de datos.
@@ -93,7 +98,9 @@ implementation 'mysql:mysql-connector-java:8.0.28'
 9.	El método insertar deberá insertar una nueva asignatura en la base de datos. 
 10.	El método buscar deberá devolver el resultado de encontrar en la base de datos la asignatura pasada como parámetro.
 11.	El método borrar deberá eliminar de la base de datos la asignatura pasada como parámetro.  
-5.	Añade la clase Matriculas tal y como aparece en el diagrama de clases teniendo en cuenta que:
+
+### Añade la clase Matriculas tal y como aparece en el diagrama de clases teniendo en cuenta que:
+
 1.	Implementa el patrón singlenton a través del atributo instancia y del método getInstancia que si el atributo instancia es nulo devolverá una instancia de la clase Matriculas, y si no es nulo devolverá el valor del atributo instancia.
 2.	El constructor de la clase se encargará de llamar al método comenzar.
 3.	El método comenzar deberá crear una conexión con la base de datos.
@@ -108,7 +115,9 @@ implementation 'mysql:mysql-connector-java:8.0.28'
 12.	El método get de un alumno deberá devolver una lista de todas las matrículas del alumno pasado como parámetro.
 13.	El método get de un ciclo formativo deberá devolver una lista de todas las matrículas del ciclo formativo pasado como parámetro.
 14.	El método get de un curso académico deberá devolver una lista de todas las matrículas del curso académico pasado como parámetro.
-6.	Crea la clase FuenteDatosMySQL  que deberá implementar la interfaz  IFuenteDatos, tal y como se indica en el diagrama. Esta clase será la encargada de implementar el patrón fábrica, devolviendo en cada caso el resultado de crear la colección a la que hace referencia su nombre:
+
+### 	Crea la clase FuenteDatosMySQL  que deberá implementar la interfaz  IFuenteDatos, tal y como se indica en el diagrama. Esta clase será la encargada de implementar el patrón fábrica, devolviendo en cada caso el resultado de crear la colección a la que hace referencia su nombre:
+
 1.	Método crearAlumnos devolverá una nueva colección de tipo Alumnos del paquete mysql.
 2.	Método crearCiclosFormativos devolverá una nueva colección de tipo CiclosFormativos del paquete mysql.
 3.	Método crearAsignaturas devolverá una nueva colección de tipo Asignaturas del paquete mysql.
