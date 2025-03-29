@@ -15,6 +15,7 @@ public interface IMatriculas {
 	public void terminar();
 	public ArrayList<Matricula> get() throws OperationNotSupportedException;
 	public int getTamano();
+	public void insertar(Matricula matricula) throws OperationNotSupportedException;
 	public Matricula buscar (Matricula matricula) throws OperationNotSupportedException;
 	public void borrar(Matricula matricula) throws OperationNotSupportedException;
 	public ArrayList<Matricula> get(Alumno alumno) throws OperationNotSupportedException;

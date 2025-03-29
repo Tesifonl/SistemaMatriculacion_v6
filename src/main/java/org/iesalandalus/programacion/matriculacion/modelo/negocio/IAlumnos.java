@@ -12,6 +12,7 @@ public interface IAlumnos {
 	public void terminar();
 	public ArrayList<Alumno> get();
 	public int getTamano();
+	public void insertar(Alumno alumno) throws OperationNotSupportedException;
 	public Alumno buscar (Alumno alumno);
 	public void borrar(Alumno alumno) throws OperationNotSupportedException;
 }
