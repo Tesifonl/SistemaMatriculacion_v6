@@ -53,7 +53,7 @@ public class Alumnos implements IAlumnos{
 		try {
 			
 			Statement statement=conexion.createStatement();
-			ResultSet registros=statement.executeQuery("select nombre,dni,correo,telefono,fechaNacimiento from alumnos order by nombre");
+			ResultSet registros=statement.executeQuery("select nombre,dni,correo,telefono,fechaNacimiento from alumno order by nombre");
 			
 			while(registros.next()) {
 				String nombre=registros.getString(1);
@@ -85,7 +85,7 @@ public class Alumnos implements IAlumnos{
 		try {
 			
 			Statement statement=conexion.createStatement();
-			ResultSet registros=statement.executeQuery("select count(*) from alumnos");
+			ResultSet registros=statement.executeQuery("select count(*) from alumno");
 			
 			if(registros.next()) {
 				tamano=registros.getInt(1);
@@ -104,11 +104,11 @@ public class Alumnos implements IAlumnos{
 		// TODO Auto-generated method stub
 		
 		if(alumno==null) {
-			throw new NullPointerException("");
+			throw new NullPointerException("No se ha recibido el alumno a insertar");
 		}
 		else {
 			try {
-				PreparedStatement preparedStatement=conexion.prepareStatement("insert into alumnos values (?,?,?,?,?,?)");
+				PreparedStatement preparedStatement=conexion.prepareStatement("insert into alumno values (?,?,?,?,?,?)");
 				preparedStatement.setString(1, alumno.getNombre());
 				preparedStatement.setString(2, alumno.getDni());
 				preparedStatement.setString(3, alumno.getCorreo());
@@ -137,7 +137,7 @@ public class Alumnos implements IAlumnos{
 		}
 		else {
 			try {
-				PreparedStatement preparedStatement=conexion.prepareStatement("select nombre, dni, telefono from alumnos where dni = ?");
+				PreparedStatement preparedStatement=conexion.prepareStatement("select nombre, dni, telefono from alumno where dni = ?");
 				preparedStatement.setString(1, alumno.getDni());
 				ResultSet registros=preparedStatement.executeQuery();
 				
@@ -167,7 +167,7 @@ public class Alumnos implements IAlumnos{
 		}
 		else {
 			try {
-				PreparedStatement preparedStatement=conexion.prepareStatement("delete from clientes where dni = ?");
+				PreparedStatement preparedStatement=conexion.prepareStatement("delete from alumno where dni = ?");
 				preparedStatement.setString(1, alumno.getDni());
 				
 				
