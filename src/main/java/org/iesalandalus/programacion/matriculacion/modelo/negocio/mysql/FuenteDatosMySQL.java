@@ -33,6 +33,7 @@ public class FuenteDatosMySQL implements IFuenteDatos{
 	public IMatriculas crearMatriculas() {
 		// TODO Auto-generated method stub
 		Matriculas matriculas=new Matriculas();
+		Asignaturas asignaturas=new Asignaturas();
 		return matriculas;
 	}
 
