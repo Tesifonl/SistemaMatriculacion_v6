@@ -7,7 +7,7 @@ import org.iesalandalus.programacion.matriculacion.modelo.negocio.IFuenteDatos;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.IMatriculas;
 
 public class FuenteDatosMySQL implements IFuenteDatos{
-/*
+
 	@Override
 	public IAlumnos crearAlumnos() {
 		// TODO Auto-generated method stub
@@ -35,5 +35,5 @@ public class FuenteDatosMySQL implements IFuenteDatos{
 		Matriculas matriculas=new Matriculas();
 		return matriculas;
 	}
-*/
+
 }

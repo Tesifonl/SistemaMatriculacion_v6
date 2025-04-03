@@ -24,7 +24,7 @@ import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.utilidad
 
 public class Matriculas implements IMatriculas{
 	
-	/*private Connection conexion = null;
+	private Connection conexion = null;
 
 	private static Matriculas instancia;
 	
@@ -450,6 +450,6 @@ public class Matriculas implements IMatriculas{
 		}
 	}
 
-*/
+
 
 }
