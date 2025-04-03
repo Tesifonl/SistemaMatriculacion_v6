@@ -19,7 +19,7 @@ public interface IMatriculas {
 	public Matricula buscar (Matricula matricula) throws OperationNotSupportedException;
 	public void borrar(Matricula matricula) throws OperationNotSupportedException;
 	public ArrayList<Matricula> get(Alumno alumno) throws OperationNotSupportedException;
-	public ArrayList<Matricula> get(String cursoAcademico);
+	public ArrayList<Matricula> get(String cursoAcademico) throws OperationNotSupportedException;
 	public ArrayList<Matricula> get(CicloFormativo cicloFormativo) throws OperationNotSupportedException;
 
 }

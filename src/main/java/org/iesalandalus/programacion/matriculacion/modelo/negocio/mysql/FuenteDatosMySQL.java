@@ -11,25 +11,29 @@ public class FuenteDatosMySQL implements IFuenteDatos{
 	@Override
 	public IAlumnos crearAlumnos() {
 		// TODO Auto-generated method stub
-		return null;
+		Alumnos alumnos=new Alumnos();
+		return alumnos;
 	}
 
 	@Override
 	public ICiclosFormativos crearCiclosFormativos() {
 		// TODO Auto-generated method stub
-		return null;
+		CiclosFormativos ciclosFormativos=new CiclosFormativos();
+		return ciclosFormativos;
 	}
 
 	@Override
 	public IAsignaturas crearAsignaturas() {
 		// TODO Auto-generated method stub
-		return null;
+		Asignaturas asignaturas=new Asignaturas();
+		return asignaturas;
 	}
 
 	@Override
 	public IMatriculas crearMatriculas() {
 		// TODO Auto-generated method stub
-		return null;
+		Matriculas matriculas=new Matriculas();
+		return matriculas;
 	}
 
 }

@@ -15,6 +15,8 @@ import javax.naming.OperationNotSupportedException;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.Curso;
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.EspecialidadProfesorado;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Grado;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.IMatriculas;
@@ -141,8 +143,31 @@ public class Matriculas implements IMatriculas{
 		return tamano;
 	}
 	
+	
+	public void insertarAsignaturasMatricula(int idMatricula,ArrayList<Asignatura> coleccionAsignaturas) throws OperationNotSupportedException {
+		if(coleccionAsignaturas==null) {
+			throw new NullPointerException(" No se ha recibido la matricula a insertar");		
+		}
+		else {
+			try {
+				
+				for (Asignatura asignaturaRecibida: coleccionAsignaturas) {
+				PreparedStatement preparedStatement=conexion.prepareStatement("insert into asignaturasMatricula values (?,?,?,?,?)");
+				preparedStatement.setInt(1, idMatricula);
+				preparedStatement.setString(1, asignaturaRecibida.getNombre());
+				}
+			}
+			catch (SQLIntegrityConstraintViolationException e) {
+				throw new OperationNotSupportedException("ERROR: Ya existe una asignatura igual.");
+			} 
+			catch (SQLException e) {
+				throw new OperationNotSupportedException("ERROR:" + e.getMessage());
+			}
+		}
+	}
+	
 	@Override
-	public void insertar(Matricula matricula) {
+	public void insertar(Matricula matricula) throws OperationNotSupportedException {
 		// TODO Auto-generated method stub
 		if(matricula==null) {
 			throw new NullPointerException(" No se ha recibido la matricula a insertar");		
@@ -167,7 +192,7 @@ public class Matriculas implements IMatriculas{
 				
 				for(Alumno alumnoEncontrado: copiaAlumnos) {
 					int i=+1;
-					if(alumnoEncontrado.getDni().equals(dni)) {
+					if(alumnoEncontrado.getDni().equals(matricula.getAlumno().getDni())) {
 						alumnoBuscado=copiaAlumnos.get(i);
 					}else {
 						throw new NullPointerException("No se ha encontrado el alumno en la matricula");
@@ -296,15 +321,133 @@ public class Matriculas implements IMatriculas{
 	}
 
 	@Override
-	public ArrayList<Matricula> get(String cursoAcademico) {
+	public ArrayList<Matricula> get(String cursoAcademico) throws OperationNotSupportedException  {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Matricula>coleccionMatriculas=new ArrayList<>();
+		
+		if(cursoAcademico==null) {
+			throw new NullPointerException("No se puede buscar una matricula de un curso academico recibido nulo");
+		}
+		else {
+			try {
+				PreparedStatement preparedStatement=conexion.prepareStatement("select idMatricula, cursoAcademico, fechaMatriculacion,fechaAnulacion, dni from matricula where cursoAcademico = ?");
+				preparedStatement.setString(1, cursoAcademico);
+				ResultSet registros=preparedStatement.executeQuery();
+				
+				if (registros.next()) {
+					while(registros.next()) {
+						int idMatricula=registros.getInt(1);
+						String cursoAcademicoLocalizado=registros.getString(2);
+						LocalDate fechaMatriculacion=registros.getDate(3).toLocalDate();
+						LocalDate fechaAnulacion=registros.getDate(4).toLocalDate();
+						String dni=registros.getString(5);
+
+						
+						ArrayList<Asignatura> coleccionAsignaturas=getAsignaturasMatricula(idMatricula);
+						
+						Alumnos alumnos= new Alumnos();
+						ArrayList <Alumno> copiaAlumnos=alumnos.get();
+						Alumno alumnoBuscado=null;
+				
+						
+						for(Alumno alumnoEncontrado: copiaAlumnos) {
+							int i=+1;
+							if(alumnoEncontrado.getDni().equals(dni)) {
+								alumnoBuscado=copiaAlumnos.get(i);
+							}else {
+								throw new NullPointerException("No se ha encontrado el alumno en la matricula");
+							}
+						}
+						
+						Matricula nuevaMatricula=new Matricula(idMatricula,cursoAcademicoLocalizado,fechaMatriculacion,alumnoBuscado,coleccionAsignaturas);
+						coleccionMatriculas.add(nuevaMatricula);
+					
+					}
+				}
+			}
+			catch (SQLException e) {
+				throw new IllegalArgumentException("ERROR:" + e.getMessage());
+			}
+			
+			return coleccionMatriculas;
+		}
 	}
 
 	@Override
 	public ArrayList<Matricula> get(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Matricula>coleccionMatriculas=new ArrayList<>();
+		
+		if(cicloFormativo==null) {
+			throw new NullPointerException("No se puede buscar una matricula de un curso academico recibido nulo");
+		}
+		else {
+			try {
+				PreparedStatement preparedStatement=conexion.prepareStatement("select codigo,codigoCicloFormativo from asignatura where codigoCicloFormativo = ?");
+				preparedStatement.setInt(1, cicloFormativo.getCodigo());
+				ResultSet registros=preparedStatement.executeQuery();
+
+				
+				if (registros.next()) {
+					
+					String codigo=registros.getString(1);
+					int codigoCicloFormativo=registros.getInt(2);
+					
+					PreparedStatement preparedStatement2=conexion.prepareStatement("select idMatricula, codigo from asignaturasMatricula where codigo = ?");
+					preparedStatement2.setInt(1,codigoCicloFormativo);
+					ResultSet registros2=preparedStatement.executeQuery();
+					
+					while(registros2.next()){
+						
+					
+					int idMatricula=registros2.getInt(1);
+					int codigo2=registros2.getInt(2);
+					
+					PreparedStatement preparedStatement3=conexion.prepareStatement("select idMatricula, cursoAcademico, fechaMatriculacion,fechaAnulacion, dni from matricula where idMatricula = ?");
+					preparedStatement3.setInt(1,codigo2);
+					ResultSet registros3=preparedStatement.executeQuery();
+					
+					int idMatricula2=registros.getInt(1);
+					String cursoAcademicoLocalizado=registros.getString(2);
+					LocalDate fechaMatriculacion=registros.getDate(3).toLocalDate();
+					LocalDate fechaAnulacion=registros.getDate(4).toLocalDate();
+					String dni=registros.getString(5);
+					
+					
+					
+					ArrayList<Asignatura> coleccionAsignaturas=getAsignaturasMatricula(idMatricula);
+					
+					Alumnos alumnos= new Alumnos();
+					ArrayList <Alumno> copiaAlumnos=alumnos.get();
+					Alumno alumnoBuscado=null;
+			
+					
+					for(Alumno alumnoEncontrado: copiaAlumnos) {
+						int i=+1;
+						if(alumnoEncontrado.getDni().equals(dni)) {
+							alumnoBuscado=copiaAlumnos.get(i);
+						}else {
+							throw new NullPointerException("No se ha encontrado el alumno en la matricula");
+						}
+					}
+					
+					Matricula nuevaMatricula=new Matricula(idMatricula,cursoAcademicoLocalizado,fechaMatriculacion,alumnoBuscado,coleccionAsignaturas);
+					coleccionMatriculas.add(nuevaMatricula);
+					
+
+					}		
+				}
+				else {
+					throw new NullPointerException("No existe este codigo de ciclo formativo en el sistema");
+				}
+			}
+				
+			catch (SQLException e) {
+				throw new IllegalArgumentException("ERROR:" + e.getMessage());
+			}
+			
+			return coleccionMatriculas;
+		}
 	}
 
 
