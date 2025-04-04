@@ -155,6 +155,7 @@ public class Matriculas implements IMatriculas{
 				PreparedStatement preparedStatement=conexion.prepareStatement("insert into asignaturasMatricula values (?,?,?,?,?)");
 				preparedStatement.setInt(1, idMatricula);
 				preparedStatement.setString(1, asignaturaRecibida.getNombre());
+				preparedStatement.executeUpdate();
 				}
 			}
 			catch (SQLIntegrityConstraintViolationException e) {
@@ -179,7 +180,7 @@ public class Matriculas implements IMatriculas{
 				preparedStatement.setString(2, matricula.getCursoAcademico());
 				preparedStatement.setDate(3, Date.valueOf(matricula.getFechaMatriculacion()));
 				preparedStatement.setDate(4, Date.valueOf(matricula.getFechaAnulacion()));
-				preparedStatement.setString(2, matricula.getAlumno().getDni());
+				preparedStatement.setString(5, matricula.getAlumno().getDni());
 				preparedStatement.executeUpdate();
 				
 				

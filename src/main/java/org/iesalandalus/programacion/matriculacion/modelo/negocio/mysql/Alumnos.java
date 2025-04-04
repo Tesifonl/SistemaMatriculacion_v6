@@ -53,13 +53,13 @@ public class Alumnos implements IAlumnos{
 		try {
 			
 			Statement statement=conexion.createStatement();
-			ResultSet registros=statement.executeQuery("select nombre,dni,correo,telefono,fechaNacimiento from alumno order by nombre");
+			ResultSet registros=statement.executeQuery("select nombre,telefono,correo,dni,fechaNacimiento from alumno order by nombre");
 			
 			while(registros.next()) {
 				String nombre=registros.getString(1);
-				String dni=registros.getString(2);
+				String telefono=registros.getString(2);
 				String correo=registros.getString(3);
-				String telefono=registros.getString(4);
+				String dni=registros.getString(4);
 				LocalDate fechaNacimiento=registros.getDate(5).toLocalDate();
 				
 				Alumno alumno=new Alumno(nombre,dni, correo, telefono, fechaNacimiento);
@@ -108,13 +108,12 @@ public class Alumnos implements IAlumnos{
 		}
 		else {
 			try {
-				PreparedStatement preparedStatement=conexion.prepareStatement("insert into alumno values (?,?,?,?,?,?)");
+				PreparedStatement preparedStatement=conexion.prepareStatement("insert into alumno values (?,?,?,?,?)");
 				preparedStatement.setString(1, alumno.getNombre());
-				preparedStatement.setString(2, alumno.getDni());
+				preparedStatement.setString(2, alumno.getTelefono());
 				preparedStatement.setString(3, alumno.getCorreo());
-				preparedStatement.setString(4, alumno.getTelefono());
-				preparedStatement.setString(5, alumno.getNombre());
-				preparedStatement.setDate(6, Date.valueOf(alumno.getFechaNacimiento()));
+				preparedStatement.setString(4, alumno.getDni());
+				preparedStatement.setDate(5, Date.valueOf(alumno.getFechaNacimiento()));
 				preparedStatement.executeUpdate();
 				
 			}
@@ -137,15 +136,15 @@ public class Alumnos implements IAlumnos{
 		}
 		else {
 			try {
-				PreparedStatement preparedStatement=conexion.prepareStatement("select nombre, dni, telefono from alumno where dni = ?");
+				PreparedStatement preparedStatement=conexion.prepareStatement("select nombre,telefono,correo,dni,fechaNacimiento from alumno where dni = ?");
 				preparedStatement.setString(1, alumno.getDni());
 				ResultSet registros=preparedStatement.executeQuery();
 				
 				if (registros.next()) {
 					String nombre=registros.getString(1);
-					String dni=registros.getString(2);
+					String telefono=registros.getString(2);
 					String correo=registros.getString(3);
-					String telefono=registros.getString(4);
+					String dni=registros.getString(4);
 					LocalDate fechaNacimiento=registros.getDate(5).toLocalDate();
 					
 					alumnoLocalizado=new Alumno(nombre,dni, correo, telefono, fechaNacimiento);
@@ -169,6 +168,7 @@ public class Alumnos implements IAlumnos{
 			try {
 				PreparedStatement preparedStatement=conexion.prepareStatement("delete from alumno where dni = ?");
 				preparedStatement.setString(1, alumno.getDni());
+				preparedStatement.executeUpdate();
 				
 				
 				if (preparedStatement.executeUpdate()==0) {

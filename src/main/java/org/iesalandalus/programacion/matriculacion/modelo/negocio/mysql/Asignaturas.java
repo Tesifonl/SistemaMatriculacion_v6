@@ -93,8 +93,9 @@ public class Asignaturas implements IAsignaturas{
 				int horasAnuales=registros.getInt(3);
 				Curso curso=getCurso(registros.getString(4));
 				int horasDesdoble=registros.getInt(5);
-				EspecialidadProfesorado especialidadProfesorado=getEspecialidadProfesorado(registros.getString(4));
-				int codigoCicloFormativo=registros.getInt(6);
+				EspecialidadProfesorado especialidadProfesorado=getEspecialidadProfesorado(registros.getString(6));
+				int codigoCicloFormativo=registros.getInt(7);
+				
 				
 				CiclosFormativos ciclosCopia=new CiclosFormativos();
 				ArrayList <CicloFormativo> copiaArray=ciclosCopia.get();
@@ -111,10 +112,10 @@ public class Asignaturas implements IAsignaturas{
 					}
 				}
 				
-				CicloFormativo cicloLocalizado=ciclosCopia.buscar(nuevoCiclo);
+				CicloFormativo cicloFormativoLocalizado=ciclosCopia.buscar(nuevoCiclo);
 				
 				Asignatura asignatura=new Asignatura(codigo,nombre,horasAnuales, curso,horasDesdoble,
-						especialidadProfesorado,cicloLocalizado);
+						especialidadProfesorado,cicloFormativoLocalizado);
 				
 				asignaturas.add(asignatura);
 			}
@@ -200,8 +201,8 @@ public class Asignaturas implements IAsignaturas{
 					int horasAnuales=registros.getInt(3);
 					Curso curso=getCurso(registros.getString(4));
 					int horasDesdoble=registros.getInt(5);
-					EspecialidadProfesorado especialidadProfesorado=getEspecialidadProfesorado(registros.getString(4));;
-					int codigoCicloFormativo=registros.getInt(6);
+					EspecialidadProfesorado especialidadProfesorado=getEspecialidadProfesorado(registros.getString(6));;
+					int codigoCicloFormativo=registros.getInt(7);
 					
 					CiclosFormativos ciclosCopia=new CiclosFormativos();
 					ArrayList <CicloFormativo> copiaArray=ciclosCopia.get();
