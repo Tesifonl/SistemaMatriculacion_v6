@@ -8,32 +8,65 @@ import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.IAlumnos;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.IAsignaturas;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.ICiclosFormativos;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.IFuenteDatos;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.IMatriculas;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.memoria.Alumnos;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.memoria.Asignaturas;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.memoria.CiclosFormativos;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.memoria.FuenteDatosMemoria;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.memoria.Matriculas;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.FuenteDatosMySQL;
 import org.iesalandalus.programacion.matriculacion.vista.Consola;
 
 
 public class Modelo {
 
-	private Alumnos alumnos;
-	private Matriculas matriculas;
-	private Asignaturas asignaturas;
-	private CiclosFormativos ciclosFormativos;
+	private IAlumnos alumnos;
+	private IMatriculas matriculas;
+	private IAsignaturas asignaturas;
+	private ICiclosFormativos ciclosFormativos;
+	private IFuenteDatos fuenteDatos;
+	
 
 	
+	public Modelo(FactoriaFuenteDatos factoriaFuenteDatos) {
+		
+		setFuenteDatos(factoriaFuenteDatos.crear());
+	}
 	
-	public Modelo() {}
+	public void setFuenteDatos(IFuenteDatos fuenteDatos) {
+		if (fuenteDatos!=null) {
+		this.fuenteDatos=fuenteDatos;
+		}else {
+			throw new NullPointerException("No se ha recibido una fuente de datos");
+		}
+	}
+	
 	
 	public void comenzar() {
-    	alumnos=new Alumnos();
-    	asignaturas=new Asignaturas();
-    	ciclosFormativos=new CiclosFormativos();
-    	matriculas=new Matriculas();
+		
+		alumnos=fuenteDatos.crearAlumnos();
+		alumnos.comenzar();
+		
+		ciclosFormativos=fuenteDatos.crearCiclosFormativos();
+		ciclosFormativos.comenzar();
+		
+		asignaturas=fuenteDatos.crearAsignaturas();
+		asignaturas.comenzar();
+		
+		matriculas=fuenteDatos.crearMatriculas();
+		matriculas.comenzar();
+
 	}
 	
 	public void terminar (){
+		alumnos.terminar();
+		ciclosFormativos.terminar();
+		asignaturas.terminar();
+		matriculas.terminar();
 		System.out.print("Hasta luego");
 	}
 	

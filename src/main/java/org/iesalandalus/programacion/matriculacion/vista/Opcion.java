@@ -168,4 +168,6 @@ public enum Opcion {
 	}
 	
 	public abstract void ejecutar();
+	
+	//con esto obligo a que cada opcion de enumerado tenga un metodo asociado.
 }
