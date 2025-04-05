@@ -168,7 +168,7 @@ public class Alumnos implements IAlumnos{
 			try {
 				PreparedStatement preparedStatement=conexion.prepareStatement("delete from alumno where dni = ?");
 				preparedStatement.setString(1, alumno.getDni());
-				preparedStatement.executeUpdate();
+				//preparedStatement.executeUpdate();
 				
 				
 				if (preparedStatement.executeUpdate()==0) {

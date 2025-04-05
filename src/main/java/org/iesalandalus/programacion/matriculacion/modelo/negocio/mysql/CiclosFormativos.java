@@ -1,13 +1,13 @@
 package org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql;
 
+
+
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.naming.OperationNotSupportedException;
@@ -20,6 +20,8 @@ import org.iesalandalus.programacion.matriculacion.modelo.dominio.GradoE;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Modalidad;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.ICiclosFormativos;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.utilidades.MySQL;
+
+import com.mysql.cj.jdbc.result.ResultSetImpl;
 
 public class CiclosFormativos implements ICiclosFormativos {
 	
@@ -60,16 +62,20 @@ public class CiclosFormativos implements ICiclosFormativos {
 		}else {
 		
 		
-		if (tipoGrado=="gradod") {
+		if (tipoGrado.equalsIgnoreCase("gradod")) {
 			if (nombreGrado!=null && modalidad!=null) {
-			nuevoGrado=new GradoD(nombreGrado,numAniosGrado,Modalidad.valueOf(modalidad));
+				if(modalidad.equalsIgnoreCase("presencial")) {
+					nuevoGrado=new GradoD(nombreGrado,numAniosGrado,Modalidad.PRESENCIAL);
+				}else {
+					nuevoGrado=new GradoD(nombreGrado,numAniosGrado,Modalidad.SEMIPRESENCIAL);
+				}
 			}
 			else {
 				throw new NullPointerException("Se ha recibido un tipo de grado nulo");
 			}
 		}
 		
-		if (tipoGrado=="gradoe") {
+		if (tipoGrado.equalsIgnoreCase("gradoe")) {
 			if (nombreGrado!=null)  {
 			nuevoGrado=new GradoE(nombreGrado,numAniosGrado,numEdiciones);
 			}
@@ -123,24 +129,24 @@ public class CiclosFormativos implements ICiclosFormativos {
 	@Override
 	public int getTamano() {
 		// TODO Auto-generated method stub
-		int tamano=0;
-		
-		try {
-			
-			Statement statement=conexion.createStatement();
-			ResultSet registros=statement.executeQuery("select count(*) from cicloFormativo");
-			
-			if(registros.next()) {
-				tamano=registros.getInt(1);
-			}
-			
-		}
-		catch(SQLException e) {
-			throw new IllegalArgumentException("ERROR:" + e.getMessage());
-		}
-			
-		return tamano;
+	    int tamano = 0;
+
+
+	    try (PreparedStatement preparedStatement = conexion.prepareStatement("select count(*) from cicloFormativo");
+	         ResultSet registros = preparedStatement.executeQuery()) {
+
+	        if (registros.next()) {
+	            tamano = registros.getInt(1);
+	        }
+
+	    } catch (SQLException e) {
+	        throw new IllegalArgumentException("ERROR al obtener el tamaño: " + e.getMessage());
+	    }
+
+	    return tamano;
 	}
+	
+
 	
 	@Override
 	public void insertar(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
@@ -152,30 +158,34 @@ public class CiclosFormativos implements ICiclosFormativos {
 			try {
 				Grado grado=cicloFormativo.getGrado();
 				
+	
+				
 				PreparedStatement preparedStatement=conexion.prepareStatement("insert into cicloFormativo values (?,?,?,?,?,?,?,?,?)");
 				
 				if(grado instanceof GradoE) {
 				GradoE gradoE=(GradoE) grado;
 				preparedStatement.setInt(1,cicloFormativo.getCodigo());
 				preparedStatement.setString(2,cicloFormativo.getFamiliaProfesional());
-				preparedStatement.setString(3,cicloFormativo.getGrado().toString());
+				preparedStatement.setString(3,"gradoe");
 				preparedStatement.setString(4,cicloFormativo.getNombre());
 				preparedStatement.setInt(5,cicloFormativo.getHoras());
 				preparedStatement.setString(6,cicloFormativo.getGrado().getNombre());
-				preparedStatement.setInt(7,1);
-				preparedStatement.setString(8,"");
+				preparedStatement.setInt(7,grado.getNumAnios());
+				preparedStatement.setString(8,"presencial");
 				preparedStatement.setInt(9,gradoE.getNumEdiciones());
 				}
-				else if(grado instanceof GradoD) {
+				else {
 				GradoD gradoD=(GradoD) grado;
 				preparedStatement.setInt(1,cicloFormativo.getCodigo());
 				preparedStatement.setString(2,cicloFormativo.getFamiliaProfesional());
-				preparedStatement.setString(3,cicloFormativo.getGrado().toString());
+				preparedStatement.setString(3,"gradod");
 				preparedStatement.setString(4,cicloFormativo.getNombre());
 				preparedStatement.setInt(5,cicloFormativo.getHoras());
 				preparedStatement.setString(6,gradoD.getNombre());
-				preparedStatement.setInt(7,1);
-				preparedStatement.setString(8,gradoD.getModalidad().toString());
+				preparedStatement.setInt(7,grado.getNumAnios());
+				if(gradoD.getModalidad().equals(Modalidad.PRESENCIAL)) {
+				preparedStatement.setString(8,"presencial");
+				}else {preparedStatement.setString(8,"semipresencial");}
 				preparedStatement.setInt(9,0);
 				}
 				preparedStatement.executeUpdate();
@@ -201,7 +211,7 @@ public class CiclosFormativos implements ICiclosFormativos {
 		}
 		else {
 			try {
-				PreparedStatement preparedStatement=conexion.prepareStatement("select codigo, familiaProfesional, grado,nombre from cicloFormativo where codigo = ?");
+				PreparedStatement preparedStatement=conexion.prepareStatement("select codigo,familiaProfesional,grado,nombre,horas,nombreGrado,numAniosGrado,modalidad,numEdiciones from cicloFormativo where codigo = ?");
 				preparedStatement.setInt(1, cicloFormativo.getCodigo());
 				ResultSet registros=preparedStatement.executeQuery();
 				

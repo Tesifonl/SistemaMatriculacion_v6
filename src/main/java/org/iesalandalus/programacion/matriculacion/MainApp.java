@@ -6,11 +6,13 @@ import org.iesalandalus.programacion.matriculacion.modelo.FactoriaFuenteDatos;
 import org.iesalandalus.programacion.matriculacion.modelo.Modelo;
 import org.iesalandalus.programacion.matriculacion.vista.Vista;
 
+import com.mysql.cj.jdbc.exceptions.OperationNotSupportedException;
+
 
 public class MainApp {
 
     
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws OperationNotSupportedException  {
     	
     	//MySQL.establecerConexion();
     	//MySQL.cerrarConexion();

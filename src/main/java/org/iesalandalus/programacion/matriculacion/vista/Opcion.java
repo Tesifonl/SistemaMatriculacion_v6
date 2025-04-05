@@ -1,5 +1,7 @@
 package org.iesalandalus.programacion.matriculacion.vista;
 
+import com.mysql.cj.jdbc.exceptions.OperationNotSupportedException;
+
 public enum Opcion {
 	
 	SALIR("Salir") {
@@ -40,7 +42,7 @@ public enum Opcion {
 	},
 	INSERTAR_CICLO_FORMATIVO("Insertar ciclo formativo") {
 		@Override
-		public void ejecutar() {
+		public void ejecutar() throws OperationNotSupportedException {
 			// TODO Auto-generated method stub
 			vista.insertarCicloFormativo();
 		}
@@ -167,7 +169,7 @@ public enum Opcion {
 		}
 	}
 	
-	public abstract void ejecutar();
+	public abstract void ejecutar() throws OperationNotSupportedException;
 	
 	//con esto obligo a que cada opcion de enumerado tenga un metodo asociado.
 }

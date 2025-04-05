@@ -193,7 +193,7 @@ public class Modelo {
       }
     
 	
-    public void insertarCicloFormativo(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+    public void insertarCicloFormativo(CicloFormativo cicloFormativo) throws OperationNotSupportedException, com.mysql.cj.jdbc.exceptions.OperationNotSupportedException {
 	  		
     	if(cicloFormativo!=null) {
 

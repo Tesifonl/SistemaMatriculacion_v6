@@ -4,8 +4,8 @@ package org.iesalandalus.programacion.matriculacion.modelo.dominio;
 
 public enum Modalidad {
 	
-	SEMIPRESENCIAL("Semipresencial"),
-	PRESENCIAL("Presencial");
+	SEMIPRESENCIAL("semipresencial"),
+	PRESENCIAL("presencial");
 	
 	private String cadenaAMostrar;
 

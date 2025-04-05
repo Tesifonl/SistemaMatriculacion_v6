@@ -186,15 +186,16 @@ public class Consola {
 		Grado gradoElegido=null;
 		System.out.println("Introduce un nombre para el grado");
 		String nombre=Entrada.cadena();
-		System.out.println("Introduce un numero de años para el grado");
+		TiposGrado nuevoGrado=leerTipoGrado();
+		System.out.println("Introduce un numero de años.Para grados D solo puede ser 1 o 2 años. Para grados E solo 1 año ");
 		int numAnios=Entrada.entero();
 		
-		if (leerTipoGrado().equals(TiposGrado.GRADOD)) {
+		if (nuevoGrado.equals(TiposGrado.GRADOD)) {
 			gradoElegido=new GradoD(nombre,numAnios,leerModalidad());
 		}else {
 			System.out.println("Introduce un numero de ediciones para el grado");
 			int numEdiciones=Entrada.entero();
-			gradoElegido=new GradoE(nombre,numAnios,numEdiciones);
+			gradoElegido=new GradoE(nombre,1,numEdiciones);
 		}
 
 		
@@ -224,7 +225,7 @@ public class Consola {
 				tiposGradoElegido=TiposGrado.GRADOE;
 				break;
 			case 3:
-				tiposGradoElegido=null;
+				tiposGradoElegido=TiposGrado.GRADOD;
 				break;
 
 		}
@@ -255,7 +256,7 @@ public class Consola {
 				modalidadElegido=Modalidad.PRESENCIAL;
 				break;
 			case 3:
-				modalidadElegido=null;
+				modalidadElegido=Modalidad.SEMIPRESENCIAL;
 				break;
 
 		}

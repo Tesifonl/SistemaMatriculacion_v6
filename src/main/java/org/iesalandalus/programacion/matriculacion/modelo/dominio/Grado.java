@@ -15,6 +15,9 @@ public abstract class Grado {
 		return nombre;
 	}
 	
+	public int getNumAnios() {
+		return numAnios;
+	}
 	protected void setNombre(String nombre) {
 		if(nombre!=null) {
 			this.nombre=nombre;

@@ -31,7 +31,7 @@ public class Controlador {
 		}
 	}
 	
-	public void comenzar() {
+	public void comenzar() throws com.mysql.cj.jdbc.exceptions.OperationNotSupportedException {
 		modelo.comenzar();
 		vista.comenzar();;
 	}
@@ -94,7 +94,7 @@ public class Controlador {
     }
     
 	
-    public void insertarCicloFormativo(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
+    public void insertarCicloFormativo(CicloFormativo cicloFormativo) throws OperationNotSupportedException, com.mysql.cj.jdbc.exceptions.OperationNotSupportedException {
 
     		modelo.insertarCicloFormativo(cicloFormativo);
     }

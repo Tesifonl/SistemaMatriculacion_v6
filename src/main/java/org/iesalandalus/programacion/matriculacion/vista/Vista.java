@@ -30,7 +30,7 @@ public class Vista {
 		}
 	}
 	
-	public void comenzar() {
+	public void comenzar() throws com.mysql.cj.jdbc.exceptions.OperationNotSupportedException {
 		
 		Opcion opcion=null;
 				
@@ -261,7 +261,7 @@ public class Vista {
 	}
 
 
-	public void insertarCicloFormativo() {
+	public void insertarCicloFormativo() throws com.mysql.cj.jdbc.exceptions.OperationNotSupportedException {
 		
 		try{
 			controlador.insertarCicloFormativo(Consola.leerCicloFormativo());
