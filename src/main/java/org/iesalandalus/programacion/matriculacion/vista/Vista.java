@@ -191,15 +191,8 @@ public class Vista {
 	public void insertarAsignatura() {
 		
 		try {
-			
 			Asignatura asignatura=Consola.leerAsignatura();
-			if (controlador.getAsignaturas()==null || Consola.asignaturaYaMatriculada(controlador.getAsignaturas(), asignatura)!=true) {
 			controlador.insertarAsignatura(asignatura);
-			System.out.println("Asignatura insertada correctamente");
-			}else
-			{
-				System.out.println("Asignatura insertada anteriormente");
-			}
 		}				
 		catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());

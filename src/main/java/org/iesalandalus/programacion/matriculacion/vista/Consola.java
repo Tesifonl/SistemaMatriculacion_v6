@@ -187,7 +187,7 @@ public class Consola {
 		System.out.println("Introduce un nombre para el grado");
 		String nombre=Entrada.cadena();
 		TiposGrado nuevoGrado=leerTipoGrado();
-		System.out.println("Introduce un numero de años.Para grados D solo puede ser 1 o 2 años. Para grados E solo 1 año ");
+		System.out.println("Introduce un numero de años.Para grados D solo puede ser 2 o 3 años. Para grados E solo 1 año ");
 		int numAnios=Entrada.entero();
 		
 		if (nuevoGrado.equals(TiposGrado.GRADOD)) {
@@ -399,7 +399,7 @@ public class Consola {
 			System.out.println("Introduce un numero de horas anuales ");
 			int horasAnuales=Entrada.entero();
 			Curso curso=leerCurso();
-			System.out.println("Introduce un numero de horas de desdoble: ");
+			System.out.println("Introduce un numero de horas de desdoble entre 0 y 6 horas: ");
 			int horasDesdoble=Entrada.entero();
 			EspecialidadProfesorado especialidadProfesorado=leerEspecialidadProfesorado();
 			CicloFormativo cicloformativo=getCicloFormativoPorCodigo();

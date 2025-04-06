@@ -158,26 +158,33 @@ public class Asignaturas implements IAsignaturas{
 			throw new NullPointerException("No se ha recibido las asignaturas a insertar");
 		}
 		else {
-			try {
-				PreparedStatement preparedStatement=conexion.prepareStatement("insert into asignatura values (?,?,?,?,?,?,?)");
-				preparedStatement.setString(1, asignatura.getCodigo());
-				preparedStatement.setString(2, asignatura.getNombre());
-				preparedStatement.setInt(3, asignatura.getHorasAnuales());
-				preparedStatement.setString(4,asignatura.getCurso().toString());
-				preparedStatement.setInt(5, asignatura.getHorasDesdoble());
-				preparedStatement.setString(6,asignatura.getEspecialidadProfesorado().toString());
-				preparedStatement.setInt(7, asignatura.getCicloFormativo().getCodigo());
-				preparedStatement.executeUpdate();
-				
-				CiclosFormativos ciclosCopia=new CiclosFormativos();
-				ciclosCopia.insertar(asignatura.getCicloFormativo());
-				
+			
+			CiclosFormativos ciclosFormativos=new CiclosFormativos();
+			if (ciclosFormativos.buscar(asignatura.getCicloFormativo())==null) {
+				System.out.println("Error: No existe este ciclo formativo en el sistema,introduzcalo previamente a la asignatura");
 			}
-			catch (SQLIntegrityConstraintViolationException e) {
-				throw new OperationNotSupportedException("ERROR: Ya existe una asignatura igual.");
-			} 
-			catch (SQLException e) {
-				throw new OperationNotSupportedException("ERROR:" + e.getMessage());
+			else {
+				try {
+					PreparedStatement preparedStatement=conexion.prepareStatement("insert into asignatura values (?,?,?,?,?,?,?)");
+					preparedStatement.setString(1, asignatura.getCodigo());
+					preparedStatement.setString(2, asignatura.getNombre());
+					preparedStatement.setInt(3, asignatura.getHorasAnuales());
+					preparedStatement.setString(4,asignatura.getCurso().toString());
+					preparedStatement.setInt(5, asignatura.getHorasDesdoble());
+					preparedStatement.setString(6,asignatura.getEspecialidadProfesorado().toString());
+					preparedStatement.setInt(7, asignatura.getCicloFormativo().getCodigo());
+					preparedStatement.executeUpdate();
+					
+					System.out.println("Asignatura insertada correctamente");
+				
+				
+				}
+				catch (SQLIntegrityConstraintViolationException e) {
+					throw new OperationNotSupportedException("ERROR:" + e.getMessage());
+				} 
+				catch (SQLException e) {
+					throw new OperationNotSupportedException("ERROR:" + e.getMessage());
+				}
 			}
 		}
 	}
