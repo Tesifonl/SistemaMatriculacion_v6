@@ -57,7 +57,7 @@ public class Asignaturas implements IAsignaturas{
 	
 	public Curso getCurso(String curso) {
 		if (curso!=null) {
-			Curso cursoRecibido=Curso.valueOf(curso);
+			Curso cursoRecibido=Curso.valueOf(curso.toUpperCase());
 			return cursoRecibido;
 		}
 		else {
@@ -68,7 +68,7 @@ public class Asignaturas implements IAsignaturas{
 	
 	public EspecialidadProfesorado getEspecialidadProfesorado(String especialidad) {
 		if (especialidad!=null) {
-			EspecialidadProfesorado epecialidadRecibida=EspecialidadProfesorado .valueOf(especialidad);
+			EspecialidadProfesorado epecialidadRecibida=EspecialidadProfesorado .valueOf(especialidad.toUpperCase());
 			return epecialidadRecibida;
 		}
 		else {
@@ -91,33 +91,37 @@ public class Asignaturas implements IAsignaturas{
 				String codigo=registros.getString(1);
 				String nombre=registros.getString(2);
 				int horasAnuales=registros.getInt(3);
-				Curso curso=getCurso(registros.getString(4));
+				String curso=registros.getString(4);
 				int horasDesdoble=registros.getInt(5);
-				EspecialidadProfesorado especialidadProfesorado=getEspecialidadProfesorado(registros.getString(6));
+				String especialidadProfesorado=registros.getString(6);
 				int codigoCicloFormativo=registros.getInt(7);
 				
 				
-				CiclosFormativos ciclosCopia=new CiclosFormativos();
-				ArrayList <CicloFormativo> copiaArray=ciclosCopia.get();
-				CicloFormativo nuevoCiclo=null;
+
+				Curso curso1=getCurso(curso);
+				EspecialidadProfesorado especialidadProfesorado1=getEspecialidadProfesorado(especialidadProfesorado);
+				CiclosFormativos ciclosFormativos1=new CiclosFormativos();
 				
+				ArrayList <CicloFormativo> copiaArray=ciclosFormativos1.get();
+				CicloFormativo nuevoCiclo=null;
+				boolean encontrado=false;
+				int i=0;
 				
 				for (CicloFormativo ciclofor: copiaArray) {
-					int i=+1;
+					
+					i++;
 					if (ciclofor.getCodigo()==codigoCicloFormativo) {
-						nuevoCiclo=copiaArray.get(i);
+						nuevoCiclo=copiaArray.get(i-1);
+						
+						Asignatura asignatura=new Asignatura(codigo,nombre,horasAnuales, curso1,horasDesdoble,especialidadProfesorado1,nuevoCiclo);
+						
+						asignaturas.add(asignatura);
 					}
 					else {
-						throw new NullPointerException("No se ha encontrado el alumno en la matricula");
+						encontrado=true;
 					}
 				}
 				
-				CicloFormativo cicloFormativoLocalizado=ciclosCopia.buscar(nuevoCiclo);
-				
-				Asignatura asignatura=new Asignatura(codigo,nombre,horasAnuales, curso,horasDesdoble,
-						especialidadProfesorado,cicloFormativoLocalizado);
-				
-				asignaturas.add(asignatura);
 			}
 			
 		}
@@ -206,36 +210,39 @@ public class Asignaturas implements IAsignaturas{
 					String codigo=registros.getString(1);
 					String nombre=registros.getString(2);
 					int horasAnuales=registros.getInt(3);
-					Curso curso=getCurso(registros.getString(4));
+					String curso=registros.getString(4);
 					int horasDesdoble=registros.getInt(5);
-					EspecialidadProfesorado especialidadProfesorado=getEspecialidadProfesorado(registros.getString(6));;
+					String especialidadProfesorado=registros.getString(6);
 					int codigoCicloFormativo=registros.getInt(7);
 					
-					CiclosFormativos ciclosCopia=new CiclosFormativos();
-					ArrayList <CicloFormativo> copiaArray=ciclosCopia.get();
-					CicloFormativo nuevoCiclo=null;
+					Curso curso1=getCurso(curso);
+					EspecialidadProfesorado especialidadProfesorado1=getEspecialidadProfesorado(especialidadProfesorado);
+					CiclosFormativos ciclosFormativos1=new CiclosFormativos();
 					
+					ArrayList <CicloFormativo> copiaArray=ciclosFormativos1.get();
+					CicloFormativo nuevoCiclo=null;
+					boolean encontrado=false;
+					int i=0;
 					
 					for (CicloFormativo ciclofor: copiaArray) {
-						int i=+1;
+						i++;
 						if (ciclofor.getCodigo()==codigoCicloFormativo) {
-							nuevoCiclo=copiaArray.get(i);
+							nuevoCiclo=copiaArray.get(i-1);
+							asignaturaLocalizada=new Asignatura(codigo,nombre,horasAnuales, curso1,horasDesdoble,especialidadProfesorado1,nuevoCiclo);
 						}
 						else {
-							throw new NullPointerException("No se ha encontrado el ciclo formatico  en las asignaturas");
-						}
+							encontrado=true;
+							}
 					}
-					
-					CicloFormativo cicloLocalizado=ciclosCopia.buscar(nuevoCiclo);
-					
-					asignaturaLocalizada=new Asignatura(codigo,nombre,horasAnuales, curso,horasDesdoble,
-							especialidadProfesorado,cicloLocalizado);
+				
+			
 				}
 			}
 			catch (SQLException e) {
 				throw new IllegalArgumentException("ERROR:" + e.getMessage());
 			}
 			
+		
 			return asignaturaLocalizada;
 		}
 	}
@@ -247,18 +254,10 @@ public class Asignaturas implements IAsignaturas{
 			throw new NullPointerException("No se puede buscar una asignatura nula");
 		}
 		else {
-			try {
-				PreparedStatement preparedStatement=conexion.prepareStatement("delete from asignatura where codigo = ?");
-				preparedStatement.setString(1, asignatura.getCodigo());
-				
-				
-				if (preparedStatement.executeUpdate()==0) {
-					throw new OperationNotSupportedException("ERROR: No existe ninguna asignatura con los datos indicados.");
-				}
-			}
-			catch (SQLException e) {
-				throw new IllegalArgumentException("ERROR:" + e.getMessage());
-			}
+			
+			CiclosFormativos ciclosFormativos=new CiclosFormativos();
+			ciclosFormativos.borrar(buscar(asignatura).getCicloFormativo());
+			
 		}
 	}
 
