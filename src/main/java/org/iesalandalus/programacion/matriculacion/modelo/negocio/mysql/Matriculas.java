@@ -170,45 +170,52 @@ public class Matriculas implements IMatriculas{
 	@Override
 	public void insertar(Matricula matricula) throws OperationNotSupportedException {
 		// TODO Auto-generated method stub
+		
 		if(matricula==null) {
 			throw new NullPointerException(" No se ha recibido la matricula a insertar");		
 		}
 		else {
-			try {
-				PreparedStatement preparedStatement=conexion.prepareStatement("insert into matricula values (?,?,?,?,?)");
-				preparedStatement.setInt(1, matricula.getIdMatricula());
-				preparedStatement.setString(2, matricula.getCursoAcademico());
-				preparedStatement.setDate(3, Date.valueOf(matricula.getFechaMatriculacion()));
-				preparedStatement.setDate(4, Date.valueOf(matricula.getFechaAnulacion()));
-				preparedStatement.setString(5, matricula.getAlumno().getDni());
-				preparedStatement.executeUpdate();
+			Alumnos alumnos=new Alumnos();
+			Asignaturas asignaturas=new Asignaturas();
+			if (alumnos.buscar(matricula.getAlumno())==null ) {
+				System.out.println("Error: No existe este alumno en el sistema,introduzcalo previamente a la matricula");
+				}
+				else {
+					try {
+						PreparedStatement preparedStatement=conexion.prepareStatement("insert into matricula values (?,?,?,?,?)");
+						preparedStatement.setInt(1, matricula.getIdMatricula());
+						preparedStatement.setString(2, matricula.getCursoAcademico());
+						preparedStatement.setDate(3, Date.valueOf(matricula.getFechaMatriculacion()));
+						preparedStatement.setNull(4, java.sql.Types.DATE);
+						preparedStatement.setString(5, matricula.getAlumno().getDni());
+						preparedStatement.executeUpdate();
 				
 				
-				ArrayList<Asignatura> coleccionAsignaturas=getAsignaturasMatricula(matricula.getIdMatricula());
+					/*ArrayList<Asignatura> coleccionAsignaturas=getAsignaturasMatricula(matricula.getIdMatricula());
 				
-				Alumnos alumnos= new Alumnos();
-				ArrayList <Alumno> copiaAlumnos=alumnos.get();
-				Alumno alumnoBuscado=null;
+					Alumnos alumnos1= new Alumnos();
+					ArrayList <Alumno> copiaAlumnos=alumnos1.get();
+					Alumno alumnoBuscado=null;
 		
 				
-				for(Alumno alumnoEncontrado: copiaAlumnos) {
-					int i=+1;
-					if(alumnoEncontrado.getDni().equals(matricula.getAlumno().getDni())) {
-						alumnoBuscado=copiaAlumnos.get(i);
-					}else {
-						throw new NullPointerException("No se ha encontrado el alumno en la matricula");
-					}
-				}
+					for(Alumno alumnoEncontrado: copiaAlumnos) {
+						int i=+1;
+						if(alumnoEncontrado.getDni().equals(matricula.getAlumno().getDni())) {alumnoBuscado=copiaAlumnos.get(i);
+						}else {
+							throw new NullPointerException("No se ha encontrado el alumno en la matricula");
+						}
+					}*/
 				
-				alumnos.insertar(alumnoBuscado);
+				//alumnos.insertar(alumnoBuscado);
 				//LO MISMO TENGO QUE HACER CON EL ARRAY DE ASIGNATURAS.
 				
-			}
-			catch (SQLIntegrityConstraintViolationException e) {
-				throw new OperationNotSupportedException("ERROR: Ya existe una asignatura igual.");
-			} 
-			catch (SQLException e) {
-				throw new OperationNotSupportedException("ERROR:" + e.getMessage());
+					}
+					catch (SQLIntegrityConstraintViolationException e) {
+						throw new OperationNotSupportedException("ERROR:" + e.getMessage());
+					} 
+					catch (SQLException e) {
+						throw new OperationNotSupportedException("ERROR:" + e.getMessage());
+					}
 			}
 		}
 	}
