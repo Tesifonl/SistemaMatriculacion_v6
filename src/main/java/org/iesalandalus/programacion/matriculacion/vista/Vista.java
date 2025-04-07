@@ -332,7 +332,7 @@ public class Vista {
 	public void  insertarMatricula() {
 		try{
 			controlador.insertarMatricula(Consola.leerMatricula(Consola.getAlumnoPorDni(), Consola.elegirAsignaturasMatricula()));
-			System.out.println("Matricula insertada correctamente");
+		
 		}				
 		catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());

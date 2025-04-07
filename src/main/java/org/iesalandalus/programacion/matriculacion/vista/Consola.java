@@ -524,6 +524,7 @@ public class Consola {
 		try {
 			System.out.println("Introduce un id de matricula: ");
 			int idMatricula=Entrada.entero();
+			System.out.println(idMatricula);
 			Grado grado=new GradoE("DW",1,1);
 			Alumno alumno=new Alumno( "Tesi", "11111111H", "Tesi@gmail.com", "999999999", LocalDate.of(1979, 1, 8));
 			CicloFormativo cicloFormativo =new CicloFormativo(1111,"Semipresencial",grado,"DAW",100);
