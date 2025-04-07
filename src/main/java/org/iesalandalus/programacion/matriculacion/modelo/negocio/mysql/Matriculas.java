@@ -334,25 +334,32 @@ public class Matriculas implements IMatriculas{
 				ResultSet registros=preparedStatement.executeQuery();
 				
 				if (registros.next()) {
-					while(registros.next()) {
+					
 						int idMatricula=registros.getInt(1);
 						String cursoAcademico=registros.getString(2);
 						LocalDate fechaMatriculacion=registros.getDate(3).toLocalDate();
-						LocalDate fechaAnulacion=registros.getDate(4).toLocalDate();
+				        LocalDate fechaAnulacion = null;
+				        if (registros.getDate(4) != null) {
+				            fechaAnulacion = registros.getDate(4).toLocalDate();
+				        }
 						String dni=registros.getString(5);
 
 						
 						ArrayList<Asignatura> coleccionAsignaturas=getAsignaturasMatricula(idMatricula);
 						Matricula nuevaMatricula=new Matricula(idMatricula,cursoAcademico,fechaMatriculacion,alumno,coleccionAsignaturas);
-						coleccionMatriculas.add(nuevaMatricula);
-					
-					}
+	
+						coleccionMatriculas.add(nuevaMatricula);	
+
+				
+				}
+				else {
+					System.out.println("No existen matriculas para este alumno");
 				}
 			}
 			catch (SQLException e) {
 				throw new IllegalArgumentException("ERROR:" + e.getMessage());
 			}
-			
+			System.out.println(coleccionMatriculas);
 			return coleccionMatriculas;
 		}
 	}
@@ -372,11 +379,14 @@ public class Matriculas implements IMatriculas{
 				ResultSet registros=preparedStatement.executeQuery();
 				
 				if (registros.next()) {
-					while(registros.next()) {
+					
 						int idMatricula=registros.getInt(1);
 						String cursoAcademicoLocalizado=registros.getString(2);
 						LocalDate fechaMatriculacion=registros.getDate(3).toLocalDate();
-						LocalDate fechaAnulacion=registros.getDate(4).toLocalDate();
+				        LocalDate fechaAnulacion = null;
+				        if (registros.getDate(4) != null) {
+				            fechaAnulacion = registros.getDate(4).toLocalDate();
+				        
 						String dni=registros.getString(5);
 
 						
@@ -401,11 +411,14 @@ public class Matriculas implements IMatriculas{
 					
 					}
 				}
+				else {
+					System.out.println("No existen matriculas para curso academico");
+				}
 			}
 			catch (SQLException e) {
 				throw new IllegalArgumentException("ERROR:" + e.getMessage());
 			}
-			
+			System.out.println(coleccionMatriculas);
 			return coleccionMatriculas;
 		}
 	}
@@ -447,7 +460,10 @@ public class Matriculas implements IMatriculas{
 					int idMatricula2=registros.getInt(1);
 					String cursoAcademicoLocalizado=registros.getString(2);
 					LocalDate fechaMatriculacion=registros.getDate(3).toLocalDate();
-					LocalDate fechaAnulacion=registros.getDate(4).toLocalDate();
+			        LocalDate fechaAnulacion = null;
+			        if (registros.getDate(4) != null) {
+			            fechaAnulacion = registros.getDate(4).toLocalDate();
+			        }
 					String dni=registros.getString(5);
 					
 					
@@ -482,7 +498,7 @@ public class Matriculas implements IMatriculas{
 			catch (SQLException e) {
 				throw new IllegalArgumentException("ERROR:" + e.getMessage());
 			}
-			
+			System.out.println(coleccionMatriculas);
 			return coleccionMatriculas;
 		}
 	}
