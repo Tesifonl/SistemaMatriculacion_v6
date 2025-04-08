@@ -385,7 +385,7 @@ public class Matriculas implements IMatriculas{
 						LocalDate fechaMatriculacion=registros.getDate(3).toLocalDate();
 				        LocalDate fechaAnulacion = null;
 				        if (registros.getDate(4) != null) {
-				            fechaAnulacion = registros.getDate(4).toLocalDate();
+				            fechaAnulacion = registros.getDate(4).toLocalDate();}
 				        
 						String dni=registros.getString(5);
 
@@ -395,22 +395,21 @@ public class Matriculas implements IMatriculas{
 						Alumnos alumnos= new Alumnos();
 						ArrayList <Alumno> copiaAlumnos=alumnos.get();
 						Alumno alumnoBuscado=null;
-				
+						int i=0;
+						boolean encontrado=false;
 						
 						for(Alumno alumnoEncontrado: copiaAlumnos) {
-							int i=+1;
+							i++;
 							if(alumnoEncontrado.getDni().equals(dni)) {
-								alumnoBuscado=copiaAlumnos.get(i);
+								alumnoBuscado=copiaAlumnos.get(i-1);
+								Matricula nuevaMatricula=new Matricula(idMatricula,cursoAcademicoLocalizado,fechaMatriculacion,alumnoBuscado,coleccionAsignaturas);
+								coleccionMatriculas.add(nuevaMatricula);
 							}else {
-								throw new NullPointerException("No se ha encontrado el alumno en la matricula");
+								encontrado=true;
 							}
 						}
-						
-						Matricula nuevaMatricula=new Matricula(idMatricula,cursoAcademicoLocalizado,fechaMatriculacion,alumnoBuscado,coleccionAsignaturas);
-						coleccionMatriculas.add(nuevaMatricula);
-					
 					}
-				}
+				
 				else {
 					System.out.println("No existen matriculas para curso academico");
 				}
@@ -445,7 +444,7 @@ public class Matriculas implements IMatriculas{
 					
 					PreparedStatement preparedStatement2=conexion.prepareStatement("select idMatricula, codigo from asignaturasMatricula where codigo = ?");
 					preparedStatement2.setInt(1,codigoCicloFormativo);
-					ResultSet registros2=preparedStatement.executeQuery();
+					ResultSet registros2=preparedStatement2.executeQuery();
 					
 					while(registros2.next()){
 						
@@ -454,17 +453,18 @@ public class Matriculas implements IMatriculas{
 					int codigo2=registros2.getInt(2);
 					
 					PreparedStatement preparedStatement3=conexion.prepareStatement("select idMatricula, cursoAcademico, fechaMatriculacion,fechaAnulacion, dni from matricula where idMatricula = ?");
-					preparedStatement3.setInt(1,codigo2);
-					ResultSet registros3=preparedStatement.executeQuery();
+					preparedStatement3.setInt(1,idMatricula);
+					ResultSet registros3=preparedStatement3.executeQuery();
 					
-					int idMatricula2=registros.getInt(1);
-					String cursoAcademicoLocalizado=registros.getString(2);
-					LocalDate fechaMatriculacion=registros.getDate(3).toLocalDate();
-			        LocalDate fechaAnulacion = null;
-			        if (registros.getDate(4) != null) {
-			            fechaAnulacion = registros.getDate(4).toLocalDate();
-			        }
-					String dni=registros.getString(5);
+					if(registros3.next()) {
+						int idMatricula2=registros3.getInt(1);
+						String cursoAcademicoLocalizado=registros3.getString(2);
+						LocalDate fechaMatriculacion=registros3.getDate(3).toLocalDate();
+						LocalDate fechaAnulacion = null;
+						if (registros3.getDate(4) != null) {
+							fechaAnulacion = registros3.getDate(4).toLocalDate();
+						}
+					String dni=registros3.getString(5);
 					
 					
 					
@@ -473,21 +473,20 @@ public class Matriculas implements IMatriculas{
 					Alumnos alumnos= new Alumnos();
 					ArrayList <Alumno> copiaAlumnos=alumnos.get();
 					Alumno alumnoBuscado=null;
-			
+					int i=0;
+					boolean encontrado=false;
 					
 					for(Alumno alumnoEncontrado: copiaAlumnos) {
-						int i=+1;
+						i++;
 						if(alumnoEncontrado.getDni().equals(dni)) {
-							alumnoBuscado=copiaAlumnos.get(i);
+							alumnoBuscado=copiaAlumnos.get(i-1);
+							Matricula nuevaMatricula=new Matricula(idMatricula2,cursoAcademicoLocalizado,fechaMatriculacion,alumnoBuscado,coleccionAsignaturas);
+							coleccionMatriculas.add(nuevaMatricula);
 						}else {
-							throw new NullPointerException("No se ha encontrado el alumno en la matricula");
+							encontrado=true;
 						}
 					}
-					
-					Matricula nuevaMatricula=new Matricula(idMatricula,cursoAcademicoLocalizado,fechaMatriculacion,alumnoBuscado,coleccionAsignaturas);
-					coleccionMatriculas.add(nuevaMatricula);
-					
-
+					}
 					}		
 				}
 				else {

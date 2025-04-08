@@ -14,9 +14,7 @@ public class MainApp {
     
     public static void main(String[] args) throws OperationNotSupportedException  {
     	
-    	//MySQL.establecerConexion();
-    	//MySQL.cerrarConexion();
-    	
+ 	
     	Modelo modelo=procesarArgumentosFuenteDatos(args);
     	Vista vista=new Vista();
     	Controlador controlador=new Controlador(modelo, vista);
