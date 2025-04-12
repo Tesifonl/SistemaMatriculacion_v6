@@ -1,14 +1,8 @@
 package org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.sql.Statement;
-import java.time.LocalDate;
+import java.sql.*;
 import java.util.ArrayList;
+
 
 import javax.naming.OperationNotSupportedException;
 
@@ -17,13 +11,9 @@ import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Curso;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.EspecialidadProfesorado;
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.Grado;
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.GradoD;
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.GradoE;
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.Modalidad;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.IAsignaturas;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.utilidades.MySQL;
-import org.iesalandalus.programacion.matriculacion.vista.Consola;
+
 
 public class Asignaturas implements IAsignaturas{
 	
