@@ -2,13 +2,9 @@ package org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql;
 
 
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
+
 
 import javax.naming.OperationNotSupportedException;
 
@@ -133,7 +129,7 @@ public class CiclosFormativos implements ICiclosFormativos {
 
 
 	    try (PreparedStatement preparedStatement = conexion.prepareStatement("select count(*) from cicloFormativo");
-	         ResultSet registros = preparedStatement.executeQuery()) {
+			 ResultSet registros = preparedStatement.executeQuery()) {
 
 	        if (registros.next()) {
 	            tamano = registros.getInt(1);
