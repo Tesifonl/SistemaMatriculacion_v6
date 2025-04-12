@@ -31,7 +31,7 @@ public class Controlador {
 		}
 	}
 	
-	public void comenzar() throws com.mysql.cj.jdbc.exceptions.OperationNotSupportedException {
+	public void comenzar() {
 		modelo.comenzar();
 		vista.comenzar();;
 	}
