@@ -12,7 +12,7 @@ import com.mysql.cj.jdbc.exceptions.OperationNotSupportedException;
 public class MainApp {
 
     
-    public static void main(String[] args) throws OperationNotSupportedException  {
+    public static void main(String[] args)  {
     	
  	
     	Modelo modelo=procesarArgumentosFuenteDatos(args);
