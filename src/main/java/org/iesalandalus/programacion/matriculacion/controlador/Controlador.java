@@ -10,20 +10,20 @@ import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
-import org.iesalandalus.programacion.matriculacion.vista.Vista;
+import org.iesalandalus.programacion.matriculacion.vista.texto.VistaTexto;
 
 public class Controlador {
 	
 	private Modelo modelo;
-	private Vista vista;
+	private VistaTexto vistaTexto;
 	
 	
-	public Controlador(Modelo modelo, Vista vista) {
+	public Controlador(Modelo modelo, VistaTexto vistaTexto) {
 		
-		if (modelo!=null && vista!=null) {
+		if (modelo!=null && vistaTexto !=null) {
 			this.modelo=modelo;
-			this.vista=vista;
-			vista.setControlador(this);
+			this.vistaTexto = vistaTexto;
+			vistaTexto.setControlador(this);
 			
 			
 		}else {
@@ -33,7 +33,7 @@ public class Controlador {
 	
 	public void comenzar() {
 		modelo.comenzar();
-		vista.comenzar();;
+		vistaTexto.comenzar();;
 	}
 	
 	public void terminar() {

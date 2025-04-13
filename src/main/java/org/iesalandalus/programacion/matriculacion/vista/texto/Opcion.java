@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.matriculacion.vista;
+package org.iesalandalus.programacion.matriculacion.vista.texto;
 
 import com.mysql.cj.jdbc.exceptions.OperationNotSupportedException;
 
@@ -8,7 +8,7 @@ public enum Opcion {
 		@Override
 		public void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.terminar();;
+			vistaTexto.terminar();;
 			
 		}
 	}, 
@@ -16,139 +16,139 @@ public enum Opcion {
 		@Override
 		public void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.insertarAlumno();
+			vistaTexto.insertarAlumno();
 		}
 	},
 	BUSCAR_ALUMNO("Buscar alumno") {
 		@Override
 		public void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.buscarAlumno();
+			vistaTexto.buscarAlumno();
 		}
 	},
 	BORRAR_ALUMNO("Borrar alumno") {
 		@Override
 		public void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.borrarAlumno();
+			vistaTexto.borrarAlumno();
 		}
 	},
 	MOSTRAR_ALUMNOS("Mostrar alumnos") {
 		@Override
 		public void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.mostrarAlumnos();
+			vistaTexto.mostrarAlumnos();
 		}
 	},
 	INSERTAR_CICLO_FORMATIVO("Insertar ciclo formativo") {
 		@Override
 		public void ejecutar() throws OperationNotSupportedException {
 			// TODO Auto-generated method stub
-			vista.insertarCicloFormativo();
+			vistaTexto.insertarCicloFormativo();
 		}
 	},
 	BUSCAR_CICLO_FORMATIVO("Buscar ciclo formativo") {
 		@Override
 		public void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.buscarCicloFormativo();
+			vistaTexto.buscarCicloFormativo();
 		}
 	},
 	BORRAR_CICLO_FORMATIVO("Borrar ciclo formativo") {
 		@Override
 		public void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.borrarCicloFormativo();
+			vistaTexto.borrarCicloFormativo();
 		}
 	},
 	MOSTRAR_CICLOS_FORMATIVOS("Mostrar ciclos formativos") {
 		@Override
 		public void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.mostrarCiclosFormativos();
+			vistaTexto.mostrarCiclosFormativos();
 		}
 	}, 
 	INSERTAR_ASIGNATURA("Insertar asignatura") {
 		@Override
 		public void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.insertarAsignatura();
+			vistaTexto.insertarAsignatura();
 		}
 	},
 	BUSCAR_ASIGNATURA("Buscar asignatura") {
 		@Override
 		public void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.buscarAsignatura();
+			vistaTexto.buscarAsignatura();
 		}
 	},
 	BORRAR_ASIGNATURA("Borrar asignatura") {
 		@Override
 		public void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.borrarAsignatura();
+			vistaTexto.borrarAsignatura();
 		}
 	},
 	MOSTRAR_ASIGNATURAS("Mostrar asignaturas") {
 		@Override
 		public void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.mostrarAsignaturas();
+			vistaTexto.mostrarAsignaturas();
 		}
 	},
 	INSERTAR_MATRICULA("Insertar matricula") {
 		@Override
 		public void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.insertarMatricula();
+			vistaTexto.insertarMatricula();
 		}
 	},
 	BUSCAR_MATRICULA("Buscar matricula") {
 		@Override
 		public void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.buscarMatricula();
+			vistaTexto.buscarMatricula();
 		}
 	},
 	ANULAR_MATRICULA("Anular matricula") {
 		@Override
 		public void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.anularMatricula();
+			vistaTexto.anularMatricula();
 		}
 	},
 	MOSTRAR_MATRICULAS("Mostrar matricula") {
 		@Override
 		public void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.mostrarMatriculas();
+			vistaTexto.mostrarMatriculas();
 		}
 	},
 	MOSTRAR_MATRICULAS_ALUMNO("Mostrar matriculas de un alumno") {
 		@Override
 		public void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.mostrarMatriculasPorAlumno();
+			vistaTexto.mostrarMatriculasPorAlumno();
 		}
 	},
 	MOSTRAR_MATRICULAS_CICLO_FORMATIVO(" Mostrar matriculas de un ciclo formativo") {
 		@Override
 		public void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.mostrarMatriculasPorCicloFormativo();
+			vistaTexto.mostrarMatriculasPorCicloFormativo();
 		}
 	},
 	MOSTRAR_MATRICULAS_CURSO_ACADEMICO(" Mostrar matriculas de un curso ademico") {
 		@Override
 		public void ejecutar() {
 			// TODO Auto-generated method stub
-			vista.mostrarMatriculasPorCursoAcademico();
+			vistaTexto.mostrarMatriculasPorCursoAcademico();
 		}
 	
 	};
 	
 	private String cadenaAMostrar;
-	private static Vista vista;
+	private static VistaTexto vistaTexto;
 	
 	private Opcion (String cadenaAMostrar) {	
 		this.cadenaAMostrar=cadenaAMostrar;	
@@ -160,10 +160,10 @@ public enum Opcion {
 	}
 	
 	
-	public void setVista(Vista vista) {
+	public void setVista(VistaTexto vistaTexto) {
 		
-		if (vista!=null) {
-		Opcion.vista=vista;
+		if (vistaTexto !=null) {
+		Opcion.vistaTexto = vistaTexto;
 		}else {
 			throw new IllegalArgumentException("Error: No se ha recibido la vista");
 		}

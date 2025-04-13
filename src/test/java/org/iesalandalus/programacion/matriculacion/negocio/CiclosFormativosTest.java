@@ -1,6 +1,6 @@
 /*package org.iesalandalus.programacion.matriculacion.negocio;
 
-import org.iesalandalus.programacion.matriculacion.MainApp;
+import org.iesalandalus.programacion.matriculacion.vista.texto.MainApp;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Grado;

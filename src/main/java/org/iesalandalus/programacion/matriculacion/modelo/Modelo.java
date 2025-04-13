@@ -13,13 +13,6 @@ import org.iesalandalus.programacion.matriculacion.modelo.negocio.IAsignaturas;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.ICiclosFormativos;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.IFuenteDatos;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.IMatriculas;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.memoria.Alumnos;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.memoria.Asignaturas;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.memoria.CiclosFormativos;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.memoria.FuenteDatosMemoria;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.memoria.Matriculas;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.FuenteDatosMySQL;
-import org.iesalandalus.programacion.matriculacion.vista.Consola;
 
 
 public class Modelo {

@@ -1,12 +1,9 @@
-package org.iesalandalus.programacion.matriculacion;
+package org.iesalandalus.programacion.matriculacion.vista.texto;
 
 
 import org.iesalandalus.programacion.matriculacion.controlador.Controlador;
 import org.iesalandalus.programacion.matriculacion.modelo.FactoriaFuenteDatos;
 import org.iesalandalus.programacion.matriculacion.modelo.Modelo;
-import org.iesalandalus.programacion.matriculacion.vista.Vista;
-
-import com.mysql.cj.jdbc.exceptions.OperationNotSupportedException;
 
 
 public class MainApp {
@@ -16,8 +13,8 @@ public class MainApp {
     	
  	
     	Modelo modelo=procesarArgumentosFuenteDatos(args);
-    	Vista vista=new Vista();
-    	Controlador controlador=new Controlador(modelo, vista);
+    	VistaTexto vistaTexto =new VistaTexto();
+    	Controlador controlador=new Controlador(modelo, vistaTexto);
     	controlador.comenzar();
     }
 

@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.matriculacion.vista;
+package org.iesalandalus.programacion.matriculacion.vista.texto;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,12 +12,12 @@ import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
-public class Vista {
+public class VistaTexto {
 	
 	private Controlador controlador;
 	private Opcion opcion;
 	
-	public Vista() {
+	public VistaTexto() {
 
 	}
 	

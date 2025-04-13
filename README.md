@@ -6,7 +6,7 @@ En definitiva, lo que nos pide el cliente es lo siguiente:
 •	Que la aplicación almacene los datos en una base de datos creada para tal efecto.
 •	La base de datos debe estar implementada en MySQL.
 •	Acomodar el proyecto para que gradle gestione la dependencia con el driver para java de MySQL en su última versión.
-•	Modificar el proyecto para que se puedan ejecutar las dos versiones: memoria con vista textual y BD con vista textual.
+•	Modificar el proyecto para que se puedan ejecutar las dos versiones: memoria con vistaTexto textual y BD con vistaTexto textual.
 •	Gestionar los alumnos para que su persistencia se lleve a cabo por medio de dicha BD.
 •	Gestionar los ciclos formativos para que su persistencia se lleve a cabo por medio de dicha BD.
 •	Gestionar las asignaturas para que su persistencia se lleve a cabo por medio de dicha BD.
