@@ -5,6 +5,8 @@ import java.util.Collections;
 
 import javax.naming.OperationNotSupportedException;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
 import org.iesalandalus.programacion.matriculacion.controlador.Controlador;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
@@ -13,7 +15,7 @@ import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
 import org.iesalandalus.programacion.matriculacion.vista.Vista;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
-public class VistaTexto extends Vista {
+public class VistaTexto extends Vista  {
 	
 	private Controlador controlador;
 	private Opcion opcion;
@@ -21,7 +23,8 @@ public class VistaTexto extends Vista {
 	public VistaTexto() {
 
 	}
-	
+
+
 	public void setControlador(Controlador controlador) {
 		
 		if(controlador!=null) {

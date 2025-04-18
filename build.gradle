@@ -18,7 +18,8 @@ dependencies {
     // Entrada para que el repositorio jitpack.io sepa acceder a la localización de librería entrada
     implementation 'com.github.JRJimenezReyes:entrada:1.0.3'
     implementation 'mysql:mysql-connector-java:8.0.28'
-    
+    //implementation 'org.openjfx:javafx-controls:21.0.3'
+    //implementation 'org.openjfx:javafx-fxml:21.0.3'
 }
 
 javafx {

@@ -6,14 +6,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MySQL {
-	
+
 	private static final String HOST="database-1.cvfy4igo31vd.us-east-1.rds.amazonaws.com";
 	private static final String ESQUEMA="sistemamatriculacion" ;
 	private static final String USUARIO="sistemamatriculacion" ;
 	private static final String CONTRASENA="sistemamatriculacion-2024" ;
 	private static Connection conexion;
-	
-	
+
+
+
 	private void MySQL() {
 		
 	}
