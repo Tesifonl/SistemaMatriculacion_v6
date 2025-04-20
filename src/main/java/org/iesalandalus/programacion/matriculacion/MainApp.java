@@ -15,7 +15,6 @@ import javax.naming.OperationNotSupportedException;
 
 public class MainApp {
    		public static void main(String[] args)   {
-
     	Modelo modelo=procesarArgumentosFuenteDatos(args);
     	Vista vista = procesarArgumentosVista (args);
     	Controlador controlador=new Controlador(modelo, vista);
