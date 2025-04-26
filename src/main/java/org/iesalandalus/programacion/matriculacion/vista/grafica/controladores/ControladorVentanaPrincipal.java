@@ -120,7 +120,8 @@ public class ControladorVentanaPrincipal {
         tcMatrciulaCursoAcademico.setCellValueFactory(new PropertyValueFactory<Matricula,String>("cursoAcademico"));
         tcMatriculaFechaMatriculacion.setCellValueFactory(new PropertyValueFactory<Matricula,String>("fechaMatriculacion"));
         tcMatriculaFechaAnulacion.setCellValueFactory(new PropertyValueFactory<Matricula,String>("fechaAnulacion"));
-        tcMatriculaDNI.setCellValueFactory(new PropertyValueFactory<Matricula,String>("dni"));
+        //tcMatriculaDNI.setCellValueFactory(new PropertyValueFactory<Matricula,String>("dni"));
+        tcMatriculaDNI.setCellValueFactory(matricula -> new SimpleStringProperty(matricula.getValue().getAlumno().getDni()));
         tvMatriculas.setItems(obsListadoMatriculas);
     }
 
