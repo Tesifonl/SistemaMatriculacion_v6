@@ -5,15 +5,25 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.CiclosFormativos;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.VistaGrafica;
+import org.iesalandalus.programacion.matriculacion.vista.grafica.recursos.LocalizadorRecursos;
 
 import javax.naming.OperationNotSupportedException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -27,7 +37,6 @@ public class ControladorVentanaPrincipal {
     @FXML private TableColumn<Alumno, String> tcAlumnoFechaNacimiento;
     @FXML private TableColumn<Alumno, String> tcAlumnoNombre;
     @FXML private TableColumn<Alumno, String> tcAlumnoTelefono;
-
     private ObservableList<Alumno> obsListadoAlumnos= FXCollections.observableArrayList();
     private List<Alumno> coleccionAlumnos=new ArrayList<>();
 
@@ -61,6 +70,14 @@ public class ControladorVentanaPrincipal {
     @FXML private TableColumn<Matricula, Integer> tcMatriculasIDMatricula;
     private ObservableList<Matricula> obsListadoMatriculas= FXCollections.observableArrayList();
     private List<Matricula> coleccionMatriculas=new ArrayList<>();
+
+
+    @FXML private Button btBorrarAlumno;
+    @FXML private Button btBuscarAlumno;
+    @FXML private TextField tfBorrarAlumno;
+    @FXML private TextField tfBuscarAlumno;
+    @FXML private Button btInsertarAlumno;
+
 
     private static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -124,5 +141,56 @@ public class ControladorVentanaPrincipal {
         tcMatriculaDNI.setCellValueFactory(matricula -> new SimpleStringProperty(matricula.getValue().getAlumno().getDni()));
         tvMatriculas.setItems(obsListadoMatriculas);
     }
+
+
+    @FXML void borrarAlumno(ActionEvent event) {
+
+    }
+
+    @FXML void buscarAlumno(ActionEvent event) {
+        List<Alumno> coleccionAlumnosBusqueda=new ArrayList<>();
+
+        if (tfBuscarAlumno.getText().isBlank() || tfBuscarAlumno.getText().isEmpty()){
+            obsListadoAlumnos.setAll(coleccionAlumnos);
+        }else{
+            String cadenaFiltrado=tfBuscarAlumno.getText().toLowerCase();
+
+            for (Alumno alumno: coleccionAlumnos){
+                if (alumno.getNombre().toLowerCase().contains(cadenaFiltrado)){
+                    coleccionAlumnosBusqueda.add(alumno);
+                }
+            obsListadoAlumnos.setAll(coleccionAlumnosBusqueda);
+            }
+
+        }
+    }
+
+    @FXML void insertarAlumno(ActionEvent event) {
+
+        try
+        {
+
+            FXMLLoader loader=new FXMLLoader(LocalizadorRecursos.class.getResource("/vistas/InsertarAlumno.fxml"));
+            Parent raiz=loader.load();
+
+            //IMPORTANTE: Para pasar el controlador a la otra hoja
+            ControladorInsertarAlumno controladorInsertarAlumno=loader.getController();
+            controladorInsertarAlumno.cargaDatos(coleccionAlumnos,obsListadoAlumnos);
+
+
+            Scene escena=new Scene(raiz);
+            Stage escenario=new Stage();
+            escenario.setScene(escena);
+            escenario.setTitle("Alumnos");
+            escenario.setResizable(false);
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.show();
+
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+
 
 }
