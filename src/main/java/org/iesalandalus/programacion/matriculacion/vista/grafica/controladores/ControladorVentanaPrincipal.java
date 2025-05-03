@@ -84,20 +84,33 @@ public class ControladorVentanaPrincipal {
 
     private static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public void inicializaObservables() throws OperationNotSupportedException {
+    public void inicializaObservables() {
 
-        coleccionAlumnos= VistaGrafica.getControlador().getAlumnos();
+        try {
+            coleccionAlumnos= VistaGrafica.getControlador().getAlumnos();
         //coleccionAlumnos.add(new Alumno("Juan","11111111h","juan@gmail.com","333333333",LocalDate.of(2002, 9, 15)));
-        obsListadoAlumnos.setAll(coleccionAlumnos);
-
-        coleccionCiclosFormativos=VistaGrafica.getControlador().getCiclosFormativos();
-        obsListadoCiclosFormativos.setAll(coleccionCiclosFormativos);
-
-        coleccionAsignaturas=VistaGrafica.getControlador().getAsignaturas();
-        obsListadoAsignaturas.setAll(coleccionAsignaturas);
-
-        coleccionMatriculas=VistaGrafica.getControlador().getMatriculas();
-        obsListadoMatriculas.setAll(coleccionMatriculas);
+            obsListadoAlumnos.setAll(coleccionAlumnos);
+        } catch (OperationNotSupportedException | NullPointerException e) {
+        Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+        }
+        try {
+            coleccionCiclosFormativos=VistaGrafica.getControlador().getCiclosFormativos();
+            obsListadoCiclosFormativos.setAll(coleccionCiclosFormativos);
+        } catch ( NullPointerException e) {
+            Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+        }
+        try {
+            coleccionAsignaturas=VistaGrafica.getControlador().getAsignaturas();
+            obsListadoAsignaturas.setAll(coleccionAsignaturas);
+        } catch ( NullPointerException e) {
+            Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+        }
+        try {
+            coleccionMatriculas=VistaGrafica.getControlador().getMatriculas();
+            obsListadoMatriculas.setAll(coleccionMatriculas);
+        } catch (OperationNotSupportedException | NullPointerException e) {
+            Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+        }
     }
 
     @FXML private void initialize() throws OperationNotSupportedException {
@@ -192,7 +205,7 @@ public class ControladorVentanaPrincipal {
         }
     }
 
-    @FXML void borrarAlumno(ActionEvent event) throws OperationNotSupportedException {
+    @FXML void borrarAlumno(ActionEvent event)  {
 
         Alumno alumno=tvAlumnos.getSelectionModel().getSelectedItem();
 
@@ -202,11 +215,19 @@ public class ControladorVentanaPrincipal {
         {
             if (Dialogos.mostrarDialogoConfirmacion("Eliminar Alumno","¿Realmente quieres borrar a esta alumno?"))
             {
+                try {
                 VistaGrafica.getControlador().borrarAlumno(alumno);
                 coleccionAlumnos=VistaGrafica.getControlador().getAlumnos();
                 obsListadoAlumnos.setAll(coleccionAlumnos);
                 Dialogos.mostrarDialogoInformacion("Eliminar Alumno","Alumno eliminada correctamente");
-            }
+                 } catch ( NullPointerException e) {
+                Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+                coleccionAlumnos.clear();
+                obsListadoAlumnos.setAll(coleccionAlumnos);
+                 } catch (OperationNotSupportedException e) {
+                    Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+                }
+             }
         }
     }
 

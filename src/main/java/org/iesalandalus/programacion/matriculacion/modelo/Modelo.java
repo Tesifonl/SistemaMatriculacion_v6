@@ -119,7 +119,6 @@ public class Modelo {
   			 }
   			 else {
   				throw new NullPointerException(" No existen alumnos en el sistema");
-  				
   			 }
 
       }

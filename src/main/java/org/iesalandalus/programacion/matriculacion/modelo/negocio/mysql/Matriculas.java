@@ -115,7 +115,7 @@ public class Matriculas implements IMatriculas{
 				for(Alumno alumnoEncontrado: copiaAlumnos) {
 					int i=+1;
 					if(alumnoEncontrado.getDni().equals(dni)) {
-						alumnoBuscado=copiaAlumnos.get(i);
+						alumnoBuscado=alumnoEncontrado;
 					}else {
 						encontrado=true;
 					}
