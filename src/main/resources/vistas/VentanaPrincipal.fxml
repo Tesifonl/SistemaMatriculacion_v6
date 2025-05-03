@@ -56,7 +56,8 @@
                                     </TableView>
                                     <AnchorPane prefHeight="168.0" prefWidth="277.0">
                                        <children>
-                                          <Button fx:id="btInsertarAlumno" layoutX="14.0" layoutY="65.0" mnemonicParsing="false" onAction="#insertarAlumno" text="INSERTAR NUEVO ALUMMO" />
+                                          <Button fx:id="btInsertarAlumno" layoutX="15.0" layoutY="41.0" mnemonicParsing="false" onAction="#insertarAlumno" text="INSERTAR NUEVO ALUMMO" />
+                                          <Button fx:id="btBorrarAlumno" layoutX="13.0" layoutY="84.0" mnemonicParsing="false" onAction="#borrarAlumno" prefHeight="26.0" prefWidth="182.0" text="BORRAR ALUMNO" />
                                        </children>
                                     </AnchorPane>
                                  </children>
@@ -64,15 +65,13 @@
                               <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="422.0">
                                  <children>
                                     <Label layoutX="33.0" layoutY="25.0" text="NOMBRE" />
-                                    <Label layoutX="34.0" layoutY="60.0" text="DNI" />
                                     <TextField fx:id="tfBuscarAlumno" layoutX="108.0" layoutY="20.0" />
-                                    <TextField fx:id="tfBorrarAlumno" layoutX="108.0" layoutY="55.0" />
                                     <Button fx:id="btBuscarAlumno" layoutX="295.0" layoutY="21.0" mnemonicParsing="false" onAction="#buscarAlumno" text="BUSCAR" />
-                                    <Button fx:id="btBorrarAlumno" layoutX="295.0" layoutY="56.0" mnemonicParsing="false" onAction="#borrarAlumno" text="BORRAR" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </VBox>
+                        <Button fx:id="btSalir" layoutX="246.0" layoutY="473.0" mnemonicParsing="false" onAction="#salir" prefHeight="43.0" prefWidth="213.0" text="SALIR" />
                      </children>
                   </AnchorPane>
             </content>

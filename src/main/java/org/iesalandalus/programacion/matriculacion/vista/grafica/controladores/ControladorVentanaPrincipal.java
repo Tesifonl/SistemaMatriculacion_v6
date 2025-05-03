@@ -21,6 +21,7 @@ import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.CiclosFormativos;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.VistaGrafica;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.recursos.LocalizadorRecursos;
+import org.iesalandalus.programacion.matriculacion.vista.grafica.utilidades.Dialogos;
 
 import javax.naming.OperationNotSupportedException;
 import java.io.IOException;
@@ -74,9 +75,11 @@ public class ControladorVentanaPrincipal {
 
     @FXML private Button btBorrarAlumno;
     @FXML private Button btBuscarAlumno;
-    @FXML private TextField tfBorrarAlumno;
+    //@FXML private TextField tfBorrarAlumno;
     @FXML private TextField tfBuscarAlumno;
     @FXML private Button btInsertarAlumno;
+    @FXML private Button btSalir;
+
 
 
     private static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -143,9 +146,7 @@ public class ControladorVentanaPrincipal {
     }
 
 
-    @FXML void borrarAlumno(ActionEvent event) {
 
-    }
 
     @FXML void buscarAlumno(ActionEvent event) {
         List<Alumno> coleccionAlumnosBusqueda=new ArrayList<>();
@@ -191,6 +192,32 @@ public class ControladorVentanaPrincipal {
         }
     }
 
+    @FXML void borrarAlumno(ActionEvent event) throws OperationNotSupportedException {
 
+        Alumno alumno=tvAlumnos.getSelectionModel().getSelectedItem();
+
+        if (alumno==null)
+            Dialogos.mostrarDialogoAdvertencia("Eliminar Alumno", "Debes seleccionar una persona para realizar esta operación");
+        else
+        {
+            if (Dialogos.mostrarDialogoConfirmacion("Eliminar Alumno","¿Realmente quieres borrar a esta alumno?"))
+            {
+                VistaGrafica.getControlador().borrarAlumno(alumno);
+                coleccionAlumnos=VistaGrafica.getControlador().getAlumnos();
+                obsListadoAlumnos.setAll(coleccionAlumnos);
+                Dialogos.mostrarDialogoInformacion("Eliminar Alumno","Alumno eliminada correctamente");
+            }
+        }
+    }
+
+    @FXML void salir(ActionEvent event) {
+
+        if (Dialogos.mostrarDialogoConfirmacion("Ventana Principal", "¿Realmente quieres salir de la aplicación?"))
+        {
+            System.exit(0);
+        }
+        else
+            event.consume();
+    }
 
 }
