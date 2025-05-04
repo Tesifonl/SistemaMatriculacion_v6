@@ -19,6 +19,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.CiclosFormativos;
+import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Matriculas;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.VistaGrafica;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.recursos.LocalizadorRecursos;
 import org.iesalandalus.programacion.matriculacion.vista.grafica.utilidades.Dialogos;
@@ -75,9 +76,17 @@ public class ControladorVentanaPrincipal {
 
     @FXML private Button btBorrarAlumno;
     @FXML private Button btBuscarAlumno;
-    //@FXML private TextField tfBorrarAlumno;
+    @FXML private Button btBuscarAsignatura;
+    @FXML private Button btBuscarCicloFormativo;
+    @FXML private Button btBuscarMatricula;
     @FXML private TextField tfBuscarAlumno;
+    @FXML private TextField tfBuscarAsignatura;
+    @FXML private TextField tfBuscarCicloFormativo;
+    @FXML private TextField tfBuscarMatricula;
     @FXML private Button btInsertarAlumno;
+    @FXML private Button btInsertarAsignatura;
+    @FXML private Button btInsertarCicloFormativo;
+    @FXML private Button btInsertarMatricula;
     @FXML private Button btSalir;
 
 
@@ -179,6 +188,62 @@ public class ControladorVentanaPrincipal {
         }
     }
 
+
+    @FXML void buscarAsignatura(ActionEvent event) {
+
+        List<Asignatura> coleccionAsignaturasBusqueda=new ArrayList<>();
+
+        if (tfBuscarAsignatura.getText().isBlank() || tfBuscarAsignatura.getText().isEmpty()){
+            obsListadoAsignaturas.setAll(coleccionAsignaturas);
+        }else{
+            String cadenaFiltrado=tfBuscarAsignatura.getText().toLowerCase();
+
+            for (Asignatura asignatura: coleccionAsignaturas){
+                if (asignatura.getCodigo().toLowerCase().contains(cadenaFiltrado)){
+                    coleccionAsignaturasBusqueda.add(asignatura);
+                }
+                obsListadoAsignaturas.setAll(coleccionAsignaturasBusqueda);
+            }
+        }
+    }
+
+    @FXML void buscarCicloFormativo(ActionEvent event) {
+
+        List<CicloFormativo> coleccionCiclosBusqueda=new ArrayList<>();
+
+        if (tfBuscarCicloFormativo.getText().isBlank() || tfBuscarCicloFormativo.getText().isEmpty()){
+            obsListadoCiclosFormativos.setAll(coleccionCiclosFormativos);
+        }else{
+            int cadenaFiltrado= Integer.parseInt(tfBuscarCicloFormativo.getText().toLowerCase());
+
+            for (CicloFormativo cicloFormativo: coleccionCiclosFormativos){
+                if (cicloFormativo.getCodigo()==cadenaFiltrado){
+                    coleccionCiclosBusqueda.add(cicloFormativo);
+                }
+                obsListadoCiclosFormativos.setAll(coleccionCiclosBusqueda);
+            }
+        }
+    }
+
+    @FXML void buscarMatricula(ActionEvent event) {
+        List<Matricula> coleccionMatriculasBusqueda=new ArrayList<>();
+
+        if (tfBuscarMatricula.getText().isBlank() || tfBuscarMatricula.getText().isEmpty()){
+            obsListadoMatriculas.setAll(coleccionMatriculas);
+        }else{
+            int cadenaFiltrado= Integer.parseInt(tfBuscarMatricula.getText().toLowerCase());
+
+            for (Matricula matricula: coleccionMatriculas){
+                if (matricula.getIdMatricula()==cadenaFiltrado){
+                    coleccionMatriculasBusqueda.add(matricula);
+                }
+                obsListadoMatriculas.setAll(coleccionMatriculasBusqueda);
+            }
+        }
+    }
+
+
+
     @FXML void insertarAlumno(ActionEvent event) {
 
         try
@@ -196,6 +261,82 @@ public class ControladorVentanaPrincipal {
             Stage escenario=new Stage();
             escenario.setScene(escena);
             escenario.setTitle("Alumnos");
+            escenario.setResizable(false);
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.show();
+
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+    @FXML void insertarAsignatura(ActionEvent event) {
+        try
+        {
+
+            FXMLLoader loader=new FXMLLoader(LocalizadorRecursos.class.getResource("/vistas/InsertarAsignatura.fxml"));
+            Parent raiz=loader.load();
+
+            //IMPORTANTE: Para pasar el controlador a la otra hoja
+            ControladorInsertarAsignatura controladorInsertarAsignatura=loader.getController();
+            controladorInsertarAsignatura.cargaDatos(coleccionAsignaturas,obsListadoAsignaturas);
+
+
+            Scene escena=new Scene(raiz);
+            Stage escenario=new Stage();
+            escenario.setScene(escena);
+            escenario.setTitle("Asignaturas");
+            escenario.setResizable(false);
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.show();
+
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @FXML void insertarCicloFormativo(ActionEvent event) {
+        try
+        {
+
+            FXMLLoader loader=new FXMLLoader(LocalizadorRecursos.class.getResource("/vistas/InsertarCicloFormativo.fxml"));
+            Parent raiz=loader.load();
+
+            //IMPORTANTE: Para pasar el controlador a la otra hoja
+            ControladorInsertarCicloFormativo controladorInsertarCicloFormativo=loader.getController();
+            controladorInsertarCicloFormativo.cargaDatos(coleccionCiclosFormativos,obsListadoCiclosFormativos);
+
+
+            Scene escena=new Scene(raiz);
+            Stage escenario=new Stage();
+            escenario.setScene(escena);
+            escenario.setTitle("Clico Formativo");
+            escenario.setResizable(false);
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.show();
+
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @FXML void insertarMatricula(ActionEvent event) {
+        try
+        {
+
+            FXMLLoader loader=new FXMLLoader(LocalizadorRecursos.class.getResource("/vistas/InsertarMatricula.fxml"));
+            Parent raiz=loader.load();
+
+            //IMPORTANTE: Para pasar el controlador a la otra hoja
+            ControladorInsertarMatricula controladorInsertarMatricula=loader.getController();
+            controladorInsertarMatricula.cargaDatos(coleccionMatriculas,obsListadoMatriculas);
+
+
+            Scene escena=new Scene(raiz);
+            Stage escenario=new Stage();
+            escenario.setScene(escena);
+            escenario.setTitle("Matriculas");
             escenario.setResizable(false);
             escenario.initModality(Modality.APPLICATION_MODAL);
             escenario.show();
@@ -240,5 +381,12 @@ public class ControladorVentanaPrincipal {
         else
             event.consume();
     }
+
+
+    
+
+
+
+
 
 }
