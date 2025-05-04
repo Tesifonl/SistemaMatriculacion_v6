@@ -349,7 +349,6 @@ public class ControladorVentanaPrincipal {
     @FXML void borrarAlumno(ActionEvent event)  {
 
         Alumno alumno=tvAlumnos.getSelectionModel().getSelectedItem();
-
         if (alumno==null)
             Dialogos.mostrarDialogoAdvertencia("Eliminar Alumno", "Debes seleccionar una persona para realizar esta operación");
         else
@@ -371,6 +370,57 @@ public class ControladorVentanaPrincipal {
              }
         }
     }
+
+    @FXML void borrarCicloFormativo(ActionEvent event)  {
+
+        CicloFormativo cicloFormativo=tvCiclosFormativos.getSelectionModel().getSelectedItem();
+        if (cicloFormativo==null)
+            Dialogos.mostrarDialogoAdvertencia("Eliminar Ciclo Formativo", "Debes seleccionar un ciclo para realizar esta operación");
+        else
+        {
+            if (Dialogos.mostrarDialogoConfirmacion("Eliminar Ciclo Formativo","¿Realmente quieres borrar este ciclo formativo?"))
+            {
+                try {
+                    VistaGrafica.getControlador().borrarCicloFormativo(cicloFormativo);
+                    coleccionCiclosFormativos=VistaGrafica.getControlador().getCiclosFormativos();
+                    obsListadoCiclosFormativos.setAll(coleccionCiclosFormativos);
+                    Dialogos.mostrarDialogoInformacion("Eliminar Ciclo Formativo","Ciclo Formativo eliminado correctamente");
+                } catch ( NullPointerException e) {
+                    Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+                    coleccionCiclosFormativos.clear();
+                    obsListadoCiclosFormativos.setAll(coleccionCiclosFormativos);
+                } catch (OperationNotSupportedException e) {
+                    Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+                }
+            }
+        }
+    }
+
+    @FXML void borrarAsignatura(ActionEvent event)  {
+
+        Asignatura asignatura=tvAsignaturas.getSelectionModel().getSelectedItem();
+        if (asignatura==null)
+            Dialogos.mostrarDialogoAdvertencia("Eliminar Asignatura", "Debes seleccionar una asignatura para realizar esta operación");
+        else
+        {
+            if (Dialogos.mostrarDialogoConfirmacion("Eliminar Asignatura","¿Realmente quieres borrar esta asignatura?"))
+            {
+                try {
+                    VistaGrafica.getControlador().borrarAsignatura(asignatura);
+                    coleccionAsignaturas=VistaGrafica.getControlador().getAsignaturas();
+                    obsListadoAsignaturas.setAll(coleccionAsignaturas);
+                    Dialogos.mostrarDialogoInformacion("Eliminar Asignatura","Asignatura eliminada correctamente");
+                } catch ( NullPointerException e) {
+                    Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+                    coleccionAsignaturas.clear();
+                    obsListadoAsignaturas.setAll(coleccionAsignaturas);
+                } catch (OperationNotSupportedException e) {
+                    Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+                }
+            }
+        }
+    }
+
 
     @FXML void salir(ActionEvent event) {
 

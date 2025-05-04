@@ -98,6 +98,7 @@
                                     <AnchorPane prefHeight="168.0" prefWidth="277.0">
                                        <children>
                                           <Button fx:id="btInsertarCicloFormativo" layoutX="84.0" layoutY="42.0" mnemonicParsing="false" onAction="#insertarCicloFormativo" text="INSERTAR CICLO" />
+                                          <Button fx:id="btBorrarCicloFormativo" layoutX="86.0" layoutY="93.0" mnemonicParsing="false" onAction="#borrarCicloFormativo" prefHeight="26.0" prefWidth="111.0" text="BORRAR CICLO" />
                                        </children></AnchorPane>
                                  </children>
                               </HBox>
@@ -136,6 +137,7 @@
                                     <AnchorPane prefHeight="168.0" prefWidth="277.0">
                                        <children>
                                           <Button fx:id="btInsertarAsignatura" layoutX="66.0" layoutY="43.0" mnemonicParsing="false" onAction="#insertarAsignatura" text="INSERTAR ASIGNATURA" />
+                                          <Button fx:id="btBorrarAsignatura" layoutX="71.0" layoutY="96.0" mnemonicParsing="false" onAction="#borrarAsignatura" text="BORRAR ASIGNATURA" />
                                        </children></AnchorPane>
                                  </children>
                               </HBox>
