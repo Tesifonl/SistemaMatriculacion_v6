@@ -58,6 +58,7 @@
                                        <children>
                                           <Button fx:id="btInsertarAlumno" layoutX="15.0" layoutY="41.0" mnemonicParsing="false" onAction="#insertarAlumno" text="INSERTAR NUEVO ALUMMO" />
                                           <Button fx:id="btBorrarAlumno" layoutX="13.0" layoutY="84.0" mnemonicParsing="false" onAction="#borrarAlumno" prefHeight="26.0" prefWidth="182.0" text="BORRAR ALUMNO" />
+                                          <Button fx:id="btMostrarAlumnos" layoutX="34.0" layoutY="128.0" mnemonicParsing="false" onAction="#mostrarAlumnos" text="MOSTRAR ALUMNOS" />
                                        </children>
                                     </AnchorPane>
                                  </children>
@@ -99,6 +100,7 @@
                                        <children>
                                           <Button fx:id="btInsertarCicloFormativo" layoutX="84.0" layoutY="42.0" mnemonicParsing="false" onAction="#insertarCicloFormativo" text="INSERTAR CICLO" />
                                           <Button fx:id="btBorrarCicloFormativo" layoutX="86.0" layoutY="93.0" mnemonicParsing="false" onAction="#borrarCicloFormativo" prefHeight="26.0" prefWidth="111.0" text="BORRAR CICLO" />
+                                          <Button fx:id="btMostrarCiclos" layoutX="86.0" layoutY="128.0" mnemonicParsing="false" onAction="#mostrarCiclos" text="MOSTRAR CICLOS" />
                                        </children></AnchorPane>
                                  </children>
                               </HBox>
@@ -138,6 +140,7 @@
                                        <children>
                                           <Button fx:id="btInsertarAsignatura" layoutX="66.0" layoutY="43.0" mnemonicParsing="false" onAction="#insertarAsignatura" text="INSERTAR ASIGNATURA" />
                                           <Button fx:id="btBorrarAsignatura" layoutX="71.0" layoutY="96.0" mnemonicParsing="false" onAction="#borrarAsignatura" text="BORRAR ASIGNATURA" />
+                                          <Button fx:id="btMostrarAsignaturas" layoutX="71.0" layoutY="128.0" mnemonicParsing="false" onAction="#mostrarAsignaturas" text="MOSTRAR ASIGNATURAS" />
                                        </children></AnchorPane>
                                  </children>
                               </HBox>
@@ -174,6 +177,8 @@
                                     <AnchorPane prefHeight="168.0" prefWidth="277.0">
                                        <children>
                                           <Button fx:id="btInsertarMatricula" layoutX="81.0" layoutY="58.0" mnemonicParsing="false" onAction="#insertarMatricula" text="INSERTAR MATRICULA" />
+                                          <Button fx:id="btMostrarMatriculas" layoutX="76.0" layoutY="128.0" mnemonicParsing="false" onAction="#mostrarMatriculas" text="MOSTRAR MATRICULAS" />
+                                          <Button fx:id="btBorrarMatricula" layoutX="85.0" layoutY="92.0" mnemonicParsing="false" onAction="#borrarMatricula" text="BORRAR MATRICULA" />
                                        </children></AnchorPane>
                                  </children>
                               </HBox>

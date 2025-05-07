@@ -73,8 +73,14 @@ public class ControladorVentanaPrincipal {
     private ObservableList<Matricula> obsListadoMatriculas= FXCollections.observableArrayList();
     private List<Matricula> coleccionMatriculas=new ArrayList<>();
 
-
+    @FXML private Button btMostrarAlumnos;
+    @FXML private Button btMostrarAsignaturas;
+    @FXML private Button btMostrarCiclos;
+    @FXML private Button btMostrarMatriculas;
     @FXML private Button btBorrarAlumno;
+    @FXML private Button btBorrarAsignatura;
+    @FXML private Button btBorrarCicloFormativo;
+    @FXML private Button btBorrarMatricula;
     @FXML private Button btBuscarAlumno;
     @FXML private Button btBuscarAsignatura;
     @FXML private Button btBuscarCicloFormativo;
@@ -161,14 +167,59 @@ public class ControladorVentanaPrincipal {
         tcMatriculasIDMatricula.setCellValueFactory(new PropertyValueFactory<Matricula,Integer>("idMatricula"));
         tcMatrciulaCursoAcademico.setCellValueFactory(new PropertyValueFactory<Matricula,String>("cursoAcademico"));
         tcMatriculaFechaMatriculacion.setCellValueFactory(new PropertyValueFactory<Matricula,String>("fechaMatriculacion"));
-        tcMatriculaFechaAnulacion.setCellValueFactory(new PropertyValueFactory<Matricula,String>("fechaAnulacion"));
+        tcMatriculaFechaAnulacion.setCellValueFactory(matricula -> {
+            LocalDate fecha = matricula.getValue().getFechaAnulacion();
+            String fechaFormateada;
+            if (fecha != null) {
+                fechaFormateada = fecha.format(FORMATO_FECHA);
+            } else {
+                fechaFormateada = "";
+            }
+            return new SimpleStringProperty(fechaFormateada);
+        });
+        //tcMatriculaFechaAnulacion.setCellValueFactory(new PropertyValueFactory<Matricula,String>("fechaAnulacion"));
         //tcMatriculaDNI.setCellValueFactory(new PropertyValueFactory<Matricula,String>("dni"));
         tcMatriculaDNI.setCellValueFactory(matricula -> new SimpleStringProperty(matricula.getValue().getAlumno().getDni()));
         tvMatriculas.setItems(obsListadoMatriculas);
     }
 
+    @FXML void mostrarAlumnos(ActionEvent event) {
+        try {
+            coleccionAlumnos= VistaGrafica.getControlador().getAlumnos();
+            //coleccionAlumnos.add(new Alumno("Juan","11111111h","juan@gmail.com","333333333",LocalDate.of(2002, 9, 15)));
+            obsListadoAlumnos.setAll(coleccionAlumnos);
+        } catch (OperationNotSupportedException | NullPointerException e) {
+            Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+        }
+    }
 
 
+    @FXML void mostrarAsignaturas(ActionEvent event) {
+        try {
+            coleccionAsignaturas=VistaGrafica.getControlador().getAsignaturas();
+            obsListadoAsignaturas.setAll(coleccionAsignaturas);
+        } catch ( NullPointerException e) {
+            Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+        }
+    }
+
+    @FXML void mostrarCiclos(ActionEvent event) {
+        try {
+            coleccionCiclosFormativos=VistaGrafica.getControlador().getCiclosFormativos();
+            obsListadoCiclosFormativos.setAll(coleccionCiclosFormativos);
+        } catch ( NullPointerException e) {
+            Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+        }
+    }
+
+    @FXML void mostrarMatriculas(ActionEvent event) {
+        try {
+            coleccionMatriculas=VistaGrafica.getControlador().getMatriculas();
+            obsListadoMatriculas.setAll(coleccionMatriculas);
+        } catch (OperationNotSupportedException | NullPointerException e) {
+            Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+        }
+    }
 
     @FXML void buscarAlumno(ActionEvent event) {
         List<Alumno> coleccionAlumnosBusqueda=new ArrayList<>();
@@ -421,6 +472,29 @@ public class ControladorVentanaPrincipal {
         }
     }
 
+    @FXML void borrarMatricula(ActionEvent event) {
+        Matricula matricula=tvMatriculas.getSelectionModel().getSelectedItem();
+        if (matricula==null)
+            Dialogos.mostrarDialogoAdvertencia("Anular Matricula", "Debes seleccionar una matricula para realizar esta operación");
+        else
+        {
+            if (Dialogos.mostrarDialogoConfirmacion("Anular Matricula","¿Realmente quieres anular esta matricula?"))
+            {
+                try {
+                    VistaGrafica.getControlador().borrarMatricula(matricula);
+                    coleccionMatriculas=VistaGrafica.getControlador().getMatriculas();
+                    obsListadoMatriculas.setAll(coleccionMatriculas);
+                    Dialogos.mostrarDialogoInformacion("Anular Matricula","Matricula anulada correctamente");
+                } catch ( NullPointerException e) {
+                    Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+                    coleccionMatriculas.clear();
+                    obsListadoMatriculas.setAll(coleccionMatriculas);
+                } catch (OperationNotSupportedException e) {
+                    Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+                }
+            }
+        }
+    }
 
     @FXML void salir(ActionEvent event) {
 

@@ -298,7 +298,7 @@ public class Modelo {
   	
   			 if(matriculas.getTamano()>0) {
   				
-  				 ArrayList<Matricula> nuevoArrayList=matriculas.get();
+  				 ArrayList<Matricula> nuevoArrayList=null;
   				/* Collections.sort(nuevoArrayList);
 
   				 
@@ -306,7 +306,7 @@ public class Modelo {
   					 System.out.println("Matricula: "+ matricula);
   					 System.out.println("Asignatura: "+matricula.getColeccionAsignaturas().toString());
   				 }*/
-  				 return matriculas.get();
+  				 return  matriculas.get();
   			 }
   			 else {
   				throw new NullPointerException(" No existen matriculas en el sistema");

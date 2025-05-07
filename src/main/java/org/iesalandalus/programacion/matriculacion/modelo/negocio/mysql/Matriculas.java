@@ -123,7 +123,9 @@ public class Matriculas implements IMatriculas{
 				
 				
 				Matricula matricula=new Matricula(idMatricula,cursoAcademico,fechaMatriculacion,alumnoBuscado,coleccionAsignaturas);
-				
+				if (fechaAnulacion!=null){
+					matricula.setFechaMatriculacion(fechaAnulacion);
+				}
 				matriculas.add(matricula);
 			}
 			
