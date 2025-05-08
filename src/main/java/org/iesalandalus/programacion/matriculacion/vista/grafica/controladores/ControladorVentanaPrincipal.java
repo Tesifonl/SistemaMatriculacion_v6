@@ -167,7 +167,7 @@ public class ControladorVentanaPrincipal {
         tcMatriculasIDMatricula.setCellValueFactory(new PropertyValueFactory<Matricula,Integer>("idMatricula"));
         tcMatrciulaCursoAcademico.setCellValueFactory(new PropertyValueFactory<Matricula,String>("cursoAcademico"));
         tcMatriculaFechaMatriculacion.setCellValueFactory(new PropertyValueFactory<Matricula,String>("fechaMatriculacion"));
-        tcMatriculaFechaAnulacion.setCellValueFactory(matricula -> {
+        /*tcMatriculaFechaAnulacion.setCellValueFactory(matricula -> {
             LocalDate fecha = matricula.getValue().getFechaAnulacion();
             String fechaFormateada;
             if (fecha != null) {
@@ -176,8 +176,8 @@ public class ControladorVentanaPrincipal {
                 fechaFormateada = "";
             }
             return new SimpleStringProperty(fechaFormateada);
-        });
-        //tcMatriculaFechaAnulacion.setCellValueFactory(new PropertyValueFactory<Matricula,String>("fechaAnulacion"));
+        });*/
+        tcMatriculaFechaAnulacion.setCellValueFactory(new PropertyValueFactory<Matricula,String>("fechaAnulacion"));
         //tcMatriculaDNI.setCellValueFactory(new PropertyValueFactory<Matricula,String>("dni"));
         tcMatriculaDNI.setCellValueFactory(matricula -> new SimpleStringProperty(matricula.getValue().getAlumno().getDni()));
         tvMatriculas.setItems(obsListadoMatriculas);
