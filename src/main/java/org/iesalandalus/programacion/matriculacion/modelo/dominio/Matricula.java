@@ -181,7 +181,9 @@ public class Matricula implements Comparable<Matricula>  {
 		else if(fechaAnulacion.isAfter(fechaMatriculacion.plusMonths(MAXIMO_MESES_ANTERIOR_ANULACION))) {
 			throw new IllegalArgumentException("ERROR: La fecha de anulación de la matrícula no puede superar 6 meses");
 		}
-		else {this.fechaAnulacion = fechaAnulacion;}
+		else {
+			this.fechaAnulacion = fechaAnulacion;
+		}
 	}
 
 

@@ -374,7 +374,6 @@ public class VistaTexto extends Vista  {
 		
 		try{
 			controlador.borrarMatricula(Consola.getMatriculaPorIdentificador());
-			System.out.println("Matricula anulada correctamente");
 		}				
 		catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());
