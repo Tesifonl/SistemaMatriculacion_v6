@@ -42,6 +42,7 @@ public class ControladorVentanaPrincipal {
     private ObservableList<Alumno> obsListadoAlumnos= FXCollections.observableArrayList();
     private List<Alumno> coleccionAlumnos=new ArrayList<>();
 
+
     @FXML private TableView<CicloFormativo> tvCiclosFormativos;
     @FXML private TableColumn<CicloFormativo, String> tcCiclosFormativosCodigo;
     @FXML private TableColumn<CicloFormativo, String> tcCiclosFormativosFamiliaProfesional;
@@ -73,6 +74,18 @@ public class ControladorVentanaPrincipal {
     private ObservableList<Matricula> obsListadoMatriculas= FXCollections.observableArrayList();
     private List<Matricula> coleccionMatriculas=new ArrayList<>();
 
+
+    @FXML private TableView<Matricula> tvMatriculasAlumno;
+    @FXML private TableColumn<Matricula, String> tcAlumnoCursoAcademico;
+    @FXML private TableColumn<Matricula, String> tcAlumnoIdentificacion;
+    @FXML private TableColumn<Matricula, String> tcAlumnoFechaAnulacion;
+    @FXML private TableColumn<Matricula, String> tcAlumnoFechaMatriculacion;
+    @FXML private TableColumn<Matricula, Integer> tcAlumnoIDMatricula;
+    private ObservableList<Matricula> obsListadoMatriculasAlumno= FXCollections.observableArrayList();
+    private List<Matricula> coleccionMatriculasAlumno=new ArrayList<>();
+
+
+
     @FXML private Button btMostrarAlumnos;
     @FXML private Button btMostrarAsignaturas;
     @FXML private Button btMostrarCiclos;
@@ -89,11 +102,13 @@ public class ControladorVentanaPrincipal {
     @FXML private TextField tfBuscarAsignatura;
     @FXML private TextField tfBuscarCicloFormativo;
     @FXML private TextField tfBuscarMatricula;
+    @FXML private TextField tfAlumnoBuscarMatricula;
     @FXML private Button btInsertarAlumno;
     @FXML private Button btInsertarAsignatura;
     @FXML private Button btInsertarCicloFormativo;
     @FXML private Button btInsertarMatricula;
     @FXML private Button btSalir;
+    @FXML private Button btAlumnoBuscarMatricula;
 
 
 
@@ -507,10 +522,24 @@ public class ControladorVentanaPrincipal {
     }
 
 
-    
+    @FXML void buscarMatriculaAlumno(ActionEvent event) {
 
+        try {
 
+            Alumno alumno=new Alumno("Juan",tfAlumnoBuscarMatricula.getText(),"juanmo@gmail.com","111111111",LocalDate.of(2002, 9, 15));
+            coleccionMatriculasAlumno=VistaGrafica.getControlador().getMatriculas(alumno);
+            obsListadoMatriculasAlumno.setAll(coleccionMatriculasAlumno);
+        } catch (OperationNotSupportedException | NullPointerException | IllegalArgumentException e) {
+            Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+        }
 
+            tcAlumnoIDMatricula.setCellValueFactory(new PropertyValueFactory<Matricula,Integer>("idMatricula"));
+            tcAlumnoCursoAcademico.setCellValueFactory(new PropertyValueFactory<Matricula,String>("cursoAcademico"));
+            tcAlumnoFechaMatriculacion.setCellValueFactory(new PropertyValueFactory<Matricula,String>("fechaMatriculacion"));
+            tcAlumnoFechaAnulacion.setCellValueFactory(new PropertyValueFactory<Matricula,String>("fechaAnulacion"));
+            tcAlumnoIdentificacion.setCellValueFactory(matricula -> new SimpleStringProperty(matricula.getValue().getAlumno().getDni()));
+            tvMatriculasAlumno.setItems(obsListadoMatriculasAlumno);
 
+        }
+    }
 
-}
