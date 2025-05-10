@@ -225,6 +225,7 @@ public class ControladorVentanaPrincipal {
             coleccionAlumnos= VistaGrafica.getControlador().getAlumnos();
             //coleccionAlumnos.add(new Alumno("Juan","11111111h","juan@gmail.com","333333333",LocalDate.of(2002, 9, 15)));
             obsListadoAlumnos.setAll(coleccionAlumnos);
+            buscarMatriculaAlumno(event);
         } catch (OperationNotSupportedException | NullPointerException e) {
             Dialogos.mostrarDialogoError("Error datos", e.getMessage());
         }
@@ -244,6 +245,7 @@ public class ControladorVentanaPrincipal {
         try {
             coleccionCiclosFormativos=VistaGrafica.getControlador().getCiclosFormativos();
             obsListadoCiclosFormativos.setAll(coleccionCiclosFormativos);
+            buscarMatriculaCicloFormativo(event);
         } catch ( NullPointerException e) {
             Dialogos.mostrarDialogoError("Error datos", e.getMessage());
         }
@@ -253,6 +255,7 @@ public class ControladorVentanaPrincipal {
         try {
             coleccionMatriculas=VistaGrafica.getControlador().getMatriculas();
             obsListadoMatriculas.setAll(coleccionMatriculas);
+            buscarAsignaturaMatricula(event);
         } catch (OperationNotSupportedException | NullPointerException e) {
             Dialogos.mostrarDialogoError("Error datos", e.getMessage());
         }
@@ -271,6 +274,7 @@ public class ControladorVentanaPrincipal {
                     coleccionAlumnosBusqueda.add(alumno);
                 }
             obsListadoAlumnos.setAll(coleccionAlumnosBusqueda);
+                tfBuscarAlumno.clear();
             }
 
         }
@@ -291,6 +295,7 @@ public class ControladorVentanaPrincipal {
                     coleccionAsignaturasBusqueda.add(asignatura);
                 }
                 obsListadoAsignaturas.setAll(coleccionAsignaturasBusqueda);
+                tfBuscarAsignatura.clear();
             }
         }
     }
@@ -309,6 +314,7 @@ public class ControladorVentanaPrincipal {
                     coleccionCiclosBusqueda.add(cicloFormativo);
                 }
                 obsListadoCiclosFormativos.setAll(coleccionCiclosBusqueda);
+                tfBuscarCicloFormativo.clear();
             }
         }
     }
@@ -326,6 +332,7 @@ public class ControladorVentanaPrincipal {
                     coleccionMatriculasBusqueda.add(matricula);
                 }
                 obsListadoMatriculas.setAll(coleccionMatriculasBusqueda);
+                tfBuscarMatricula.clear();
             }
         }
     }
@@ -546,69 +553,86 @@ public class ControladorVentanaPrincipal {
 
     @FXML void buscarMatriculaAlumno(ActionEvent event) {
 
-        try {
-
-            Alumno alumno=new Alumno("Juan",tfAlumnoBuscarMatricula.getText(),"juanmo@gmail.com","111111111",LocalDate.of(2002, 9, 15));
-            coleccionMatriculasAlumno=VistaGrafica.getControlador().getMatriculas(alumno);
+        if (tfAlumnoBuscarMatricula.getText().isBlank() || tfAlumnoBuscarMatricula.getText().isEmpty()) {
+            coleccionMatriculasAlumno.clear();
             obsListadoMatriculasAlumno.setAll(coleccionMatriculasAlumno);
-        } catch (OperationNotSupportedException | NullPointerException | IllegalArgumentException e) {
-            Dialogos.mostrarDialogoError("Error datos", e.getMessage());
-        }
+        } else {
+            try {
 
-            tcAlumnoIDMatricula.setCellValueFactory(new PropertyValueFactory<Matricula,Integer>("idMatricula"));
-            tcAlumnoCursoAcademico.setCellValueFactory(new PropertyValueFactory<Matricula,String>("cursoAcademico"));
-            tcAlumnoFechaMatriculacion.setCellValueFactory(new PropertyValueFactory<Matricula,String>("fechaMatriculacion"));
-            tcAlumnoFechaAnulacion.setCellValueFactory(new PropertyValueFactory<Matricula,String>("fechaAnulacion"));
+                Alumno alumno = new Alumno("Juan", tfAlumnoBuscarMatricula.getText(), "juanmo@gmail.com", "111111111", LocalDate.of(2002, 9, 15));
+                coleccionMatriculasAlumno = VistaGrafica.getControlador().getMatriculas(alumno);
+                obsListadoMatriculasAlumno.setAll(coleccionMatriculasAlumno);
+            } catch (OperationNotSupportedException | NullPointerException | IllegalArgumentException e) {
+                Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+            }
+
+            tcAlumnoIDMatricula.setCellValueFactory(new PropertyValueFactory<Matricula, Integer>("idMatricula"));
+            tcAlumnoCursoAcademico.setCellValueFactory(new PropertyValueFactory<Matricula, String>("cursoAcademico"));
+            tcAlumnoFechaMatriculacion.setCellValueFactory(new PropertyValueFactory<Matricula, String>("fechaMatriculacion"));
+            tcAlumnoFechaAnulacion.setCellValueFactory(new PropertyValueFactory<Matricula, String>("fechaAnulacion"));
             tcAlumnoIdentificacion.setCellValueFactory(matricula -> new SimpleStringProperty(matricula.getValue().getAlumno().getDni()));
             tvMatriculasAlumno.setItems(obsListadoMatriculasAlumno);
-
+            tfAlumnoBuscarMatricula.clear();
         }
+    }
 
     @FXML void buscarMatriculaCicloFormativo(ActionEvent event) {
-        try {
-            Grado grado=new GradoE("DW",1,1);
-            CicloFormativo cicloFormativo =new CicloFormativo(Integer.parseInt(tfCicloFormativoBuscarMatricula.getText()),"Semipresencial",grado,"DAW",100);
 
-            coleccionMatriculasCicloFormativo=VistaGrafica.getControlador().getMatriculas(cicloFormativo);
+        if (tfCicloFormativoBuscarMatricula.getText().isBlank() || tfCicloFormativoBuscarMatricula.getText().isEmpty()) {
+            coleccionMatriculasCicloFormativo .clear();
             obsListadoMatriculasCicloFormativo.setAll(coleccionMatriculasCicloFormativo);
-        } catch (OperationNotSupportedException | NullPointerException | IllegalArgumentException e) {
-            Dialogos.mostrarDialogoError("Error datos", e.getMessage());
-        }
+        } else {
+            try {
+                Grado grado = new GradoE("DW", 1, 1);
+                CicloFormativo cicloFormativo = new CicloFormativo(Integer.parseInt(tfCicloFormativoBuscarMatricula.getText()), "Semipresencial", grado, "DAW", 100);
 
-        tcCicloFormativoIDMatricula.setCellValueFactory(new PropertyValueFactory<Matricula,Integer>("idMatricula"));
-        tcCicloFormativoCursoAcademico.setCellValueFactory(new PropertyValueFactory<Matricula,String>("cursoAcademico"));
-        tcCicloFormativoFechaMatriculacion.setCellValueFactory(new PropertyValueFactory<Matricula,String>("fechaMatriculacion"));
-        tcCicloFormativoFechaAnulacion.setCellValueFactory(new PropertyValueFactory<Matricula,String>("fechaAnulacion"));
-        tcCicloFormativoIdentificacionAlumno.setCellValueFactory(matricula -> new SimpleStringProperty(matricula.getValue().getAlumno().getDni()));
-        tvCiclosFormativosMatriculas.setItems(obsListadoMatriculasCicloFormativo);
+                coleccionMatriculasCicloFormativo = VistaGrafica.getControlador().getMatriculas(cicloFormativo);
+                obsListadoMatriculasCicloFormativo.setAll(coleccionMatriculasCicloFormativo);
+            } catch (OperationNotSupportedException | NullPointerException | IllegalArgumentException e) {
+                Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+            }
+
+            tcCicloFormativoIDMatricula.setCellValueFactory(new PropertyValueFactory<Matricula, Integer>("idMatricula"));
+            tcCicloFormativoCursoAcademico.setCellValueFactory(new PropertyValueFactory<Matricula, String>("cursoAcademico"));
+            tcCicloFormativoFechaMatriculacion.setCellValueFactory(new PropertyValueFactory<Matricula, String>("fechaMatriculacion"));
+            tcCicloFormativoFechaAnulacion.setCellValueFactory(new PropertyValueFactory<Matricula, String>("fechaAnulacion"));
+            tcCicloFormativoIdentificacionAlumno.setCellValueFactory(matricula -> new SimpleStringProperty(matricula.getValue().getAlumno().getDni()));
+            tvCiclosFormativosMatriculas.setItems(obsListadoMatriculasCicloFormativo);
+            tfCicloFormativoBuscarMatricula.clear();
+        }
     }
 
     @FXML void buscarAsignaturaMatricula(ActionEvent event) {
 
-        try {
-            Alumno alumno=new Alumno( "Tesi", "11111111H", "Tesi@gmail.com", "999999999", LocalDate.of(1979, 1, 8));
-            Grado grado=new GradoE("DW",1,1);
-            CicloFormativo cicloFormativo =new CicloFormativo(1111,"Semipresencial",grado,"DAW",100);
-            ArrayList<Asignatura> asignaturas=new ArrayList<Asignatura>();
-            asignaturas.add(new Asignatura("2222","Programacion",100,Curso.PRIMERO,6,EspecialidadProfesorado.INFORMATICA,cicloFormativo));
-            Matricula matricula =new Matricula(Integer.parseInt(tfMatriculaBuscarAsignaturas.getText()),"23-24",LocalDate.now(),alumno,asignaturas);
-
-            coleccionAsignaturasMatriculadas=VistaGrafica.getControlador().buscarMatricula(matricula).getColeccionAsignaturas();
+        if (tfMatriculaBuscarAsignaturas.getText().isBlank() || tfMatriculaBuscarAsignaturas.getText().isEmpty()) {
+            coleccionAsignaturasMatriculadas.clear();
             obsListadoAsignaturasMatriculadas.setAll(coleccionAsignaturasMatriculadas);
-        } catch (OperationNotSupportedException | NullPointerException | IllegalArgumentException e) {
-            Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+        } else {
+            try {
+                Alumno alumno = new Alumno("Tesi", "11111111H", "Tesi@gmail.com", "999999999", LocalDate.of(1979, 1, 8));
+                Grado grado = new GradoE("DW", 1, 1);
+                CicloFormativo cicloFormativo = new CicloFormativo(1111, "Semipresencial", grado, "DAW", 100);
+                ArrayList<Asignatura> asignaturas = new ArrayList<Asignatura>();
+                asignaturas.add(new Asignatura("2222", "Programacion", 100, Curso.PRIMERO, 6, EspecialidadProfesorado.INFORMATICA, cicloFormativo));
+                Matricula matricula = new Matricula(Integer.parseInt(tfMatriculaBuscarAsignaturas.getText()), "23-24", LocalDate.now(), alumno, asignaturas);
+
+                coleccionAsignaturasMatriculadas = VistaGrafica.getControlador().buscarMatricula(matricula).getColeccionAsignaturas();
+                obsListadoAsignaturasMatriculadas.setAll(coleccionAsignaturasMatriculadas);
+
+            } catch (OperationNotSupportedException | NullPointerException | IllegalArgumentException e) {
+                Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+            }
+            tcMatriculaAsignaturaCodigo.setCellValueFactory(new PropertyValueFactory<Asignatura, Integer>("codigo"));
+            tcMatriculaAsignaturaNombre.setCellValueFactory(new PropertyValueFactory<Asignatura, String>("nombre"));
+            tcMatriculaAsignaturaCurso.setCellValueFactory(new PropertyValueFactory<Asignatura, String>("curso"));
+            tcMatriculaAsignaturaEspecialidad.setCellValueFactory(new PropertyValueFactory<Asignatura, String>("especialidadProfesorado"));
+            tcMatriculaAsignaturaHorasAn.setCellValueFactory(new PropertyValueFactory<Asignatura, Integer>("horasAnuales"));
+            tcMatriculaAsignaturaHorasDes.setCellValueFactory(new PropertyValueFactory<Asignatura, Integer>("horasDesdoble"));
+            tcMatriculaAsignaturaCiclo.setCellValueFactory(asignatura -> new SimpleIntegerProperty(asignatura.getValue().getCicloFormativo().getCodigo()).asObject());
+            tvMatriculasAsignaturas.setItems(obsListadoAsignaturasMatriculadas);
+            tfMatriculaBuscarAsignaturas.clear();
         }
-        tcMatriculaAsignaturaCodigo.setCellValueFactory(new PropertyValueFactory<Asignatura,Integer>("codigo"));
-        tcMatriculaAsignaturaNombre.setCellValueFactory(new PropertyValueFactory<Asignatura,String>("nombre"));
-        tcMatriculaAsignaturaCurso.setCellValueFactory(new PropertyValueFactory<Asignatura,String>("curso"));
-        tcMatriculaAsignaturaEspecialidad.setCellValueFactory(new PropertyValueFactory<Asignatura,String>("especialidadProfesorado"));
-        tcMatriculaAsignaturaHorasAn.setCellValueFactory(new PropertyValueFactory<Asignatura,Integer>("horasAnuales"));
-        tcMatriculaAsignaturaHorasDes.setCellValueFactory(new PropertyValueFactory<Asignatura,Integer>("horasDesdoble"));
-        tcMatriculaAsignaturaCiclo.setCellValueFactory(asignatura -> new SimpleIntegerProperty(asignatura.getValue().getCicloFormativo().getCodigo()).asObject());
-        tvMatriculasAsignaturas.setItems(obsListadoAsignaturasMatriculadas);
     }
-
-
 
     }
 
