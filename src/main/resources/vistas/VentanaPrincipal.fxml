@@ -125,6 +125,7 @@
                               </TableView>
                            </children>
                         </VBox>
+                        <Button fx:id="btSalir" layoutX="304.0" layoutY="482.0" mnemonicParsing="false" onAction="#salir" prefHeight="28.0" prefWidth="106.0" text="SALIR" />
                      </children>
                   </AnchorPane>
             </content>
@@ -161,6 +162,7 @@
                               </AnchorPane>
                            </children>
                         </VBox>
+                        <Button fx:id="btSalir" layoutX="312.0" layoutY="470.0" mnemonicParsing="false" onAction="#salir" prefHeight="36.0" prefWidth="99.0" text="SALIR" textFill="#070707" />
                      </children>
                   </AnchorPane>
               </content>
@@ -208,6 +210,7 @@
                               </TableView>
                            </children>
                         </VBox>
+                        <Button fx:id="btSalir" layoutX="310.0" layoutY="468.0" mnemonicParsing="false" onAction="#salir" prefHeight="41.0" prefWidth="82.0" text="SALIR" />
                      </children>
                   </AnchorPane>
               </content>
