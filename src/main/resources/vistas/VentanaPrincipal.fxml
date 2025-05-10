@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.matriculacion.vista.grafica.controladores.ControladorVentanaPrincipal">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" stylesheets="@../estilos/estilos.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.matriculacion.vista.grafica.controladores.ControladorVentanaPrincipal">
    <children>
       <MenuBar fx:id="TabMatriculas">
         <menus>
@@ -34,7 +34,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TabPane prefHeight="568.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="568.0" prefWidth="700.0" styleClass="../estilos/estilos.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="tabAlumnos" text="Alumnos">
             <content>
@@ -46,38 +46,38 @@
                                  <children>
                                     <TableView fx:id="tvAlumnos" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="168.0" prefWidth="699.0">
                                       <columns>
-                                        <TableColumn fx:id="tcAlumnoNombre" prefWidth="75.0" text="Nombre" />
-                                        <TableColumn fx:id="tcAlumnoTelefono" prefWidth="75.0" text="Telefono" />
-                                          <TableColumn fx:id="tcAlumnoCorreo" prefWidth="75.0" text="Correo" />
-                                          <TableColumn fx:id="tcAlumnoDni" prefWidth="75.0" text="Dni" />
-                                          <TableColumn fx:id="tcAlumnoFechaNacimiento" prefWidth="125.0" text="Fecha Nacimiento" />
+                                        <TableColumn fx:id="tcAlumnoNombre" prefWidth="99.0" text="NOMBRE" />
+                                        <TableColumn fx:id="tcAlumnoTelefono" prefWidth="112.0" text="TELEFÓNO" />
+                                          <TableColumn fx:id="tcAlumnoCorreo" prefWidth="89.0" text="CORREO" />
+                                          <TableColumn fx:id="tcAlumnoDni" prefWidth="128.0" text="DNI" />
+                                          <TableColumn fx:id="tcAlumnoFechaNacimiento" prefWidth="210.0" text="FECHA NACIMIENTO" />
                                       </columns>
                                     </TableView>
                                  </children>
                               </HBox>
                               <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="136.0" prefWidth="699.0">
                                  <children>
-                                    <TextField fx:id="tfBuscarAlumno" layoutX="493.0" layoutY="21.0" />
-                                    <Button fx:id="btBuscarAlumno" layoutX="333.0" layoutY="27.0" mnemonicParsing="false" onAction="#buscarAlumno" prefHeight="26.0" prefWidth="142.0" text="BUSCAR ALUMNO" />
-                                    <TextField fx:id="tfAlumnoBuscarMatricula" layoutX="493.0" layoutY="73.0" />
-                                    <Button fx:id="btInsertarAlumno" layoutX="40.0" layoutY="14.0" mnemonicParsing="false" onAction="#insertarAlumno" text="INSERTAR NUEVO ALUMMO" />
-                                    <Button fx:id="btBorrarAlumno" layoutX="39.0" layoutY="47.0" mnemonicParsing="false" onAction="#borrarAlumno" prefHeight="26.0" prefWidth="182.0" text="BORRAR ALUMNO" />
-                                    <Button fx:id="btMostrarAlumnos" layoutX="40.0" layoutY="82.0" mnemonicParsing="false" onAction="#mostrarAlumnos" prefHeight="26.0" prefWidth="179.0" text="MOSTRAR ALUMNOS" />
-                                    <Button fx:id="btAlumnoBuscarMatricula" layoutX="333.0" layoutY="73.0" mnemonicParsing="false" onAction="#buscarMatriculaAlumno" text="BUSCAR MATRICULA" />
+                                    <TextField fx:id="tfBuscarAlumno" layoutX="283.0" layoutY="57.0" promptText="NOMBRE" />
+                                    <Button fx:id="btBuscarAlumno" layoutX="275.0" layoutY="22.0" mnemonicParsing="false" onAction="#buscarAlumno" prefHeight="26.0" prefWidth="190.0" text="BUSCAR ALUMNO" />
+                                    <TextField fx:id="tfAlumnoBuscarMatricula" layoutX="493.0" layoutY="57.0" promptText="DNI" />
+                                    <Button fx:id="btInsertarAlumno" layoutX="40.0" layoutY="22.0" mnemonicParsing="false" onAction="#insertarAlumno" prefHeight="26.0" prefWidth="190.0" text="INSERTAR NUEVO ALUMMO" />
+                                    <Button fx:id="btBorrarAlumno" layoutX="40.0" layoutY="56.0" mnemonicParsing="false" onAction="#borrarAlumno" prefHeight="26.0" prefWidth="190.0" text="BORRAR ALUMNO" />
+                                    <Button fx:id="btMostrarAlumnos" layoutX="40.0" layoutY="90.0" mnemonicParsing="false" onAction="#mostrarAlumnos" prefHeight="26.0" prefWidth="190.0" text="MOSTRAR ALUMNOS" />
+                                    <Button fx:id="btAlumnoBuscarMatricula" layoutX="486.0" layoutY="22.0" mnemonicParsing="false" onAction="#buscarMatriculaAlumno" prefHeight="26.0" prefWidth="190.0" text="BUSCAR MATRÍCULA" />
                                  </children>
                               </AnchorPane>
                               <TableView fx:id="tvMatriculasAlumno" prefHeight="200.0" prefWidth="200.0">
                                 <columns>
                                   <TableColumn fx:id="tcAlumnoIDMatricula" prefWidth="113.0" text="ID MATRICULA" />
                                   <TableColumn fx:id="tcAlumnoCursoAcademico" prefWidth="136.0" text="CURSO ACADEMICO" />
-                                    <TableColumn fx:id="tcAlumnoFechaMatriculacion" prefWidth="141.0" text="FECHA MATRICULACION" />
-                                    <TableColumn fx:id="tcAlumnoFechaAnulacion" prefWidth="116.0" text="FECHA ANULACION" />
+                                    <TableColumn fx:id="tcAlumnoFechaMatriculacion" prefWidth="141.0" text="FECHA MATRICULACIÓN" />
+                                    <TableColumn fx:id="tcAlumnoFechaAnulacion" prefWidth="116.0" text="FECHA ANULACIÓN" />
                                     <TableColumn fx:id="tcAlumnoIdentificacion" prefWidth="193.0" text="DNI ALUMNO" />
                                 </columns>
                               </TableView>
                            </children>
                         </VBox>
-                        <Button fx:id="btSalir" layoutX="246.0" layoutY="473.0" mnemonicParsing="false" onAction="#salir" prefHeight="43.0" prefWidth="213.0" text="SALIR" />
+                        <Button fx:id="btSalir" layoutX="295.0" layoutY="473.0" mnemonicParsing="false" onAction="#salir" prefHeight="43.0" prefWidth="133.0" text="SALIR" />
                      </children>
                   </AnchorPane>
             </content>
@@ -92,40 +92,40 @@
                                  <children>
                                     <TableView fx:id="tvCiclosFormativos" prefHeight="168.0" prefWidth="699.0">
                                       <columns>
-                                        <TableColumn fx:id="tcCiclosFormativosCodigo" prefWidth="75.0" text="Codigo" />
-                                        <TableColumn fx:id="tcCiclosFormativosFamiliaProfesional" prefWidth="112.0" text="Familia Profesional" />
-                                          <TableColumn fx:id="tcCiclosFormativosGrado" prefWidth="38.0" text="Grado" />
-                                          <TableColumn fx:id="tcCiclosFormativosNombre" prefWidth="75.0" text="Nombre" />
-                                          <TableColumn fx:id="tcCiclosFormativosHoras" prefWidth="75.0" text="Horas" />
-                                          <TableColumn fx:id="tcCiclosFormativosNombreGrado" prefWidth="102.0" text="Nombre Grado" />
-                                          <TableColumn fx:id="tcCiclosFormativosNumAnios" prefWidth="75.0" text="Num Años " />
+                                        <TableColumn fx:id="tcCiclosFormativosCodigo" prefWidth="75.0" text="CÓDIGO" />
+                                        <TableColumn fx:id="tcCiclosFormativosFamiliaProfesional" prefWidth="148.0" text="FAMILIA PROFESIONAL" />
+                                          <TableColumn fx:id="tcCiclosFormativosGrado" prefWidth="61.0" text="GRADO" />
+                                          <TableColumn fx:id="tcCiclosFormativosNombre" prefWidth="86.0" text="NOMBRE" />
+                                          <TableColumn fx:id="tcCiclosFormativosHoras" prefWidth="51.0" text="HORAS" />
+                                          <TableColumn fx:id="tcCiclosFormativosNombreGrado" prefWidth="101.0" text="NOMBRE GRADO" />
+                                          <TableColumn fx:id="tcCiclosFormativosNumAnios" prefWidth="175.0" text="NÚMERO DE AÑOS" />
                                       </columns>
                                     </TableView>
                                  </children>
                               </HBox>
                               <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="136.0" prefWidth="699.0">
                                  <children>
-                                    <TextField fx:id="tfBuscarCicloFormativo" layoutX="484.0" layoutY="33.0" />
-                                    <Button fx:id="btBuscarCicloFormativo" layoutX="310.0" layoutY="33.0" mnemonicParsing="false" onAction="#buscarCicloFormativo" prefHeight="26.0" prefWidth="143.0" text="BUSCAR CICLO" />
-                                    <TextField fx:id="tfCicloFormativoBuscarMatricula" layoutX="484.0" layoutY="72.0" promptText="CODIGO DE CICLO" />
-                                    <Button fx:id="btCicloFormativoBuscarMatricula" layoutX="310.0" layoutY="72.0" mnemonicParsing="false" onAction="#buscarMatriculaCicloFormativo" text="BUSCAR MATRICULAS" />
-                                    <Button fx:id="btInsertarCicloFormativo" layoutX="67.0" layoutY="20.0" mnemonicParsing="false" onAction="#insertarCicloFormativo" prefHeight="26.0" prefWidth="125.0" text="INSERTAR CICLO" />
-                                    <Button fx:id="btBorrarCicloFormativo" layoutX="69.0" layoutY="59.0" mnemonicParsing="false" onAction="#borrarCicloFormativo" prefHeight="26.0" prefWidth="122.0" text="BORRAR CICLO" />
-                                    <Button fx:id="btMostrarCiclos" layoutX="68.0" layoutY="96.0" mnemonicParsing="false" onAction="#mostrarCiclos" text="MOSTRAR CICLOS" />
+                                    <TextField fx:id="tfBuscarCicloFormativo" layoutX="278.0" layoutY="60.0" promptText="CÓDIGO DE CICLO" />
+                                    <Button fx:id="btBuscarCicloFormativo" layoutX="271.0" layoutY="21.0" mnemonicParsing="false" onAction="#buscarCicloFormativo" prefHeight="26.0" prefWidth="190.0" text="BUSCAR CICLO" />
+                                    <TextField fx:id="tfCicloFormativoBuscarMatricula" layoutX="484.0" layoutY="60.0" prefHeight="25.0" prefWidth="185.0" promptText="CÓDIGO DE CICLO" />
+                                    <Button fx:id="btCicloFormativoBuscarMatricula" layoutX="482.0" layoutY="21.0" mnemonicParsing="false" onAction="#buscarMatriculaCicloFormativo" prefHeight="26.0" prefWidth="190.0" text="BUSCAR MATRICULAS" />
+                                    <Button fx:id="btInsertarCicloFormativo" layoutX="34.0" layoutY="21.0" mnemonicParsing="false" onAction="#insertarCicloFormativo" prefHeight="26.0" prefWidth="190.0" text="INSERTAR CICLO" />
+                                    <Button fx:id="btBorrarCicloFormativo" layoutX="34.0" layoutY="60.0" mnemonicParsing="false" onAction="#borrarCicloFormativo" prefHeight="26.0" prefWidth="190.0" text="BORRAR CICLO" />
+                                    <Button fx:id="btMostrarCiclos" layoutX="34.0" layoutY="97.0" mnemonicParsing="false" onAction="#mostrarCiclos" prefHeight="25.0" prefWidth="190.0" text="MOSTRAR CICLOS" />
                                  </children>
                               </AnchorPane>
                               <TableView fx:id="tvCiclosFormativosMatriculas" prefHeight="193.0" prefWidth="700.0">
                                 <columns>
                                   <TableColumn fx:id="tcCicloFormativoIDMatricula" prefWidth="130.0" text="ID MATRICULA" />
                                   <TableColumn fx:id="tcCicloFormativoCursoAcademico" prefWidth="146.0" text="CURSO ACADEMICO" />
-                                    <TableColumn fx:id="tcCicloFormativoFechaMatriculacion" prefWidth="144.0" text="FECHA MATRICULACION" />
-                                    <TableColumn fx:id="tcCicloFormativoFechaAnulacion" prefWidth="132.0" text="FECHA ANULACION" />
+                                    <TableColumn fx:id="tcCicloFormativoFechaMatriculacion" prefWidth="144.0" text="FECHA MATRICULACIÓN" />
+                                    <TableColumn fx:id="tcCicloFormativoFechaAnulacion" prefWidth="132.0" text="FECHA ANULACIÓN" />
                                     <TableColumn fx:id="tcCicloFormativoIdentificacionAlumno" prefWidth="134.0" text="DNI ALUMNO" />
                                 </columns>
                               </TableView>
                            </children>
                         </VBox>
-                        <Button fx:id="btSalir" layoutX="304.0" layoutY="482.0" mnemonicParsing="false" onAction="#salir" prefHeight="28.0" prefWidth="106.0" text="SALIR" />
+                        <Button fx:id="btSalir" layoutX="275.0" layoutY="459.0" mnemonicParsing="false" onAction="#salir" prefHeight="43.0" prefWidth="133.0" text="SALIR" />
                      </children>
                   </AnchorPane>
             </content>
@@ -140,29 +140,29 @@
                                  <children>
                                     <TableView fx:id="tvAsignaturas" prefHeight="168.0" prefWidth="699.0">
                                       <columns>
-                                        <TableColumn fx:id="tcAsignaturasCodigo" prefWidth="75.0" text="Codigo" />
-                                        <TableColumn fx:id="tcAsignaturasNombre" prefWidth="75.0" text="Nombre" />
-                                          <TableColumn fx:id="tcAsignaturasHorasAnual" prefWidth="98.0" text="Horas anuales" />
-                                          <TableColumn fx:id="tcAsignaturasCurso" prefWidth="52.0" text="Curso" />
-                                          <TableColumn fx:id="tcAsignaturasHorasDesdoble" prefWidth="75.0" text="Horas desdoble" />
-                                          <TableColumn fx:id="tcAsignaturasEspecialProfesor" prefWidth="128.0" text="Especiliadad profesor" />
-                                          <TableColumn fx:id="tcAsignatuasCodigoCiclo" prefWidth="128.0" text="Codigo de ciclo" />
+                                        <TableColumn fx:id="tcAsignaturasCodigo" prefWidth="75.0" text="CÓDIGO" />
+                                        <TableColumn fx:id="tcAsignaturasNombre" prefWidth="75.0" text="NOMBRE" />
+                                          <TableColumn fx:id="tcAsignaturasHorasAnual" prefWidth="98.0" text="H ANUALES" />
+                                          <TableColumn fx:id="tcAsignaturasCurso" prefWidth="85.0" text="CURSO" />
+                                          <TableColumn fx:id="tcAsignaturasHorasDesdoble" prefWidth="91.0" text="H DESDOBLE" />
+                                          <TableColumn fx:id="tcAsignaturasEspecialProfesor" prefWidth="146.0" text="ESPECILIDAD PROF" />
+                                          <TableColumn fx:id="tcAsignatuasCodigoCiclo" prefWidth="105.0" text="CÓDIGO CICLO" />
                                       </columns>
                                     </TableView>
                                  </children>
                               </HBox>
                               <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="136.0" prefWidth="699.0">
                                  <children>
-                                    <TextField fx:id="tfBuscarAsignatura" layoutX="466.0" layoutY="27.0" />
-                                    <Button fx:id="btBuscarAsignatura" layoutX="279.0" layoutY="27.0" mnemonicParsing="false" onAction="#buscarAsignatura" prefHeight="26.0" prefWidth="155.0" text="BUSCAR MATRICULA" />
-                                    <Button fx:id="btInsertarAsignatura" layoutX="28.0" layoutY="23.0" mnemonicParsing="false" onAction="#insertarAsignatura" prefHeight="26.0" prefWidth="162.0" text="INSERTAR ASIGNATURA" />
-                                    <Button fx:id="btBorrarAsignatura" layoutX="28.0" layoutY="55.0" mnemonicParsing="false" onAction="#borrarAsignatura" prefHeight="26.0" prefWidth="161.0" text="BORRAR ASIGNATURA" />
-                                    <Button fx:id="btMostrarAsignaturas" layoutX="28.0" layoutY="88.0" mnemonicParsing="false" onAction="#mostrarAsignaturas" text="MOSTRAR ASIGNATURAS" />
+                                    <TextField fx:id="tfBuscarAsignatura" layoutX="325.0" layoutY="69.0" promptText="CODIGO" />
+                                    <Button fx:id="btBuscarAsignatura" layoutX="317.0" layoutY="23.0" mnemonicParsing="false" onAction="#buscarAsignatura" prefHeight="26.0" prefWidth="190.0" text="BUSCAR ASIGNATURA" />
+                                    <Button fx:id="btInsertarAsignatura" layoutX="28.0" layoutY="23.0" mnemonicParsing="false" onAction="#insertarAsignatura" prefHeight="26.0" prefWidth="190.0" text="INSERTAR ASIGNATURA" />
+                                    <Button fx:id="btBorrarAsignatura" layoutX="28.0" layoutY="55.0" mnemonicParsing="false" onAction="#borrarAsignatura" prefHeight="26.0" prefWidth="190.0" text="BORRAR ASIGNATURA" />
+                                    <Button fx:id="btMostrarAsignaturas" layoutX="28.0" layoutY="88.0" mnemonicParsing="false" onAction="#mostrarAsignaturas" prefHeight="26.0" prefWidth="190.0" text="MOSTRAR ASIGNATURAS" />
                                  </children>
                               </AnchorPane>
                            </children>
                         </VBox>
-                        <Button fx:id="btSalir" layoutX="312.0" layoutY="470.0" mnemonicParsing="false" onAction="#salir" prefHeight="36.0" prefWidth="99.0" text="SALIR" textFill="#070707" />
+                        <Button fx:id="btSalir" layoutX="259.0" layoutY="465.0" mnemonicParsing="false" onAction="#salir" prefHeight="43.0" prefWidth="133.0" text="SALIR" textFill="#070707" />
                      </children>
                   </AnchorPane>
               </content>
@@ -177,24 +177,24 @@
                                  <children>
                                     <TableView fx:id="tvMatriculas" prefHeight="168.0" prefWidth="699.0">
                                       <columns>
-                                        <TableColumn fx:id="tcMatriculasIDMatricula" text="ID Matricula" />
-                                        <TableColumn fx:id="tcMatrciulaCursoAcademico" prefWidth="127.0" text="Curso academico" />
-                                          <TableColumn fx:id="tcMatriculaFechaMatriculacion" prefWidth="130.0" text="Fecha matriculacion" />
-                                          <TableColumn fx:id="tcMatriculaFechaAnulacion" prefWidth="142.0" text="Fecha anulacion" />
-                                          <TableColumn fx:id="tcMatriculaDNI" prefWidth="69.0" text="DNI" />
+                                        <TableColumn fx:id="tcMatriculasIDMatricula" prefWidth="132.0" text="ID MATRÍCULA" />
+                                        <TableColumn fx:id="tcMatrciulaCursoAcademico" prefWidth="165.0" text="CURSO ACADÉMICO" />
+                                          <TableColumn fx:id="tcMatriculaFechaMatriculacion" prefWidth="136.0" text="FECHA MATRICULACIÓN" />
+                                          <TableColumn fx:id="tcMatriculaFechaAnulacion" prefWidth="166.0" text="FECHA ANULACIÓN" />
+                                          <TableColumn fx:id="tcMatriculaDNI" prefWidth="98.0" text="DNI" />
                                       </columns>
                                     </TableView>
                                  </children>
                               </HBox>
                               <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="136.0" prefWidth="699.0">
                                  <children>
-                                    <TextField fx:id="tfBuscarMatricula" layoutX="509.0" layoutY="24.0" />
-                                    <Button fx:id="btBuscarMatricula" layoutX="329.0" layoutY="24.0" mnemonicParsing="false" onAction="#buscarMatricula" text="BUSCAR MATRICULA" />
-                                    <TextField fx:id="tfMatriculaBuscarAsignaturas" layoutX="509.0" layoutY="64.0" />
-                                    <Button fx:id="btMatriculaBuscarAsignatura" layoutX="329.0" layoutY="64.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#buscarAsignaturaMatricula" text="BUSCAR ASIGNATURAS" />
-                                    <Button fx:id="btInsertarMatricula" layoutX="21.0" layoutY="24.0" mnemonicParsing="false" onAction="#insertarMatricula" prefHeight="26.0" prefWidth="163.0" text="INSERTAR MATRICULA" />
-                                    <Button fx:id="btBorrarMatricula" layoutX="21.0" layoutY="55.0" mnemonicParsing="false" onAction="#borrarMatricula" prefHeight="26.0" prefWidth="163.0" text="BORRAR MATRICULA" />
-                                    <Button fx:id="btMostrarMatriculas" layoutX="21.0" layoutY="90.0" mnemonicParsing="false" onAction="#mostrarMatriculas" prefHeight="26.0" prefWidth="166.0" text="MOSTRAR MATRICULAS" />
+                                    <TextField fx:id="tfBuscarMatricula" layoutX="262.0" layoutY="56.0" promptText="CODIGO MATRÍCULA" />
+                                    <Button fx:id="btBuscarMatricula" layoutX="255.0" layoutY="25.0" mnemonicParsing="false" onAction="#buscarMatricula" prefHeight="26.0" prefWidth="190.0" text="BUSCAR MATRÍCULA" />
+                                    <TextField fx:id="tfMatriculaBuscarAsignaturas" layoutX="478.0" layoutY="56.0" promptText="CODIGO MATRÍCULA" />
+                                    <Button fx:id="btMatriculaBuscarAsignatura" layoutX="470.0" layoutY="25.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#buscarAsignaturaMatricula" prefHeight="26.0" prefWidth="190.0" text="BUSCAR ASIGNATURAS" />
+                                    <Button fx:id="btInsertarMatricula" layoutX="21.0" layoutY="25.0" mnemonicParsing="false" onAction="#insertarMatricula" prefHeight="26.0" prefWidth="190.0" text="INSERTAR MATRÍCULA" />
+                                    <Button fx:id="btBorrarMatricula" layoutX="21.0" layoutY="55.0" mnemonicParsing="false" onAction="#borrarMatricula" prefHeight="26.0" prefWidth="190.0" text="BORRAR MATRÍCULA" />
+                                    <Button fx:id="btMostrarMatriculas" layoutX="21.0" layoutY="88.0" mnemonicParsing="false" onAction="#mostrarMatriculas" prefHeight="26.0" prefWidth="190.0" text="MOSTRAR MATRÍCULAS" />
                                  </children>
                               </AnchorPane>
                               <TableView fx:id="tvMatriculasAsignaturas" prefHeight="200.0" prefWidth="200.0">
@@ -210,7 +210,7 @@
                               </TableView>
                            </children>
                         </VBox>
-                        <Button fx:id="btSalir" layoutX="310.0" layoutY="468.0" mnemonicParsing="false" onAction="#salir" prefHeight="41.0" prefWidth="82.0" text="SALIR" />
+                        <Button fx:id="btSalir" layoutX="290.0" layoutY="459.0" mnemonicParsing="false" onAction="#salir" prefHeight="43.0" prefWidth="133.0" text="SALIR" />
                      </children>
                   </AnchorPane>
               </content>
