@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -163,9 +162,8 @@
                               </HBox>
                               <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="422.0">
                                  <children>
-                                    <Label layoutX="56.0" layoutY="42.0" text="NOMBRE" />
-                                    <TextField fx:id="tfBuscarAsignatura" layoutX="110.0" layoutY="38.0" />
-                                    <Button fx:id="btBuscarAsignatura" layoutX="320.0" layoutY="38.0" mnemonicParsing="false" onAction="#buscarAsignatura" text="BUSCAR" />
+                                    <TextField fx:id="tfBuscarAsignatura" layoutX="51.0" layoutY="14.0" />
+                                    <Button fx:id="btBuscarAsignatura" layoutX="232.0" layoutY="14.0" mnemonicParsing="false" onAction="#buscarAsignatura" prefHeight="26.0" prefWidth="155.0" text="BUSCAR MATRICULA" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -201,11 +199,23 @@
                               </HBox>
                               <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="422.0">
                                  <children>
-                                    <Label layoutX="65.0" layoutY="42.0" text="NOMBRE" />
-                                    <TextField fx:id="tfBuscarMatricula" layoutX="140.0" layoutY="38.0" />
-                                    <Button fx:id="btBuscarMatricula" layoutX="334.0" layoutY="38.0" mnemonicParsing="false" onAction="#buscarMatricula" text="BUSCAR" />
+                                    <TextField fx:id="tfBuscarMatricula" layoutX="14.0" layoutY="51.0" />
+                                    <Button fx:id="btBuscarMatricula" layoutX="211.0" layoutY="51.0" mnemonicParsing="false" onAction="#buscarMatricula" text="BUSCAR" />
+                                    <TextField fx:id="tfMatriculaBuscarAsignaturas" layoutX="14.0" layoutY="11.0" />
+                                    <Button fx:id="btMatriculaBuscarAsignatura" layoutX="211.0" layoutY="11.0" mnemonicParsing="false" onAction="#buscarAsignaturaMatricula" text="BUSCAR ASIGNATURAS" />
                                  </children>
                               </AnchorPane>
+                              <TableView fx:id="tvMatriculasAsignaturas" prefHeight="200.0" prefWidth="200.0">
+                                <columns>
+                                  <TableColumn fx:id="tcMatriculaAsignaturaCodigo" prefWidth="75.0" text="CODIGO" />
+                                  <TableColumn fx:id="tcMatriculaAsignaturaNombre" prefWidth="75.0" text="NOMBRE" />
+                                    <TableColumn fx:id="tcMatriculaAsignaturaHorasAn" prefWidth="125.0" text="HORAS ANUALES" />
+                                    <TableColumn fx:id="tcMatriculaAsignaturaCurso" prefWidth="62.0" text="CURSO" />
+                                    <TableColumn fx:id="tcMatriculaAsignaturaHorasDes" prefWidth="110.0" text="HORAS DESDOBLE" />
+                                    <TableColumn fx:id="tcMatriculaAsignaturaEspecialidad" prefWidth="140.0" text="ESPECIALIDAD PROFESORADO" />
+                                    <TableColumn fx:id="tcMatriculaAsignaturaCiclo" prefWidth="112.0" text="CODIGO CICLO" />
+                                </columns>
+                              </TableView>
                            </children>
                         </VBox>
                      </children>

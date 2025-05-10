@@ -93,7 +93,16 @@ public class ControladorVentanaPrincipal {
     private ObservableList<Matricula> obsListadoMatriculasCicloFormativo= FXCollections.observableArrayList();
     private List<Matricula> coleccionMatriculasCicloFormativo=new ArrayList<>();
 
-
+    @FXML private TableView<Asignatura> tvMatriculasAsignaturas;
+    @FXML private TableColumn<Asignatura, Integer> tcMatriculaAsignaturaCiclo;
+    @FXML private TableColumn<Asignatura, Integer> tcMatriculaAsignaturaCodigo;
+    @FXML private TableColumn<Asignatura, String> tcMatriculaAsignaturaCurso;
+    @FXML private TableColumn<Asignatura, String> tcMatriculaAsignaturaEspecialidad;
+    @FXML private TableColumn<Asignatura, Integer> tcMatriculaAsignaturaHorasAn;
+    @FXML private TableColumn<Asignatura, Integer> tcMatriculaAsignaturaHorasDes;
+    @FXML private TableColumn<Asignatura, String> tcMatriculaAsignaturaNombre;
+    private ObservableList<Asignatura> obsListadoAsignaturasMatriculadas= FXCollections.observableArrayList();
+    private List<Asignatura> coleccionAsignaturasMatriculadas=new ArrayList<>();
 
     @FXML private Button btMostrarAlumnos;
     @FXML private Button btMostrarAsignaturas;
@@ -113,6 +122,7 @@ public class ControladorVentanaPrincipal {
     @FXML private TextField tfBuscarMatricula;
     @FXML private TextField tfAlumnoBuscarMatricula;
     @FXML private TextField tfCicloFormativoBuscarMatricula;
+    @FXML private TextField tfMatriculaBuscarAsignaturas;
     @FXML private Button btInsertarAlumno;
     @FXML private Button btInsertarAsignatura;
     @FXML private Button btInsertarCicloFormativo;
@@ -120,6 +130,7 @@ public class ControladorVentanaPrincipal {
     @FXML private Button btSalir;
     @FXML private Button btAlumnoBuscarMatricula;
     @FXML private Button btCicloFormativoBuscarMatricula;
+    @FXML private Button btMatriculaBuscarAsignatura;
 
 
 
@@ -571,6 +582,33 @@ public class ControladorVentanaPrincipal {
         tcCicloFormativoIdentificacionAlumno.setCellValueFactory(matricula -> new SimpleStringProperty(matricula.getValue().getAlumno().getDni()));
         tvCiclosFormativosMatriculas.setItems(obsListadoMatriculasCicloFormativo);
     }
+
+    @FXML void buscarAsignaturaMatricula(ActionEvent event) {
+
+        try {
+            Alumno alumno=new Alumno( "Tesi", "11111111H", "Tesi@gmail.com", "999999999", LocalDate.of(1979, 1, 8));
+            Grado grado=new GradoE("DW",1,1);
+            CicloFormativo cicloFormativo =new CicloFormativo(1111,"Semipresencial",grado,"DAW",100);
+            ArrayList<Asignatura> asignaturas=new ArrayList<Asignatura>();
+            asignaturas.add(new Asignatura("2222","Programacion",100,Curso.PRIMERO,6,EspecialidadProfesorado.INFORMATICA,cicloFormativo));
+            Matricula matricula =new Matricula(Integer.parseInt(tfMatriculaBuscarAsignaturas.getText()),"23-24",LocalDate.now(),alumno,asignaturas);
+
+            coleccionAsignaturasMatriculadas=VistaGrafica.getControlador().buscarMatricula(matricula).getColeccionAsignaturas();
+            obsListadoAsignaturasMatriculadas.setAll(coleccionAsignaturasMatriculadas);
+        } catch (OperationNotSupportedException | NullPointerException | IllegalArgumentException e) {
+            Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+        }
+        tcMatriculaAsignaturaCodigo.setCellValueFactory(new PropertyValueFactory<Asignatura,Integer>("codigo"));
+        tcMatriculaAsignaturaNombre.setCellValueFactory(new PropertyValueFactory<Asignatura,String>("nombre"));
+        tcMatriculaAsignaturaCurso.setCellValueFactory(new PropertyValueFactory<Asignatura,String>("curso"));
+        tcMatriculaAsignaturaEspecialidad.setCellValueFactory(new PropertyValueFactory<Asignatura,String>("especialidadProfesorado"));
+        tcMatriculaAsignaturaHorasAn.setCellValueFactory(new PropertyValueFactory<Asignatura,Integer>("horasAnuales"));
+        tcMatriculaAsignaturaHorasDes.setCellValueFactory(new PropertyValueFactory<Asignatura,Integer>("horasDesdoble"));
+        tcMatriculaAsignaturaCiclo.setCellValueFactory(asignatura -> new SimpleIntegerProperty(asignatura.getValue().getCicloFormativo().getCodigo()).asObject());
+        tvMatriculasAsignaturas.setItems(obsListadoAsignaturasMatriculadas);
+    }
+
+
 
     }
 
