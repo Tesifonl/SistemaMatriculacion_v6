@@ -437,11 +437,11 @@ public class Matriculas implements IMatriculas{
 				
 				if (registros.next()) {
 					
-					String codigo=registros.getString(1);
+					int codigo=registros.getInt(1);
 					int codigoCicloFormativo=registros.getInt(2);
 					
 					PreparedStatement preparedStatement2=conexion.prepareStatement("select idMatricula, codigo from asignaturasMatricula where codigo = ?");
-					preparedStatement2.setInt(1,codigoCicloFormativo);
+					preparedStatement2.setInt(1,codigo);
 					ResultSet registros2=preparedStatement2.executeQuery();
 					
 					while(registros2.next()){

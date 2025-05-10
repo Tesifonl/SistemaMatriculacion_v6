@@ -113,11 +113,21 @@
                               </HBox>
                               <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="422.0">
                                  <children>
-                                    <Label layoutX="43.0" layoutY="36.0" text="NOMBRE" />
-                                    <TextField fx:id="tfBuscarCicloFormativo" layoutX="123.0" layoutY="32.0" />
-                                    <Button fx:id="btBuscarCicloFormativo" layoutX="350.0" layoutY="33.0" mnemonicParsing="false" onAction="#buscarCicloFormativo" text="BUSCAR" />
+                                    <TextField fx:id="tfBuscarCicloFormativo" layoutX="25.0" layoutY="20.0" />
+                                    <Button fx:id="btBuscarCicloFormativo" layoutX="198.0" layoutY="20.0" mnemonicParsing="false" onAction="#buscarCicloFormativo" text="BUSCAR CICLO" />
+                                    <TextField fx:id="tfCicloFormativoBuscarMatricula" layoutX="25.0" layoutY="50.0" promptText="CODIGO DE CICLO" />
+                                    <Button fx:id="btCicloFormativoBuscarMatricula" layoutX="198.0" layoutY="50.0" mnemonicParsing="false" onAction="#buscarMatriculaCicloFormativo" text="BUSCAR MATRICULAS" />
                                  </children>
                               </AnchorPane>
+                              <TableView fx:id="tvCiclosFormativosMatriculas" prefHeight="193.0" prefWidth="700.0">
+                                <columns>
+                                  <TableColumn fx:id="tcCicloFormativoIDMatricula" prefWidth="130.0" text="ID MATRICULA" />
+                                  <TableColumn fx:id="tcCicloFormativoCursoAcademico" prefWidth="146.0" text="CURSO ACADEMICO" />
+                                    <TableColumn fx:id="tcCicloFormativoFechaMatriculacion" prefWidth="144.0" text="FECHA MATRICULACION" />
+                                    <TableColumn fx:id="tcCicloFormativoFechaAnulacion" prefWidth="132.0" text="FECHA ANULACION" />
+                                    <TableColumn fx:id="tcCicloFormativoIdentificacionAlumno" prefWidth="134.0" text="DNI ALUMNO" />
+                                </columns>
+                              </TableView>
                            </children>
                         </VBox>
                      </children>

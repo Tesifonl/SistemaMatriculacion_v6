@@ -84,6 +84,15 @@ public class ControladorVentanaPrincipal {
     private ObservableList<Matricula> obsListadoMatriculasAlumno= FXCollections.observableArrayList();
     private List<Matricula> coleccionMatriculasAlumno=new ArrayList<>();
 
+    @FXML private TableView<Matricula> tvCiclosFormativosMatriculas;
+    @FXML private TableColumn<Matricula, String > tcCicloFormativoCursoAcademico;
+    @FXML private TableColumn<Matricula, String > tcCicloFormativoIdentificacionAlumno;
+    @FXML private TableColumn<Matricula, String> tcCicloFormativoFechaAnulacion;
+    @FXML private TableColumn<Matricula, String> tcCicloFormativoFechaMatriculacion;
+    @FXML private TableColumn<Matricula, Integer> tcCicloFormativoIDMatricula;
+    private ObservableList<Matricula> obsListadoMatriculasCicloFormativo= FXCollections.observableArrayList();
+    private List<Matricula> coleccionMatriculasCicloFormativo=new ArrayList<>();
+
 
 
     @FXML private Button btMostrarAlumnos;
@@ -103,12 +112,14 @@ public class ControladorVentanaPrincipal {
     @FXML private TextField tfBuscarCicloFormativo;
     @FXML private TextField tfBuscarMatricula;
     @FXML private TextField tfAlumnoBuscarMatricula;
+    @FXML private TextField tfCicloFormativoBuscarMatricula;
     @FXML private Button btInsertarAlumno;
     @FXML private Button btInsertarAsignatura;
     @FXML private Button btInsertarCicloFormativo;
     @FXML private Button btInsertarMatricula;
     @FXML private Button btSalir;
     @FXML private Button btAlumnoBuscarMatricula;
+    @FXML private Button btCicloFormativoBuscarMatricula;
 
 
 
@@ -541,5 +552,25 @@ public class ControladorVentanaPrincipal {
             tvMatriculasAlumno.setItems(obsListadoMatriculasAlumno);
 
         }
+
+    @FXML void buscarMatriculaCicloFormativo(ActionEvent event) {
+        try {
+            Grado grado=new GradoE("DW",1,1);
+            CicloFormativo cicloFormativo =new CicloFormativo(Integer.parseInt(tfCicloFormativoBuscarMatricula.getText()),"Semipresencial",grado,"DAW",100);
+
+            coleccionMatriculasCicloFormativo=VistaGrafica.getControlador().getMatriculas(cicloFormativo);
+            obsListadoMatriculasCicloFormativo.setAll(coleccionMatriculasCicloFormativo);
+        } catch (OperationNotSupportedException | NullPointerException | IllegalArgumentException e) {
+            Dialogos.mostrarDialogoError("Error datos", e.getMessage());
+        }
+
+        tcCicloFormativoIDMatricula.setCellValueFactory(new PropertyValueFactory<Matricula,Integer>("idMatricula"));
+        tcCicloFormativoCursoAcademico.setCellValueFactory(new PropertyValueFactory<Matricula,String>("cursoAcademico"));
+        tcCicloFormativoFechaMatriculacion.setCellValueFactory(new PropertyValueFactory<Matricula,String>("fechaMatriculacion"));
+        tcCicloFormativoFechaAnulacion.setCellValueFactory(new PropertyValueFactory<Matricula,String>("fechaAnulacion"));
+        tcCicloFormativoIdentificacionAlumno.setCellValueFactory(matricula -> new SimpleStringProperty(matricula.getValue().getAlumno().getDni()));
+        tvCiclosFormativosMatriculas.setItems(obsListadoMatriculasCicloFormativo);
+    }
+
     }
 
