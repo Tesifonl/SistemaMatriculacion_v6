@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../estilos/estilos.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.matriculacion.vista.grafica.controladores.ControladorInsertarAlumno">
+   <children>
+      <Label layoutX="155.0" layoutY="95.0" text="NOMBRE" />
+      <Label layoutX="155.0" layoutY="131.0" text="TELFONO" />
+      <Label layoutX="155.0" layoutY="162.0" text="CORREO" />
+      <Label layoutX="155.0" layoutY="192.0" text="DNI" />
+      <Label layoutX="155.0" layoutY="226.0" text="FECHA" />
+      <TextField fx:id="tfInsertarAlumnoNombre" layoutX="232.0" layoutY="91.0" prefHeight="26.0" prefWidth="186.0" />
+      <TextField fx:id="tfInsertarAlumnoTelefono" layoutX="232.0" layoutY="127.0" prefHeight="26.0" prefWidth="186.0" />
+      <TextField fx:id="tfInsertarAlumnoCorreo" layoutX="232.0" layoutY="158.0" prefHeight="26.0" prefWidth="186.0" />
+      <TextField fx:id="tfInsertarAlumnoDni" layoutX="232.0" layoutY="188.0" prefHeight="26.0" prefWidth="186.0" />
+      <DatePicker fx:id="dpInsertarAlumnoFecha" layoutX="232.0" layoutY="222.0" />
+      <Button fx:id="btAceptarInsertarAlumno" layoutX="168.0" layoutY="309.0" mnemonicParsing="false" onAction="#aceptarInsertarAlumno" text="ACEPTAR" />
+      <Button fx:id="btCancelarInsertarAlumno" layoutX="325.0" layoutY="309.0" mnemonicParsing="false" onAction="#cancelarInsertarAlumno" text="CANCELAR" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../estilos/estilos.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.matriculacion.vista.grafica.controladores.ControladorInsertarMatricula">
+   <children>
+      <Label layoutX="18.0" layoutY="50.0" text="ID MATRICULA" />
+      <Label layoutX="18.0" layoutY="91.0" text="CURSO ACADEMICO" />
+      <Label layoutX="18.0" layoutY="130.0" text="FECHA MATRICULACION" />
+      <Label layoutX="18.0" layoutY="168.0" prefHeight="16.0" prefWidth="38.0" text="DNI" />
+      <TextField fx:id="tfIDMatricula" layoutX="192.0" layoutY="45.0" />
+      <TextField fx:id="tfCursoAcademico" layoutX="192.0" layoutY="86.0" />
+      <TextField fx:id="tfDni" layoutX="192.0" layoutY="163.0" />
+      <Button fx:id="btAceptarInsertarMatricula" layoutX="135.0" layoutY="324.0" mnemonicParsing="false" onAction="#aceptarInsertarMatricula" text="ACEPTAR" />
+      <Button fx:id="btCancelarInsertarMatricula" layoutX="345.0" layoutY="325.0" mnemonicParsing="false" onAction="#cancelarInsertarMatricula" text="CANCELAR" />
+      <AnchorPane layoutX="386.0" layoutY="43.0" prefHeight="216.0" prefWidth="200.0">
+         <children>
+            <AnchorPane layoutY="2.0" prefHeight="198.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tvAsignaturas" layoutX="4.0" prefHeight="200.0" prefWidth="202.0">
+                    <columns>
+                      <TableColumn fx:id="tcAsignaturasCodigo" prefWidth="85.0" text="CODIGO" />
+                      <TableColumn fx:id="tcAsignaturasNombre" prefWidth="117.0" text="NOMBRE" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </children></AnchorPane>
+      <Button fx:id="rbIncorporarAsignaturas" layoutX="399.0" layoutY="259.0" mnemonicParsing="false" onAction="#incorporarAsignaturas" text="INCLUIR ASIGNATURAS" />
+      <DatePicker fx:id="dpFechaMatriculacion" layoutX="192.0" layoutY="126.0" prefHeight="25.0" prefWidth="175.0" />
+      <Text fill="#ebbb39" layoutX="147.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DEBE INCLUIR UNA ASIGNATURA">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
