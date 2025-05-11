@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.matriculacion.modelo.negocio.fichero.utilidades;
+package org.iesalandalus.programacion.matriculacion.modelo.negocio.fichero;
 
 
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;

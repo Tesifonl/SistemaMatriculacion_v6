@@ -1,16 +1,14 @@
-package org.iesalandalus.programacion.matriculacion.modelo.negocio.fichero.utilidades;
+package org.iesalandalus.programacion.matriculacion.modelo.negocio.fichero;
 
 
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.IAlumnos;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.utilidades.MySQL;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import javax.naming.OperationNotSupportedException;
-import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
