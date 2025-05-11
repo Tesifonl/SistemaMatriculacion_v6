@@ -28,9 +28,12 @@ public class MainApp {
 		for (String argumento : args) {
 			if (argumento.equalsIgnoreCase("-fdmemoria")) {
 				modelo = new Modelo(FactoriaFuenteDatos.MEMORIA);
-
 			} else if (argumento.equalsIgnoreCase("-fdmysql")) {
 				modelo = new Modelo(FactoriaFuenteDatos.MYSQL);
+			} else if (argumento.equalsIgnoreCase("-fdfichero")){
+				modelo = new Modelo(FactoriaFuenteDatos.FICHEROS);
+			}else{
+				modelo = new Modelo(FactoriaFuenteDatos.MEMORIA);
 			}
 		}
 
