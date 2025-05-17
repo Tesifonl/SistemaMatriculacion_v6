@@ -47,22 +47,22 @@ public class Alumnos implements IAlumnos{
 
 	private static Element alumnoToElement(Document DOMAlumnos, Alumno alumno)
 	{
-		Element alumnoDOM = DOMAlumnos.createElement("Empleado");
-		alumnoDOM.setAttribute("dni", String.valueOf(alumno.getDni()));
+		Element alumnoDOM = DOMAlumnos.createElement("Alumno");
+		alumnoDOM.setAttribute("Dni", String.valueOf(alumno.getDni()));
 
-		Element eNombre = DOMAlumnos.createElement("nombre");
+		Element eNombre = DOMAlumnos.createElement("Nombre");
 		eNombre.setTextContent(alumno.getNombre());
 		alumnoDOM.appendChild(eNombre);
 
-		Element eTelefono = DOMAlumnos.createElement("telefono");
+		Element eTelefono = DOMAlumnos.createElement("Telefono");
 		eTelefono.setTextContent(alumno.getTelefono());
 		alumnoDOM.appendChild(eTelefono);
 
-		Element eCorreo = DOMAlumnos.createElement("correo");
+		Element eCorreo = DOMAlumnos.createElement("Correo");
 		eCorreo.setTextContent(alumno.getCorreo());
 		alumnoDOM.appendChild(eCorreo);
 
-		Element eFechaNacimiento = DOMAlumnos.createElement("fechaNacimiento");
+		Element eFechaNacimiento = DOMAlumnos.createElement("FechaNacimiento");
 		eFechaNacimiento.setTextContent(alumno.getFechaNacimiento().format(FORMATO_FECHA));
 		alumnoDOM.appendChild(eFechaNacimiento);
 
@@ -73,27 +73,29 @@ public class Alumnos implements IAlumnos{
 
 	private static Alumno elementToAlumno(Element alumnoDOM)
     {
-        String aDni = alumnoDOM.getAttribute("dni");
+        String aDni = alumnoDOM.getAttribute("Dni");
 
-        Element eNombre = (Element) alumnoDOM.getElementsByTagName("nombre").item(0);
-        Element eTelefono = (Element) alumnoDOM.getElementsByTagName("telefono").item(0);
-		Element eCorreo = (Element) alumnoDOM.getElementsByTagName("correo").item(0);
-		Element eFechaNacimiento = (Element) alumnoDOM.getElementsByTagName("fechaNacimiento").item(0);
+        Element eNombre = (Element) alumnoDOM.getElementsByTagName("Nombre").item(0);
+        Element eTelefono = (Element) alumnoDOM.getElementsByTagName("Telefono").item(0);
+		Element eCorreo = (Element) alumnoDOM.getElementsByTagName("Correo").item(0);
+		Element eFechaNacimiento = (Element) alumnoDOM.getElementsByTagName("FechaNacimiento").item(0);
 
         String aNombre= eNombre.getTextContent();
 		String aTelefono= eTelefono.getTextContent();
 		String aCorreo= eCorreo.getTextContent();
 		String aFechaNacimiento= eFechaNacimiento.getTextContent();
 
-        return new Alumno(aDni, aNombre, aTelefono, aCorreo,LocalDate.parse(aFechaNacimiento,FORMATO_FECHA));
+        return new Alumno(aNombre,aDni,aCorreo,aTelefono,LocalDate.parse(aFechaNacimiento,FORMATO_FECHA));
     }
 
 
 
 	public void leerXml(){
 
-		xmlToDom("datos/alumnos.xml");
-		Document doc=crearDomVacio("Alumnos");
+		//xmlToDom("datos/alumnos.xml");
+		//Document doc=crearDomVacio("Alumnos");
+
+		Document doc = xmlToDom("datos/alumnos.xml");
 
 		if (doc==null)
 		{
@@ -104,7 +106,7 @@ public class Alumnos implements IAlumnos{
 			Element raizDOM = doc.getDocumentElement();
 
 			//Recorremos la lista de nodos del DOM
-			NodeList listaNodos=raizDOM.getElementsByTagName("alumno");
+			NodeList listaNodos=raizDOM.getElementsByTagName("Alumno");
 
 			if (listaNodos.getLength()>0) {
 				System.out.println("Datos de los alumnos:");
@@ -151,7 +153,6 @@ public class Alumnos implements IAlumnos{
 
 
 	public Alumnos () {
-
 		coleccionAlumnos=new ArrayList <Alumno>();
 
 	}

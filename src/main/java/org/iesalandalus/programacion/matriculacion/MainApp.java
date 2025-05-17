@@ -30,11 +30,12 @@ public class MainApp {
 				modelo = new Modelo(FactoriaFuenteDatos.MEMORIA);
 			} else if (argumento.equalsIgnoreCase("-fdmysql")) {
 				modelo = new Modelo(FactoriaFuenteDatos.MYSQL);
-			} else if (argumento.equalsIgnoreCase("-fdfichero")){
+			} else /* (argumento.equalsIgnoreCase("-fdfichero"))*/{
 				modelo = new Modelo(FactoriaFuenteDatos.FICHEROS);
-			}else{
-				modelo = new Modelo(FactoriaFuenteDatos.MEMORIA);
 			}
+			/*else{
+				modelo = new Modelo(FactoriaFuenteDatos.MEMORIA);
+			}*/
 		}
 
 		return modelo;

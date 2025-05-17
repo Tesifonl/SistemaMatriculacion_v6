@@ -120,7 +120,7 @@ public class Consola {
 	
 	public static Alumno leerAlumno() {
 		
-		
+		Alumno alumno=null;
 		try {
 			System.out.println("Introduce el nombre del alumno: ");
 			String nombre=Entrada.cadena();
@@ -133,17 +133,15 @@ public class Consola {
 			System.out.println("Introduce una fecha nacimiento: ");
 			LocalDate fechaNacimiento=leerFecha(Entrada.cadena());
 
-			Alumno alumno =new Alumno( nombre, dni, correo, telefono, fechaNacimiento);
-			return alumno;
+			alumno =new Alumno( nombre, dni, correo, telefono, fechaNacimiento);
+
 			}
-			catch(IllegalArgumentException e) {
+			catch(IllegalArgumentException | NullPointerException e) {
 				System.out.println(e.getMessage());
-				return null;
+				//return null;
 			}
-			catch(NullPointerException e) {
-			System.out.println(e.getMessage());
-			return null;
-			}
+
+		return alumno;
 	}
 	
 	

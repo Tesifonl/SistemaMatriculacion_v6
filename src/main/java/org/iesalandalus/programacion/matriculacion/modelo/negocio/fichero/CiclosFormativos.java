@@ -30,13 +30,13 @@ public class CiclosFormativos implements ICiclosFormativos {
 	@Override
 	public void comenzar() {
 		// TODO Auto-generated method stub
-		conexion=MySQL.establecerConexion();
+		//conexion=MySQL.establecerConexion();
 	}
 
 	@Override
 	public void terminar() {
 		// TODO Auto-generated method stub
-		MySQL.cerrarConexion();
+		//MySQL.cerrarConexion();
 	}
 
 	

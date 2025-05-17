@@ -122,15 +122,12 @@ public class VistaTexto extends Vista  {
 			System.out.println("Alumno insertado correctamente");
 		}	
 		
-		catch(IllegalArgumentException e) {
+		catch(IllegalArgumentException |NullPointerException | OperationNotSupportedException e) {
 			System.out.println(e.getMessage());
 			
 		}
-		catch(NullPointerException e) {
-		System.out.println(e.getMessage());;
-		}
-		catch(OperationNotSupportedException e) {
-		System.out.println(e.getMessage());;}
+
+
 	}
 	
 
@@ -139,15 +136,11 @@ public class VistaTexto extends Vista  {
 			//controlador.buscarAlumno(Consola.getAlumnoPorDni());
 			System.out.println(controlador.buscarAlumno(Consola.getAlumnoPorDni()));
 		}				
-		catch(IllegalArgumentException e) {
+		catch(IllegalArgumentException |NullPointerException | OperationNotSupportedException e) {
 			System.out.println(e.getMessage());
 			
 		}
-		catch(NullPointerException e) {
-			System.out.println(e.getMessage());
-		}
-		catch(OperationNotSupportedException e) {
-		System.out.println(e.getMessage());;}
+
 	}
 
 	public void borrarAlumno()  {
@@ -156,15 +149,11 @@ public class VistaTexto extends Vista  {
 			System.out.println("Alumno borrado correctamente");
 		}				
 		
-		catch(IllegalArgumentException e) {
+		catch(IllegalArgumentException |NullPointerException | OperationNotSupportedException e) {
 			System.out.println(e.getMessage());
 			
 		}
-		catch(NullPointerException e) {
-			System.out.println(e.getMessage());;
-		}
-		catch(OperationNotSupportedException e) {
-		System.out.println(e.getMessage());;}
+
 	}
 
 
@@ -180,15 +169,11 @@ public class VistaTexto extends Vista  {
 				System.out.println("Alumno: "+alumno);
 			}
 		}				
-		catch(IllegalArgumentException e) {
+		catch(IllegalArgumentException |NullPointerException | OperationNotSupportedException e) {
 			System.out.println(e.getMessage());
 			
 		}
-		catch(NullPointerException e) {
-			System.out.println(e.getMessage());
-		}
-		catch(OperationNotSupportedException e) {
-		System.out.println(e.getMessage());;}
+
 	}
 
 
@@ -198,15 +183,11 @@ public class VistaTexto extends Vista  {
 			Asignatura asignatura=Consola.leerAsignatura();
 			controlador.insertarAsignatura(asignatura);
 		}				
-		catch(IllegalArgumentException e) {
+		catch(IllegalArgumentException |NullPointerException | OperationNotSupportedException e) {
 			System.out.println(e.getMessage());
 			
 		}
-		catch(NullPointerException e) {
-		System.out.println(e.getMessage());
-		}
-		catch(OperationNotSupportedException e) {
-		System.out.println(e.getMessage());;}
+
 	}
 
 	public void buscarAsignatura(){
@@ -214,13 +195,11 @@ public class VistaTexto extends Vista  {
 			//controlador.buscarAsignatura(Consola.getAsignaturaPorCodigo());
 			System.out.println(controlador.buscarAsignatura(Consola.getAsignaturaPorCodigo()));
 		}				
-		catch(IllegalArgumentException e) {
+		catch(IllegalArgumentException |NullPointerException  e) {
 			System.out.println(e.getMessage());
 			
 		}
-		catch(NullPointerException e) {
-		System.out.println(e.getMessage());
-		}
+
 		
 	}
 
@@ -230,15 +209,11 @@ public class VistaTexto extends Vista  {
 			controlador.borrarAsignatura(Consola.getAsignaturaPorCodigo());
 			System.out.println("Asignatura borrada correctamente");
 		}				
-		catch(IllegalArgumentException e) {
+		catch(IllegalArgumentException |NullPointerException | OperationNotSupportedException e) {
 			System.out.println(e.getMessage());
 			
 		}
-		catch(NullPointerException e) {
-			System.out.println(e.getMessage());
-		}
-		catch(OperationNotSupportedException e) {
-		System.out.println(e.getMessage());;}
+
 	}
 
 
@@ -247,13 +222,11 @@ public class VistaTexto extends Vista  {
 			
 			Consola.mostrarAsignaturas(controlador.getAsignaturas());
 		}				
-		catch(IllegalArgumentException e) {
+		catch(IllegalArgumentException |NullPointerException e) {
 				System.out.println(e.getMessage());
 				
 		}
-		catch(NullPointerException e) {
-			System.out.println(e.getMessage());
-		}
+
 		
 	}
 
@@ -264,17 +237,11 @@ public class VistaTexto extends Vista  {
 			controlador.insertarCicloFormativo(Consola.leerCicloFormativo());
 			System.out.println("Ciclo formativo insertado correctamente");
 		}				
-		catch(IllegalArgumentException e) {
+		catch(IllegalArgumentException |NullPointerException | OperationNotSupportedException |com.mysql.cj.jdbc.exceptions.OperationNotSupportedException e) {
 			System.out.println(e.getMessage());
 			
 		}
-		catch(NullPointerException e) {
-			System.out.println(e.getMessage());
-		}
-		catch(OperationNotSupportedException e) {
-		System.out.println(e.getMessage());;} catch (com.mysql.cj.jdbc.exceptions.OperationNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
 
@@ -284,15 +251,11 @@ public class VistaTexto extends Vista  {
 			//controlador.buscarCicloFormativo(Consola.getCicloFormativoPorCodigo());
 			System.out.println(controlador.buscarCicloFormativo(Consola.getCicloFormativoPorCodigo()));
 		}				
-		catch(IllegalArgumentException e) {
+		catch(IllegalArgumentException |NullPointerException | OperationNotSupportedException e) {
 			System.out.println(e.getMessage());
 			
 		}
-		catch(NullPointerException e) {
-			System.out.println(e.getMessage());
-		}
-		catch(OperationNotSupportedException e) {
-		System.out.println(e.getMessage());;}
+
 	}
 
 
@@ -302,15 +265,11 @@ public class VistaTexto extends Vista  {
 			controlador.borrarCicloFormativo(Consola.getCicloFormativoPorCodigo());
 			System.out.println("Ciclo formativo borrado correctamente");
 		}				
-		catch(IllegalArgumentException e) {
+		catch(IllegalArgumentException |NullPointerException | OperationNotSupportedException e) {
 			System.out.println(e.getMessage());
 			
 		}
-		catch(NullPointerException e) {
-			System.out.println(e.getMessage());
-		}
-		catch(OperationNotSupportedException e) {
-		System.out.println(e.getMessage());;}
+
 	}
 	
 
@@ -325,13 +284,11 @@ public class VistaTexto extends Vista  {
 				System.out.println("Ciclo formativo: "+cicloFormativo);
 			}
 		}				
-		catch(IllegalArgumentException e) {
+		catch(IllegalArgumentException |NullPointerException e) {
 			System.out.println(e.getMessage());
 			
 		}
-		catch(NullPointerException e) {
-			System.out.println(e.getMessage());
-		}
+
 	}
 
 
@@ -340,15 +297,10 @@ public class VistaTexto extends Vista  {
 			controlador.insertarMatricula(Consola.leerMatricula(Consola.getAlumnoPorDni(), Consola.elegirAsignaturasMatricula()));
 		
 		}				
-		catch(IllegalArgumentException e) {
+		catch(IllegalArgumentException |NullPointerException | OperationNotSupportedException e) {
 			System.out.println(e.getMessage());
 			
 		}
-		catch(NullPointerException e) {
-			System.out.println(e.getMessage());
-		}
-		catch(OperationNotSupportedException e) {
-		System.out.println(e.getMessage());;}
 	}
 
 
@@ -358,15 +310,11 @@ public class VistaTexto extends Vista  {
 			//controlador.buscarMatricula(Consola.getMatriculaPorIdentificador());
 			System.out.println(controlador.buscarMatricula(Consola.getMatriculaPorIdentificador()));
 		}
-		catch(IllegalArgumentException e) {
+		catch(IllegalArgumentException |NullPointerException | OperationNotSupportedException e) {
 			System.out.println(e.getMessage());
 	
 		}
-		catch(NullPointerException e) {
-		System.out.println(e.getMessage());
-		}
-		catch(OperationNotSupportedException e) {
-		System.out.println(e.getMessage());;}
+
 	}
 	
 
@@ -375,15 +323,11 @@ public class VistaTexto extends Vista  {
 		try{
 			controlador.borrarMatricula(Consola.getMatriculaPorIdentificador());
 		}				
-		catch(IllegalArgumentException e) {
+		catch(IllegalArgumentException |NullPointerException | OperationNotSupportedException e) {
 			System.out.println(e.getMessage());
 			
 		}
-		catch(NullPointerException e) {
-		System.out.println(e.getMessage());
-		}
-		catch(OperationNotSupportedException e) {
-		System.out.println(e.getMessage());;}
+
 	}
 
 
@@ -399,15 +343,11 @@ public class VistaTexto extends Vista  {
 				System.out.println("Asignatura: "+matricula.getColeccionAsignaturas().toString());
 			}	
 		}				
-		catch(IllegalArgumentException e) {
+		catch(IllegalArgumentException |NullPointerException | OperationNotSupportedException e) {
 			System.out.println(e.getMessage());
 			
 		}
-		catch(NullPointerException e) {
-		System.out.println(e.getMessage());;
-		}
-		catch(OperationNotSupportedException e) {
-		System.out.println(e.getMessage());;}
+
 	}
 
 	public void mostrarMatriculasPorAlumno()  {
@@ -422,15 +362,11 @@ public class VistaTexto extends Vista  {
 				System.out.println("Asignatura: "+matricula.getColeccionAsignaturas().toString());
 			}
 		}				
-		catch(IllegalArgumentException e) {
+		catch(IllegalArgumentException |NullPointerException | OperationNotSupportedException e) {
 			System.out.println(e.getMessage());
 			
 		}
-		catch(NullPointerException e) {
-		System.out.println(e.getMessage());
-		}
-		catch(OperationNotSupportedException e) {
-		System.out.println(e.getMessage());;}
+
 	}
 
 	public void mostrarMatriculasPorCicloFormativo() {
@@ -445,42 +381,32 @@ public class VistaTexto extends Vista  {
 				System.out.println("Asignatura: "+matricula.getColeccionAsignaturas().toString());
 			}
 		}				
-		catch(IllegalArgumentException e) {
+		catch(IllegalArgumentException |NullPointerException | OperationNotSupportedException e) {
 			System.out.println(e.getMessage());
 			
 		}
-		catch(NullPointerException e) {
-		System.out.println(e.getMessage());
-		}
-		catch(OperationNotSupportedException e) {
-		System.out.println(e.getMessage());;}
+
 	}
 
 	
-	public void mostrarMatriculasPorCursoAcademico()   {
-		
-		try{
+	public void mostrarMatriculasPorCursoAcademico() {
+
+		try {
 			System.out.println("Introduce el curso en formato DD-DD, por ejemplo 23-24");
-			String cursoAcademico=Entrada.cadena();
+			String cursoAcademico = Entrada.cadena();
 			//controlador.getMatriculas(cursoAcademico);
-			
-			ArrayList<Matricula> nuevoArrayList=controlador.getMatriculas(cursoAcademico);
- 	 		Collections.sort(nuevoArrayList);
- 
- 			for (Matricula matricula: nuevoArrayList) {
- 				System.out.println("Matricula: "+ matricula);
- 				System.out.println("Asignatura: "+matricula.getColeccionAsignaturas().toString());
- 			}
-		}				
-		catch(IllegalArgumentException e) {
+
+			ArrayList<Matricula> nuevoArrayList = controlador.getMatriculas(cursoAcademico);
+			Collections.sort(nuevoArrayList);
+
+			for (Matricula matricula : nuevoArrayList) {
+				System.out.println("Matricula: " + matricula);
+				System.out.println("Asignatura: " + matricula.getColeccionAsignaturas().toString());
+			}
+		} catch (IllegalArgumentException | NullPointerException | OperationNotSupportedException e) {
 			System.out.println(e.getMessage());
-		
-		}
-		catch(NullPointerException e) {
-			System.out.println(e.getMessage());
-		}
-		catch(OperationNotSupportedException e) {
-		System.out.println(e.getMessage());;}
+
 		}
 
+	}
 	}

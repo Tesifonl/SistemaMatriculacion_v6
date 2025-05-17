@@ -74,21 +74,27 @@ public class UtilidadesXML {
 
 
 
-    public static void xmlToDom(String rutaXml) {
+    public static Document xmlToDom(String rutaXml) {
         //Creamos DOM a partir de XML
         Document doc=null;
         try {
+
+            File file = new File(rutaXml);
+            if (!file.exists()) {
+                System.out.println(" El archivo no existe en la ruta: " + file.getAbsolutePath());
+                return null;
+            }
             // Creamos una nueva instancia de un fabrica de constructores de documentos.
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             // A partir de la instancia anterior, fabricamos un constructor de documentos, que procesara el XML.
             DocumentBuilder db = dbf.newDocumentBuilder();
             //Procesamos el documento (almacenado en un archivo) y lo convertimos en un arbol DOM.
-            doc=db.parse(rutaXml);
+            doc=db.parse(file);
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-
+        return doc;
     }
 
 }

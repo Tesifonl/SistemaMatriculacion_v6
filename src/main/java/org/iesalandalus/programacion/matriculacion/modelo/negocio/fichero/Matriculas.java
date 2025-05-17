@@ -32,13 +32,13 @@ public class Matriculas implements IMatriculas{
 	@Override
 	public void comenzar() {
 		// TODO Auto-generated method stub
-		conexion=MySQL.establecerConexion();
+		//conexion=MySQL.establecerConexion();
 	}
 
 	@Override
 	public void terminar() {
 		// TODO Auto-generated method stub
-		MySQL.cerrarConexion();
+		//MySQL.cerrarConexion();
 	}
 
 	public ArrayList<Asignatura> getAsignaturasMatricula(int identificadorMatricula) throws OperationNotSupportedException{

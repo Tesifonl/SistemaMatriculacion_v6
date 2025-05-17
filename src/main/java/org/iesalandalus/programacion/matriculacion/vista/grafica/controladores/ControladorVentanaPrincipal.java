@@ -546,6 +546,7 @@ public class ControladorVentanaPrincipal {
 
         if (Dialogos.mostrarDialogoConfirmacion("Ventana Principal", "¿Realmente quieres salir de la aplicación?"))
         {
+            VistaGrafica.getControlador().terminar();
             System.exit(0);
         }
         else
