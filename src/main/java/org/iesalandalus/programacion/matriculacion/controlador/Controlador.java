@@ -32,7 +32,7 @@ public class Controlador {
 		}
 	}
 	
-	public void comenzar(){
+	public void comenzar() throws OperationNotSupportedException {
 		modelo.comenzar();
 		vista.comenzar();;
 	}

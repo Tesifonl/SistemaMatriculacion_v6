@@ -1,254 +1,267 @@
 package org.iesalandalus.programacion.matriculacion.modelo.negocio.fichero;
 
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo;
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.Curso;
-import org.iesalandalus.programacion.matriculacion.modelo.dominio.EspecialidadProfesorado;
+
+import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.IAsignaturas;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.CiclosFormativos;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.utilidades.MySQL;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javax.naming.OperationNotSupportedException;
-import java.sql.*;
 import java.util.ArrayList;
 
+import static org.iesalandalus.programacion.matriculacion.modelo.negocio.fichero.CiclosFormativos.cicloFormativoToElement;
+import static org.iesalandalus.programacion.matriculacion.modelo.negocio.fichero.utilidades.UtilidadesXML.*;
 
-public class Asignaturas implements IAsignaturas{
-	
-	private Connection conexion = null;
+public class Asignaturas implements IAsignaturas {
 
 	private static Asignaturas instancia;
-	
-	public Asignaturas() {
-		comenzar();
-	}
-	
-	public static Asignaturas getInstancia() {
+	private ArrayList<Asignatura> coleccionAsignaturas;
+
+	private static Asignaturas getInstancia() {
 		if (instancia==null)
 			instancia=new Asignaturas();
 
 		return instancia;
 	}
 
+	public Asignaturas () {
+
+		coleccionAsignaturas=new ArrayList<Asignatura>();
+
+	}
+
+	public ArrayList<Asignatura> get() {
+		ArrayList<Asignatura> copia=copiaProfundaAsignaturas();
+		return copia;
+	}
+
+	private ArrayList<Asignatura> copiaProfundaAsignaturas() {
+
+		ArrayList<Asignatura>copiaAsignatura=new ArrayList<Asignatura>();
+
+		for(Asignatura asignatura: coleccionAsignaturas){
+			copiaAsignatura.add(asignatura);
+		}
+
+		return copiaAsignatura;
+	}
+
+	public int getTamano() {
+		int tamano=0;
+
+		for (int i=0;i<coleccionAsignaturas.size();i++) {
+			if(coleccionAsignaturas.get(i)!=null) {tamano++;}
+		}
+
+		return tamano;
+	}
+
+
+
+	public void insertar(Asignatura asignatura) throws OperationNotSupportedException {
+
+		if(asignatura!=null) {
+			if(coleccionAsignaturas.contains(asignatura)) {
+				throw new OperationNotSupportedException("ERROR: Ya existe una asignatura con ese codigo.");
+			}else {
+				coleccionAsignaturas.add(asignatura);
+			}
+		}
+		else {
+			throw new NullPointerException("ERROR: No se puede insertar una asignatura nula.");
+		}
+	}
+
+	public Asignatura buscar(Asignatura asignatura) {
+		boolean encontrado=false;
+		boolean noEncontrado=false;
+		Asignatura asignaturaArrayCreado=null;
+
+		if(asignatura!=null) {
+
+			if(coleccionAsignaturas.size()>0) {
+
+				for (Asignatura asignaturaArray:coleccionAsignaturas) {
+
+					if(asignaturaArray.equals(asignatura)) {
+						encontrado=true;
+						asignaturaArrayCreado=asignaturaArray;
+					}else {
+						noEncontrado=true;
+					}
+				}
+				if (encontrado!=true && noEncontrado==true) {
+					return null;
+				}else {
+					return asignaturaArrayCreado;
+				}
+			}else {
+				throw new NullPointerException("No hay asignaturas incluidas en la coleccion");
+			}
+
+		}
+		else {
+			throw new NullPointerException("asignatura recibido nulo");
+		}
+	}
+
+
+
+	public void borrar(Asignatura asignatura) throws OperationNotSupportedException {
+		if(asignatura!=null) {
+			if (coleccionAsignaturas.contains(asignatura)) {
+				coleccionAsignaturas.remove(asignatura);
+			}
+			else{
+				throw new OperationNotSupportedException("ERROR: No existe ningún alumno como el indicado.");
+			}
+		}
+		else {
+			throw new NullPointerException("ERROR: No se puede borrar una asignatura nula.");
+		}
+	}
+
 	@Override
 	public void comenzar() {
 		// TODO Auto-generated method stub
-		//conexion=MySQL.establecerConexion();
+		leerXml();
 	}
 
 	@Override
 	public void terminar() {
 		// TODO Auto-generated method stub
-		//MySQL.cerrarConexion();
+		escribirXml();
 	}
 
-	
-	public Curso getCurso(String curso) {
-		if (curso!=null) {
-			Curso cursoRecibido=Curso.valueOf(curso.toUpperCase());
-			return cursoRecibido;
-		}
-		else {
-			throw new NullPointerException("No se ha recibido el curso");
-		}
-						
-	}
-	
-	public EspecialidadProfesorado getEspecialidadProfesorado(String especialidad) {
-		if (especialidad!=null) {
-			EspecialidadProfesorado epecialidadRecibida=EspecialidadProfesorado .valueOf(especialidad.toUpperCase());
-			return epecialidadRecibida;
-		}
-		else {
-			throw new NullPointerException("No se ha recibido el curso");
-		}
-						
-	}
-	
-	@Override
-	public ArrayList<Asignatura> get() {
-		// TODO Auto-generated method stub
-		ArrayList<Asignatura> asignaturas=new ArrayList<>();
-		
-		try {
-			
-			Statement statement=conexion.createStatement();
-			ResultSet registros=statement.executeQuery("select codigo,nombre,horasAnuales,curso,horasDesdoble,especialidadProfesorado,codigoCicloFormativo from asignatura order by nombre");
-			
-			while(registros.next()) {
-				String codigo=registros.getString(1);
-				String nombre=registros.getString(2);
-				int horasAnuales=registros.getInt(3);
-				String curso=registros.getString(4);
-				int horasDesdoble=registros.getInt(5);
-				String especialidadProfesorado=registros.getString(6);
-				int codigoCicloFormativo=registros.getInt(7);
-				
-				
+	public void leerXml(){
 
-				Curso curso1=getCurso(curso);
-				EspecialidadProfesorado especialidadProfesorado1=getEspecialidadProfesorado(especialidadProfesorado);
-				CiclosFormativos ciclosFormativos1=new CiclosFormativos();
-				
-				ArrayList <CicloFormativo> copiaArray=ciclosFormativos1.get();
-				CicloFormativo nuevoCiclo=null;
-				boolean encontrado=false;
-				int i=0;
-				
-				for (CicloFormativo ciclofor: copiaArray) {
-					
-					i++;
-					if (ciclofor.getCodigo()==codigoCicloFormativo) {
-						nuevoCiclo=copiaArray.get(i-1);
-						
-						Asignatura asignatura=new Asignatura(codigo,nombre,horasAnuales, curso1,horasDesdoble,especialidadProfesorado1,nuevoCiclo);
-						
-						asignaturas.add(asignatura);
-					}
-					else {
-						encontrado=true;
+		//xmlToDom("datos/alumnos.xml");
+		//Document doc=crearDomVacio("Alumnos");
+
+		Document doc = xmlToDom("datos/asignaturas.xml");
+
+		if (doc==null)
+		{
+			System.out.println("No se ha podido leer el fichero ");
+		}
+		else
+		{
+			Element raizDOM = doc.getDocumentElement();
+
+			//Recorremos la lista de nodos del DOM
+			NodeList listaNodos=raizDOM.getElementsByTagName("Asignatura");
+
+			if (listaNodos.getLength()>0) {
+				System.out.println("Datos de la asignatura:");
+				System.out.println("=======================");
+
+				for (int i=0; i<listaNodos.getLength();i++)
+				{
+					Node nodo=listaNodos.item(i);
+
+					if(nodo.getNodeType() == Node.ELEMENT_NODE)
+					{
+						Element asignaturaDOM = (Element) nodo;
+						Asignatura asignatura=elementToAsignatura(asignaturaDOM);
+						coleccionAsignaturas.add(asignatura);
+						System.out.println(asignatura);
 					}
 				}
-				
-			}
-			
-		}
-		catch(SQLException e) {
-			throw new IllegalArgumentException("ERROR:" + e.getMessage());
-		}
-		
-		
-		return asignaturas;
-	}
 
-	@Override
-	public int getTamano() {
-		// TODO Auto-generated method stub
-		int tamano=0;
-		
-		try {
-			
-			Statement statement=conexion.createStatement();
-			ResultSet registros=statement.executeQuery("select count(*) from asignatura");
-			
-			if(registros.next()) {
-				tamano=registros.getInt(1);
+				System.out.println("Fichero de asignaturas leido correctamente.");
 			}
-			
-		}
-		catch(SQLException e) {
-			throw new IllegalArgumentException("ERROR:" + e.getMessage());
-		}
-			
-		return tamano;
-	}
-	@Override
-	public void insertar(Asignatura asignatura) throws OperationNotSupportedException {
-		// TODO Auto-generated method stub
-		
-		if(asignatura==null) {
-			throw new NullPointerException("No se ha recibido las asignaturas a insertar");
-		}
-		else {
-			
-			CiclosFormativos ciclosFormativos=new CiclosFormativos();
-			if (ciclosFormativos.buscar(asignatura.getCicloFormativo())==null) {
-				System.out.println("Error: No existe este ciclo formativo en el sistema,introduzcalo previamente a la asignatura");
-			}
-			else {
-				try {
-					PreparedStatement preparedStatement=conexion.prepareStatement("insert into asignatura values (?,?,?,?,?,?,?)");
-					preparedStatement.setString(1, asignatura.getCodigo());
-					preparedStatement.setString(2, asignatura.getNombre());
-					preparedStatement.setInt(3, asignatura.getHorasAnuales());
-					preparedStatement.setString(4,asignatura.getCurso().toString());
-					preparedStatement.setInt(5, asignatura.getHorasDesdoble());
-					preparedStatement.setString(6,asignatura.getEspecialidadProfesorado().toString());
-					preparedStatement.setInt(7, asignatura.getCicloFormativo().getCodigo());
-					preparedStatement.executeUpdate();
-					
-					System.out.println("Asignatura insertada correctamente");
-				
-				
-				}
-				catch (SQLIntegrityConstraintViolationException e) {
-					throw new OperationNotSupportedException("ERROR:" + e.getMessage());
-				} 
-				catch (SQLException e) {
-					throw new OperationNotSupportedException("ERROR:" + e.getMessage());
-				}
-			}
-		}
-	}
-	@Override
-	public Asignatura buscar(Asignatura asignatura) {
-		// TODO Auto-generated method stub
-		Asignatura asignaturaLocalizada=null;
-		
-		if(asignatura==null) {
-			throw new NullPointerException("No se puede buscar un alumno nulo");
-		}
-		else {
-			try {
-				PreparedStatement preparedStatement=conexion.prepareStatement("select codigo,nombre,horasAnuales,curso,horasDesdoble,especialidadProfesorado,codigoCicloFormativo from asignatura where codigo = ?");
-				preparedStatement.setString(1, asignatura.getCodigo());
-				ResultSet registros=preparedStatement.executeQuery();
-				
-				if (registros.next()) {
-					String codigo=registros.getString(1);
-					String nombre=registros.getString(2);
-					int horasAnuales=registros.getInt(3);
-					String curso=registros.getString(4);
-					int horasDesdoble=registros.getInt(5);
-					String especialidadProfesorado=registros.getString(6);
-					int codigoCicloFormativo=registros.getInt(7);
-					
-					Curso curso1=getCurso(curso);
-					EspecialidadProfesorado especialidadProfesorado1=getEspecialidadProfesorado(especialidadProfesorado);
-					CiclosFormativos ciclosFormativos1=new CiclosFormativos();
-					
-					ArrayList <CicloFormativo> copiaArray=ciclosFormativos1.get();
-					CicloFormativo nuevoCiclo=null;
-					boolean encontrado=false;
-					int i=0;
-					
-					for (CicloFormativo ciclofor: copiaArray) {
-						i++;
-						if (ciclofor.getCodigo()==codigoCicloFormativo) {
-							nuevoCiclo=copiaArray.get(i-1);
-							asignaturaLocalizada=new Asignatura(codigo,nombre,horasAnuales, curso1,horasDesdoble,especialidadProfesorado1,nuevoCiclo);
-						}
-						else {
-							encontrado=true;
-							}
-					}
-				
-			
-				}
-			}
-			catch (SQLException e) {
-				throw new IllegalArgumentException("ERROR:" + e.getMessage());
-			}
-			
-		
-			return asignaturaLocalizada;
+			else
+				System.out.println("No hay datos de asignaturas en el fichero xml proporcionado");
+
 		}
 	}
 
-	@Override
-	public void borrar(Asignatura asignatura) throws OperationNotSupportedException {
-		// TODO Auto-generated method stub
-		if(asignatura==null) {
-			throw new NullPointerException("No se puede buscar una asignatura nula");
+
+	public void escribirXml(){
+		Document DOMAsignatura=crearDomVacio("Asignaturas");
+		Element raizDOM = DOMAsignatura.getDocumentElement();
+
+		if(coleccionAsignaturas!=null){
+
+			for(Asignatura asignatura :coleccionAsignaturas){
+				Element cicloDOM = asignaturaToElement(DOMAsignatura, asignatura);
+				raizDOM.appendChild(cicloDOM);
+			}
 		}
-		else {
-			
-			CiclosFormativos ciclosFormativos=new CiclosFormativos();
-			ciclosFormativos.borrar(buscar(asignatura).getCicloFormativo());
-			
-		}
+
+		//Convertimos nuestro arbol DOM en un fichero xml
+		domToXml(DOMAsignatura, "datos/asignaturas.xml");
 	}
 
+
+	private static Element asignaturaToElement(Document doc, Asignatura asignatura) {
+		Element asignaturaDOM = doc.createElement("Asignatura");
+		asignaturaDOM.setAttribute("Codigo", String.valueOf(asignatura.getCodigo()));
+
+		Element eNombre = doc.createElement("Nombre");
+		eNombre.setTextContent(asignatura.getNombre());
+		asignaturaDOM.appendChild(eNombre);
+
+		Element eCurso = doc.createElement("Curso");
+		eCurso.setTextContent(asignatura.getCurso().name()); // Enum
+		asignaturaDOM.appendChild(eCurso);
+
+		Element eEspecialidad = doc.createElement("EspecialidadProfesorado");
+		eEspecialidad.setTextContent(asignatura.getEspecialidadProfesorado().name()); // Enum
+		asignaturaDOM.appendChild(eEspecialidad);
+
+
+		Element eCiclo = cicloFormativoToElement(doc, asignatura.getCicloFormativo());
+		asignaturaDOM.appendChild(eCiclo);
+
+		Element eHoras = doc.createElement("Horas");
+
+		Element eAnuales = doc.createElement("Anuales");
+		eAnuales.setTextContent(String.valueOf(asignatura.getHorasAnuales()));
+		eHoras.appendChild(eAnuales);
+
+		Element eDesdoble = doc.createElement("Desdoble");
+		eDesdoble.setTextContent(String.valueOf(asignatura.getHorasDesdoble()));
+		eHoras.appendChild(eDesdoble);
+
+		asignaturaDOM.appendChild(eHoras);
+
+		return asignaturaDOM;
+	}
+
+	private static Asignatura elementToAsignatura(Element asignaturaDOM) {
+
+
+
+		String codigo = asignaturaDOM.getAttribute("Codigo");
+
+		String nombre = asignaturaDOM.getElementsByTagName("Nombre").item(0).getTextContent();
+		Curso curso = Curso.valueOf(asignaturaDOM.getElementsByTagName("Curso").item(0).getTextContent());
+		EspecialidadProfesorado especialidadProfesorado = EspecialidadProfesorado.valueOf(asignaturaDOM.getElementsByTagName("EspecialidadProfesorado").item(0).getTextContent());
+
+		// Recuperar el nodo <CicloFormativo> dentro de la asignatura
+		Element eCiclo = (Element) asignaturaDOM.getElementsByTagName("CicloFormativo").item(0);
+		int codigoCiclo=Integer.parseInt(eCiclo.getTextContent());
+		Grado gradoFicticio=new GradoE("DW",1,1);
+		CicloFormativo cicloFormativoFicticio =new CicloFormativo(codigoCiclo,"Semipresencial",gradoFicticio,"DAW",100);
+
+
+		CiclosFormativos ciclosFormativos1=CiclosFormativos.getInstancia();
+		ArrayList <CicloFormativo> copiaArray=ciclosFormativos1.get();
+
+
+		CicloFormativo ciclosFormativosLocalizado=ciclosFormativos1.buscar(cicloFormativoFicticio);
+
+
+
+		Element eHoras = (Element) asignaturaDOM.getElementsByTagName("Horas").item(0);
+		int horasAnuales = Integer.parseInt(eHoras.getElementsByTagName("Anuales").item(0).getTextContent());
+		int horasDesdoble = Integer.parseInt(eHoras.getElementsByTagName("Desdoble").item(0).getTextContent());
+
+		return new Asignatura(codigo, nombre,horasAnuales,curso,horasDesdoble,especialidadProfesorado, ciclosFormativosLocalizado);
+	}
 
 
 }

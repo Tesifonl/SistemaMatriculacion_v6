@@ -11,7 +11,7 @@ import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
 public interface IMatriculas {
 	
 
-	public void comenzar();
+	public void comenzar() throws OperationNotSupportedException;
 	public void terminar();
 	public ArrayList<Matricula> get() throws OperationNotSupportedException;
 	public int getTamano();

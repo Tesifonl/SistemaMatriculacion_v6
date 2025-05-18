@@ -1,495 +1,390 @@
 package org.iesalandalus.programacion.matriculacion.modelo.negocio.fichero;
 
+
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.*;
 import org.iesalandalus.programacion.matriculacion.modelo.negocio.IMatriculas;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Alumnos;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Asignaturas;
-import org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.utilidades.MySQL;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javax.naming.OperationNotSupportedException;
-import java.sql.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
+
+import static org.iesalandalus.programacion.matriculacion.modelo.negocio.fichero.utilidades.UtilidadesXML.*;
+
 
 public class Matriculas implements IMatriculas{
-	
-	private Connection conexion = null;
 
-	private static Matriculas instancia;
-	
-	public Matriculas() {
-		comenzar();
-	}
-	
-	private static Matriculas getInstancia() {
-		if (instancia==null)
-			instancia=new Matriculas();
 
-		return instancia;
+	private ArrayList<Matricula> coleccionMatriculas;
+	private static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+	public Matriculas () {
+
+		coleccionMatriculas=new ArrayList<Matricula> ();
+
+
 	}
-	
-	
+
+	public ArrayList<Matricula> get() throws OperationNotSupportedException {
+		ArrayList<Matricula> copia=copiaProfundaMatriculas();
+		return copia;
+	}
+
+	private ArrayList<Matricula> copiaProfundaMatriculas() throws OperationNotSupportedException {
+
+		ArrayList<Matricula>copiaMatricula=new ArrayList<Matricula>();
+
+		for(Matricula matricula: coleccionMatriculas) {
+			copiaMatricula.add(matricula);
+		}
+		return copiaMatricula;
+	}
+
+
+	public int getTamano() {
+		int tamano=0;
+
+		for (int i=0;i<coleccionMatriculas.size();i++) {
+			if(coleccionMatriculas.get(i)!=null) {tamano++;}
+		}
+
+		return tamano;
+	}
+
+
+
+	public void insertar(Matricula matricula) throws OperationNotSupportedException {
+
+		if(matricula!=null) {
+			if(coleccionMatriculas.contains(matricula)) {
+				throw new OperationNotSupportedException("ERROR: Ya existe una matricula con ese codigo.");
+			}else {
+				coleccionMatriculas.add(matricula);
+			}
+		}
+		else {
+			throw new NullPointerException("ERROR: No se puede insertar una matrícula nula.");
+		}
+	}
+
+
+	public Matricula buscar(Matricula matricula) throws OperationNotSupportedException {
+		boolean encontrado=false;
+		boolean noEncontrado=false;
+		Matricula matriculaArrayCreado=null;
+
+		if(matricula!=null) {
+
+			if(coleccionMatriculas.size()>0) {
+
+				for (Matricula matriculaArray:coleccionMatriculas) {
+
+					if(matriculaArray.equals(matricula)) {
+						encontrado=true;
+						matriculaArrayCreado=matriculaArray;
+					}else {
+						noEncontrado=true;
+					}
+				}
+				if (encontrado!=true && noEncontrado==true) {
+					return null;
+				}else {
+					return matriculaArrayCreado;
+				}
+			}else {
+				throw new NullPointerException("No hay matriculas incluidas en la coleccion");
+			}
+		}
+		else {
+			throw new NullPointerException("matricula recibido nulo");
+		}
+	}
+
+
+
+	public void borrar(Matricula matricula) throws OperationNotSupportedException {
+		if(matricula!=null) {
+			if (coleccionMatriculas.contains(matricula)) {
+				//coleccionMatriculas.remove(matricula);
+
+				for (int i=0;i<coleccionMatriculas.size();i++) {
+					if(coleccionMatriculas.get(i).equals(matricula)) {
+						Matricula matriculaElegida=coleccionMatriculas.get(i);
+						matriculaElegida.setFechaAnulacion(LocalDate.now());;
+					}
+				}
+			}
+			else{
+				throw new OperationNotSupportedException("ERROR: No existe ningún alumno como el indicado.");
+			}
+		}
+		else {
+			throw new NullPointerException("ERROR: No se puede borrar una matrícula nula.");
+		}
+	}
+
+
+
+	public ArrayList<Matricula> get (Alumno alumno) throws OperationNotSupportedException{
+		boolean encontrado=false;
+		boolean otro=false;
+		ArrayList<Matricula> nuevaColeccion=new ArrayList<Matricula>();
+
+
+		if (alumno!=null) {
+			for (Matricula matricula:coleccionMatriculas) {
+				if (matricula.getAlumno().equals(alumno)) {
+					encontrado=true;
+					nuevaColeccion.add(matricula);
+
+				}
+				else {
+					otro=false;
+				}
+			}
+
+			if (encontrado==true) {
+				return nuevaColeccion;
+			}
+			else {
+				return null;
+			}
+		}
+		else {
+			throw new NullPointerException("ERROR: Se ha recibido un alumno nulo");
+		}
+	}
+
+	public ArrayList<Matricula> get (String cursoAcademico){
+		boolean encontrado=false;
+		boolean otro=false;
+		ArrayList<Matricula> nuevaColeccion=new ArrayList<Matricula>();
+
+
+		if (cursoAcademico!=null) {
+
+			for (Matricula matricula:coleccionMatriculas) {
+				if (matricula.getCursoAcademico().equals(cursoAcademico)) {
+					encontrado=true;
+					nuevaColeccion.add(matricula);
+
+				}
+				else {
+					otro=false;
+				}
+			}
+
+			if (encontrado==true) {
+				return nuevaColeccion;
+			}
+			else {
+				return null;
+			}
+		}
+		else {
+			throw new NullPointerException("ERROR: Se ha recibido un curso academico nulo");
+		}
+	}
+
+	public ArrayList<Matricula> get (CicloFormativo cicloFormativo) throws OperationNotSupportedException{
+		boolean encontrado=false;
+		boolean otro=false;
+		ArrayList<Matricula> nuevaColeccion=new ArrayList<Matricula>();
+
+
+
+		if (cicloFormativo!=null) {
+			for (Matricula matricula:coleccionMatriculas) {
+
+				ArrayList<Asignatura> nuevaColeccionAsignatura=matricula.getColeccionAsignaturas();
+
+				for (Asignatura asignatura: nuevaColeccionAsignatura)
+					if (asignatura.getCicloFormativo().equals(cicloFormativo))
+					{encontrado=true;
+						nuevaColeccion.add(matricula);
+					}
+					else {
+						otro=false;
+					}
+
+
+			}
+			if (encontrado==true) {
+				return nuevaColeccion;
+			}
+			else {
+				return null;
+			}
+
+		}
+		else {
+			throw new NullPointerException("ERROR: Se ha recibido un ciclo formativo nulo");
+		}
+
+	}
+
 	@Override
-	public void comenzar() {
+	public void comenzar() throws OperationNotSupportedException {
 		// TODO Auto-generated method stub
-		//conexion=MySQL.establecerConexion();
+		leerXml();
 	}
 
 	@Override
 	public void terminar() {
 		// TODO Auto-generated method stub
-		//MySQL.cerrarConexion();
+		escribirXml();
 	}
 
-	public ArrayList<Asignatura> getAsignaturasMatricula(int identificadorMatricula) throws OperationNotSupportedException{
+	public void leerXml() throws OperationNotSupportedException {
 
-		ArrayList<Asignatura> arrayAsignaturas=new ArrayList<>();
-		org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Asignaturas asignaturas=new org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Asignaturas();
-		boolean encontrado=false;
-		
-		try {
-			
-			PreparedStatement preparedStatement=conexion.prepareStatement("select idMatricula, codigo from asignaturasMatricula where idMatricula = ?");
-			preparedStatement.setInt(1, identificadorMatricula);
-			ResultSet registros=preparedStatement.executeQuery();
-			
-			while(registros.next()) {
-				int idMatricula=registros.getInt(1);
-				String codigo=registros.getString(2);
-				Asignatura asignaturaNueva=new Asignatura(codigo,"Ficticio",100,Curso.PRIMERO,5,EspecialidadProfesorado.INFORMATICA,new CicloFormativo(9988,"SemiPresencial",new GradoD("ficticio",2,Modalidad.PRESENCIAL),"ficticio",100));	
-				Asignatura asignaturaLocalizada=asignaturas.buscar(asignaturaNueva);
-				if (asignaturaLocalizada!=null) {
-					arrayAsignaturas.add(asignaturaLocalizada);
-				}else {
-					encontrado=true;
-				}
-	
-			}
-			}
-			catch(SQLException e) {
-				throw new IllegalArgumentException("ERROR:" + e.getMessage());
-			}	
-		
-		return arrayAsignaturas;
-		
-	} 
-	
-	@Override
-	public ArrayList<Matricula> get() throws OperationNotSupportedException {
-		// TODO Auto-generated method stub
-		ArrayList<Matricula> matriculas=new ArrayList<>();
-		
-		try {
-			
-			Statement statement=conexion.createStatement();
-			ResultSet registros=statement.executeQuery("select idMatricula,cursoAcademico,fechaMatriculacion,fechaAnulacion,dni from matricula order by idMatricula");
-			
-			while(registros.next()) {
-				int idMatricula=registros.getInt(1);
-				String cursoAcademico=registros.getString(2);
-				LocalDate fechaMatriculacion=registros.getDate(3).toLocalDate();
-		        LocalDate fechaAnulacion = null;
-		        if (registros.getDate(4) != null) {
-		            fechaAnulacion = registros.getDate(4).toLocalDate();
-		        }
-				String dni=registros.getString(5);
+		//xmlToDom("datos/alumnos.xml");
+		//Document doc=crearDomVacio("Alumnos");
 
-				
-				ArrayList<Asignatura> coleccionAsignaturas=getAsignaturasMatricula(idMatricula);
-				
-				org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Alumnos alumnos= new org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Alumnos();
-				ArrayList <Alumno> copiaAlumnos=alumnos.get();
-				Alumno alumnoBuscado=null;
-				boolean encontrado=false;
-		
-				
-				for(Alumno alumnoEncontrado: copiaAlumnos) {
-					int i=+1;
-					if(alumnoEncontrado.getDni().equals(dni)) {
-						alumnoBuscado=alumnoEncontrado;
-					}else {
-						encontrado=true;
+		Document doc = xmlToDom("datos/matriculas.xml");
+
+		if (doc==null)
+		{
+			System.out.println("No se ha podido leer el fichero matriculas ");
+		}
+		else
+		{
+			Element raizDOM = doc.getDocumentElement();
+
+			//Recorremos la lista de nodos del DOM
+			NodeList listaNodos=raizDOM.getElementsByTagName("Asignatura");
+
+			if (listaNodos.getLength()>0) {
+				System.out.println("Datos de la matricula:");
+				System.out.println("=======================");
+
+				for (int i=0; i<listaNodos.getLength();i++)
+				{
+					Node nodo=listaNodos.item(i);
+
+					if(nodo.getNodeType() == Node.ELEMENT_NODE)
+					{
+						Element matriculaDOM = (Element) nodo;
+						Matricula matricula=elementToMatricula(matriculaDOM);
+						coleccionMatriculas.add(matricula);
+						System.out.println(matricula);
 					}
 				}
-				
-				
-				Matricula matricula=new Matricula(idMatricula,cursoAcademico,fechaMatriculacion,alumnoBuscado,coleccionAsignaturas);
-				if (fechaAnulacion!=null){
-					matricula.setFechaAnulacion(fechaAnulacion);
 
-				}
-				matriculas.add(matricula);
+				System.out.println("Fichero de matriculas leido correctamente.");
+			}
+			else
+				System.out.println("No hay datos de matriculas en el fichero xml proporcionado");
 
-			}
-			
-		}
-		catch(SQLException e) {
-			throw new IllegalArgumentException("ERROR:" + e.getMessage());
-		}
-		
-		
-		return matriculas;
-	}
-
-	@Override
-	public int getTamano() {
-		// TODO Auto-generated method stub
-		int tamano=0;
-		
-		try {
-			
-			Statement statement=conexion.createStatement();
-			ResultSet registros=statement.executeQuery("select count(*) from matricula");
-			
-			if(registros.next()) {
-				tamano=registros.getInt(1);
-			}
-			
-		}
-		catch(SQLException e) {
-			throw new IllegalArgumentException("ERROR:" + e.getMessage());
-		}
-			
-		return tamano;
-	}
-	
-	
-	public void insertarAsignaturasMatricula(int idMatricula,ArrayList<Asignatura> coleccionAsignaturas) throws OperationNotSupportedException {
-		if(coleccionAsignaturas==null) {
-			throw new NullPointerException(" No se ha recibido la matricula a insertar");		
-		}
-		else {
-			try {
-				org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Asignaturas asignaturas=new org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Asignaturas();
-				boolean encontrado=false;
-				
-				for (Asignatura asignaturaRecibida: coleccionAsignaturas) {
-					if(asignaturas.buscar(asignaturaRecibida)!=null) {
-						PreparedStatement preparedStatement=conexion.prepareStatement("insert into asignaturasMatricula values (?,?)");
-						preparedStatement.setInt(1, idMatricula);
-						preparedStatement.setString(2, asignaturaRecibida.getCodigo());
-						preparedStatement.executeUpdate();}
-					else {encontrado=true;}
-				}
-			}
-			catch (SQLIntegrityConstraintViolationException e) {
-				throw new OperationNotSupportedException("ERROR:"+ e.getMessage());
-			} 
-			catch (SQLException e) {
-				throw new OperationNotSupportedException("ERROR:" + e.getMessage());
-			}
-		}
-	}
-	
-	@Override
-	public void insertar(Matricula matricula) throws OperationNotSupportedException {
-		// TODO Auto-generated method stub
-		
-		if(matricula==null) {
-			throw new NullPointerException(" No se ha recibido la matricula a insertar");		
-		}
-		else {
-			org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Alumnos alumnos=new org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Alumnos();
-			org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Asignaturas asignaturas=new Asignaturas();
-			boolean noEncontrado=false;
-			boolean encontrado=false;
-			
-			ArrayList<Asignatura> nuevoArray=matricula.getColeccionAsignaturas();
-			for (Asignatura asign: nuevoArray) {
-				if(asignaturas.buscar(asign)!=null) {
-					encontrado=true;
-				}else {
-					noEncontrado=true;
-				}
-			}
-			
-			
-			if (alumnos.buscar(matricula.getAlumno())==null || noEncontrado) {
-				System.out.println("Error: No existe este alumno en el sistema, o algunas de las asignaturas recibidas no han sido dadas de alta. Introduzcalo previamente a la matricula");
-				}
-				else {
-					try {
-						PreparedStatement preparedStatement=conexion.prepareStatement("insert into matricula values (?,?,?,?,?)");
-						preparedStatement.setInt(1, matricula.getIdMatricula());
-						preparedStatement.setString(2, matricula.getCursoAcademico());
-						preparedStatement.setDate(3, Date.valueOf(matricula.getFechaMatriculacion()));
-						preparedStatement.setNull(4, Types.DATE);
-						preparedStatement.setString(5, matricula.getAlumno().getDni());
-						preparedStatement.executeUpdate();
-						insertarAsignaturasMatricula(matricula.getIdMatricula(),matricula.getColeccionAsignaturas());
-						System.out.println("Matricula insertada correctamente");
-
-					}
-					catch (SQLIntegrityConstraintViolationException e) {
-						throw new OperationNotSupportedException("ERROR:" + e.getMessage());
-					} 
-					catch (SQLException e) {
-						throw new OperationNotSupportedException("ERROR:" + e.getMessage());
-					}
-			}
 		}
 	}
 
-	@Override
-	public Matricula buscar(Matricula matricula) throws OperationNotSupportedException {
-		// TODO Auto-generated method stub
-		Matricula matriculaLocalizada=null;
-		
-		if(matricula==null) {
-			throw new NullPointerException("No se puede buscar una matricula nula");
-		}
-		else {
-			try {
-				PreparedStatement preparedStatement=conexion.prepareStatement("select idMatricula, cursoAcademico, fechaMatriculacion,fechaAnulacion, dni from matricula where idMatricula = ?");
-				preparedStatement.setInt(1, matricula.getIdMatricula());
-				ResultSet registros=preparedStatement.executeQuery();
-				
-				if (registros.next()) {
-					int idMatricula=registros.getInt(1);
-					String cursoAcademico=registros.getString(2);
-					LocalDate fechaMatriculacion=registros.getDate(3).toLocalDate();
-			        LocalDate fechaAnulacion = null;
-			        if (registros.getDate(4) != null) {
-			            fechaAnulacion = registros.getDate(4).toLocalDate();
-			        }
-				
-					String dni=registros.getString(5);
-					
-					ArrayList<Asignatura> coleccionAsignaturas=getAsignaturasMatricula(matricula.getIdMatricula());
-					
-					org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Alumnos alumnos= new org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Alumnos();
-					ArrayList <Alumno> copiaAlumnos=alumnos.get();
-					Alumno alumnoBuscado=null;
-					boolean encontrado=false;
-			
-					
-					for(Alumno alumnoEncontrado: copiaAlumnos) {
-						int i=+1;
-						if(alumnoEncontrado.getDni().equals(dni)) {
-							alumnoBuscado=copiaAlumnos.get(i);
-						}else {
-							encontrado=true;
-						}
-					}
-					
-					matriculaLocalizada=new Matricula(idMatricula,cursoAcademico,fechaMatriculacion,alumnoBuscado,coleccionAsignaturas);
-				}
+
+	public void escribirXml(){
+		Document DOMMatricula=crearDomVacio("Matriculas");
+		Element raizDOM = DOMMatricula.getDocumentElement();
+
+		if(coleccionMatriculas!=null){
+
+			for(Matricula matricula :coleccionMatriculas){
+				Element cicloDOM = matriculaToElement(DOMMatricula, matricula);
+				raizDOM.appendChild(cicloDOM);
 			}
-			catch (SQLException e) {
-				throw new IllegalArgumentException("ERROR:" + e.getMessage());
-			}
-			
-			return matriculaLocalizada;
 		}
+
+		//Convertimos nuestro arbol DOM en un fichero xml
+		domToXml(DOMMatricula, "datos/matriculas.xml");
 	}
 
-	@Override
-	public void borrar(Matricula matricula) throws OperationNotSupportedException {
-		// TODO Auto-generated method stub
-		if(matricula==null) {
-			throw new NullPointerException(" No se ha recibido la matricula a insertar");		
-		}
-		else {
-			try {
+	private static Element matriculaToElement(Document doc, Matricula matricula) {
+		Element eMatricula = doc.createElement("Matricula");
+		eMatricula.setAttribute("Id", String.valueOf(matricula.getIdMatricula()));
+		eMatricula.setAttribute("Alumno", matricula.getAlumno().getDni());
 
-				PreparedStatement preparedStatement=conexion.prepareStatement("UPDATE matricula SET fechaAnulacion = ? WHERE idMatricula = ?");
-				preparedStatement.setDate(1, Date.valueOf(LocalDate.now().toString()));
-				preparedStatement.setInt(2, matricula.getIdMatricula());
-				preparedStatement.executeUpdate();
-				System.out.println("Fecha anulacion introducida");
+		Element eCurso = doc.createElement("Curso");
+		eCurso.setTextContent(matricula.getCursoAcademico());
+		eMatricula.appendChild(eCurso);
 
-			}
-			catch (SQLIntegrityConstraintViolationException e) {
-				throw new OperationNotSupportedException("ERROR: Ya existe una asignatura igual.");
-			} 
-			catch (SQLException e) {
-				throw new OperationNotSupportedException("ERROR:" + e.getMessage());
-			}
+		Element eFechaMatriculacion = doc.createElement("FechaMatriculacion");
+		eFechaMatriculacion.setTextContent(matricula.getFechaMatriculacion().format(FORMATO_FECHA));
+		eMatricula.appendChild(eFechaMatriculacion);
+
+		if (matricula.getFechaAnulacion() != null) {
+			Element eFechaAnulacion = doc.createElement("FechaAnulacion");
+			eFechaAnulacion.setTextContent(matricula.getFechaAnulacion().format(FORMATO_FECHA));
+			eMatricula.appendChild(eFechaAnulacion);
 		}
+
+		Element eAsignaturas = doc.createElement("Asignaturas");
+		for (Asignatura a : matricula.getColeccionAsignaturas()) {
+			Element eAsignatura = doc.createElement("Asignatura");
+			eAsignatura.setAttribute("Codigo", String.valueOf(a.getCodigo()));
+			eAsignaturas.appendChild(eAsignatura);
+		}
+
+		eMatricula.appendChild(eAsignaturas);
+
+		return eMatricula;
 	}
 
-	@Override
-	public ArrayList<Matricula> get(Alumno alumno) throws OperationNotSupportedException {
-		// TODO Auto-generated method stub
-		ArrayList<Matricula>coleccionMatriculas=new ArrayList<>();
-		
-		if(alumno==null) {
-			throw new NullPointerException("No se puede buscar una matricula de un alumno recibido nulo");
+	private static Matricula elementToMatricula(Element eMatricula) throws OperationNotSupportedException {
+		// Obtener listas desde clases externas
+		ArrayList<Alumno> alumnos = new Alumnos().get();
+		ArrayList<Asignatura> asignaturasDisponibles = new Asignaturas().get();
+
+		int id = Integer.parseInt(eMatricula.getAttribute("Id"));
+		String dniAlumno = eMatricula.getAttribute("Alumno");
+
+		// Buscar el alumno por DNI
+		Alumno alumno = null;
+		for (Alumno a : alumnos) {
+			if (a.getDni().equals(dniAlumno)) {
+				alumno = a;
+				break;
+			}
 		}
-		else {
-			try {
-				PreparedStatement preparedStatement=conexion.prepareStatement("select idMatricula, cursoAcademico, fechaMatriculacion,fechaAnulacion, dni from matricula where dni = ?");
-				preparedStatement.setString(1, alumno.getDni());
-				ResultSet registros=preparedStatement.executeQuery();
-				
-				if (registros.next()) {
-					
-						int idMatricula=registros.getInt(1);
-						String cursoAcademico=registros.getString(2);
-						LocalDate fechaMatriculacion=registros.getDate(3).toLocalDate();
-				        LocalDate fechaAnulacion = null;
-				        if (registros.getDate(4) != null) {
-				            fechaAnulacion = registros.getDate(4).toLocalDate();
-				        }
-						String dni=registros.getString(5);
+		if (alumno == null) {
+			throw new IllegalArgumentException("Alumno con DNI " + dniAlumno + " no encontrado.");
+		}
 
-						
-						ArrayList<Asignatura> coleccionAsignaturas=getAsignaturasMatricula(idMatricula);
-						Matricula nuevaMatricula=new Matricula(idMatricula,cursoAcademico,fechaMatriculacion,alumno,coleccionAsignaturas);
-	
-						coleccionMatriculas.add(nuevaMatricula);	
+		String curso =eMatricula.getElementsByTagName("Curso").item(0).getTextContent();
 
-				
-				}
-				else {
-					System.out.println("No existen matriculas para este alumno");
+		LocalDate fechaMatriculacion = LocalDate.parse(
+				eMatricula.getElementsByTagName("FechaMatriculacion").item(0).getTextContent(),
+				FORMATO_FECHA
+		);
+
+		// Fecha de anulación (opcional)
+		LocalDate fechaAnulacion = null;
+		NodeList fechaAnulacionNodes = eMatricula.getElementsByTagName("FechaAnulacion");
+		if (fechaAnulacionNodes.getLength() > 0) {
+			fechaAnulacion = LocalDate.parse(fechaAnulacionNodes.item(0).getTextContent(), FORMATO_FECHA);
+		}
+
+		// Buscar asignaturas por código
+		ArrayList<Asignatura> asignaturasMatriculadas = new ArrayList<>();
+		NodeList asignaturaNodes = ((Element) eMatricula.getElementsByTagName("Asignaturas").item(0)).getElementsByTagName("Asignatura");
+
+		for (int i = 0; i < asignaturaNodes.getLength(); i++) {
+			Element eAsignatura = (Element) asignaturaNodes.item(i);
+			String codigo = eAsignatura.getAttribute("Codigo");
+
+			for (Asignatura asignatura : asignaturasDisponibles) {
+				if (asignatura.getCodigo().equals(codigo)) {
+					asignaturasMatriculadas.add(asignatura);
+					break;
 				}
 			}
-			catch (SQLException e) {
-				throw new IllegalArgumentException("ERROR:" + e.getMessage());
-			}
-			System.out.println(coleccionMatriculas);
-			return coleccionMatriculas;
 		}
+
+		return new Matricula(id,curso, fechaMatriculacion,alumno,asignaturasMatriculadas);
 	}
 
-	@Override
-	public ArrayList<Matricula> get(String cursoAcademico) throws OperationNotSupportedException  {
-		// TODO Auto-generated method stub
-		ArrayList<Matricula>coleccionMatriculas=new ArrayList<>();
-		
-		if(cursoAcademico==null) {
-			throw new NullPointerException("No se puede buscar una matricula de un curso academico recibido nulo");
-		}
-		else {
-			try {
-				PreparedStatement preparedStatement=conexion.prepareStatement("select idMatricula, cursoAcademico, fechaMatriculacion,fechaAnulacion, dni from matricula where cursoAcademico = ?");
-				preparedStatement.setString(1, cursoAcademico);
-				ResultSet registros=preparedStatement.executeQuery();
-				
-				if (registros.next()) {
-					
-						int idMatricula=registros.getInt(1);
-						String cursoAcademicoLocalizado=registros.getString(2);
-						LocalDate fechaMatriculacion=registros.getDate(3).toLocalDate();
-				        LocalDate fechaAnulacion = null;
-				        if (registros.getDate(4) != null) {
-				            fechaAnulacion = registros.getDate(4).toLocalDate();}
-				        
-						String dni=registros.getString(5);
 
-						
-						ArrayList<Asignatura> coleccionAsignaturas=getAsignaturasMatricula(idMatricula);
-						
-						org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Alumnos alumnos= new org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Alumnos();
-						ArrayList <Alumno> copiaAlumnos=alumnos.get();
-						Alumno alumnoBuscado=null;
-						int i=0;
-						boolean encontrado=false;
-						
-						for(Alumno alumnoEncontrado: copiaAlumnos) {
-							i++;
-							if(alumnoEncontrado.getDni().equals(dni)) {
-								alumnoBuscado=copiaAlumnos.get(i-1);
-								Matricula nuevaMatricula=new Matricula(idMatricula,cursoAcademicoLocalizado,fechaMatriculacion,alumnoBuscado,coleccionAsignaturas);
-								coleccionMatriculas.add(nuevaMatricula);
-							}else {
-								encontrado=true;
-							}
-						}
-					}
-				
-				else {
-					System.out.println("No existen matriculas para curso academico");
-				}
-			}
-			catch (SQLException e) {
-				throw new IllegalArgumentException("ERROR:" + e.getMessage());
-			}
-			System.out.println(coleccionMatriculas);
-			return coleccionMatriculas;
-		}
-	}
-
-	@Override
-	public ArrayList<Matricula> get(CicloFormativo cicloFormativo) throws OperationNotSupportedException {
-		// TODO Auto-generated method stub
-		ArrayList<Matricula>coleccionMatriculas=new ArrayList<>();
-		
-		if(cicloFormativo==null) {
-			throw new NullPointerException("No se puede buscar una matricula de un curso academico recibido nulo");
-		}
-		else {
-			try {
-				PreparedStatement preparedStatement=conexion.prepareStatement("select codigo,codigoCicloFormativo from asignatura where codigoCicloFormativo = ?");
-				preparedStatement.setInt(1, cicloFormativo.getCodigo());
-				ResultSet registros=preparedStatement.executeQuery();
-
-				
-				if (registros.next()) {
-					
-					int codigo=registros.getInt(1);
-					int codigoCicloFormativo=registros.getInt(2);
-					
-					PreparedStatement preparedStatement2=conexion.prepareStatement("select idMatricula, codigo from asignaturasMatricula where codigo = ?");
-					preparedStatement2.setInt(1,codigo);
-					ResultSet registros2=preparedStatement2.executeQuery();
-					
-					while(registros2.next()){
-						
-					
-					int idMatricula=registros2.getInt(1);
-					int codigo2=registros2.getInt(2);
-					
-					PreparedStatement preparedStatement3=conexion.prepareStatement("select idMatricula, cursoAcademico, fechaMatriculacion,fechaAnulacion, dni from matricula where idMatricula = ?");
-					preparedStatement3.setInt(1,idMatricula);
-					ResultSet registros3=preparedStatement3.executeQuery();
-					
-					if(registros3.next()) {
-						int idMatricula2=registros3.getInt(1);
-						String cursoAcademicoLocalizado=registros3.getString(2);
-						LocalDate fechaMatriculacion=registros3.getDate(3).toLocalDate();
-						LocalDate fechaAnulacion = null;
-						if (registros3.getDate(4) != null) {
-							fechaAnulacion = registros3.getDate(4).toLocalDate();
-						}
-					String dni=registros3.getString(5);
-					
-					
-					
-					ArrayList<Asignatura> coleccionAsignaturas=getAsignaturasMatricula(idMatricula);
-					
-					org.iesalandalus.programacion.matriculacion.modelo.negocio.mysql.Alumnos alumnos= new Alumnos();
-					ArrayList <Alumno> copiaAlumnos=alumnos.get();
-					Alumno alumnoBuscado=null;
-					int i=0;
-					boolean encontrado=false;
-					
-					for(Alumno alumnoEncontrado: copiaAlumnos) {
-						i++;
-						if(alumnoEncontrado.getDni().equals(dni)) {
-							alumnoBuscado=copiaAlumnos.get(i-1);
-							Matricula nuevaMatricula=new Matricula(idMatricula2,cursoAcademicoLocalizado,fechaMatriculacion,alumnoBuscado,coleccionAsignaturas);
-							coleccionMatriculas.add(nuevaMatricula);
-						}else {
-							encontrado=true;
-						}
-					}
-					}
-					}		
-				}
-				else {
-					throw new NullPointerException("No existe este codigo de ciclo formativo en el sistema");
-				}
-			}
-				
-			catch (SQLException e) {
-				throw new IllegalArgumentException("ERROR:" + e.getMessage());
-			}
-			System.out.println(coleccionMatriculas);
-			return coleccionMatriculas;
-		}
-	}
 
 
 
