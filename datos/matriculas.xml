@@ -18,7 +18,6 @@
     <Matricula Alumno="11111111H" Id="2305">
         <Curso>23-25</Curso>
         <FechaMatriculacion>20/05/2025</FechaMatriculacion>
-        <FechaAnulacion>20/05/2025</FechaAnulacion>
         <Asignaturas>
             <Asignatura Codigo="6666"/>
             <Asignatura Codigo="9999"/>

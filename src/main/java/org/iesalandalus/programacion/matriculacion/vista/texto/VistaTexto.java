@@ -120,6 +120,7 @@ public class VistaTexto extends Vista  {
 	public void insertarAlumno()  {
 
 		try {
+
 			controlador.insertarAlumno(Consola.leerAlumno());
 			System.out.println("Alumno insertado correctamente");
 		}
@@ -128,7 +129,6 @@ public class VistaTexto extends Vista  {
 			System.out.println(e.getMessage());
 
 		}
-
 
 	}
 	
