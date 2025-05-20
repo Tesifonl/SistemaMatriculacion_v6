@@ -3,10 +3,9 @@ package org.iesalandalus.programacion.matriculacion.vista.texto;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import javax.naming.OperationNotSupportedException;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
+
+
 import org.iesalandalus.programacion.matriculacion.controlador.Controlador;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Alumno;
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Asignatura;
@@ -14,6 +13,9 @@ import org.iesalandalus.programacion.matriculacion.modelo.dominio.CicloFormativo
 import org.iesalandalus.programacion.matriculacion.modelo.dominio.Matricula;
 import org.iesalandalus.programacion.matriculacion.vista.Vista;
 import org.iesalandalus.programacion.utilidades.Entrada;
+
+import javax.naming.OperationNotSupportedException;
+
 
 public class VistaTexto extends Vista  {
 	
@@ -113,18 +115,18 @@ public class VistaTexto extends Vista  {
 	public void terminar() {
 		controlador.terminar();
 	}
-	
-	
+
 
 	public void insertarAlumno()  {
+
 		try {
 			controlador.insertarAlumno(Consola.leerAlumno());
 			System.out.println("Alumno insertado correctamente");
-		}	
-		
-		catch(IllegalArgumentException |NullPointerException | OperationNotSupportedException e) {
+		}
+
+		catch(IllegalArgumentException | NullPointerException | OperationNotSupportedException e) {
 			System.out.println(e.getMessage());
-			
+
 		}
 
 
