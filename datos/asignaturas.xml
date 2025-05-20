@@ -4,7 +4,16 @@
         <Nombre>WWW</Nombre>
         <Curso>PRIMERO</Curso>
         <EspecialidadProfesorado>INFORMATICA</EspecialidadProfesorado>
-        <CicloFormativo>1234</CicloFormativo>
+        <CicloFormativo Codigo="1234">
+            <Nombre>AAA</Nombre>
+            <FamiliaProfesional>BBB</FamiliaProfesional>
+            <Horas>123</Horas>
+            <Grado Tipo="GradoD">
+                <Nombre>RRR</Nombre>
+                <NumAnios>2</NumAnios>
+                <Modalidad>PRESENCIAL</Modalidad>
+            </Grado>
+        </CicloFormativo>
         <Horas>
             <Anuales>100</Anuales>
             <Desdoble>5</Desdoble>
@@ -14,7 +23,16 @@
         <Nombre>ZZZ</Nombre>
         <Curso>PRIMERO</Curso>
         <EspecialidadProfesorado>INFORMATICA</EspecialidadProfesorado>
-        <CicloFormativo>1234</CicloFormativo>
+        <CicloFormativo Codigo="1234">
+            <Nombre>AAA</Nombre>
+            <FamiliaProfesional>BBB</FamiliaProfesional>
+            <Horas>123</Horas>
+            <Grado Tipo="GradoD">
+                <Nombre>RRR</Nombre>
+                <NumAnios>2</NumAnios>
+                <Modalidad>PRESENCIAL</Modalidad>
+            </Grado>
+        </CicloFormativo>
         <Horas>
             <Anuales>200</Anuales>
             <Desdoble>3</Desdoble>

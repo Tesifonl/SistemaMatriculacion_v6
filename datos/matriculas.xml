@@ -2,10 +2,16 @@
 <Matriculas>
     <Matricula Alumno="53709168M" Id="23">
         <Curso>24-25</Curso>
-        <FechaMatriculacion>02/05/2025</FechaMatriculacion>
-        <FechaAnulacion>05/05/2025</FechaAnulacion>
+        <FechaMatriculacion>18/05/2025</FechaMatriculacion>
         <Asignaturas>
             <Asignatura Codigo="1234"/>
+            <Asignatura Codigo="4444"/>
+        </Asignaturas>
+    </Matricula>
+    <Matricula Alumno="11111111H" Id="5555">
+        <Curso>23-25</Curso>
+        <FechaMatriculacion>20/05/2025</FechaMatriculacion>
+        <Asignaturas>
             <Asignatura Codigo="4444"/>
         </Asignaturas>
     </Matricula>

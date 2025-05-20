@@ -19,18 +19,20 @@ public class Asignaturas implements IAsignaturas {
 	private static Asignaturas instancia;
 	private ArrayList<Asignatura> coleccionAsignaturas;
 
-	private static Asignaturas getInstancia() {
+	public Asignaturas () {
+
+		coleccionAsignaturas=new ArrayList<Asignatura>();
+
+	}
+
+	public static Asignaturas getInstancia() {
 		if (instancia==null)
 			instancia=new Asignaturas();
 
 		return instancia;
 	}
 
-	public Asignaturas () {
 
-		coleccionAsignaturas=new ArrayList<Asignatura>();
-
-	}
 
 	public ArrayList<Asignatura> get() {
 		ArrayList<Asignatura> copia=copiaProfundaAsignaturas();
@@ -154,7 +156,7 @@ public class Asignaturas implements IAsignaturas {
 			NodeList listaNodos=raizDOM.getElementsByTagName("Asignatura");
 
 			if (listaNodos.getLength()>0) {
-				System.out.println("Datos de la asignatura:");
+				System.out.println("Datos de las asignaturas:");
 				System.out.println("=======================");
 
 				for (int i=0; i<listaNodos.getLength();i++)
@@ -234,31 +236,31 @@ public class Asignaturas implements IAsignaturas {
 	private static Asignatura elementToAsignatura(Element asignaturaDOM) {
 
 
-
 		String codigo = asignaturaDOM.getAttribute("Codigo");
 
 		String nombre = asignaturaDOM.getElementsByTagName("Nombre").item(0).getTextContent();
+
+
 		Curso curso = Curso.valueOf(asignaturaDOM.getElementsByTagName("Curso").item(0).getTextContent());
+
 		EspecialidadProfesorado especialidadProfesorado = EspecialidadProfesorado.valueOf(asignaturaDOM.getElementsByTagName("EspecialidadProfesorado").item(0).getTextContent());
 
-		// Recuperar el nodo <CicloFormativo> dentro de la asignatura
+
 		Element eCiclo = (Element) asignaturaDOM.getElementsByTagName("CicloFormativo").item(0);
-		int codigoCiclo=Integer.parseInt(eCiclo.getTextContent());
+		int codigoCiclo=Integer.parseInt(eCiclo.getAttribute("Codigo"));
 		Grado gradoFicticio=new GradoE("DW",1,1);
 		CicloFormativo cicloFormativoFicticio =new CicloFormativo(codigoCiclo,"Semipresencial",gradoFicticio,"DAW",100);
+		CiclosFormativos ciclosFormativos=CiclosFormativos.getInstancia();
+		CicloFormativo ciclosFormativosLocalizado=ciclosFormativos.buscar(cicloFormativoFicticio);
+		//habra que poner un try
+
+		//Element eHoras = (Element) asignaturaDOM.getElementsByTagName("Horas").item(0);
+		int horasAnuales = Integer.parseInt(asignaturaDOM.getElementsByTagName("Anuales").item(0).getTextContent());
+		int horasDesdoble = Integer.parseInt(asignaturaDOM.getElementsByTagName("Desdoble").item(0).getTextContent());
 
 
-		CiclosFormativos ciclosFormativos1=CiclosFormativos.getInstancia();
-		ArrayList <CicloFormativo> copiaArray=ciclosFormativos1.get();
 
 
-		CicloFormativo ciclosFormativosLocalizado=ciclosFormativos1.buscar(cicloFormativoFicticio);
-
-
-
-		Element eHoras = (Element) asignaturaDOM.getElementsByTagName("Horas").item(0);
-		int horasAnuales = Integer.parseInt(eHoras.getElementsByTagName("Anuales").item(0).getTextContent());
-		int horasDesdoble = Integer.parseInt(eHoras.getElementsByTagName("Desdoble").item(0).getTextContent());
 
 		return new Asignatura(codigo, nombre,horasAnuales,curso,horasDesdoble,especialidadProfesorado, ciclosFormativosLocalizado);
 	}

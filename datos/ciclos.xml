@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<CiclosFormativos>
+<Ciclos>
     <CicloFormativo Codigo="1234">
         <Nombre>AAA</Nombre>
         <FamiliaProfesional>BBB</FamiliaProfesional>
@@ -10,4 +10,14 @@
             <Modalidad>PRESENCIAL</Modalidad>
         </Grado>
     </CicloFormativo>
-</CiclosFormativos>
+    <CicloFormativo Codigo="5678">
+        <Nombre>2222</Nombre>
+        <FamiliaProfesional>SEMI</FamiliaProfesional>
+        <Horas>100</Horas>
+        <Grado Tipo="GradoD">
+            <Nombre>Matematicas</Nombre>
+            <NumAnios>2</NumAnios>
+            <Modalidad>SEMIPRESENCIAL</Modalidad>
+        </Grado>
+    </CicloFormativo>
+</Ciclos>

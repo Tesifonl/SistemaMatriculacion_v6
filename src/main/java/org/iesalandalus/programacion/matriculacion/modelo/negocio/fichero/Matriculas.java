@@ -19,7 +19,7 @@ import static org.iesalandalus.programacion.matriculacion.modelo.negocio.fichero
 
 public class Matriculas implements IMatriculas{
 
-
+	private static Matriculas instancia;
 	private ArrayList<Matricula> coleccionMatriculas;
 	private static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -28,6 +28,12 @@ public class Matriculas implements IMatriculas{
 		coleccionMatriculas=new ArrayList<Matricula> ();
 
 
+	}
+	public static Matriculas getInstancia() {
+		if (instancia==null)
+			instancia=new Matriculas();
+
+		return instancia;
 	}
 
 	public ArrayList<Matricula> get() throws OperationNotSupportedException {
@@ -256,7 +262,7 @@ public class Matriculas implements IMatriculas{
 			Element raizDOM = doc.getDocumentElement();
 
 			//Recorremos la lista de nodos del DOM
-			NodeList listaNodos=raizDOM.getElementsByTagName("Asignatura");
+			NodeList listaNodos=raizDOM.getElementsByTagName("Matricula");
 
 			if (listaNodos.getLength()>0) {
 				System.out.println("Datos de la matricula:");
@@ -331,25 +337,17 @@ public class Matriculas implements IMatriculas{
 		return eMatricula;
 	}
 
-	private static Matricula elementToMatricula(Element eMatricula) throws OperationNotSupportedException {
-		// Obtener listas desde clases externas
-		ArrayList<Alumno> alumnos = new Alumnos().get();
-		ArrayList<Asignatura> asignaturasDisponibles = new Asignaturas().get();
+	private static Matricula elementToMatricula(Element eMatricula) {
 
+		String dni = eMatricula.getAttribute("Alumno");
 		int id = Integer.parseInt(eMatricula.getAttribute("Id"));
-		String dniAlumno = eMatricula.getAttribute("Alumno");
 
-		// Buscar el alumno por DNI
-		Alumno alumno = null;
-		for (Alumno a : alumnos) {
-			if (a.getDni().equals(dniAlumno)) {
-				alumno = a;
-				break;
-			}
-		}
-		if (alumno == null) {
-			throw new IllegalArgumentException("Alumno con DNI " + dniAlumno + " no encontrado.");
-		}
+		//String dni = eMatricula.getAttribute("Alumno");
+		Alumno alumno=new Alumno( "Tesi", dni, "Tesi@gmail.com", "999999999", LocalDate.of(1979, 1, 8));
+		Alumnos alumnos=Alumnos.getInstancia();
+		Alumno alumnoLocalizado=alumnos.buscar(alumno);
+
+
 
 		String curso =eMatricula.getElementsByTagName("Curso").item(0).getTextContent();
 
@@ -358,14 +356,16 @@ public class Matriculas implements IMatriculas{
 				FORMATO_FECHA
 		);
 
-		// Fecha de anulación (opcional)
+
+
 		LocalDate fechaAnulacion = null;
 		NodeList fechaAnulacionNodes = eMatricula.getElementsByTagName("FechaAnulacion");
 		if (fechaAnulacionNodes.getLength() > 0) {
 			fechaAnulacion = LocalDate.parse(fechaAnulacionNodes.item(0).getTextContent(), FORMATO_FECHA);
 		}
 
-		// Buscar asignaturas por código
+
+		ArrayList<Asignatura> coleccionAsignaturas=Asignaturas.getInstancia().get();
 		ArrayList<Asignatura> asignaturasMatriculadas = new ArrayList<>();
 		NodeList asignaturaNodes = ((Element) eMatricula.getElementsByTagName("Asignaturas").item(0)).getElementsByTagName("Asignatura");
 
@@ -373,18 +373,21 @@ public class Matriculas implements IMatriculas{
 			Element eAsignatura = (Element) asignaturaNodes.item(i);
 			String codigo = eAsignatura.getAttribute("Codigo");
 
-			for (Asignatura asignatura : asignaturasDisponibles) {
-				if (asignatura.getCodigo().equals(codigo)) {
-					asignaturasMatriculadas.add(asignatura);
-					break;
-				}
+		for (Asignatura asignatura : coleccionAsignaturas) {
+			if (asignatura.getCodigo().equals(codigo)) {
+				asignaturasMatriculadas.add(asignatura);
+				break;
 			}
 		}
-
-		return new Matricula(id,curso, fechaMatriculacion,alumno,asignaturasMatriculadas);
 	}
 
-
+        try {
+            return new Matricula(id,curso, fechaMatriculacion,alumnoLocalizado,asignaturasMatriculadas);
+        } catch (OperationNotSupportedException e) {
+			System.out.println(e.getMessage());
+           return null;
+        }
+    }
 
 
 

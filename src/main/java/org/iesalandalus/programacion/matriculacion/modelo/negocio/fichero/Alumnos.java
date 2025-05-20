@@ -24,132 +24,12 @@ public class Alumnos implements IAlumnos{
 
 
 	
-	private static Alumnos getInstancia() {
+	public static Alumnos getInstancia() {
 		if (instancia==null)
 			instancia=new Alumnos();
 
 		return instancia;
 	}
-
-	@Override
-	public void comenzar() {
-		// TODO Auto-generated method stub
-		leerXml();
-	}
-
-	@Override
-	public void terminar() {
-		// TODO Auto-generated method stub
-		escribirXml();
-	}
-
-
-
-	private static Element alumnoToElement(Document DOMAlumnos, Alumno alumno)
-	{
-		Element alumnoDOM = DOMAlumnos.createElement("Alumno");
-		alumnoDOM.setAttribute("Dni", String.valueOf(alumno.getDni()));
-
-		Element eNombre = DOMAlumnos.createElement("Nombre");
-		eNombre.setTextContent(alumno.getNombre());
-		alumnoDOM.appendChild(eNombre);
-
-		Element eTelefono = DOMAlumnos.createElement("Telefono");
-		eTelefono.setTextContent(alumno.getTelefono());
-		alumnoDOM.appendChild(eTelefono);
-
-		Element eCorreo = DOMAlumnos.createElement("Correo");
-		eCorreo.setTextContent(alumno.getCorreo());
-		alumnoDOM.appendChild(eCorreo);
-
-		Element eFechaNacimiento = DOMAlumnos.createElement("FechaNacimiento");
-		eFechaNacimiento.setTextContent(alumno.getFechaNacimiento().format(FORMATO_FECHA));
-		alumnoDOM.appendChild(eFechaNacimiento);
-
-		return alumnoDOM;
-	}
-
-
-
-	private static Alumno elementToAlumno(Element alumnoDOM)
-    {
-        String aDni = alumnoDOM.getAttribute("Dni");
-
-        Element eNombre = (Element) alumnoDOM.getElementsByTagName("Nombre").item(0);
-        Element eTelefono = (Element) alumnoDOM.getElementsByTagName("Telefono").item(0);
-		Element eCorreo = (Element) alumnoDOM.getElementsByTagName("Correo").item(0);
-		Element eFechaNacimiento = (Element) alumnoDOM.getElementsByTagName("FechaNacimiento").item(0);
-
-        String aNombre= eNombre.getTextContent();
-		String aTelefono= eTelefono.getTextContent();
-		String aCorreo= eCorreo.getTextContent();
-		String aFechaNacimiento= eFechaNacimiento.getTextContent();
-
-        return new Alumno(aNombre,aDni,aCorreo,aTelefono,LocalDate.parse(aFechaNacimiento,FORMATO_FECHA));
-    }
-
-
-
-	public void leerXml(){
-
-		//xmlToDom("datos/alumnos.xml");
-		//Document doc=crearDomVacio("Alumnos");
-
-		Document doc = xmlToDom("datos/alumnos.xml");
-
-		if (doc==null)
-		{
-			System.out.println("No se ha podido leer el fichero ");
-		}
-		else
-		{
-			Element raizDOM = doc.getDocumentElement();
-
-			//Recorremos la lista de nodos del DOM
-			NodeList listaNodos=raizDOM.getElementsByTagName("Alumno");
-
-			if (listaNodos.getLength()>0) {
-				System.out.println("Datos de los alumnos:");
-				System.out.println("=======================");
-
-				for (int i=0; i<listaNodos.getLength();i++)
-				{
-					Node nodo=listaNodos.item(i);
-
-					if(nodo.getNodeType() == Node.ELEMENT_NODE)
-					{
-						Element alumnoDOM = (Element) nodo;
-						Alumno alumno=elementToAlumno(alumnoDOM);
-						coleccionAlumnos.add(alumno);
-						System.out.println(alumno);
-					}
-				}
-
-				System.out.println("Fichero de alumnos leido correctamente.");
-			}
-			else
-				System.out.println("No hay datos de alumnos en el fichero xml proporcionado");
-
-		}
-	}
-
-
-	public void escribirXml(){
-		Document DOMAlumnos=crearDomVacio("Alumnos");
-		Element raizDOM = DOMAlumnos.getDocumentElement();
-
-		if(coleccionAlumnos!=null){
-
-			for(Alumno alumno :coleccionAlumnos){
-				Element alumnoDOM = alumnoToElement(DOMAlumnos, alumno);
-				raizDOM.appendChild(alumnoDOM);
-			}
-		}
-
-		//Convertimos nuestro arbol DOM en un fichero xml
-		domToXml(DOMAlumnos, "datos/alumnos.xml");
-	}
-
 
 
 	public Alumnos () {
@@ -248,6 +128,126 @@ public class Alumnos implements IAlumnos{
 		else {
 			throw new NullPointerException("ERROR: No se puede borrar un alumno nulo.");
 		}
+	}
+
+
+	@Override
+	public void comenzar() {
+		// TODO Auto-generated method stub
+		leerXml();
+	}
+
+	@Override
+	public void terminar() {
+		// TODO Auto-generated method stub
+		escribirXml();
+	}
+
+
+
+	private static Element alumnoToElement(Document DOMAlumnos, Alumno alumno)
+	{
+		Element alumnoDOM = DOMAlumnos.createElement("Alumno");
+		alumnoDOM.setAttribute("Dni", String.valueOf(alumno.getDni()));
+
+		Element eNombre = DOMAlumnos.createElement("Nombre");
+		eNombre.setTextContent(alumno.getNombre());
+		alumnoDOM.appendChild(eNombre);
+
+		Element eTelefono = DOMAlumnos.createElement("Telefono");
+		eTelefono.setTextContent(alumno.getTelefono());
+		alumnoDOM.appendChild(eTelefono);
+
+		Element eCorreo = DOMAlumnos.createElement("Correo");
+		eCorreo.setTextContent(alumno.getCorreo());
+		alumnoDOM.appendChild(eCorreo);
+
+		Element eFechaNacimiento = DOMAlumnos.createElement("FechaNacimiento");
+		eFechaNacimiento.setTextContent(alumno.getFechaNacimiento().format(FORMATO_FECHA));
+		alumnoDOM.appendChild(eFechaNacimiento);
+
+		return alumnoDOM;
+	}
+
+
+
+	private static Alumno elementToAlumno(Element alumnoDOM)
+	{
+		String aDni = alumnoDOM.getAttribute("Dni");
+
+		Element eNombre = (Element) alumnoDOM.getElementsByTagName("Nombre").item(0);
+		Element eTelefono = (Element) alumnoDOM.getElementsByTagName("Telefono").item(0);
+		Element eCorreo = (Element) alumnoDOM.getElementsByTagName("Correo").item(0);
+		Element eFechaNacimiento = (Element) alumnoDOM.getElementsByTagName("FechaNacimiento").item(0);
+
+		String aNombre= eNombre.getTextContent();
+		String aTelefono= eTelefono.getTextContent();
+		String aCorreo= eCorreo.getTextContent();
+		String aFechaNacimiento= eFechaNacimiento.getTextContent();
+
+		return new Alumno(aNombre,aDni,aCorreo,aTelefono,LocalDate.parse(aFechaNacimiento,FORMATO_FECHA));
+	}
+
+
+
+	public void leerXml(){
+
+		//xmlToDom("datos/alumnos.xml");
+		//Document doc=crearDomVacio("Alumnos");
+
+		Document doc = xmlToDom("datos/alumnos.xml");
+
+		if (doc==null)
+		{
+			System.out.println("No se ha podido leer el fichero ");
+		}
+		else
+		{
+			Element raizDOM = doc.getDocumentElement();
+
+			//Recorremos la lista de nodos del DOM
+			NodeList listaNodos=raizDOM.getElementsByTagName("Alumno");
+
+			if (listaNodos.getLength()>0) {
+				System.out.println("Datos de los alumnos:");
+				System.out.println("=======================");
+
+				for (int i=0; i<listaNodos.getLength();i++)
+				{
+					Node nodo=listaNodos.item(i);
+
+					if(nodo.getNodeType() == Node.ELEMENT_NODE)
+					{
+						Element alumnoDOM = (Element) nodo;
+						Alumno alumno=elementToAlumno(alumnoDOM);
+						coleccionAlumnos.add(alumno);
+						System.out.println(alumno);
+					}
+				}
+
+				System.out.println("Fichero de alumnos leido correctamente.");
+			}
+			else
+				System.out.println("No hay datos de alumnos en el fichero xml proporcionado");
+
+		}
+	}
+
+
+	public void escribirXml(){
+		Document DOMAlumnos=crearDomVacio("Alumnos");
+		Element raizDOM = DOMAlumnos.getDocumentElement();
+
+		if(coleccionAlumnos!=null){
+
+			for(Alumno alumno :coleccionAlumnos){
+				Element alumnoDOM = alumnoToElement(DOMAlumnos, alumno);
+				raizDOM.appendChild(alumnoDOM);
+			}
+		}
+
+		//Convertimos nuestro arbol DOM en un fichero xml
+		domToXml(DOMAlumnos, "datos/alumnos.xml");
 	}
 
 

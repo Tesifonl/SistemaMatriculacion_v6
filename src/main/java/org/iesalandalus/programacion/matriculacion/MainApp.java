@@ -18,11 +18,7 @@ public class MainApp {
     	Modelo modelo=procesarArgumentosFuenteDatos(args);
     	Vista vista = procesarArgumentosVista (args);
     	Controlador controlador=new Controlador(modelo, vista);
-            try {
-                controlador.comenzar();
-            } catch (OperationNotSupportedException e) {
-                throw new RuntimeException(e);
-            }
+		controlador.comenzar();
 
         }
 

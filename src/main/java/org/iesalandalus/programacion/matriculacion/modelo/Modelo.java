@@ -39,7 +39,7 @@ public class Modelo {
 	}
 	
 	
-	public void comenzar() throws OperationNotSupportedException {
+	public void comenzar() {
 		
 		alumnos=fuenteDatos.crearAlumnos();
 		alumnos.comenzar();
@@ -51,9 +51,15 @@ public class Modelo {
 		asignaturas.comenzar();
 		
 		matriculas=fuenteDatos.crearMatriculas();
-		matriculas.comenzar();
 
-	}
+        try {
+            matriculas.comenzar();
+        } catch (OperationNotSupportedException e) {
+			System.out.println(e.getMessage());
+        }
+
+
+    }
 	
 	public void terminar (){
 		alumnos.terminar();
