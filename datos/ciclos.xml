@@ -20,4 +20,14 @@
             <Modalidad>SEMIPRESENCIAL</Modalidad>
         </Grado>
     </CicloFormativo>
+    <CicloFormativo Codigo="4343">
+        <Nombre>PRUEBA</Nombre>
+        <FamiliaProfesional>SEMI</FamiliaProfesional>
+        <Horas>100</Horas>
+        <Grado Tipo="GradoD">
+            <Nombre>PRUEBAS2</Nombre>
+            <NumAnios>2</NumAnios>
+            <Modalidad>PRESENCIAL</Modalidad>
+        </Grado>
+    </CicloFormativo>
 </Ciclos>

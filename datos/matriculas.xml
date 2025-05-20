@@ -15,4 +15,12 @@
             <Asignatura Codigo="4444"/>
         </Asignaturas>
     </Matricula>
+    <Matricula Alumno="11111111H" Id="2305">
+        <Curso>23-25</Curso>
+        <FechaMatriculacion>20/05/2025</FechaMatriculacion>
+        <Asignaturas>
+            <Asignatura Codigo="6666"/>
+            <Asignatura Codigo="9999"/>
+        </Asignaturas>
+    </Matricula>
 </Matriculas>

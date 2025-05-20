@@ -38,4 +38,42 @@
             <Desdoble>3</Desdoble>
         </Horas>
     </Asignatura>
+    <Asignatura Codigo="6666">
+        <Nombre>QQQQ</Nombre>
+        <Curso>PRIMERO</Curso>
+        <EspecialidadProfesorado>SISTEMAS</EspecialidadProfesorado>
+        <CicloFormativo Codigo="1234">
+            <Nombre>AAA</Nombre>
+            <FamiliaProfesional>BBB</FamiliaProfesional>
+            <Horas>123</Horas>
+            <Grado Tipo="GradoD">
+                <Nombre>RRR</Nombre>
+                <NumAnios>2</NumAnios>
+                <Modalidad>PRESENCIAL</Modalidad>
+            </Grado>
+        </CicloFormativo>
+        <Horas>
+            <Anuales>100</Anuales>
+            <Desdoble>5</Desdoble>
+        </Horas>
+    </Asignatura>
+    <Asignatura Codigo="9999">
+        <Nombre>UUUU</Nombre>
+        <Curso>SEGUNDO</Curso>
+        <EspecialidadProfesorado>FOL</EspecialidadProfesorado>
+        <CicloFormativo Codigo="1234">
+            <Nombre>AAA</Nombre>
+            <FamiliaProfesional>BBB</FamiliaProfesional>
+            <Horas>123</Horas>
+            <Grado Tipo="GradoD">
+                <Nombre>RRR</Nombre>
+                <NumAnios>2</NumAnios>
+                <Modalidad>PRESENCIAL</Modalidad>
+            </Grado>
+        </CicloFormativo>
+        <Horas>
+            <Anuales>100</Anuales>
+            <Desdoble>5</Desdoble>
+        </Horas>
+    </Asignatura>
 </Asignaturas>

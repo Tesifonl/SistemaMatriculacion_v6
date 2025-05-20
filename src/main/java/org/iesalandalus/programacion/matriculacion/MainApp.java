@@ -48,7 +48,7 @@ public class MainApp {
 			if (argumento.equalsIgnoreCase("-vTexto")) {
 				vista = new VistaTexto();
 
-			} else if (argumento.equalsIgnoreCase("-vGrafica")) {
+			} else if (argumento.equalsIgnoreCase("-vGrafica") ){
 				vista = new VistaGrafica();
 			}
 		}

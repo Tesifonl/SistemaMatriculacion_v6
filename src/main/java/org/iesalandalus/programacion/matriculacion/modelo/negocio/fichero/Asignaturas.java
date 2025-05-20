@@ -9,6 +9,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import javax.naming.OperationNotSupportedException;
+import javax.swing.*;
 import java.util.ArrayList;
 
 import static org.iesalandalus.programacion.matriculacion.modelo.negocio.fichero.CiclosFormativos.cicloFormativoToElement;
@@ -67,8 +68,13 @@ public class Asignaturas implements IAsignaturas {
 		if(asignatura!=null) {
 			if(coleccionAsignaturas.contains(asignatura)) {
 				throw new OperationNotSupportedException("ERROR: Ya existe una asignatura con ese codigo.");
-			}else {
-				coleccionAsignaturas.add(asignatura);
+			}else  {
+				ArrayList<CicloFormativo>coleccionCiclosFormativos=CiclosFormativos.getInstancia().get();
+					if (coleccionCiclosFormativos.contains(asignatura.getCicloFormativo())) {
+					coleccionAsignaturas.add(asignatura);
+					}else{
+					throw new OperationNotSupportedException("Error: El ciclo formativo insertado no esta en el sistema");
+				}
 			}
 		}
 		else {

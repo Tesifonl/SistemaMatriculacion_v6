@@ -70,7 +70,24 @@ public class Matriculas implements IMatriculas{
 			if(coleccionMatriculas.contains(matricula)) {
 				throw new OperationNotSupportedException("ERROR: Ya existe una matricula con ese codigo.");
 			}else {
-				coleccionMatriculas.add(matricula);
+				ArrayList<Alumno>coleccionAlumnos=Alumnos.getInstancia().get();
+				ArrayList<Asignatura>coleccionAsignaturas=Asignaturas.getInstancia().get();
+
+
+				boolean encontrado=false;
+				boolean desactivo=false;
+				ArrayList<Asignatura>coleccionAsignaturasMatricula=matricula.getColeccionAsignaturas();
+				for (Asignatura asignatura: coleccionAsignaturasMatricula){
+					if (coleccionAsignaturas.contains(asignatura)){
+						encontrado=true;
+					}else{ desactivo=true;}
+				}
+
+				if(coleccionAlumnos.contains(matricula.getAlumno()) && !desactivo ){
+					coleccionMatriculas.add(matricula);
+				}else{
+				throw new OperationNotSupportedException("Error: El alumno o la asignatura no estan en el sistema");
+				}
 			}
 		}
 		else {
